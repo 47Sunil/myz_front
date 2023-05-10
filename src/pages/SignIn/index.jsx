@@ -4,7 +4,6 @@ import FormRight from '../../components/FormRight/FormRight';
 import logo from '../../assets/logos/logo.png';
 import rocket from '../../assets/icons/icon_rocket.png';
 import bgForm from '../../assets/images/signin_bg.png';
-import { RiAlertFill } from 'react-icons/ri';
 import styled from 'styled-components';
 const SignInLeft = styled.div`
   border: 0.5px solid black;
@@ -18,7 +17,6 @@ const SignInLeft = styled.div`
 `;
 
 const SignIn = () => {
-  const [isError, setIsError] = useState(false);
   return (
     <div className='relative flex w-screen h-screen overflow-hidden'>
       <SignInLeft className='overflow-y-scroll'>
