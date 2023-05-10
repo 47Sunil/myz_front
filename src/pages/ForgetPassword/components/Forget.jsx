@@ -7,9 +7,23 @@ import PinkButton from '../../../components/PinkButton/PinkButton';
 import { Link, useNavigate } from 'react-router-dom';
 import GoToHomeBtn from '../../../components/BackToHome/BackToHome';
 // import axios from '../../../utils/axios';
-
+import styled from 'styled-components';
+import bgForm from '../../../assets/images/signin_bg.png';
+import ForgetForm from './ForgetForm';
 const EmailValidator =
   "/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$/";
+
+const ForgetPasswordLeft = styled.div`
+  border: 0.5px solid black;
+  width: 40%;
+  min-width: 600px;
+  background-color: #1e1e1e;
+  background-image: url(${bgForm});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+`;
+
 function Forget() {
   const [email, setEmail] = useState('');
   const [isLoaderRunning, setIsLoaderRunning] = useState(false);
@@ -40,40 +54,21 @@ function Forget() {
   //   };
 
   return (
-    <div className='relative flex w-screen h-screen overflow-hidden text-white'>
-      <div className='absolute mx-20 w-[80%]'>
+    <ForgetPasswordLeft>
+      <div className='my-0 mx-auto w-[75%] '>
         <img
           className='logo_img'
           alt='logo'
           src={logo}
         />
-
-        <h1 className='my-6 text-3xl font-bold'>Forget Password 😄</h1>
-        <p className='mb-6'>Register Email Address </p>
-        <div className='relative flex '>
-          <UserIcon className=' absolute m-4 h-5 w-5' />
-          <input
-            className='font-medium leading-8 text-[#d9d9d9] text-xl bg-[rgba(255,255,255,0.05)] border-solid border border-[rgba(255,255,255,.1)] rounded-[13px] py-[.7rem] px-[2.8rem]'
-            size='30'
-            type='email'
-          />
+        <div className='flex items-center mb-[3rem] gap-[0.5rem]'>
+          <h1 className='font-semibold text-[40px] leading-[60px] text-white'>
+            Forget Password 🫤
+          </h1>
         </div>
-        <PinkButton
-          style='mt-12 text-center'
-          text={'Next'}
-        />
-        <div className='mt-4 flex justify-between '>
-          <p>
-            Don't have a account ?{' '}
-            <Link className='hover:underline'>Sign up</Link>{' '}
-          </p>
-          <Link to='/account/login'>
-            <p>Back to Login</p>
-          </Link>
-        </div>
-        <GoToHomeBtn />
+        <ForgetForm />
       </div>
-    </div>
+    </ForgetPasswordLeft>
   );
 }
 

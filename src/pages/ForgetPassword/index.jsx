@@ -4,7 +4,7 @@ import FormRight from '../../components/FormRight/FormRight';
 
 function Password() {
   return (
-    <div className='flex'>
+    <div className='relative flex w-screen h-screen overflow-hidden text-white'>
       <Forget />
       <FormRight />
     </div>
