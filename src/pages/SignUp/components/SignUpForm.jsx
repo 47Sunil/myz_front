@@ -120,7 +120,7 @@ const SignUpForm = ({ setSignUpError }) => {
             />
           </div>
         </div>
-        <PinkButton text='Sign In' />
+        <PinkButton text='Sign Up' />
         <p className='mt-4 font-normal text-[22px] leading-8 text-[rgba(255,255,255,.82)]'>
           Already have an account?{' '}
           <Link className='text-[#bd61ec]'>
