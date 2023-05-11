@@ -8,7 +8,7 @@ const FormLeft = ({ logo, heading, headingIcon, form }) => {
         src={logo}
       />
       <div>
-        <div className='flex items-center mb-[3rem] gap-[0.5rem]'>
+        <div className='flex items-center mb-[2rem] gap-[0.5rem]'>
           <h2 className='font-semibold text-[40px] leading-[60px] text-white'>
             {heading}
           </h2>
