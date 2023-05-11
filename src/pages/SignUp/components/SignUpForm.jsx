@@ -87,7 +87,10 @@ const SignUpForm = ({ setSignUpError }) => {
       <PinkButton text='Sign Up' />
       <p className='mt-4 font-normal text-[20px] leading-8 text-[rgba(255,255,255,.82)] px-5 pb-5'>
         Already have an account?{' '}
-        <Link className='text-[#bd61ec]'>
+        <Link
+          to='/accounts/signin'
+          className='text-[#bd61ec] cursor-pointer hover:underline'
+        >
           <span>Sign In</span>
         </Link>
       </p>

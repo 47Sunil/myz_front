@@ -1,26 +1,62 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import useSlide from '../../hooks/useSlideAnimation';
 const FormLeft = ({ logo, heading, headingIcon, form }) => {
+  const { isChanged } = useSlide();
   return (
-    <div className='my-0 mx-auto w-[75%] '>
-      <img
-        className='logo_img scale-75 mt-[-20px] mb-[-30px]'
-        alt='logo'
-        src={logo}
-      />
-      <div>
-        <div className='flex items-center mb-[2rem] gap-[0.5rem]'>
-          <h2 className='font-semibold text-[35px] leading-[60px] text-white px-5'>
-            {heading}
-          </h2>
+    <>
+      {!isChanged ? (
+        <motion.div
+          initial={{ x: '-120%' }}
+          animate={{ x: 0 }}
+          className='my-0 mx-auto w-[75%] '
+        >
           <img
-            className='h-[40px] w-[40px]'
-            src={headingIcon}
-            alt='rocket'
+            className='logo_img scale-75 mt-[-20px] mb-[-30px]'
+            alt='logo'
+            src={logo}
           />
-        </div>
-        {form}
-      </div>
-    </div>
+          <div>
+            <div className='flex items-center mb-[2rem] gap-[0.5rem]'>
+              <h2 className='font-semibold text-[35px] leading-[60px] text-white px-5'>
+                {heading}
+              </h2>
+              <img
+                className='h-[40px] w-[40px]'
+                src={headingIcon}
+                alt='rocket'
+              />
+            </div>
+            {form}
+          </div>
+        </motion.div>
+      ) : (
+        <motion.div
+          initial={{ x: 0 }}
+          animate={{ x: '-120%' }}
+          className='my-0 mx-auto w-[75%] '
+        >
+          <img
+            className='logo_img scale-75 mt-[-20px] mb-[-30px]'
+            alt='logo'
+            src={logo}
+          />
+          <div>
+            <div className='flex items-center mb-[2rem] gap-[0.5rem]'>
+              <h2 className='font-semibold text-[35px] leading-[60px] text-white px-5'>
+                {heading}
+              </h2>
+              <img
+                className='h-[40px] w-[40px]'
+                src={headingIcon}
+                alt='rocket'
+              />
+            </div>
+            {form}
+          </div>
+        </motion.div>
+      )}
+    </>
   );
 };
 

@@ -8,10 +8,12 @@ import EyeCloseIcon from '../../../assets/svg/EyesClose';
 import PinkButton from '../../../components/PinkButton/PinkButton';
 import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
 import RememberMe from './RememberMe';
+import useSlide from '../../../hooks/useSlideAnimation';
 
 const SignForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { handleChange } = useSlide();
   return (
     <form
       action=''
@@ -45,7 +47,11 @@ const SignForm = () => {
       <PinkButton text='Sign In' />
       <p className='mt-4 font-normal text-[20px] leading-8 text-[rgba(255,255,255,.82)] px-5 pb-5'>
         Don't have an account?{' '}
-        <Link className='text-[#bd61ec]'>
+        <Link
+          to='/accounts/signup'
+          className='text-[#bd61ec] cursor-pointer hover:underline'
+          onClick={handleChange}
+        >
           <span>Sign Up</span>
         </Link>
       </p>

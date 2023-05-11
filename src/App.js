@@ -1,27 +1,22 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import SignIn from './pages/SignIn/index';
-import SignUp from './pages/SignUp/index';
-import ForgetPassword from './pages/ForgetPassword/index';
 import './App.css';
+import Router from './routes/Routes';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path='/'
-          element=<SignIn />
-        />
-        <Route
-          path='/signup'
-          element=<SignUp />
-        />
-        <Route
-          path='/forgetPassword'
-          element=<ForgetPassword />
-        />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <Router />
+    </QueryClientProvider>
   );
 }
 
