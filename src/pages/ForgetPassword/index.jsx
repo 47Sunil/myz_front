@@ -20,19 +20,6 @@ function Password() {
   return (
     <div className='relative flex w-screen h-screen overflow-hidden text-white'>
       <ForgetPasswordLeft>
-        {/* <div className='my-0 mx-auto w-[75%] '>
-          <img
-            className='logo_img'
-            alt='logo'
-            src={logo}
-          />
-          <div className='flex items-center mb-[3rem] gap-[0.5rem]'>
-            <h1 className='font-semibold text-[40px] leading-[60px] text-white'>
-              Forget Password 🫤
-            </h1>
-          </div>
-          <ForgetForm />
-        </div> */}
         <FormLeft
           logo={logo}
           heading={'Forget Password'}

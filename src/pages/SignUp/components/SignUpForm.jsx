@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-
+import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
 import LockIcon from '../../../assets/svg/Lock';
 import UserIcon from '../../../assets/svg/User';
 import MailIcon from '../../../assets/svg/Mail';
 import PhoneIcon from '../../../assets/svg/Phone';
 import GoToHomeBtn from '../../../components/BackToHome/BackToHome';
 import { Link } from 'react-router-dom';
-// import { emailRegex } from '../utils/constant';
-// import { useNavigate } from 'react-router-dom';
-
-// import AuthService from '../services/auth.service.js';
 import { countryCode } from '../../../utils/Data/constant';
 import PinkButton from '../../../components/PinkButton/PinkButton';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { motion } from 'framer-motion';
 
 const CountryCodeSelector = ({ setCountryCode }) => {
   const selectHandler = (e) => {
@@ -46,90 +38,61 @@ const CountryCodeSelector = ({ setCountryCode }) => {
 
 const SignUpForm = ({ setSignUpError }) => {
   const [countryCode, setCountryCode] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
   return (
-    <Formik>
-      <Form>
-        <div className='mb-[1.6rem] flex flex-col'>
-          <label
-            className='font-normal text-[22px] leading-[33px] text-[rgba(255,255,255,0.82)] mb-[0.5rem]'
-            htmlFor='name'
-          >
-            Name
-          </label>
-          <div className='relative'>
-            <UserIcon />
-            <Field
-              type='name'
-              id='name'
-              name='name'
-              className='font-medium leading-8 text-[#d9d9d9] text-xl bg-[rgba(255,255,255,0.05)] border-solid border border-[rgba(255,255,255,.1)] rounded-[13px] py-[.7rem] px-[2.8rem]'
-            />
-          </div>
-        </div>
-        <div className='mb-[1.6rem] flex flex-col'>
-          <label
-            className='font-normal text-[22px] leading-[33px] text-[rgba(255,255,255,0.82)] mb-[0.5rem]'
-            htmlFor='email'
-          >
-            Email Address
-          </label>
-          <div className='relative'>
-            <MailIcon />
-            <Field
-              type='email'
-              id='email'
-              name='email'
-              className='font-medium leading-8 text-[#d9d9d9] text-xl bg-[rgba(255,255,255,0.05)] border-solid border border-[rgba(255,255,255,.1)] rounded-[13px] py-[.7rem] px-[2.8rem]'
-            />
-          </div>
-        </div>
-        <div className='mb-[1.6rem] flex flex-col'>
-          <label
-            className='font-normal text-[22px] leading-[33px] text-[rgba(255,255,255,0.82)] mb-[0.5rem]'
-            htmlFor='phone'
-          >
-            Phone
-          </label>
-          <div className=' relative '>
-            <PhoneIcon />
-            <CountryCodeSelector setCountryCode={setCountryCode} />
-            <Field
-              type='tel'
-              id='phone'
-              name='phone'
-              pattern='[0-9]*'
-              maxLength='10'
-              className='font-medium leading-8 text-[#d9d9d9] text-xl bg-[rgba(255,255,255,0.05)] border-solid border border-[rgba(255,255,255,.1)] rounded-[13px] py-[.7rem] px-[2.8rem]'
-            />
-          </div>
-        </div>
-        <div className='mb-[1.6rem] flex flex-col'>
-          <label
-            className='font-normal text-[22px] leading-[33px] text-[rgba(255,255,255,0.82)] mb-[0.5rem]'
-            htmlFor='password'
-          >
-            Password
-          </label>
-          <div className='relative'>
-            <LockIcon />
-            <Field
-              type='password'
-              id='password'
-              name='password'
-              className='font-medium leading-8 text-[#d9d9d9] text-xl bg-[rgba(255,255,255,0.05)] border-solid border border-[rgba(255,255,255,.1)] rounded-[13px] py-[.7rem] px-[2.8rem]'
-            />
-          </div>
-        </div>
-        <PinkButton text='Sign Up' />
-        <p className='mt-4 font-normal text-[22px] leading-8 text-[rgba(255,255,255,.82)]'>
-          Already have an account?{' '}
-          <Link className='text-[#bd61ec]'>
-            <span>Sign In</span>
-          </Link>
-        </p>
-        <GoToHomeBtn />
-      </Form>
-    </Formik>
+    <form
+      action=''
+      className='mb-[1.6rem] flex flex-col'
+    >
+      <DynamicInputManager
+        htmlId='name'
+        label='Name'
+        isRequired={true}
+        placeholder='John Doe'
+        multiline={false}
+        type='text'
+        icon={<UserIcon />}
+        states={[name, setName]}
+      />
+      <DynamicInputManager
+        htmlId='email'
+        label='Email Address'
+        isRequired={true}
+        multiline={false}
+        type='email'
+        icon={<MailIcon />}
+        states={[email, setEmail]}
+      />
+      <DynamicInputManager
+        htmlId='phone'
+        label='Phone'
+        isRequired={true}
+        multiline={false}
+        type='tel'
+        icon={<PhoneIcon />}
+        states={[phone, setPhone]}
+      />
+      <DynamicInputManager
+        htmlId='password'
+        label='Password'
+        isRequired={true}
+        multiline={false}
+        type='password'
+        icon={<LockIcon />}
+        states={[password, setPassword]}
+      />
+      <PinkButton text='Sign Up' />
+      <p className='mt-4 font-normal text-[20px] leading-8 text-[rgba(255,255,255,.82)] px-5 pb-5'>
+        Already have an account?{' '}
+        <Link className='text-[#bd61ec]'>
+          <span>Sign In</span>
+        </Link>
+      </p>
+      <GoToHomeBtn />
+    </form>
   );
 };
 
