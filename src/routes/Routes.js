@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ForgetPassword from '../pages/ForgetPassword/index';
+import PaymentGateway from '../pages/PaymentGateways/Index';
 import Accounts from '../pages/Accounts/Accounts';
 import Dashboard from '../pages/Dashboard';
 const Router = () => {
@@ -18,6 +19,9 @@ const Router = () => {
         <Route
           path='/forgetPassword'
           element=<ForgetPassword />
+        />
+        <Route path='/payment-gateway'
+        element=<PaymentGateway/>
         />
       </Routes>
     </BrowserRouter>
