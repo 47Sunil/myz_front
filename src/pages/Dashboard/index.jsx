@@ -89,12 +89,10 @@ const Dashboard = () => {
   // }, []);
 
   return (
-    <main className='w-screen overflow-hidden bg-gradient-myzer h-full'>
-      <div className='h-full w-full bg-[rgba(30,30,30,.8)] grid grid-cols-[237px_1fr]'>
-        <SideBar />
+    <main className='w-full  h-screen z-[33333] relative '>
+      <div className='h-full w-full grid grid-cols-[237px_1fr]'>
         <div className='block min-w-[83vw] max-w-[100vw]'>
-          <TopBar />
-          <div className='p-[1.188rem_2.813rem_1.375rem_2.313rem] flex gap-[1.875rem] h-[calc(100vh-85px)] overflow-y-scroll overflow-x-hidden'>
+          <div className='p-[1.188rem_2.813rem_1.375rem_2.313rem] flex gap-[1.875rem]'>
             <div className='flex-grow flex flex-col gap-[1.125rem]'>
               <DateSection />
               <ReportSection dashBoardData={dashBoardData} />
@@ -109,9 +107,6 @@ const Dashboard = () => {
                   topProducts={topProducts}
                 />
                 <BarChart trafficSource={trafficSource} />
-                {/* <div className="online-store-sessions analytic-item"></div> */}
-                {/* <div className='top-product-sold analytic-item'></div> */}
-                {/* <div className='session-traffic-source analytic-item'></div> */}
               </div>
             </div>
             <OrderActivity ordersActivity={ordersActivity} />
