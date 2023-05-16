@@ -1,7 +1,9 @@
-import React from "react";
-import styled from "styled-components";
-import AppSidebar from "../components/Global/AppSidebar";
-import HeaderBar from "../components/Global/HeaderBar";
+import React from 'react';
+import styled from 'styled-components';
+import AppSidebar from '../components/Global/AppSidebar';
+import HeaderBar from '../components/Global/HeaderBar';
+import { useLocation } from 'react-router-dom';
+
 
 const Background = styled.div`
   height: 100vh;
@@ -27,6 +29,7 @@ const Background = styled.div`
   display: grid;
   grid-template-columns: 200px auto;
   grid-template-rows: 50px auto;
+  position: relative;
 `;
 const Overlay = styled.div`
   height: 100%;
@@ -35,6 +38,7 @@ const Overlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  inset: 0;
 `;
 
 const Header = styled.header`
@@ -59,7 +63,6 @@ const Sidebar = styled.div`
 const Main = styled.main`
   grid-row: 2 / span 1;
   grid-column: 2;
-  background: #ff000;
   max-height: calc(100vh - 50px);
   overflow-y: scroll;
 `;
