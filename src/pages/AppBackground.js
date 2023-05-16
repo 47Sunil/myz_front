@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import AppSidebar from '../components/Global/AppSidebar'
-import HeaderBar from '../components/Global/HeaderBar'
+import React from "react";
+import styled from "styled-components";
+import AppSidebar from "../components/Global/AppSidebar";
+import HeaderBar from "../components/Global/HeaderBar";
 
 const Background = styled.div`
 height: 100vh;
@@ -22,18 +22,18 @@ background: radial-gradient(
     rgba(97, 23, 255, 0.57)
   );
 
-    display: grid;
-    grid-template-columns: 200px auto;
-    grid-template-rows: 50px auto;
-`
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 50px auto;
+`;
 const Overlay = styled.div`
-height: 100%;
-width: 100%;
-background-color: rgba(30, 30, 30, 0.8);
-position: absolute;
-top:0;
-left:0;
-`
+  height: 100%;
+  width: 100%;
+  background-color: rgba(30, 30, 30, 0.8);
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
 
 const Header = styled.header`
 grid-row: 1;
@@ -54,21 +54,21 @@ const Main = styled.main`
 grid-row: 2 / span 1;
   grid-column: 2;
   background: #ff000;
-`
+  max-height: calc(100vh - 50px);
+  overflow-y: scroll;
+`;
 
 const AppBackground = ({children}) => {
   return (
     <Background>
-        <Overlay/>
-        <Header>
-            <HeaderBar/>
-        </Header>
-        <Sidebar>
-            <AppSidebar/>
-        </Sidebar>
-        <Main>
-            {children}
-        </Main>
+      <Overlay />
+      <Header>
+        <HeaderBar />
+      </Header>
+      <Sidebar>
+        <AppSidebar />
+      </Sidebar>
+      <Main className="p-4 z-10">{children}</Main>
     </Background>
   )
 }
