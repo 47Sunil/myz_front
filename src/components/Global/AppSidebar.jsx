@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrandLogo } from "../../assets/Brand/Assets";
 import { data1, data2, data3 } from "../../utils/Data/SidebarData";
 import styled from "styled-components";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Element = styled.div`
   background: ${(props) =>
@@ -12,11 +12,6 @@ const Element = styled.div`
 `;
 
 const AppSidebar = () => {
-  const location = useLocation();
-  const path = location.pathname;
-
-  const [isActiveItem, setIsActiveItem] = useState(path && "dashoard");
-
   return (
     <>
       <div className="flex p-5 justify-between flex-col h-full">
