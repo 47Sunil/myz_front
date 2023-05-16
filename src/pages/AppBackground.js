@@ -1,30 +1,36 @@
-import React from "react";
-import styled from "styled-components";
-import AppSidebar from "../components/Global/AppSidebar";
-import HeaderBar from "../components/Global/HeaderBar";
+
+import React from 'react';
+import styled from 'styled-components';
+import AppSidebar from '../components/Global/AppSidebar';
+import HeaderBar from '../components/Global/HeaderBar';
+import { useLocation } from 'react-router-dom';
 
 const Background = styled.div`
-height: 100vh;
-width: 100vw;
-background: radial-gradient(
-    50rem at left top,
-    rgba(172, 32, 1, 1),
-    rgba(172, 32, 1, 0.14)
-  ),
-  radial-gradient(
-    150rem at center left,
-    rgba(28, 146, 255, 1),
-    rgba(28, 146, 255, 0.52)
-  ),
-  radial-gradient(
-    150rem at right,
-    rgba(97, 23, 255, 1),
-    rgba(97, 23, 255, 0.57)
-  );
+  height: 100vh;
+  width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(
+      50rem at left top,
+      rgba(172, 32, 1, 1),
+      rgba(172, 32, 1, 0.14)
+    ),
+    radial-gradient(
+      150rem at center left,
+      rgba(28, 146, 255, 1),
+      rgba(28, 146, 255, 0.52)
+    ),
+    radial-gradient(
+      150rem at right,
+      rgba(97, 23, 255, 1),
+      rgba(97, 23, 255, 0.57)
+    );
 
   display: grid;
   grid-template-columns: 200px auto;
   grid-template-rows: 50px auto;
+
+  position: relative;
 `;
 const Overlay = styled.div`
   height: 100%;
@@ -33,32 +39,37 @@ const Overlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  inset: 0;
 `;
 
 const Header = styled.header`
-grid-row: 1;
-grid-column: 2;
-background: rgba(255, 255, 255, 0.05);
-z-index: 3333;
-`
+  grid-row: 1;
+  grid-column: 2;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 3333;
+`;
 
 const Sidebar = styled.div`
-grid-row: 1 / span 2; 
-grid-column: 1;
-background: linear-gradient(180deg, rgba(255, 255, 255, 0.0153) 0%, rgba(255, 255, 255, 0.09) 100%);
-z-index: 33333;
-border-right: 1px solid rgba(255, 255, 255, 0.21);
-`
+  grid-row: 1 / span 2;
+  grid-column: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.0153) 0%,
+    rgba(255, 255, 255, 0.09) 100%
+  );
+  z-index: 33333;
+  border-right: 1px solid rgba(255, 255, 255, 0.21);
+`;
 
 const Main = styled.main`
-grid-row: 2 / span 1;
+  grid-row: 2 / span 1;
   grid-column: 2;
   background: #ff000;
   max-height: calc(100vh - 50px);
   overflow-y: scroll;
 `;
 
-const AppBackground = ({children}) => {
+const AppBackground = ({ children }) => {
   return (
     <Background>
       <Overlay />
@@ -70,7 +81,7 @@ const AppBackground = ({children}) => {
       </Sidebar>
       <Main className="p-4 z-10">{children}</Main>
     </Background>
-  )
-}
+  );
+};
 
-export default AppBackground
+export default AppBackground;
