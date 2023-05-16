@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrandLogo } from "../../assets/Brand/Assets";
 import { data1, data2, data3 } from "../../utils/Data/SidebarData";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Element = styled.div`
   background: ${(props) =>

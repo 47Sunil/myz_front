@@ -74,7 +74,7 @@ const AppBackground = ({ children }) => {
       <Sidebar>
         <AppSidebar />
       </Sidebar>
-      <Main className="p-4 z-10">{children}</Main>
+      <Main>{children}</Main>
     </Background>
   );
 };

@@ -15,10 +15,7 @@ const Router = () => {
           path='/forgetPassword'
           element=<ForgetPassword />
         />
-        <Route path={'/payment-gateway/'}
-        element=<PaymentGateway/>
-        />
-        <Route path={'/payment-gateway/:method'}
+        <Route path='/payment-gateway'
         element=<PaymentGateway/>
         />
       </Routes>
