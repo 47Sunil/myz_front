@@ -1,9 +1,9 @@
+
 import React from 'react';
 import styled from 'styled-components';
 import AppSidebar from '../components/Global/AppSidebar';
 import HeaderBar from '../components/Global/HeaderBar';
 import { useLocation } from 'react-router-dom';
-
 
 const Background = styled.div`
   height: 100vh;
@@ -29,6 +29,7 @@ const Background = styled.div`
   display: grid;
   grid-template-columns: 200px auto;
   grid-template-rows: 50px auto;
+
   position: relative;
 `;
 const Overlay = styled.div`
@@ -63,6 +64,7 @@ const Sidebar = styled.div`
 const Main = styled.main`
   grid-row: 2 / span 1;
   grid-column: 2;
+  background: #ff000;
   max-height: calc(100vh - 50px);
   overflow-y: scroll;
 `;
@@ -77,7 +79,7 @@ const AppBackground = ({ children }) => {
       <Sidebar>
         <AppSidebar />
       </Sidebar>
-      <Main>{children}</Main>
+      <Main className="p-4 z-10">{children}</Main>
     </Background>
   );
 };
