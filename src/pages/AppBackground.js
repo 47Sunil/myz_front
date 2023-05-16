@@ -4,9 +4,12 @@ import AppSidebar from '../components/Global/AppSidebar';
 import HeaderBar from '../components/Global/HeaderBar';
 import { useLocation } from 'react-router-dom';
 
+
 const Background = styled.div`
   height: 100vh;
   width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
   background: radial-gradient(
       50rem at left top,
       rgba(172, 32, 1, 1),
@@ -33,6 +36,8 @@ const Overlay = styled.div`
   width: 100%;
   background-color: rgba(30, 30, 30, 0.8);
   position: absolute;
+  top: 0;
+  left: 0;
   inset: 0;
 `;
 
@@ -58,31 +63,22 @@ const Sidebar = styled.div`
 const Main = styled.main`
   grid-row: 2 / span 1;
   grid-column: 2;
-  background: #ff000;
+  max-height: calc(100vh - 50px);
   overflow-y: scroll;
 `;
 
 const AppBackground = ({ children }) => {
-  const location = useLocation();
-  const path = location.pathname.split('/').join('');
-  console.log(path);
   return (
-    <>
-      {path !== 'accountssignin' && path !== 'accountssignup' ? (
-        <Background>
-          <Overlay />
-          <Header>
-            <HeaderBar />
-          </Header>
-          <Sidebar>
-            <AppSidebar />
-          </Sidebar>
-          <Main>{children}</Main>
-        </Background>
-      ) : (
-        <>{children}</>
-      )}
-    </>
+    <Background>
+      <Overlay />
+      <Header>
+        <HeaderBar />
+      </Header>
+      <Sidebar>
+        <AppSidebar />
+      </Sidebar>
+      <Main>{children}</Main>
+    </Background>
   );
 };
 

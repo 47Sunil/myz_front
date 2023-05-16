@@ -44,11 +44,6 @@ const SideBarItem = styled.div`
 `;
 
 const AppSidebar = () => {
-  const location = useLocation();
-  const path = location.pathname;
-
-  const [isActiveItem, setIsActiveItem] = useState(path && 'dashoard');
-
   return (
     <>
       <div className='flex p-5 justify-between flex-col h-screen'>
