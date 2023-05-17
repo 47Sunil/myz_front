@@ -4,6 +4,7 @@ import ForgetPassword from '../pages/ForgetPassword/index';
 import PaymentGateway from '../pages/PaymentGateways/Index';
 import Accounts from '../pages/Accounts/Accounts';
 import Dashboard from '../pages/Dashboard';
+import LandingPage from '../pages/LandingPage/index';
 import Layout from '../pages/AppBackground';
 const Router = () => {
   return (
@@ -25,6 +26,10 @@ const Router = () => {
           <Route
             path='/payment-gateway'
             element=<PaymentGateway />
+          />
+          <Route
+            path='/landing-page'
+            element=<LandingPage />
           />
         </Routes>
       </Layout>

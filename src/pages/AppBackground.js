@@ -65,6 +65,7 @@ const Main = styled.main`
   grid-column: 2;
   background: #ff000;
   max-height: calc(100vh - 50px);
+  padding: 1rem;
   overflow-y: scroll;
 `;
 
