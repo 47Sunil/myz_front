@@ -16,6 +16,12 @@ module.exports = {
           'linear-gradient(98.02deg, #ff6b00 6.92%, #ff9900 97.15%);',
         'gradient-sidebar':
           'linear-gradient(180deg,rgba(255, 255, 255, 0.0153) 0%, rgba(255, 255,255, 0.09) 100%);',
+        'gradient-filter-right':
+          'linear-gradient(to right,rgba(0,0,0,.8),rgba(255,255,255,0))',
+        'gradient-filter-left':
+          'linear-gradient(to left,rgba(0,0,0,.8),rgba(255,255,255,0))',
+        'gradient-filter':
+          'linear-gradient(to right,rgba(0,0,0,.8),rgba(0,0,0,.5),rgba(0,0,0,0),rgba(0,0,0,.5),rgba(0,0,0,.8))',
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',

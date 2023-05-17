@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 const TransparentBtn = styled.button`
   background: ${(props) =>
-    props.transparent
+    props.transparent && !props.active
       ? 'rgba(255,255,255,.13)'
       : 'linear-gradient(93.41deg, #FF6B00 7.25%, #FF9900 116.27%)'};
   border-radius: 8px;
@@ -17,12 +17,26 @@ const TransparentBtn = styled.button`
   font-size: ${(props) => (!props.filterBtn ? '21px' : '17px')};
 `;
 
-const TransparentButton = ({ buttonText, transparent, filterBtn, icon }) => {
+const TransparentButton = ({
+  buttonText,
+  transparent,
+  filterBtn,
+  icon,
+  active = false,
+}) => {
+  const [isActive, setIsActive] = useState(false);
+  function handleClick() {
+    if (active) {
+      setIsActive(!isActive);
+    }
+  }
   return (
     <TransparentBtn
       transparent={transparent}
       filterBtn={filterBtn}
-      className='flex items-center gap-3'
+      active={isActive}
+      className='flex items-center gap-3 flex-shrink-0'
+      onClick={handleClick}
     >
       {icon}
       {buttonText}

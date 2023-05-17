@@ -5,6 +5,7 @@ import PaymentGateway from '../pages/PaymentGateways/Index';
 import Accounts from '../pages/Accounts/Accounts';
 import Dashboard from '../pages/Dashboard';
 import Layout from '../pages/AppBackground';
+import Transaction from '../pages/Transaction/index';
 const Router = () => {
   return (
     <BrowserRouter>
@@ -25,6 +26,10 @@ const Router = () => {
           <Route
             path='/payment-gateway'
             element=<PaymentGateway />
+          />
+          <Route
+            path='/transactions'
+            element=<Transaction />
           />
         </Routes>
       </Layout>
