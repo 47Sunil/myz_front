@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styled from 'styled-components';
 import AppSidebar from '../components/Global/AppSidebar';
@@ -70,17 +69,25 @@ const Main = styled.main`
 `;
 
 const AppBackground = ({ children }) => {
+  const location = useLocation();
+  const path = location.pathname.split('/').join('');
   return (
-    <Background>
-      <Overlay />
-      <Header>
-        <HeaderBar />
-      </Header>
-      <Sidebar>
-        <AppSidebar />
-      </Sidebar>
-      <Main className="p-4 z-10">{children}</Main>
-    </Background>
+    <>
+      {path !== 'accountssignin' && path !== 'accountssignup' ? (
+        <Background>
+          <Overlay />
+          <Header>
+            <HeaderBar />
+          </Header>
+          <Sidebar>
+            <AppSidebar />
+          </Sidebar>
+          <Main>{children}</Main>
+        </Background>
+      ) : (
+        <>{children}</>
+      )}
+    </>
   );
 };
 
