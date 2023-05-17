@@ -27,10 +27,6 @@ const Router = () => {
             path='/payment-gateway'
             element=<PaymentGateway />
           />
-          <Route
-            path='/transactions'
-            element=<Transaction />
-          />
         </Routes>
       </Layout>
     </BrowserRouter>
