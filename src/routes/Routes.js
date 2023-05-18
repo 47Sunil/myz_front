@@ -39,7 +39,7 @@ const Router = () => {
             element=<LandingPage />
           />
           <Route
-            path='/domains'
+            path='/domain/:method'
             element=<Domain />
           />
           <Route

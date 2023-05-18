@@ -33,9 +33,14 @@ module.exports = {
           'linear-gradient(203.96deg, #F26E57 9.69%, #C663D4 101.69%);',
         'gradient-transparent-domain':
           'linear-gradient(269.59deg, #2D2935 15.84%, #1D2B38 71.25%);',
+        'gradient-add-domain-orange':
+          'linear-gradient(153.67deg, #FF9900 0%, #FF6B00 100%);',
+        'gradient-add-domain-purple-text':
+          'linear-gradient(267.98deg, rgba(189, 97, 236, 0.71) 25.42%, rgba(187, 164, 255, 0.71) 38.73%);',
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',
+        domain: '183px 183px 50px',
       },
       gridTemplateRows: {
         reports: 'repeat(2,minmax(300px,1fr))',
