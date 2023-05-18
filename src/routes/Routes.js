@@ -44,7 +44,7 @@ const Router = () => {
           />
           <Route
             path='/account'
-            element=< UserAccount />
+            element=<UserAccount />
           />
         </Routes>
       </Layout>
