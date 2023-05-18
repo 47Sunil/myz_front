@@ -74,7 +74,9 @@ const AppBackground = ({ children }) => {
   const path = location.pathname.split('/').join('');
   return (
     <>
-      {path !== 'accountssignin' && path !== 'accountssignup' ? (
+      {path !== 'accountssignin' &&
+      path !== 'accountssignup' &&
+      path !== 'domainadd_domain' ? (
         <Background>
           <Overlay />
           <Header>

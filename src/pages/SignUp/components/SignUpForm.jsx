@@ -94,7 +94,9 @@ const SignUpForm = ({ setSignUpError }) => {
           <span>Sign In</span>
         </Link>
       </p>
-      <GoToHomeBtn />
+      <div className='px-5 pb-5'>
+        <GoToHomeBtn text={'Go Back To Home'} />
+      </div>
     </form>
   );
 };
