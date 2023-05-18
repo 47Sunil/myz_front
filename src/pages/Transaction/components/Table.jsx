@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Tables from '../../../components/Tables/Tables';
+import { Tables } from '../../../components/Tables/Tables';
 import Pagination from './Pagination';
 import { transactionTableData } from '../../../utils/Data/constant';
 

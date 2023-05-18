@@ -65,4 +65,30 @@ const Tables = ({ pages, data }) => {
   );
 };
 
-export default Tables;
+const DomainTables = ({ pages, data }) => {
+  return (
+    <table className='w-full border-collapse mb-[41px]'>
+      <tr>
+        {data.map((i) => {
+          return i.header.map((j) => {
+            return <HeaderCell>{j}</HeaderCell>;
+          });
+        })}
+      </tr>
+      {data.map((i) => {
+        return i.data.map((j) => {
+          return (
+            <BodyRow>
+              <BodyCell>{j.domainName}</BodyCell>
+              <BodyCell>{j.date}</BodyCell>
+              <BodyCell>{j.status}</BodyCell>
+              <BodyCell>{j.actions}</BodyCell>
+            </BodyRow>
+          );
+        });
+      })}
+    </table>
+  );
+};
+
+export { Tables, DomainTables };

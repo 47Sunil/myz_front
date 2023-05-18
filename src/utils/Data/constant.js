@@ -1672,3 +1672,131 @@ export const transactionTableData = [
     ],
   },
 ];
+
+export const domainTableData = [
+  {
+    header: ['Domain Name', 'Date', 'Status', 'Actions'],
+    data: [
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+      {
+        domainName: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        actions: '',
+      },
+    ],
+  },
+];
