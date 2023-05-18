@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Tables from '../../../components/Tables/Tables';
 import Pagination from './Pagination';
+import { transactionTableData } from '../../../utils/Data/constant';
 
 const Table = () => {
   const [pages, setPages] = useState(5);
@@ -16,7 +17,10 @@ const Table = () => {
           setPages={setPages}
         />
       </div>
-      <Tables pages={pages} />
+      <Tables
+        pages={pages}
+        data={transactionTableData}
+      />
     </div>
   );
 };

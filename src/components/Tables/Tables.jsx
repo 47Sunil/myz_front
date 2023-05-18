@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { transactionTableData } from '../../utils/Data/constant';
 
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
@@ -37,17 +36,17 @@ const BodyCell = styled.td`
   letter-spacing: 0.04em;
 `;
 
-const Tables = ({ pages }) => {
+const Tables = ({ pages, data }) => {
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
-        {transactionTableData.map((i) => {
+        {data.map((i) => {
           return i.header.map((j) => {
             return <HeaderCell>{j}</HeaderCell>;
           });
         })}
       </tr>
-      {transactionTableData.map((i) => {
+      {data.map((i) => {
         return i.data.map((j) => {
           return (
             <BodyRow>
