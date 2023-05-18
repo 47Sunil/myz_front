@@ -5,7 +5,7 @@ import Table from './components/Table';
 
 const Transaction = () => {
   return (
-    <div className='p-[1.188rem_2.813rem_1.375rem_2.313rem] z-[33333] relative w-full h-[calc(100vh-50px)]'>
+    <div className='z-[33333] relative w-full'>
       <Header />
       <Filter />
       <hr className='border-[rgba(255,255,255,.15)] mb-[41px]' />

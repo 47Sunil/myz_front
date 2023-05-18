@@ -64,8 +64,12 @@ const Main = styled.main`
   grid-row: 2 / span 1;
   grid-column: 2;
   background: #ff000;
+<<<<<<< HEAD
   max-height: calc(100vh - 50px);
   padding: 1rem;
+=======
+  min-height: calc(100vh - 50px);
+>>>>>>> 0d5c1e1379a1cb3ecd53a20e463053e80069d694
   overflow-y: scroll;
 `;
 
@@ -83,7 +87,7 @@ const AppBackground = ({ children }) => {
           <Sidebar>
             <AppSidebar />
           </Sidebar>
-          <Main>{children}</Main>
+          <Main className='p-4 z-10'>{children}</Main>
         </Background>
       ) : (
         <>{children}</>
