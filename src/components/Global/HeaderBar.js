@@ -1,11 +1,12 @@
 import React from 'react';
+import BellIcon from '../../assets/svg/BellLogo';
 
 const HeaderBar = () => {
   return (
     <>
       <div className='h-full flex p-2 items-center flex-row justify-end'>
         <div className='my-2 px-4 border-y-0  border border-[#FFFFFF1A] text-[#908C99]'>
-          Bell
+          <BellIcon />
         </div>
         <div className='p-2  grid grid-cols-12 gap-2'>
           <div className='col-span-8 flex flex-col items-end justify-center'>
