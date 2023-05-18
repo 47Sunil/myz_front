@@ -16,7 +16,7 @@ const BorderDiv = styled.div`
 
 const AddDomain = () => {
   return (
-    <BorderDiv className='bg-gradient-transparent-domain rounded-xl py-[19px]'>
+    <BorderDiv className='bg-gradient-transparent-domain rounded-xl py-[19px] mb-[26px]'>
       <div className='bg-gradient-add-icon text-white font-normal text-[34px] leading-[67px] rounded-full w-[67px] h-[67px] text-center'>
         +
       </div>
