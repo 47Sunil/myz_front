@@ -5,6 +5,7 @@ import PaymentGateway from '../pages/PaymentGateways/Index';
 import Accounts from '../pages/Accounts/Accounts';
 import Dashboard from '../pages/Dashboard';
 import LandingPage from '../pages/LandingPage/index';
+import UserAccount from '../pages/UserAccount/Index';
 import Domain from '../pages/Domain/index';
 import Layout from '../pages/AppBackground';
 import Transaction from '../pages/Transaction/index';
@@ -26,20 +27,24 @@ const Router = () => {
             element=<ForgetPassword />
           />
           <Route
-            path='/payment-gateway'
+            path='/payment-gateways'
             element=<PaymentGateway />
           />
           <Route
-            path='/transaction'
+            path='/transactions'
             element=<Transaction />
           />
           <Route
-            path='/landing-page'
+            path='/landing-pages'
             element=<LandingPage />
           />
           <Route
             path='/domain/:method'
             element=<Domain />
+          />
+          <Route
+            path='/account'
+            element=< UserAccount />
           />
         </Routes>
       </Layout>
