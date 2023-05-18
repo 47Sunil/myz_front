@@ -83,7 +83,7 @@ const AppBackground = ({ children }) => {
           <Sidebar>
             <AppSidebar />
           </Sidebar>
-          <Main>{children}</Main>
+          <Main className='p-4 z-10'>{children}</Main>
         </Background>
       ) : (
         <>{children}</>

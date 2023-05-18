@@ -1,54 +1,94 @@
 import React from 'react';
 import styled from 'styled-components';
+
 const HeaderCell = styled.th`
-  background: rgba(255, 255, 255, 0.22);
-  border-radius: 7px;
+  background: rgba(229, 231, 235, 0.7);
   font-weight: 400;
-  font-size: 17px;
+  font-size: 0.875rem;
   line-height: 26px;
   letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.65);
+  font-weight: 500;
+  color: #000;
   padding-block: 0.5rem;
+  padding-inline: 1rem;
+  text-align: left;
+  border: 1px solid rgb(209, 213, 219);
+  &:first-child {
+    border-left: none;
+  }
+  &:last-child {
+    border-right: none;
+  }
 `;
 
 const BodyRow = styled.tr`
-  border-collapse: collapse;
+  &:nth-child(odd) {
+    background: #f7f7f7;
+  }
 `;
 
 const BodyCell = styled.td`
-  background: white;
-  &:first-child {
-    border-radius: 7px 0 0 7px;
-  }
-  &:last-child {
-    border-radius: 0 7px 7px 0;
-  }
-  color: #565656;
+  text-align: left;
+  color: rgb(75, 85, 99);
+  padding: 1rem 1rem;
+  font-size: 14px;
+  line-height: 26px;
+  letter-spacing: 0.04em;
 `;
 
-const Tables = () => {
+const Tables = ({ pages, data }) => {
   return (
-    <table className='w-full'>
+    <table className='w-full border-collapse mb-[41px]'>
       <tr>
-        <HeaderCell>Order Id</HeaderCell>
-        <HeaderCell>Date</HeaderCell>
-        <HeaderCell>Status</HeaderCell>
-        <HeaderCell>Amount</HeaderCell>
-        <HeaderCell>Product</HeaderCell>
-        <HeaderCell>Customer</HeaderCell>
-        <HeaderCell>Actions</HeaderCell>
+        {data.map((i) => {
+          return i.header.map((j) => {
+            return <HeaderCell>{j}</HeaderCell>;
+          });
+        })}
       </tr>
-      <tbody>
-        <BodyCell>xyz</BodyCell>
-        <BodyCell>xyz</BodyCell>
-        <BodyCell>xyz</BodyCell>
-        <BodyCell>xyz</BodyCell>
-        <BodyCell>xyz</BodyCell>
-        <BodyCell>xyz</BodyCell>
-        <BodyCell>xyz</BodyCell>
-      </tbody>
+      {data.map((i) => {
+        return i.data.map((j) => {
+          return (
+            <BodyRow>
+              <BodyCell>{j.orderId}</BodyCell>
+              <BodyCell>{j.date}</BodyCell>
+              <BodyCell>{j.status}</BodyCell>
+              <BodyCell>{j.amount}</BodyCell>
+              <BodyCell>{j.product}</BodyCell>
+              <BodyCell>{j.customer}</BodyCell>
+              <BodyCell>{j.actions}</BodyCell>
+            </BodyRow>
+          );
+        });
+      })}
     </table>
   );
 };
 
-export default Tables;
+const DomainTables = ({ pages, data }) => {
+  return (
+    <table className='w-full border-collapse mb-[41px]'>
+      <tr>
+        {data.map((i) => {
+          return i.header.map((j) => {
+            return <HeaderCell>{j}</HeaderCell>;
+          });
+        })}
+      </tr>
+      {data.map((i) => {
+        return i.data.map((j) => {
+          return (
+            <BodyRow>
+              <BodyCell>{j.domainName}</BodyCell>
+              <BodyCell>{j.date}</BodyCell>
+              <BodyCell>{j.status}</BodyCell>
+              <BodyCell>{j.actions}</BodyCell>
+            </BodyRow>
+          );
+        });
+      })}
+    </table>
+  );
+};
+
+export { Tables, DomainTables };
