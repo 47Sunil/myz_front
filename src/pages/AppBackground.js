@@ -76,7 +76,8 @@ const AppBackground = ({ children }) => {
     <>
       {path !== 'accountssignin' &&
       path !== 'accountssignup' &&
-      path !== 'domainadd_domain' ? (
+      path !== 'domainadd_domain' &&
+      path !== 'domainadd_dns' ? (
         <Background>
           <Overlay />
           <Header>

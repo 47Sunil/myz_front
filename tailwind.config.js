@@ -40,6 +40,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',
+        domain: '183px 183px 50px',
       },
       gridTemplateRows: {
         reports: 'repeat(2,minmax(300px,1fr))',
