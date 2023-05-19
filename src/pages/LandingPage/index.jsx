@@ -5,6 +5,7 @@ import TemplateSlider from './components/TemplateSlider';
 import LandingPagesList from './components/LandingPagesList';
 import LandingPageListItem from './components/LandingPagesListItem';
 import ViewAllTemplatesModal from './components/ViewAllTemplatesModal';
+import Banner from './components/Banner';
 
 const LandingPages = () => {
   const [isOpened, setIsOpened] = useState(false);
@@ -12,18 +13,7 @@ const LandingPages = () => {
     <>
       {isOpened && <ViewAllTemplatesModal />}
       <div className=' relative z-[33333] overflow-y-scroll'>
-        <div className='flex max-h-[10rem] gap-[1rem] mb-2'>
-          <img
-            className='flex-1 object-contain w-[40%] rounded-xl'
-            src={DocumentImage1}
-            alt='doc-1'
-          />
-          <img
-            className='flex-1 object-contain  w-[40%] rounded-xl'
-            src={DocumentImage2}
-            alt='doc-2'
-          />
-        </div>
+        <Banner />
         <TemplateSlider
           open={isOpened}
           setOpen={setIsOpened}

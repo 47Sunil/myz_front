@@ -39,6 +39,12 @@ module.exports = {
           'linear-gradient(267.98deg, rgba(189, 97, 236, 0.71) 25.42%, rgba(187, 164, 255, 0.71) 38.73%);',
         'gradient-landing-text':
           'linear-gradient(96.2deg, #FF6B00 31.5%, #BD61EC 95.56%);',
+        'gradient-landing-purple':
+          'linear-gradient(121.92deg, #8605C8 53.35%, #6117FF 105.85%);',
+        'gradient-landing-orange':
+          'linear-gradient(95.61deg, #E98519 45.52%, #E16717 98.77%);',
+        'gradient-landing-text-purple':
+          'linear-gradient(180deg, #210C4D 0%, #8E0FCE 100%);',
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',
