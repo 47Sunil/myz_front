@@ -45,6 +45,7 @@ const Header = styled.header`
   grid-row: 1;
   grid-column: 2;
   background: rgba(255, 255, 255, 0.05);
+  border-radius: 0 0 22px 0;
   z-index: 3333;
 `;
 
