@@ -37,10 +37,13 @@ module.exports = {
           'linear-gradient(153.67deg, #FF9900 0%, #FF6B00 100%);',
         'gradient-add-domain-purple-text':
           'linear-gradient(267.98deg, rgba(189, 97, 236, 0.71) 25.42%, rgba(187, 164, 255, 0.71) 38.73%);',
+        'gradient-landing-text':
+          'linear-gradient(96.2deg, #FF6B00 31.5%, #BD61EC 95.56%);',
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',
         domain: '183px 183px 50px',
+        landingPage: 'repeat(4,minmax(220px,1fr))',
       },
       gridTemplateRows: {
         reports: 'repeat(2,minmax(300px,1fr))',
