@@ -45,6 +45,18 @@ module.exports = {
           'linear-gradient(95.61deg, #E98519 45.52%, #E16717 98.77%);',
         'gradient-landing-text-purple':
           'linear-gradient(180deg, #210C4D 0%, #8E0FCE 100%);',
+        'gradient-landing-blue':
+          'linear-gradient(153.67deg, #5E36CE 0%, #4616AD 100%);',
+        'gradient-add-page-purple':
+          'linear-gradient(145.22deg, #A561EC 20.49%, #365DCE 99.83%);',
+        'gradient-add-page-orange':
+          'linear-gradient(117.81deg, #FFCC17 -11.33%, #FF9900 65.05%);',
+        'gradient-add-page-blue':
+          ' linear-gradient(232.71deg, #3360FF 31.44%, #10D4FF 108.73%);',
+        'gradient-ai-magic':
+          'linear-gradient(92.24deg, #8F5AFF 7.51%, #5E36CE 104.06%);',
+        'gradient-ai-magic-toggle':
+          'linear-gradient(180deg, #FF6B00 0%, #FF9900 97.4%);',
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',

@@ -35,7 +35,7 @@ const Router = () => {
             element=<Transaction />
           />
           <Route
-            path='/landing-pages'
+            path='/landing-pages/:method'
             element=<LandingPage />
           />
           <Route

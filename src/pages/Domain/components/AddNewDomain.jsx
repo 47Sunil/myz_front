@@ -4,8 +4,8 @@ import DynamicInputManager from '../../../components/DynamicInputManager/Dynamic
 import thumbsUp from '../../../assets/icons/ThumbsUp.png';
 import reaction from '../../../assets/icons/reaction.png';
 import { Link, useParams } from 'react-router-dom';
-import SecondScreenWrapper from '../../../components/Global/SecondScreenWrapper';
-
+import SecondScreenWrapper from '../../../components/SecondScreen/SecondScreenWrapper';
+import SecondScreenForm from '../../../components/SecondScreen/Form';
 const AddNewDomain = () => {
   const [domainName, setDomainName] = useState('');
   const { method } = useParams();
@@ -20,18 +20,13 @@ const AddNewDomain = () => {
               className='absolute object-contain'
             />
           </div>
-          <div className='w-[62vw] h-[70vh] bg-[#100921] rounded-[22px] z-20 absolute top-[170px] left-[25%] flex flex-col'>
-            <div className='w-full h-[100px] bg-black rounded-t-[22px] border-b border-solid border-b-[rgba(255,255,255,.15)] flex flex-col py-4 px-8 justify-between'>
-              <h1 className='font-medium text-[27px] leading-[121%] text-white '>
-                Adding Domain
-              </h1>
-              <p className='capitalize font-normal text-[17px] leading-[121%] text-white'>
-                are you ready to launch your converting landing pages with{' '}
-                <span className='bg-gradient-add-domain-purple-text bg-clip-text text-transparent'>
-                  magic!
-                </span>
-              </p>
-            </div>
+          <SecondScreenForm
+            headingText={'Adding Domain'}
+            btnText={'Next'}
+            className={
+              'w-[62vw] h-[70vh] bg-[#100921] rounded-[22px] z-20 absolute top-[170px] left-[25%] flex flex-col'
+            }
+          >
             <div className='py-8 pl-4 flex-grow'>
               <div className='pr-[27rem]'>
                 <DynamicInputManager
@@ -76,15 +71,7 @@ const AddNewDomain = () => {
                 </div>
               </div>
             </div>
-            <div className='w-full h-[100px] bg-[rgba(255,255,255,0.04);] rounded-b-[22px] flex items-center py-4 px-8 '>
-              <Link
-                to='/domain/add_dns'
-                className='w-[300px] h-[58px] rounded-[10px] font-semibold text-xl leading-[58px] text-center bg-gradient-orange-text text-white'
-              >
-                Next
-              </Link>
-            </div>
-          </div>
+          </SecondScreenForm>
         </SecondScreenWrapper>
       ) : (
         <SecondScreenWrapper>

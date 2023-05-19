@@ -1,46 +1,9 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 import { AiOutlineSearch, AiFillCaretDown } from 'react-icons/ai';
 import templateImage from '../../../assets/images/myzer-templates.png';
-import { Menu, Transition } from '@headlessui/react';
-
-const DropDown = () => {
-  return (
-    <Menu
-      as='div'
-      className='bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px] h-[50px] text-white w-[220px] flex justify-center relative'
-    >
-      <Menu.Button className='text-[22px] font-medium'>Category</Menu.Button>
-      <Transition
-        as={Fragment}
-        enter='transition ease-out duration-100'
-        enterFrom='transform opacity-0 scale-95'
-        enterTo='transform opacity-100 scale-100'
-        leave='transition ease-in duration-75'
-        leaveFrom='transform opacity-100 scale-100'
-        leaveTo='transform opacity-0 scale-95'
-      >
-        <Menu.Items className='absolute top-[50px] z-[20] flex flex-col gap-4 bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px]  text-white w-[220px] p-4 overflow-y-scroll h-[182px]'>
-          <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
-            <button>Course</button>
-          </Menu.Item>
-          <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
-            <button>E-Commerce</button>
-          </Menu.Item>
-          <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
-            <button>SAAS</button>
-          </Menu.Item>
-          <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
-            <button>Webinar</button>
-          </Menu.Item>
-          <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
-            <button>Digital Product</button>
-          </Menu.Item>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-  );
-};
+import DropDown from '../../../components/DropDown/DropDown';
+import { Menu } from '@headlessui/react';
 
 const ViewAllTemplatesModal = () => {
   const [isClosed, setIsClosed] = useState(true);
@@ -82,52 +45,31 @@ const ViewAllTemplatesModal = () => {
                   >
                     <AiFillCaretDown className='text-[#85878c] text-xl' />
                   </label>
-                  <DropDown />
-                  {/* <select
-                    name='category'
-                    id='category'
-                    value={'category'}
-                    className='bg-[rgba(255,255,255,0.05)] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px] h-[50px] text-white w-[220px] text-center appearance-none'
+                  <DropDown
+                    menuClass={
+                      'bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px] h-[50px] text-white w-[220px] flex justify-center relative'
+                    }
+                    menuBtnText={'Category'}
+                    menuBtnClass={'text-[22px] font-medium'}
                   >
-                    <option
-                      value='category'
-                      selected
-                      hidden
-                      className='text-[22px] font-medium'
-                    >
-                      Category
-                    </option>
-                    <option
-                      value='course'
-                      className='bg-[red] text-[15px] text-[rgba(255,255,255,.7)]'
-                    >
-                      Course
-                    </option>
-                    <option
-                      value='ecommerce'
-                      className='bg-[rgba(255,255,255,0.05)] text-[15px] text-[rgba(255,255,255,.7)]'
-                    >
-                      E-Commerce
-                    </option>
-                    <option
-                      value='saas'
-                      className='bg-[rgba(255,255,255,0.05)] text-[15px] text-[rgba(255,255,255,.7)]'
-                    >
-                      SAAS
-                    </option>
-                    <option
-                      value='webinar'
-                      className='bg-[rgba(255,255,255,0.05)] text-[15px] text-[rgba(255,255,255,.7)]'
-                    >
-                      Webinar
-                    </option>
-                    <option
-                      value='digital-product'
-                      className='bg-[rgba(255,255,255,0.05)] text-[15px] text-[rgba(255,255,255,.7)]'
-                    >
-                      Digital Product
-                    </option>
-                  </select> */}
+                    <Menu.Items className='absolute top-[50px] z-[20] flex flex-col gap-4 bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px]  text-white w-[220px] p-4 overflow-y-scroll h-[182px]'>
+                      <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                        <button>Course</button>
+                      </Menu.Item>
+                      <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                        <button>E-Commerce</button>
+                      </Menu.Item>
+                      <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                        <button>SAAS</button>
+                      </Menu.Item>
+                      <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                        <button>Webinar</button>
+                      </Menu.Item>
+                      <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                        <button>Digital Product</button>
+                      </Menu.Item>
+                    </Menu.Items>
+                  </DropDown>
                 </div>
               </div>
               <div className='grid grid-cols-landingPage overflow-hidden gap-3'>

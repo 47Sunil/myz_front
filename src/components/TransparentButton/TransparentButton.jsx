@@ -4,6 +4,8 @@ const TransparentBtn = styled.button`
   background: ${(props) =>
     props.transparent && !props.active
       ? 'rgba(255,255,255,.13)'
+      : props.dark
+      ? 'rgba(14, 14, 14, 0.47)'
       : 'linear-gradient(93.41deg, #FF6B00 7.25%, #FF9900 116.27%)'};
   border-radius: 8px;
   color: ${(props) =>
@@ -22,6 +24,7 @@ const TransparentButton = ({
   transparent,
   filterBtn,
   icon,
+  dark,
   active = false,
 }) => {
   const [isActive, setIsActive] = useState(false);
@@ -37,6 +40,7 @@ const TransparentButton = ({
       active={isActive}
       className='flex items-center gap-3 flex-shrink-0'
       onClick={handleClick}
+      dark={dark}
     >
       {icon}
       {buttonText}
