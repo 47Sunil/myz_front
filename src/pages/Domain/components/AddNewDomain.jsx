@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import bg from '../../../assets/images/domainBG.png';
-import meshLarge from '../../../assets/images/meshLarge.png';
-import MyzerLogo from '../../../assets/svg/MyzerLogo';
-import BackToHome from '../../../components/BackToHome/BackToHome';
 import starbg from '../../../assets/images/Star.png';
 import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
 import thumbsUp from '../../../assets/icons/ThumbsUp.png';
 import reaction from '../../../assets/icons/reaction.png';
 import { Link, useParams } from 'react-router-dom';
-const DomainBG = styled.div`
-  background-image: url(${bg});
-  background-repeat: no-repeat;
-`;
+import SecondScreenWrapper from '../../../components/Global/SecondScreenWrapper';
 
 const AddNewDomain = () => {
   const [domainName, setDomainName] = useState('');
@@ -20,16 +12,7 @@ const AddNewDomain = () => {
   return (
     <>
       {method === 'add_domain' ? (
-        <DomainBG className='h-screen w-screen relative px-16 py-8 '>
-          <img
-            src={meshLarge}
-            alt=''
-            className='absolute inset-0 h-full w-full object-cover'
-          />
-          <div className='flex w-full justify-between items-center '>
-            <MyzerLogo />
-            <BackToHome text={'Go Back'} />
-          </div>
+        <SecondScreenWrapper>
           <div className='w-[60vw] h-[80vh] bg-gradient-add-domain-orange z-10 rounded-[63px] absolute top-[130px] left-[50%] translate-x-[-50%] overflow-hidden'>
             <img
               src={starbg}
@@ -102,18 +85,9 @@ const AddNewDomain = () => {
               </Link>
             </div>
           </div>
-        </DomainBG>
+        </SecondScreenWrapper>
       ) : (
-        <DomainBG className='h-screen w-screen relative px-16 py-8 '>
-          <img
-            src={meshLarge}
-            alt=''
-            className='absolute inset-0 h-full w-full object-cover'
-          />
-          <div className='flex w-full justify-between items-center '>
-            <MyzerLogo />
-            <BackToHome text={'Go Back'} />
-          </div>
+        <SecondScreenWrapper>
           <div className='w-[60vw] h-[80vh] bg-gradient-add-domain-orange z-10 rounded-[63px] absolute top-[130px] left-[50%] translate-x-[-50%] overflow-hidden'>
             <img
               src={starbg}
@@ -207,7 +181,7 @@ const AddNewDomain = () => {
               </Link>
             </div>
           </div>
-        </DomainBG>
+        </SecondScreenWrapper>
       )}
     </>
   );
