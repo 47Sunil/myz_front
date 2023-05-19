@@ -6,12 +6,12 @@ const Logintest = () => {
 
   useEffect(() => {
     handleLogin();
-  }, []);
+  });
 
   const handleLogin = async () => {
     await loginMutation.mutateAsync({
-        email: "rrsonawnse@gmail.com",
-        password: "sunil123",
+        email: "rrsonawnsze@gmail.com",
+        password: "rohit123",
         rememberMe: true
       });
   };
