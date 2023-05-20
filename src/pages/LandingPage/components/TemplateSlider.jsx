@@ -17,13 +17,15 @@ const Button = styled.button`
   color: ${(props) => (props.white ? '#000000' : '#ffffff')};
   border-radius: 30px;
 `;
-const ModalBtn = styled.div`
+const ModalBtn = styled.button`
   background: linear-gradient(180deg, #f76f47 0%, #ff9900 100%);
 `;
 
-const TemplateManager = () => {
+const TemplateManager = ({ open, setOpen }) => {
   const [templates, setTemplates] = useState([]);
-
+  function handleClick() {
+    setOpen(!open);
+  }
   // const getTemplates = async () => {
   //   const { data } = await axios.get('/api/v1/template/templates');
   //   console.log(data);
@@ -78,7 +80,10 @@ const TemplateManager = () => {
           );
         })}
 
-        <ModalBtn className='template-modal-btn h-[250px] rounded-xl p-2'>
+        <ModalBtn
+          className='template-modal-btn h-[250px] rounded-xl p-2'
+          onClick={handleClick}
+        >
           <div className='align-center relative flex h-full flex-col items-center justify-center rounded-lg border border-dashed border-white/70'>
             <Button
               white

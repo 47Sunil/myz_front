@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import AppSidebar from '../components/Global/AppSidebar';
 import HeaderBar from '../components/Global/HeaderBar';
 import { useLocation } from 'react-router-dom';
+import ViewAllTemplatesModal from './LandingPage/components/ViewAllTemplatesModal';
 
 const Background = styled.div`
   height: 100vh;
@@ -78,7 +79,8 @@ const AppBackground = ({ children }) => {
       {path !== 'accountssignin' &&
       path !== 'accountssignup' &&
       path !== 'domainadd_domain' &&
-      path !== 'domainadd_dns' ? (
+      path !== 'domainadd_dns' &&
+      path !== 'landing-pagescreate_landing_page' ? (
         <Background>
           <Overlay />
           <Header>
@@ -88,6 +90,7 @@ const AppBackground = ({ children }) => {
             <AppSidebar />
           </Sidebar>
           <Main className='p-4 z-10'>{children}</Main>
+          {/* <ViewAllTemplatesModal /> */}
         </Background>
       ) : (
         <>{children}</>
