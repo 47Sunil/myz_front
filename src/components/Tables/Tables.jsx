@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import CopyIcon from '../../assets/svg/CopyIcon';
+import Eye from '../../assets/svg/Eye';
+import Bin from '../../assets/svg/Bin';
+import Notebook from '../../assets/svg/Notebook';
 
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
@@ -91,4 +95,64 @@ const DomainTables = ({ pages, data }) => {
   );
 };
 
-export { Tables, DomainTables };
+const LandingTables = ({ pages, data }) => {
+  return (
+    <table className='w-full border-collapse mb-[41px]'>
+      <tr>
+        {data.map((i) => {
+          return i.header.map((j) => {
+            return <HeaderCell>{j}</HeaderCell>;
+          });
+        })}
+      </tr>
+      {data.map((i) => {
+        return i.data.map((j) => {
+          return (
+            <BodyRow>
+              <BodyCell className='w-[300px]'>
+                {' '}
+                <div className='w-full text-sm text-gray-900 font-medium'>
+                  <h2>Agency Workshop Landing Page</h2>
+                  <div className=' flex mt-1 bg-gray-200 rounded overflow-hidden relative'>
+                    <p className='bg-gray-800 text-white py-1 px-2 text-xs'>
+                      preview.myzer.io
+                    </p>
+                    <p className='text-gray-500 p-1 text-xs'>/preview</p>
+                    <div className='absolute p-1 right-0'>
+                      <CopyIcon />
+                    </div>
+                  </div>
+                </div>
+              </BodyCell>
+              <BodyCell className='w-[150px]'>{j.date}</BodyCell>
+              <BodyCell className=' flex justify-center h-full mt-3'>
+                <p className='bg-[rgba(255,107,0,0.23)] w-fit px-3 text-center border-2 border-dashed border-[#FA6A2C]'>
+                  Draft
+                </p>
+              </BodyCell>
+              <BodyCell className='!text-center'>3,456</BodyCell>
+              <BodyCell className='w-[300px]'>
+                <div className='flex gap-2 justify-center'>
+                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-4 text-[15px]'>
+                    Send to Draft
+                  </button>
+                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'>
+                    <Eye />
+                  </button>
+                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'>
+                    <Notebook />
+                  </button>
+                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'>
+                    <Bin />
+                  </button>
+                </div>
+              </BodyCell>
+            </BodyRow>
+          );
+        });
+      })}
+    </table>
+  );
+};
+
+export { Tables, DomainTables, LandingTables };

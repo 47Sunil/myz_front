@@ -1800,3 +1800,59 @@ export const domainTableData = [
     ],
   },
 ];
+export const landingTableData = [
+  {
+    header: ['Name', 'Date', 'Status', 'Page Views', 'Actions'],
+    data: [
+      {
+        name: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        pageViews: '',
+        actions: '',
+      },
+      {
+        name: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        pageViews: '',
+        actions: '',
+      },
+      {
+        name: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        pageViews: '',
+        actions: '',
+      },
+      {
+        name: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        pageViews: '',
+        actions: '',
+      },
+      {
+        name: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        pageViews: '',
+        actions: '',
+      },
+      {
+        name: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        pageViews: '',
+        actions: '',
+      },
+      {
+        name: 'xyz',
+        date: '19 Mar 2023',
+        status: 'paid',
+        pageViews: '',
+        actions: '',
+      },
+    ],
+  },
+];

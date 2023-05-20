@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         barlow: ['Barlow', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-myzer':

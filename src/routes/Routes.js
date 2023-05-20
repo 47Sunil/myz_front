@@ -9,6 +9,7 @@ import UserAccount from '../pages/UserAccount/Index';
 import Domain from '../pages/Domain/index';
 import Layout from '../pages/AppBackground';
 import Transaction from '../pages/Transaction/index';
+import Logintest from '../pages/SignIn_Temp/Index';
 const Router = () => {
   return (
     <BrowserRouter>
@@ -45,6 +46,10 @@ const Router = () => {
           <Route
             path='/account'
             element=<UserAccount />
+          />
+          <Route
+            path='/signintemp'
+            element=<Logintest />
           />
         </Routes>
       </Layout>

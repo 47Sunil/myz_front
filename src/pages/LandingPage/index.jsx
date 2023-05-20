@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TransparentButton from '../../components/TransparentButton/TransparentButton';
 import TemplateSlider from './components/TemplateSlider';
 import LandingPagesList from './components/LandingPagesList';
@@ -9,8 +9,13 @@ import FilterIcon from '../../assets/svg/FilterIcon';
 import Bitmoji from '../../assets/images/bitmoji_landingpage.png';
 import { useParams } from 'react-router-dom';
 import CreateLandingPage from './components/CreateLandingPage';
+import { useLandingMutation } from '../../actions/LandingPage';
+import { useQuery } from 'react-query';
+import { LandingTables } from '../../components/Tables/Tables';
+import { landingTableData } from '../../utils/Data/constant';
 
 const LandingPages = () => {
+  // const { data, isLoading } = useQuery('landing-page', useLandingMutation);
   const [isOpened, setIsOpened] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
   const { method } = useParams();
@@ -25,8 +30,15 @@ const LandingPages = () => {
               open={isOpened}
               setOpen={setIsOpened}
             />
+            {/* {data.data.map((i) => {
+              return (
+                <>
+                  <h1 className='text-xl'>{i.name}</h1>
+                </>
+              );
+            })} */}
 
-            <div className='heading-filter-container flex justify-between mt-4'>
+            <div className='heading-filter-container flex justify-between mt-4 mb-4'>
               <h4 className='text-xl text-white'>Landing pages</h4>
               <TransparentButton
                 buttonText={'Filter'}
@@ -35,7 +47,7 @@ const LandingPages = () => {
                 icon={<FilterIcon />}
               />
             </div>
-            {isEmpty ? (
+            {!isEmpty ? (
               <div className='rounded-xl mt-3 py-14 border w-full border-gray-50/20 flex items-center gap-16 bg-[rgba(255,255,255,.1)]'>
                 <div className='bg-[#1e2833] w-[500px] h-[200px] rounded-r-[300px] relative'>
                   <img
@@ -55,9 +67,8 @@ const LandingPages = () => {
                 </div>
               </div>
             ) : (
-              <div className='rounded-xl mt-3 p-4 border border-gray-50/20 flex flex-col gap-4  bg-[rgba(255,255,255,.1)]'>
-                <LandingPagesList />
-                <LandingPageListItem />
+              <div className='bg-[rgba(255,255,255,1)] border border-solid border-[rgba(255,255,255,0.15)] min-h-full rounded-t-3xl w-full  flex flex-col justify-between overflow-hidden'>
+                <LandingTables data={landingTableData} />
               </div>
             )}
           </div>
