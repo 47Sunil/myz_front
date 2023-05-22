@@ -1,25 +1,27 @@
-import React from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
+  Filler,
   Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
 import faker from 'faker';
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  BarElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
+  Filler,
   Legend
 );
-
 export const options = {
   responsive: true,
   scaleFontColor: 'white',
@@ -29,9 +31,8 @@ export const options = {
     },
   },
   scales: {
-    beginAtZero: false,
     x: {
-      beginAtZero: false,
+      beginAtZero: true,
       grid: {
         color: '#fff',
         display: false,
@@ -40,13 +41,15 @@ export const options = {
         color: '#fff',
         padding: 10,
         stepSize: 200,
+        font: {
+          family: 'Poppins',
+        },
       },
       border: {
         color: '#fff',
       },
     },
     y: {
-      beginAtZero: false,
       grid: {
         color: '#504E51',
         drawTicks: false,
@@ -55,6 +58,9 @@ export const options = {
         color: '#fff',
         padding: 10,
         stepSize: 200,
+        font: {
+          family: 'Poppins',
+        },
       },
       border: {
         color: '#fff',
@@ -62,27 +68,27 @@ export const options = {
     },
   },
 };
-
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-
 export const data = {
   labels,
   datasets: [
     {
-      label: 'Dataset 1',
+      fill: true,
+      label: 'Dataset 2',
       data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-      backgroundColor: [
-        'rgba(235, 105, 4, .8)',
-        'rgba(89, 52, 195, .8)',
-        'rgba(6, 211, 212, .8)',
-      ],
-      borderRadius: 9,
-      barThickness: 30,
+      borderColor: 'rgb(56,10,185)',
+      backgroundColor: (context) => {
+        const ctx = context.chart.ctx;
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(61,43,114,1)');
+        gradient.addColorStop(1, 'rgba(61,43,114,0)');
+        return gradient;
+      },
+      pointBackgroundColor: '#ffffff',
     },
   ],
 };
-
-const BarChart = () => {
+const AreaChart = () => {
   return (
     <div className='w-full h-full bg-[#1E222D] gap-[20px] rounded-2xl max-h-[24rem] pt-8 max-w-[570px] flex  items-center flex-col shadow-[inset_3px_3px_25px_#2d333d] border border-solid border-[#909094]'>
       <div className='w-full'>
@@ -90,7 +96,7 @@ const BarChart = () => {
           AVERAGE ORDER VALUE
         </span>
       </div>
-      <Bar
+      <Line
         options={options}
         data={data}
       />
@@ -98,4 +104,4 @@ const BarChart = () => {
   );
 };
 
-export default BarChart;
+export default AreaChart;

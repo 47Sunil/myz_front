@@ -8,6 +8,7 @@ import ReportSection from './components/Reports';
 import SplineChart from './components/SplineChart';
 import BarChart from './components/BarChart';
 import { Tables } from './components/Tables';
+import AreaChart from './components/AreaChart';
 
 const Dashboard = () => {
   const [dashBoardData, setDashBoardData] = useState({
@@ -97,7 +98,7 @@ const Dashboard = () => {
               <DateSection />
               <ReportSection dashBoardData={dashBoardData} />
               <div className='flex-grow grid grid-cols-reports grid-rows-reports gap-4'>
-                <SplineChart spinChartData={spinChartData} />
+                <AreaChart />
                 <Tables
                   heading={'Online store by sessions by location'}
                   locationData={locationData}
@@ -106,7 +107,7 @@ const Dashboard = () => {
                   heading={'Top Products by units sell'}
                   topProducts={topProducts}
                 />
-                <BarChart trafficSource={trafficSource} />
+                <BarChart />
               </div>
             </div>
             <OrderActivity ordersActivity={ordersActivity} />
