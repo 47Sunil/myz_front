@@ -32,7 +32,7 @@ const Router = () => {
             element=<PaymentGateway />
           />
           <Route
-            path='/transactions'
+            path='/transaction'
             element=<Transaction />
           />
           <Route

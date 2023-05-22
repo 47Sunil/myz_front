@@ -40,56 +40,78 @@ const BodyCell = styled.td`
   letter-spacing: 0.04em;
 `;
 
-const Tables = ({ pages, data }) => {
+const Tables = ({ pages, data, headerData }) => {
+  console.log(data, 'transaction table data');
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  function convertDate(date) {
+    const newFormatDate = new Date(date);
+    const day = newFormatDate.getDate().toString().padStart(2, '0');
+    const monthIndex = newFormatDate.getMonth();
+    const year = newFormatDate.getFullYear().toString();
+    const monthAbbreviation = monthNames[monthIndex];
+    const formattedDate = `${day} ${monthAbbreviation} ${year}`;
+    return formattedDate;
+  }
+
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
-        {data.map((i) => {
+        {headerData.map((i) => {
           return i.header.map((j) => {
             return <HeaderCell>{j}</HeaderCell>;
           });
         })}
       </tr>
       {data.map((i) => {
-        return i.data.map((j) => {
-          return (
-            <BodyRow>
-              <BodyCell>{j.orderId}</BodyCell>
-              <BodyCell>{j.date}</BodyCell>
-              <BodyCell>{j.status}</BodyCell>
-              <BodyCell>{j.amount}</BodyCell>
-              <BodyCell>{j.product}</BodyCell>
-              <BodyCell>{j.customer}</BodyCell>
-              <BodyCell>{j.actions}</BodyCell>
-            </BodyRow>
-          );
-        });
+        return (
+          <BodyRow>
+            <BodyCell>{i.orderId}</BodyCell>
+            <BodyCell>{i.createdAt}</BodyCell>
+            <BodyCell>{i.order_status}</BodyCell>
+            <BodyCell>{i.metadata.product.price}</BodyCell>
+            <BodyCell>{i.metadata.product.name}</BodyCell>
+            <BodyCell>{i.metadata.customer.name}</BodyCell>
+            <BodyCell>{i.actions}</BodyCell>
+          </BodyRow>
+        );
       })}
     </table>
   );
 };
 
-const DomainTables = ({ pages, data }) => {
+const DomainTables = ({ pages, data, headerData }) => {
+  console.log(data, 'adadaddadadaads');
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
-        {data.map((i) => {
+        {headerData.map((i) => {
           return i.header.map((j) => {
             return <HeaderCell>{j}</HeaderCell>;
           });
         })}
       </tr>
       {data.map((i) => {
-        return i.data.map((j) => {
-          return (
-            <BodyRow>
-              <BodyCell>{j.domainName}</BodyCell>
-              <BodyCell>{j.date}</BodyCell>
-              <BodyCell>{j.status}</BodyCell>
-              <BodyCell>{j.actions}</BodyCell>
-            </BodyRow>
-          );
-        });
+        return (
+          <BodyRow>
+            <BodyCell>{i.domainName}</BodyCell>
+            <BodyCell>{i.date}</BodyCell>
+            <BodyCell>{i.status}</BodyCell>
+            <BodyCell>{i.actions}</BodyCell>
+          </BodyRow>
+        );
       })}
     </table>
   );
