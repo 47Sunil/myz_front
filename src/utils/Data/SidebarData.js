@@ -24,7 +24,7 @@ export const data1 = [
   {
     label: 'Transactions',
     icon: <TransactionsLogo />,
-    path: 'transactions',
+    path: 'transaction',
   },
   {
     label: 'Domains',
