@@ -13,6 +13,9 @@ const Element = styled.div`
 const SideBarItem = styled.div`
   position: relative;
   z-index: 99;
+  background: ${(props) =>
+    props.clicked ? ' rgba(255, 255, 255, 0.05)' : 'transparent'};
+  border-radius: 9px;
   &:before {
     content: '';
     position: absolute;
@@ -44,6 +47,8 @@ const SideBarItem = styled.div`
 `;
 
 const AppSidebar = () => {
+  const { pathname } = useLocation();
+  console.log(pathname);
   return (
     <>
       <div className='flex p-5 justify-between flex-col h-screen'>
@@ -61,6 +66,7 @@ const AppSidebar = () => {
                 <SidebarItem
                   key={item.path}
                   item={item}
+                  pathname={pathname}
                 />
               );
             })}
@@ -72,6 +78,7 @@ const AppSidebar = () => {
                 <SidebarItem
                   key={item.path}
                   item={item}
+                  pathname={pathname}
                 />
               );
             })}
@@ -83,6 +90,7 @@ const AppSidebar = () => {
               <SidebarItem
                 key={item.path}
                 item={item}
+                pathname={pathname}
               />
             );
           })}
@@ -92,15 +100,20 @@ const AppSidebar = () => {
   );
 };
 
-const SidebarItem = ({ item }) => {
+const SidebarItem = ({ item, pathname }) => {
   return (
     <div
       id={item.path}
       className='h-10 w-full flex flex-row'
     >
-      <SideBarItem className='p-2 -ml-[1px] z-20 px-3 flex flex-row gap-3 backdrop-blur-md w-full'>
+      <SideBarItem
+        clicked={pathname.includes(item.path)}
+        className={
+          'p-2 -ml-[1px] z-20 px-3 flex flex-row gap-3 backdrop-blur-md w-full'
+        }
+      >
         <div className='w-3 items-center justify-center flex tools-item'>
-          {item.icon}
+          {pathname.includes(item.path) ? item.clicked : item.icon}
         </div>
         <div className='flex items-center text-[12px] text-[#FFFFFFB0]'>
           <Link to={item.path}>{item.label}</Link>

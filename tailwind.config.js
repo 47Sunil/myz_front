@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         barlow: ['Barlow', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-myzer':
@@ -33,9 +34,37 @@ module.exports = {
           'linear-gradient(203.96deg, #F26E57 9.69%, #C663D4 101.69%);',
         'gradient-transparent-domain':
           'linear-gradient(269.59deg, #2D2935 15.84%, #1D2B38 71.25%);',
+        'gradient-add-domain-orange':
+          'linear-gradient(153.67deg, #FF9900 0%, #FF6B00 100%);',
+        'gradient-add-domain-purple-text':
+          'linear-gradient(267.98deg, rgba(189, 97, 236, 0.71) 25.42%, rgba(187, 164, 255, 0.71) 38.73%);',
+        'gradient-landing-text':
+          'linear-gradient(96.2deg, #FF6B00 31.5%, #BD61EC 95.56%);',
+        'gradient-landing-purple':
+          'linear-gradient(121.92deg, #8605C8 53.35%, #6117FF 105.85%);',
+        'gradient-landing-orange':
+          'linear-gradient(95.61deg, #E98519 45.52%, #E16717 98.77%);',
+        'gradient-landing-text-purple':
+          'linear-gradient(180deg, #210C4D 0%, #8E0FCE 100%);',
+        'gradient-landing-blue':
+          'linear-gradient(153.67deg, #5E36CE 0%, #4616AD 100%);',
+        'gradient-add-page-purple':
+          'linear-gradient(145.22deg, #A561EC 20.49%, #365DCE 99.83%);',
+        'gradient-add-page-orange':
+          'linear-gradient(117.81deg, #FFCC17 -11.33%, #FF9900 65.05%);',
+        'gradient-add-page-blue':
+          ' linear-gradient(232.71deg, #3360FF 31.44%, #10D4FF 108.73%);',
+        'gradient-ai-magic':
+          'linear-gradient(92.24deg, #8F5AFF 7.51%, #5E36CE 104.06%);',
+        'gradient-ai-magic-toggle':
+          'linear-gradient(180deg, #FF6B00 0%, #FF9900 97.4%);',
+        'gradient-template-eye':
+          'linear-gradient(180deg, #FF9900 0%, #FF6B00 100%)',
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',
+        domain: '183px 183px 50px',
+        landingPage: 'repeat(4,minmax(220px,1fr))',
       },
       gridTemplateRows: {
         reports: 'repeat(2,minmax(300px,1fr))',

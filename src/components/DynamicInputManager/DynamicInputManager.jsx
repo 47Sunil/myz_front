@@ -15,7 +15,8 @@ const Label = styled.label`
   color: rgba(255, 255, 255, 0.76);
 `;
 const Input = styled.input`
-  background: rgba(255, 255, 255, 0.16);
+  background: ${(props) =>
+    props.lock ? 'rgba(0, 0, 0, 0.56)' : 'rgba(255, 255, 255, 0.16)'};
   border-radius: 11px;
   padding: ${(props) => (props.icon ? `10px 20px 10px 40px` : `10px 20px`)};
   color: white;
@@ -70,6 +71,7 @@ const DynamicInputManager = ({
   varient = 'md',
   icon,
   type,
+  lock,
 }) => {
   return (
     <div className='myzer-form-page-field w-full flex flex-col px-5 pb-5'>
@@ -108,6 +110,7 @@ const DynamicInputManager = ({
           name={htmlId}
           id={htmlId}
           value={states[0]}
+          lock={lock}
         />
       )}
     </div>
