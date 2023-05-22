@@ -9,13 +9,12 @@ import FilterIcon from '../../assets/svg/FilterIcon';
 import Bitmoji from '../../assets/images/bitmoji_landingpage.png';
 import { useParams } from 'react-router-dom';
 import CreateLandingPage from './components/CreateLandingPage';
-import { useLandingMutation } from '../../actions/LandingPage';
+import { useTemplatesData } from '../../actions/LandingPage';
 import { useQuery } from 'react-query';
 import { LandingTables } from '../../components/Tables/Tables';
 import { landingTableData } from '../../utils/Data/constant';
 
 const LandingPages = () => {
-  // const { data, isLoading } = useQuery('landing-page', useLandingMutation);
   const [isOpened, setIsOpened] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
   const { method } = useParams();
@@ -30,13 +29,6 @@ const LandingPages = () => {
               open={isOpened}
               setOpen={setIsOpened}
             />
-            {/* {data.data.map((i) => {
-              return (
-                <>
-                  <h1 className='text-xl'>{i.name}</h1>
-                </>
-              );
-            })} */}
 
             <div className='heading-filter-container flex justify-between mt-4 mb-4'>
               <h4 className='text-xl text-white'>Landing pages</h4>

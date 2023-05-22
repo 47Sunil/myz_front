@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useTemplatesData } from '../../../actions/LandingPage';
+import { useQuery } from 'react-query';
+import Eye from '../../../assets/svg/Eye';
 
 const Button = styled.button`
   background: ${(props) =>
@@ -26,20 +29,12 @@ const TemplateManager = ({ open, setOpen }) => {
   function handleClick() {
     setOpen(!open);
   }
-  // const getTemplates = async () => {
-  //   const { data } = await axios.get('/api/v1/template/templates');
-  //   console.log(data);
-  //   setTemplates(data.data);
-  // };
-
-  // useEffect(() => {
-  //   getTemplates();
-  // }, []);
-
+  const { data, isLoading } = useQuery('templates', useTemplatesData);
+  console.log(data?.data);
   return (
-    <div className='border-y border-solid border-white/20 py-4'>
-      <div className='grid grid-cols-6 gap-4'>
-        <div className='new-page h-[250px] rounded-xl border border-white/10 bg-white/5 p-2'>
+    <div className='border-b lg:border-y border-solid border-white/20 pb-4 lg:py-4'>
+      <div className='flex w-full gap-4 justify-between'>
+        <div className='new-page w-[200px] flex-shrink-0 h-[250px] rounded-xl border border-white/10 bg-white/5 p-2'>
           <div className='align-center relative flex h-full flex-col items-center justify-center rounded-lg border border-dashed border-white/70'>
             <Button className='w-50px h-50px align-center flex justify-center text-xl'>
               +
@@ -49,7 +44,38 @@ const TemplateManager = ({ open, setOpen }) => {
             </p>
           </div>
         </div>
-        {templates.slice(0, 4).map((item) => {
+        <div className='flex overflow-x-scroll w-full gap-3'>
+          {data?.data.map((i) => {
+            return (
+              <div className='h-[250px] w-[200px] flex-shrink-0 rounded-xl bg-white relative'>
+                {isLoading ? (
+                  <h1 className='text-xl'>Loading...</h1>
+                ) : (
+                  <img
+                    src={i.image}
+                    alt=''
+                    className='w-full h-full object-cover rounded-xl '
+                  />
+                )}
+                <div className='absolute bottom-0 w-full p-2 flex flex-col items-center gap-4'>
+                  <div className='bg-white rounded-full w-[102px] h-[50px] border border-solid border-[#85878C] shadow-[0_0_19px_rgba(0,0,0,.25)] flex gap-2 p-1'>
+                    <div className='bg-gradient-template-eye w-[42px] h-[42px] rounded-full flex justify-center items-center'>
+                      <Eye eyeColor='#ffffff' />
+                    </div>
+                    <div className='bg-[#DFDEE2] w-[42px] h-[42px] rounded-full flex justify-center items-center'>
+                      <p className='text-[#2C2B2B] text-[24px] '>+</p>
+                    </div>
+                  </div>
+                  <p className='bg-[#0A1118] text-[13px] leading-[34px] text-[rgba(255,255,255,.74)] text-center rounded-b-xl h-[34px] w-full'>
+                    Agency Course
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* {templates.slice(0, 4).map((item) => {
           return (
             <div
               className={`relative h-[250px] rounded-xl border bg-cover p-2`}
@@ -78,10 +104,10 @@ const TemplateManager = ({ open, setOpen }) => {
               </div>
             </div>
           );
-        })}
+        })} */}
 
         <ModalBtn
-          className='template-modal-btn h-[250px] rounded-xl p-2'
+          className='template-modal-btn w-[200px] flex-shrink-0 h-[250px] rounded-xl p-2'
           onClick={handleClick}
         >
           <div className='align-center relative flex h-full flex-col items-center justify-center rounded-lg border border-dashed border-white/70'>
