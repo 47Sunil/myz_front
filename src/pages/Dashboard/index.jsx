@@ -7,7 +7,7 @@ import OrderActivity from './components/Orders';
 import ReportSection from './components/Reports';
 import SplineChart from './components/SplineChart';
 import BarChart from './components/BarChart';
-import { Tables } from './components/Tables';
+import { CountryTables, Tables, TopSellingTables } from './components/Tables';
 import AreaChart from './components/AreaChart';
 
 const Dashboard = () => {
@@ -99,14 +99,10 @@ const Dashboard = () => {
               <ReportSection dashBoardData={dashBoardData} />
               <div className='flex-grow grid grid-cols-reports grid-rows-reports gap-4'>
                 <AreaChart />
-                <Tables
+                <CountryTables
                   heading={'Online store by sessions by location'}
-                  locationData={locationData}
                 />
-                <Tables
-                  heading={'Top Products by units sell'}
-                  topProducts={topProducts}
-                />
+                <TopSellingTables heading={'Top Products by units sell'} />
                 <BarChart />
               </div>
             </div>
@@ -114,7 +110,6 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <OrderActivity ordersActivity={ordersActivity} />
     </main>
   );
 };

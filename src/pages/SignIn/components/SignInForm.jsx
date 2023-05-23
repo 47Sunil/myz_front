@@ -13,8 +13,8 @@ import { useLoginMutation } from '../../../actions/User/Login';
 
 const SignForm = () => {
   const [loginRequest, setLoginRequest] = useState({
-    email: '',
-    password: '',
+    email: 'rrsonawne123@hotmail.com',
+    password: 'rohit123',
     rememberMe: false,
   });
 
@@ -33,6 +33,7 @@ const SignForm = () => {
   return (
     <form
       action=''
+      method='POST'
       className='mb-[1.6rem] flex flex-col'
       onSubmit={(e) => handleUserLogin(e)}
     >
