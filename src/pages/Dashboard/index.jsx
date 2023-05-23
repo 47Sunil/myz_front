@@ -99,14 +99,8 @@ const Dashboard = () => {
               <ReportSection dashBoardData={dashBoardData} />
               <div className='flex-grow grid grid-cols-reports grid-rows-reports gap-4'>
                 <AreaChart />
-                <Tables
-                  heading={'Online store by sessions by location'}
-                  locationData={locationData}
-                />
-                <Tables
-                  heading={'Top Products by units sell'}
-                  topProducts={topProducts}
-                />
+                <Tables heading={'Online store by sessions by location'} />
+                <Tables heading={'Top Products by units sell'} />
                 <BarChart />
               </div>
             </div>
