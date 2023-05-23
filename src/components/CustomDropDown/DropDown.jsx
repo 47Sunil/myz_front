@@ -4,7 +4,6 @@ import Purchase from '../../assets/svg/Purchase';
 import Lead from '../../assets/svg/Lead';
 import Other from '../../assets/svg/Other';
 import { AiFillCaretDown } from 'react-icons/ai';
-import CustomCheckBox from '../../components/CustomCheckBox/CustomCheckbox';
 
 const DropDownCustom = styled.div`
   background: #2a2439;
