@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import GoToHomeBtn from '../../../components/BackToHome/BackToHome';
 import { Link } from 'react-router-dom';
 import LockIcon from '../../../assets/svg/Lock';
@@ -9,15 +9,32 @@ import PinkButton from '../../../components/PinkButton/PinkButton';
 import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
 import RememberMe from './RememberMe';
 import useSlide from '../../../hooks/useSlideAnimation';
+import { useLoginMutation } from '../../../actions/User/Login';
 
 const SignForm = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [loginRequest, setLoginRequest] = useState({
+    email: '',
+    password: '',
+    rememberMe: false,
+  });
+
+  const loginMutation = useLoginMutation();
+
+  const handleUserLogin = (e) => {
+    e.preventDefault();
+    handleLogin();
+  };
+
+  const handleLogin = async () => {
+    await loginMutation.mutateAsync(loginRequest);
+  };
   const { handleChange } = useSlide();
+  console.log(loginRequest);
   return (
     <form
       action=''
       className='mb-[1.6rem] flex flex-col'
+      onSubmit={(e) => handleUserLogin(e)}
     >
       <DynamicInputManager
         htmlId='email'
@@ -27,7 +44,7 @@ const SignForm = () => {
         multiline={false}
         type='email'
         icon={<UserIcon />}
-        states={[email, setEmail]}
+        states={[loginRequest.email, setLoginRequest, 'email']}
       />
       <DynamicInputManager
         htmlId='password'
@@ -36,10 +53,13 @@ const SignForm = () => {
         multiline={false}
         type='password'
         icon={<LockIcon />}
-        states={[password, setPassword]}
+        states={[loginRequest.password, setLoginRequest, 'password']}
       />
       <div className='flex items-center justify-between px-5 pb-5'>
-        <RememberMe />
+        <RememberMe
+          loginRequest={loginRequest.rememberMe}
+          setLoginRequest={setLoginRequest}
+        />
         <Link className='font-normal text-[20px] leading-[33px] text-[rgba(255,255,255,.82)] '>
           Forget Password
         </Link>
