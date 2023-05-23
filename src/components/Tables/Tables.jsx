@@ -41,9 +41,34 @@ const BodyCell = styled.td`
   line-height: 26px;
   letter-spacing: 0.04em;
 `;
-
+const monthNames = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+function convertDate(date) {
+  const newFormatDate = new Date(date);
+  const day = newFormatDate.getDate().toString().padStart(2, '0');
+  const monthIndex = newFormatDate.getMonth();
+  const year = newFormatDate.getFullYear().toString();
+  const monthAbbreviation = monthNames[monthIndex];
+  const formattedDate = `${day} ${monthAbbreviation} ${year}`;
+  return formattedDate;
+}
 const Tables = ({ pages, headerData }) => {
   const { data, isLoading } = useQuery('transactions', useTransactionData);
+  {
+    !isLoading && console.log(data?.data);
+  }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
