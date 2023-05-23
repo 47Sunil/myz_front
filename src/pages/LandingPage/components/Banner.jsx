@@ -5,7 +5,7 @@ import mesh from '../../../assets/icons/mesh-banner.png';
 import lines from '../../../assets/icons/lines.png';
 const Banner = () => {
   return (
-    <div className='flex h-[8rem] gap-[1rem] mb-4 w-full'>
+    <div className='lg:flex hidden lg:items-stretch lg:flex-row min-h-[8rem] gap-[1rem] mb-4 w-full'>
       <div className='bg-gradient-landing-purple h-full w-full rounded-[9px]'>
         <div className='flex gap-8 p-4 items-center h-full w-full relative'>
           <img
@@ -30,7 +30,7 @@ const Banner = () => {
           </h1>
         </div>
       </div>
-      <div className='bg-gradient-landing-orange h-full w-full rounded-[9px]'>
+      <div className='bg-gradient-landing-orange w-full rounded-[9px]'>
         <div className='flex gap-8 p-4 items-center h-full w-full relative'>
           <img
             src={lines}

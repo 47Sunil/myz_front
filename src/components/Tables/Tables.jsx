@@ -1,5 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import CopyIcon from '../../assets/svg/CopyIcon';
+import Eye from '../../assets/svg/Eye';
+import Bin from '../../assets/svg/Bin';
+import Notebook from '../../assets/svg/Notebook';
+import { useQuery } from 'react-query';
+import { useLandingTablesData } from '../../actions/LandingPage';
+import { useTransactionData } from '../../actions/Transaction';
+import { useDomainData } from '../../actions/DomainPage';
 
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
@@ -35,60 +43,158 @@ const BodyCell = styled.td`
   line-height: 26px;
   letter-spacing: 0.04em;
 `;
+const monthNames = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+function convertDate(date) {
+  const newFormatDate = new Date(date);
+  const day = newFormatDate.getDate().toString().padStart(2, '0');
+  const monthIndex = newFormatDate.getMonth();
+  const year = newFormatDate.getFullYear().toString();
+  const monthAbbreviation = monthNames[monthIndex];
+  const formattedDate = `${day} ${monthAbbreviation} ${year}`;
+  return formattedDate;
+}
 
-const Tables = ({ pages, data }) => {
+const TransactionTable = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('transactions', useTransactionData);
+  {
+    !isLoading && console.log(data?.data);
+  }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
-        {data.map((i) => {
+        {headerData.map((i) => {
           return i.header.map((j) => {
             return <HeaderCell>{j}</HeaderCell>;
           });
         })}
       </tr>
-      {data.map((i) => {
-        return i.data.map((j) => {
+      {!isLoading &&
+        data?.data.map((i) => {
           return (
             <BodyRow>
-              <BodyCell>{j.orderId}</BodyCell>
-              <BodyCell>{j.date}</BodyCell>
-              <BodyCell>{j.status}</BodyCell>
-              <BodyCell>{j.amount}</BodyCell>
-              <BodyCell>{j.product}</BodyCell>
-              <BodyCell>{j.customer}</BodyCell>
-              <BodyCell>{j.actions}</BodyCell>
+              <BodyCell>
+                <div className='text-ellipsis w-[100px] whitespace-nowrap overflow-hidden'>
+                  {!isLoading && i?._id}
+                </div>
+              </BodyCell>
+              <BodyCell>{convertDate(i?.createdAt)}</BodyCell>
+              <BodyCell>{!isLoading && i?.order_status}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.product?.price}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.product?.name}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.customer?.name}</BodyCell>
+              <BodyCell>{!isLoading && i?.actions}</BodyCell>
             </BodyRow>
           );
-        });
-      })}
+        })}
     </table>
   );
 };
 
-const DomainTables = ({ pages, data }) => {
+const DomainTables = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('domains', useDomainData);
+  {
+    !isLoading && console.log(data, 'domain table data');
+  }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
-        {data.map((i) => {
+        {headerData.map((i) => {
           return i.header.map((j) => {
             return <HeaderCell>{j}</HeaderCell>;
           });
         })}
       </tr>
-      {data.map((i) => {
-        return i.data.map((j) => {
+      {!isLoading &&
+        data?.data.map((i) => {
           return (
             <BodyRow>
-              <BodyCell>{j.domainName}</BodyCell>
-              <BodyCell>{j.date}</BodyCell>
-              <BodyCell>{j.status}</BodyCell>
-              <BodyCell>{j.actions}</BodyCell>
+              <BodyCell>{!isLoading && i.domain_name}</BodyCell>
+              <BodyCell>{!isLoading && convertDate(i.createdAt)}</BodyCell>
+              <BodyCell>{!isLoading && i.metadata.status}</BodyCell>
+              <BodyCell>{!isLoading && i.actions}</BodyCell>
             </BodyRow>
           );
-        });
-      })}
+        })}
     </table>
   );
 };
 
-export { Tables, DomainTables };
+const LandingTables = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('LandingTables', useLandingTablesData);
+  {
+    !isLoading && console.log(data, 'landing pages table data');
+  }
+  return (
+    <table className='w-full border-collapse mb-[41px]'>
+      <tr>
+        {headerData.map((i) => {
+          return i.header.map((j) => {
+            return <HeaderCell>{j}</HeaderCell>;
+          });
+        })}
+      </tr>
+      {!isLoading &&
+        data?.data.map((i) => {
+          return (
+            <BodyRow>
+              <BodyCell className='w-[300px]'>
+                {' '}
+                <div className='w-full text-sm text-gray-900 font-medium'>
+                  <h2>{i.name}</h2>
+                  <div className=' flex mt-1 bg-gray-200 rounded overflow-hidden relative'>
+                    <p className='bg-gray-800 text-white py-1 px-2 text-xs'>
+                      preview.{i.name}.io
+                    </p>
+                    <p className='text-gray-500 p-1 text-xs'>/preview</p>
+                    <div className='absolute p-1 right-0'>
+                      <CopyIcon />
+                    </div>
+                  </div>
+                </div>
+              </BodyCell>
+              <BodyCell className='w-[150px]'>
+                {convertDate(i.createdAt)}
+              </BodyCell>
+              <BodyCell className=' flex justify-center h-full mt-3'>
+                <p className='bg-[rgba(255,107,0,0.23)] w-fit px-3 text-center border-2 border-dashed border-[#FA6A2C]'>
+                  Draft
+                </p>
+              </BodyCell>
+              <BodyCell className='!text-center'>3,456</BodyCell>
+              <BodyCell className='w-[300px]'>
+                <div className='flex gap-2 justify-center'>
+                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-4 text-[15px]'>
+                    Send to Draft
+                  </button>
+                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'>
+                    <Eye />
+                  </button>
+                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'>
+                    <Notebook />
+                  </button>
+                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'>
+                    <Bin />
+                  </button>
+                </div>
+              </BodyCell>
+            </BodyRow>
+          );
+        })}
+    </table>
+  );
+};
+
+export { TransactionTable, DomainTables, LandingTables };

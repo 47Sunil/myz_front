@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Tables } from '../../../components/Tables/Tables';
+import { TransactionTable } from '../../../components/Tables/Tables';
 import Pagination from './Pagination';
 import { transactionTableData } from '../../../utils/Data/constant';
+import { useQuery } from 'react-query';
+import { useTransactionData } from '../../../actions/Transaction';
 
 const Table = () => {
   const [pages, setPages] = useState(5);
@@ -17,9 +19,9 @@ const Table = () => {
           setPages={setPages}
         />
       </div>
-      <Tables
+      <TransactionTable
         pages={pages}
-        data={transactionTableData}
+        headerData={transactionTableData}
       />
     </div>
   );

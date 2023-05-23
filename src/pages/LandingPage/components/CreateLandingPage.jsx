@@ -6,7 +6,7 @@ import TransparentButton from '../../../components/TransparentButton/Transparent
 import { AiOutlineSwap, AiFillCaretDown } from 'react-icons/ai';
 import SecondScreenForm from '../../../components/SecondScreen/Form';
 import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
-import DropDown from '../../../components/DropDown/DropDown';
+import DropDown from '../../../components/CustomDropDown/DropDown';
 import { Menu } from '@headlessui/react';
 import Purchase from '../../../assets/svg/Purchase';
 import Lead from '../../../assets/svg/Lead';
@@ -14,55 +14,12 @@ import Other from '../../../assets/svg/Other';
 import magic from '../../../assets/icons/magic.png';
 import { Switch } from '@headlessui/react';
 import styled from 'styled-components';
-
-const TooltipBox = styled.div`
-  color: #fff;
-  font-weight: 500;
-  background: #4e4367;
-  font-size: 10px;
-  width: 230px;
-  padding: 2px 4px;
-  border-radius: 7px;
-  visibility: hidden;
-  z: 1000;
-  position: absolute;
-  left: 0;
-  top: 130px;
-  transition: visibility 0.5s, color 0.5s, background-color 0.5s,
-    padding 0.5s ease-in-out;
-  &:before {
-    content: '';
-    width: 0;
-    height: 0;
-    left: 40px;
-    top: -4px;
-    position: absolute;
-    border: 5px solid transparent;
-    transform: rotate(135deg);
-    transition: border 0.4s ease-in-out;
-  }
-`;
-const TooltipText = styled.div`
-  cursor: pointer;
-`;
-const TooltipCard = styled.div`
-  position: relative;
-  & ${TooltipText}:hover + ${TooltipBox} {
-    visibility: visible;
-    color: #fff;
-    width: 230px;
-    background: #4e4367;
-    padding: 2px 4px;
-    border-radius: 7px;
-    &:before {
-      border-color: transparent transparent #4e4367 #4e4367;
-    }
-  }
-`;
+import SolarSvg from '../../../assets/svg/LandingPageSolar';
 
 const CreateLandingPage = () => {
   const [title, setTitle] = useState('');
   const [enabled, setEnabled] = useState(false);
+
   return (
     <SecondScreenWrapper>
       <div className='w-full h-full flex items-center justify-center z-10 absolute inset-0'>
@@ -103,17 +60,20 @@ const CreateLandingPage = () => {
           }
         >
           <div className='py-8 pl-4 flex-grow relative'>
+            <div className='absolute right-[-13.4%] top-[50%] translate-y-[-50%] '>
+              <SolarSvg />
+            </div>
             <div className='bg-gradient-ai-magic w-[237px] flex items-center gap-3 rounded-b-[16px] p-2 absolute top-0 left-[50%] translate-x-[-50%]'>
               <Switch
                 checked={enabled}
                 onChange={setEnabled}
-                className={`${enabled ? 'bg-white' : 'bg-[#100921]'}
+                className={`${!enabled ? 'bg-white' : 'bg-[#100921]'}
           relative inline-flex h-[14px] w-[34px] shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 drop-shadow-lg`}
               >
                 <span
                   aria-hidden='true'
                   className={`${
-                    !enabled
+                    enabled
                       ? 'translate-x-4 translate-y-[-2.5px]'
                       : 'translate-x-0 translate-y-[-2.5px]'
                   }
@@ -139,24 +99,18 @@ const CreateLandingPage = () => {
                 type={'text'}
               />
               <div className='px-5 relative flex items-center mb-4'>
-                <label
-                  htmlFor='category'
-                  className='absolute right-8 z-10'
-                >
-                  <AiFillCaretDown className='text-[#85878c] text-xl' />
-                </label>
-                <DropDown
+                {/* <DropDown
                   menuClass={
                     'bg-[rgba(255,255,255,0.16)] border border-solid border-[rgba(255,255,255,0.16)] rounded-[11px] p-[10px_20px] text-white w-full flex relative'
                   }
                   menuBtnText={'Select a Page Goal*'}
                   menuBtnClass={'text-[15px] text-[rgba(255,255,255,0.38)]'}
                 >
-                  <Menu.Items className='absolute top-[50px] z-[20] flex gap-4 bg-[#2A2439] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px]  text-white w-full p-3 left-0'>
-                    <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                  <Menu.Items className='absolute top-[50px] z-[20] grid grid-cols-3 gap-4 bg-[#2A2439] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px]  text-white w-full p-3 left-0'>
+                    <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2 hover:outline hover:outline-1 hover:outline-white hover:outline-offset-4'>
                       <TooltipCard className='flex-grow bg-gradient-add-page-purple flex justify-center items-center'>
                         <TooltipText>
-                          <button className='flex flex-col  items-center justify-center p-4 py-5  gap-2'>
+                          <button className='flex flex-col  items-center justify-center   gap-2'>
                             <Purchase />
                             Purchase
                           </button>
@@ -166,7 +120,7 @@ const CreateLandingPage = () => {
                         </TooltipBox>
                       </TooltipCard>
                     </Menu.Item>
-                    <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                    <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2 hover:outline hover:outline-1 hover:outline-white hover:outline-offset-4'>
                       <TooltipCard className='flex-grow bg-gradient-add-page-orange flex justify-center items-center'>
                         <TooltipText>
                           <button className='flex flex-col  items-center justify-center p-4 py-5  gap-2'>
@@ -179,7 +133,7 @@ const CreateLandingPage = () => {
                         </TooltipBox>
                       </TooltipCard>
                     </Menu.Item>
-                    <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                    <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2 hover:outline hover:outline-1 hover:outline-white hover:outline-offset-4'>
                       <TooltipCard className='flex-grow bg-gradient-add-page-blue flex justify-center items-center'>
                         <TooltipText>
                           <button className='flex flex-col  items-center justify-center p-4 py-5  gap-2'>
@@ -192,10 +146,26 @@ const CreateLandingPage = () => {
                         </TooltipBox>
                       </TooltipCard>
                     </Menu.Item>
+                    <Menu.Item>
+                      <p className='text-white font-medium bg-[#4e4367] text-[10px] p-[2px_4px] rounded-[7px] text-center'>
+                        Collect Payments or Sell Digital Products
+                      </p>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <p className='text-white font-medium bg-[#4e4367] text-[10px] p-[2px_4px] rounded-[7px] text-center'>
+                        Collect Payments or Sell Digital Products
+                      </p>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <p className='text-white font-medium bg-[#4e4367] text-[10px] p-[2px_4px] rounded-[7px] text-center'>
+                        Collect Payments or Sell Digital Products
+                      </p>
+                    </Menu.Item>
                   </Menu.Items>
-                </DropDown>
+                </DropDown> */}
+                <DropDown />
               </div>
-              <p className='text-[rgba(255,255,255,0.67)] text-[15px] font-normal px-5'>
+              <p className='text-[rgba(255,255,255,0.67)] text-[15px] font-normal px-5 absolute top-[60%]'>
                 What Exactly you want from this Page
               </p>
             </div>

@@ -5,8 +5,8 @@ import styled from 'styled-components';
 const Checkbox = styled.input`
   appearance: none;
   position: relative;
-  width: 15px;
-  height: 15px;
+  width: ${(props) => (props.size ? '10px' : '15px')};
+  height: ${(props) => (props.size ? '10px' : '15px')};
   border-radius: 5px;
   background: #f8f7f7;
   cursor: pointer;
@@ -34,11 +34,12 @@ const Checkbox = styled.input`
   }
 `;
 
-const CustomCheckbox = ({ id }) => {
+const CustomCheckbox = ({ id, size }) => {
   return (
     <Checkbox
       type='checkbox'
       id={id}
+      newSize={size}
     />
   );
 };
