@@ -5,3 +5,8 @@ export async function useTemplatesData() {
   console.log(res, 'landing pages');
   return res;
 }
+
+export async function useLandingTablesData() {
+  const res = await requestInstance.get('/landingpages');
+  return res;
+}

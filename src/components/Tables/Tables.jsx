@@ -4,9 +4,10 @@ import CopyIcon from '../../assets/svg/CopyIcon';
 import Eye from '../../assets/svg/Eye';
 import Bin from '../../assets/svg/Bin';
 import Notebook from '../../assets/svg/Notebook';
+import { useQuery } from 'react-query';
+import { useLandingTablesData } from '../../actions/LandingPage';
 import { useTransactionData } from '../../actions/Transaction';
 import { useDomainData } from '../../actions/DomainPage';
-import { useQuery } from 'react-query';
 
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
@@ -65,6 +66,7 @@ function convertDate(date) {
   const formattedDate = `${day} ${monthAbbreviation} ${year}`;
   return formattedDate;
 }
+
 const TransactionTable = ({ pages, headerData }) => {
   const { data, isLoading } = useQuery('transactions', useTransactionData);
   {
@@ -130,27 +132,31 @@ const DomainTables = ({ pages, headerData }) => {
   );
 };
 
-const LandingTables = ({ pages, data }) => {
+const LandingTables = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('LandingTables', useLandingTablesData);
+  {
+    !isLoading && console.log(data, 'landing pages table data');
+  }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
-        {data.map((i) => {
+        {headerData.map((i) => {
           return i.header.map((j) => {
             return <HeaderCell>{j}</HeaderCell>;
           });
         })}
       </tr>
-      {data.map((i) => {
-        return i.data.map((j) => {
+      {!isLoading &&
+        data?.data.map((i) => {
           return (
             <BodyRow>
               <BodyCell className='w-[300px]'>
                 {' '}
                 <div className='w-full text-sm text-gray-900 font-medium'>
-                  <h2>Agency Workshop Landing Page</h2>
+                  <h2>{i.name}</h2>
                   <div className=' flex mt-1 bg-gray-200 rounded overflow-hidden relative'>
                     <p className='bg-gray-800 text-white py-1 px-2 text-xs'>
-                      preview.myzer.io
+                      preview.{i.name}.io
                     </p>
                     <p className='text-gray-500 p-1 text-xs'>/preview</p>
                     <div className='absolute p-1 right-0'>
@@ -159,7 +165,9 @@ const LandingTables = ({ pages, data }) => {
                   </div>
                 </div>
               </BodyCell>
-              <BodyCell className='w-[150px]'>{j.date}</BodyCell>
+              <BodyCell className='w-[150px]'>
+                {convertDate(i.createdAt)}
+              </BodyCell>
               <BodyCell className=' flex justify-center h-full mt-3'>
                 <p className='bg-[rgba(255,107,0,0.23)] w-fit px-3 text-center border-2 border-dashed border-[#FA6A2C]'>
                   Draft
@@ -184,8 +192,7 @@ const LandingTables = ({ pages, data }) => {
               </BodyCell>
             </BodyRow>
           );
-        });
-      })}
+        })}
     </table>
   );
 };
