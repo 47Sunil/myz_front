@@ -20,13 +20,13 @@ export const data1 = [
   {
     label: 'Landing Pages',
     icon: <LandingPagesLogo />,
-    path: 'landing-pages',
+    path: 'landing-pages/home',
     clicked: <LandingPagesLogo fillOpacity='1' />,
   },
   {
     label: 'Transactions',
     icon: <TransactionsLogo />,
-    path: 'transaction',
+    path: 'transactions',
     clicked: <TransactionsLogo fillOpacity='1' />,
   },
   {
@@ -41,7 +41,7 @@ export const data2 = [
   {
     label: 'Payment Options',
     icon: <PaymentLogo />,
-    path: 'payment',
+    path: 'payment-gateways',
     clicked: <PaymentLogo fillOpacity='1' />,
   },
   {

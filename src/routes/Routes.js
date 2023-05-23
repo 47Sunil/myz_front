@@ -7,6 +7,7 @@ import Dashboard from '../pages/Dashboard';
 import Subscription from '../pages/Subscription/Index';
 import LandingPage from '../pages/LandingPage/index';
 import UserAccount from '../pages/UserAccount/Index';
+import OtherSettings from '../pages/OtherSettings/Index';
 import Domain from '../pages/Domain/index';
 import Layout from '../pages/AppBackground';
 import Transaction from '../pages/Transaction/index';
@@ -55,6 +56,10 @@ const Router = () => {
           <Route
             path='/subscription'
             element=< Subscription/>
+          />
+          <Route
+            path='/other-settings'
+            element=< OtherSettings/>
           />
         </Routes>
       </Layout>
