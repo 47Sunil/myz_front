@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import AppSidebar from '../components/Global/AppSidebar';
 import HeaderBar from '../components/Global/HeaderBar';
 import { useLocation } from 'react-router-dom';
+import ViewAllTemplatesModal from './LandingPage/components/ViewAllTemplatesModal';
 
 const Background = styled.div`
   height: 100vh;
   width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
   background: radial-gradient(
       50rem at left top,
       rgba(172, 32, 1, 1),
@@ -26,6 +29,7 @@ const Background = styled.div`
   display: grid;
   grid-template-columns: 200px auto;
   grid-template-rows: 50px auto;
+
   position: relative;
 `;
 const Overlay = styled.div`
@@ -33,6 +37,8 @@ const Overlay = styled.div`
   width: 100%;
   background-color: rgba(30, 30, 30, 0.8);
   position: absolute;
+  top: 0;
+  left: 0;
   inset: 0;
 `;
 
@@ -40,6 +46,7 @@ const Header = styled.header`
   grid-row: 1;
   grid-column: 2;
   background: rgba(255, 255, 255, 0.05);
+  border-radius: 0 0 22px 0;
   z-index: 3333;
 `;
 
@@ -59,16 +66,21 @@ const Main = styled.main`
   grid-row: 2 / span 1;
   grid-column: 2;
   background: #ff000;
+  max-height: calc(100vh - 50px);
+  padding: 1rem;
   overflow-y: scroll;
 `;
 
 const AppBackground = ({ children }) => {
   const location = useLocation();
   const path = location.pathname.split('/').join('');
-  console.log(path);
   return (
     <>
-      {path !== 'accountssignin' && path !== 'accountssignup' ? (
+      {path !== 'accountssignin' &&
+      path !== 'accountssignup' &&
+      path !== 'domainadd_domain' &&
+      path !== 'domainadd_dns' &&
+      path !== 'landing-pagescreate_landing_page' ? (
         <Background>
           <Overlay />
           <Header>
@@ -77,7 +89,8 @@ const AppBackground = ({ children }) => {
           <Sidebar>
             <AppSidebar />
           </Sidebar>
-          <Main>{children}</Main>
+          <Main className='p-4 z-10'>{children}</Main>
+          {/* <ViewAllTemplatesModal /> */}
         </Background>
       ) : (
         <>{children}</>

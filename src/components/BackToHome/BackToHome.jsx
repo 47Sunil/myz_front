@@ -12,12 +12,12 @@ const Button = styled.button`
   border: none;
 `;
 
-const GoToHomeBtn = () => {
+const GoToHomeBtn = ({ text }) => {
   return (
-    <div className='flex items-center gap-4 px-5 pb-5'>
+    <div className='flex items-center gap-4  z-10 relative'>
       <Button />
       <p className='font-normal text-[20px]  text-[rgba(255,255,255,0.82)]'>
-        Go back to Home
+        {text}
       </p>
     </div>
   );

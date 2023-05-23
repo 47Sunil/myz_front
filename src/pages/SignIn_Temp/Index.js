@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
-import { useLoginMutation } from "../../actions/User/Login";
+import React, { useEffect } from 'react';
+import { useLoginMutation } from '../../actions/User/Login';
 
 const Logintest = () => {
   const loginMutation = useLoginMutation();
 
   useEffect(() => {
     handleLogin();
-  }, []);
+  });
 
   const handleLogin = async () => {
     await loginMutation.mutateAsync({
-        email: "rrsonawnse@gmail.com",
-        password: "sunil123",
-        rememberMe: true
-      });
+      email: 'rrsonawne123@hotmail.com',
+      password: 'rohit123',
+    });
   };
 
   return <></>;

@@ -114,6 +114,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <OrderActivity ordersActivity={ordersActivity} />
     </main>
   );
 };
