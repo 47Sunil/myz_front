@@ -40,7 +40,7 @@ const BodyCell = styled.td`
   letter-spacing: 0.04em;
 `;
 
-const Tables = ({ pages, data, headerData }) => {
+const Tables = ({ pages, data, headerData, isLoading }) => {
   console.log(data, 'transaction table data');
   const monthNames = [
     'Jan',
@@ -78,13 +78,17 @@ const Tables = ({ pages, data, headerData }) => {
       {data.map((i) => {
         return (
           <BodyRow>
-            <BodyCell>{i.orderId}</BodyCell>
-            <BodyCell>{i.createdAt}</BodyCell>
-            <BodyCell>{i.order_status}</BodyCell>
-            <BodyCell>{i.metadata.product.price}</BodyCell>
-            <BodyCell>{i.metadata.product.name}</BodyCell>
-            <BodyCell>{i.metadata.customer.name}</BodyCell>
-            <BodyCell>{i.actions}</BodyCell>
+            <BodyCell>
+              <div className='text-ellipsis w-[100px] whitespace-nowrap overflow-hidden'>
+                {!isLoading && i?._id}
+              </div>
+            </BodyCell>
+            <BodyCell>{convertDate(i?.createdAt)}</BodyCell>
+            <BodyCell>{!isLoading && i?.order_status}</BodyCell>
+            <BodyCell>{!isLoading && i?.metadata?.product?.price}</BodyCell>
+            <BodyCell>{!isLoading && i?.metadata?.product?.name}</BodyCell>
+            <BodyCell>{!isLoading && i?.metadata?.customer?.name}</BodyCell>
+            <BodyCell>{!isLoading && i?.actions}</BodyCell>
           </BodyRow>
         );
       })}
@@ -92,7 +96,7 @@ const Tables = ({ pages, data, headerData }) => {
   );
 };
 
-const DomainTables = ({ pages, data, headerData }) => {
+const DomainTables = ({ pages, data, headerData, isLoading }) => {
   console.log(data, 'adadaddadadaads');
   return (
     <table className='w-full border-collapse mb-[41px]'>
@@ -106,10 +110,10 @@ const DomainTables = ({ pages, data, headerData }) => {
       {data.map((i) => {
         return (
           <BodyRow>
-            <BodyCell>{i.domainName}</BodyCell>
-            <BodyCell>{i.date}</BodyCell>
-            <BodyCell>{i.status}</BodyCell>
-            <BodyCell>{i.actions}</BodyCell>
+            <BodyCell>{!isLoading && i.domainName}</BodyCell>
+            <BodyCell>{!isLoading && i.date}</BodyCell>
+            <BodyCell>{!isLoading && i.status}</BodyCell>
+            <BodyCell>{!isLoading && i.actions}</BodyCell>
           </BodyRow>
         );
       })}
