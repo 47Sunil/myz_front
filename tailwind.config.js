@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         barlow: ['Barlow', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-myzer':
@@ -57,6 +58,8 @@ module.exports = {
           'linear-gradient(92.24deg, #8F5AFF 7.51%, #5E36CE 104.06%);',
         'gradient-ai-magic-toggle':
           'linear-gradient(180deg, #FF6B00 0%, #FF9900 97.4%);',
+        'gradient-template-eye':
+          'linear-gradient(180deg, #FF9900 0%, #FF6B00 100%)',
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',

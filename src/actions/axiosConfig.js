@@ -3,27 +3,27 @@ import axios from 'axios';
 export const requestInstance = axios.create({
   baseURL: 'http://localhost:3000/api/v1/',
   headers: {
-    'Content-Type': 'application/json'
-  }
+    'Content-Type': 'application/json',
+  },
 });
 
 // Error handling interceptor
 requestInstance.interceptors.response.use(
   (response) => {
     // Successful response (status 2xx)
-    return response.data.data;
+    return response.data;
   },
   (error) => {
     // Error response (status 4xx or 5xx)
     if (error.response) {
       const { status, data } = error.response;
-      
+
       // Client-side errors (4xx)
       if (status >= 400 && status < 500) {
         console.log('Client error:', data.message);
         // You can perform actions like displaying an error message to the user
       }
-      
+
       // Server-side errors (5xx)
       if (status >= 500 && status < 600) {
         console.log('Server error:', data.message);
@@ -38,7 +38,7 @@ requestInstance.interceptors.response.use(
       console.log('Error:', error.message);
       // You can handle other types of errors, e.g., show a generic error message
     }
-    
+
     // Reject the promise so that the caller can handle the error further
     return Promise.reject(error);
   }
