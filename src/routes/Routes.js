@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ForgetPassword from '../pages/ForgetPassword/index';
 import PaymentGateway from '../pages/PaymentGateways/Index';
@@ -12,18 +12,27 @@ import Domain from '../pages/Domain/index';
 import Layout from '../pages/AppBackground';
 import Transaction from '../pages/Transaction/index';
 import Logintest from '../pages/SignIn_Temp/Index';
+import AuthGuard from '../Auth/AuthGuard';
+import { useAutoLoginData } from '../actions/User/Login';
 const Router = () => {
+  const autoLogin = useAutoLoginData();
+  const handleLogin = async () => {
+    await autoLogin.mutateAsync();
+  };
+  useEffect(() => {
+    handleLogin();
+  }, []);
   return (
     <BrowserRouter>
       <Layout>
         <Routes>
           <Route
             path='/dashboard'
-            element=<Dashboard />
+            element=<AuthGuard component={<Dashboard />} />
           />
           <Route
             path='/accounts/:method'
-            element=<Accounts />
+            element=<AuthGuard component={<Accounts />} />
           />
           <Route
             path='/forgetPassword'
@@ -31,35 +40,35 @@ const Router = () => {
           />
           <Route
             path='/payment-gateways'
-            element=<PaymentGateway />
+            element=<AuthGuard component={<PaymentGateway />} />
           />
           <Route
             path='/payment-gateway/:method'
-            element=<PaymentGateway />
+            element=<AuthGuard component={<PaymentGateway />} />
           />
           <Route
             path='/transactions'
-            element=<Transaction />
+            element=<AuthGuard component={<Transaction />} />
           />
           <Route
             path='/landing-pages/:method'
-            element=<LandingPage />
+            element=<AuthGuard component={<LandingPage />} />
           />
           <Route
             path='/domain/:method'
-            element=<Domain />
+            element=<AuthGuard component={<Domain />} />
           />
           <Route
             path='/account'
-            element=<UserAccount />
+            element=<AuthGuard component={<UserAccount />} />
           />
           <Route
             path='/subscription'
-            element=<Subscription />
+            element=<AuthGuard component={<Subscription />} />
           />
           <Route
             path='/other-settings'
-            element=<OtherSettings />
+            element=<AuthGuard component={<OtherSettings />} />
           />
           <Route
             path='/signintemp'
