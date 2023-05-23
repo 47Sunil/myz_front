@@ -4,6 +4,9 @@ import CopyIcon from '../../assets/svg/CopyIcon';
 import Eye from '../../assets/svg/Eye';
 import Bin from '../../assets/svg/Bin';
 import Notebook from '../../assets/svg/Notebook';
+import { useTransactionData } from '../../actions/Transaction';
+import { useDomainData } from '../../actions/DomainPage';
+import { useQuery } from 'react-query';
 
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
@@ -39,33 +42,34 @@ const BodyCell = styled.td`
   line-height: 26px;
   letter-spacing: 0.04em;
 `;
-
-const Tables = ({ pages, data, headerData, isLoading }) => {
-  console.log(data, 'transaction table data');
-  const monthNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-  function convertDate(date) {
-    const newFormatDate = new Date(date);
-    const day = newFormatDate.getDate().toString().padStart(2, '0');
-    const monthIndex = newFormatDate.getMonth();
-    const year = newFormatDate.getFullYear().toString();
-    const monthAbbreviation = monthNames[monthIndex];
-    const formattedDate = `${day} ${monthAbbreviation} ${year}`;
-    return formattedDate;
+const monthNames = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+function convertDate(date) {
+  const newFormatDate = new Date(date);
+  const day = newFormatDate.getDate().toString().padStart(2, '0');
+  const monthIndex = newFormatDate.getMonth();
+  const year = newFormatDate.getFullYear().toString();
+  const monthAbbreviation = monthNames[monthIndex];
+  const formattedDate = `${day} ${monthAbbreviation} ${year}`;
+  return formattedDate;
+}
+const Tables = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('transactions', useTransactionData);
+  {
+    !isLoading && console.log(data?.data);
   }
-
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
@@ -75,29 +79,33 @@ const Tables = ({ pages, data, headerData, isLoading }) => {
           });
         })}
       </tr>
-      {data.map((i) => {
-        return (
-          <BodyRow>
-            <BodyCell>
-              <div className='text-ellipsis w-[100px] whitespace-nowrap overflow-hidden'>
-                {!isLoading && i?._id}
-              </div>
-            </BodyCell>
-            <BodyCell>{convertDate(i?.createdAt)}</BodyCell>
-            <BodyCell>{!isLoading && i?.order_status}</BodyCell>
-            <BodyCell>{!isLoading && i?.metadata?.product?.price}</BodyCell>
-            <BodyCell>{!isLoading && i?.metadata?.product?.name}</BodyCell>
-            <BodyCell>{!isLoading && i?.metadata?.customer?.name}</BodyCell>
-            <BodyCell>{!isLoading && i?.actions}</BodyCell>
-          </BodyRow>
-        );
-      })}
+      {!isLoading &&
+        data?.data.map((i) => {
+          return (
+            <BodyRow>
+              <BodyCell>
+                <div className='text-ellipsis w-[100px] whitespace-nowrap overflow-hidden'>
+                  {!isLoading && i?._id}
+                </div>
+              </BodyCell>
+              <BodyCell>{convertDate(i?.createdAt)}</BodyCell>
+              <BodyCell>{!isLoading && i?.order_status}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.product?.price}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.product?.name}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.customer?.name}</BodyCell>
+              <BodyCell>{!isLoading && i?.actions}</BodyCell>
+            </BodyRow>
+          );
+        })}
     </table>
   );
 };
 
-const DomainTables = ({ pages, data, headerData, isLoading }) => {
-  console.log(data, 'adadaddadadaads');
+const DomainTables = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('domains', useDomainData);
+  {
+    !isLoading && console.log(data, 'domain table data');
+  }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
@@ -107,16 +115,17 @@ const DomainTables = ({ pages, data, headerData, isLoading }) => {
           });
         })}
       </tr>
-      {data.map((i) => {
-        return (
-          <BodyRow>
-            <BodyCell>{!isLoading && i.domainName}</BodyCell>
-            <BodyCell>{!isLoading && i.date}</BodyCell>
-            <BodyCell>{!isLoading && i.status}</BodyCell>
-            <BodyCell>{!isLoading && i.actions}</BodyCell>
-          </BodyRow>
-        );
-      })}
+      {!isLoading &&
+        data?.data.map((i) => {
+          return (
+            <BodyRow>
+              <BodyCell>{!isLoading && i.domain_name}</BodyCell>
+              <BodyCell>{!isLoading && convertDate(i.createdAt)}</BodyCell>
+              <BodyCell>{!isLoading && i.metadata.status}</BodyCell>
+              <BodyCell>{!isLoading && i.actions}</BodyCell>
+            </BodyRow>
+          );
+        })}
     </table>
   );
 };
