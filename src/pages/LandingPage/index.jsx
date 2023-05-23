@@ -60,7 +60,7 @@ const LandingPages = () => {
               </div>
             ) : (
               <div className='bg-[rgba(255,255,255,1)] border border-solid border-[rgba(255,255,255,0.15)] min-h-full rounded-t-3xl w-full  flex flex-col justify-between overflow-hidden'>
-                <LandingTables data={landingTableData} />
+                <LandingTables headerData={landingTableData} />
               </div>
             )}
           </div>
