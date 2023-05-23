@@ -36,7 +36,7 @@ const ProfileCommon = () => {
         <Wrapper className="w-full h-36 z-20 ">
           <Overlay1>
             <Overlay2 className="relative">
-              <div className="w-32 h-32 absolute translate-x-1/2 right-1/2 bottom-0 bg-white rounded-full translate-y-1/2 bg-[#221154] p-1">
+              <div className="w-32 h-32 absolute translate-x-1/2 right-1/2 bottom-0 rounded-full translate-y-1/2 bg-[#221154] p-1">
                 <img
                   src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80"
                   alt="User Img"

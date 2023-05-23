@@ -6,6 +6,8 @@ import Bin from '../../assets/svg/Bin';
 import Notebook from '../../assets/svg/Notebook';
 import { useQuery } from 'react-query';
 import { useLandingTablesData } from '../../actions/LandingPage';
+import { useTransactionData } from '../../actions/Transaction';
+import { useDomainData } from '../../actions/DomainPage';
 
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
@@ -65,9 +67,11 @@ function convertDate(date) {
   return formattedDate;
 }
 
-const Tables = ({ pages, data, headerData, isLoading }) => {
-  console.log(data, 'transaction table data');
-
+const TransactionTable = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('transactions', useTransactionData);
+  {
+    !isLoading && console.log(data?.data);
+  }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
@@ -77,29 +81,33 @@ const Tables = ({ pages, data, headerData, isLoading }) => {
           });
         })}
       </tr>
-      {data.map((i) => {
-        return (
-          <BodyRow>
-            <BodyCell>
-              <div className='text-ellipsis w-[100px] whitespace-nowrap overflow-hidden'>
-                {!isLoading && i?._id}
-              </div>
-            </BodyCell>
-            <BodyCell>{convertDate(i?.createdAt)}</BodyCell>
-            <BodyCell>{!isLoading && i?.order_status}</BodyCell>
-            <BodyCell>{!isLoading && i?.metadata?.product?.price}</BodyCell>
-            <BodyCell>{!isLoading && i?.metadata?.product?.name}</BodyCell>
-            <BodyCell>{!isLoading && i?.metadata?.customer?.name}</BodyCell>
-            <BodyCell>{!isLoading && i?.actions}</BodyCell>
-          </BodyRow>
-        );
-      })}
+      {!isLoading &&
+        data?.data.map((i) => {
+          return (
+            <BodyRow>
+              <BodyCell>
+                <div className='text-ellipsis w-[100px] whitespace-nowrap overflow-hidden'>
+                  {!isLoading && i?._id}
+                </div>
+              </BodyCell>
+              <BodyCell>{convertDate(i?.createdAt)}</BodyCell>
+              <BodyCell>{!isLoading && i?.order_status}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.product?.price}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.product?.name}</BodyCell>
+              <BodyCell>{!isLoading && i?.metadata?.customer?.name}</BodyCell>
+              <BodyCell>{!isLoading && i?.actions}</BodyCell>
+            </BodyRow>
+          );
+        })}
     </table>
   );
 };
 
-const DomainTables = ({ pages, data, headerData, isLoading }) => {
-  console.log(data, 'adadaddadadaads');
+const DomainTables = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('domains', useDomainData);
+  {
+    !isLoading && console.log(data, 'domain table data');
+  }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
@@ -109,16 +117,17 @@ const DomainTables = ({ pages, data, headerData, isLoading }) => {
           });
         })}
       </tr>
-      {data.map((i) => {
-        return (
-          <BodyRow>
-            <BodyCell>{!isLoading && i.domainName}</BodyCell>
-            <BodyCell>{!isLoading && i.date}</BodyCell>
-            <BodyCell>{!isLoading && i.status}</BodyCell>
-            <BodyCell>{!isLoading && i.actions}</BodyCell>
-          </BodyRow>
-        );
-      })}
+      {!isLoading &&
+        data?.data.map((i) => {
+          return (
+            <BodyRow>
+              <BodyCell>{!isLoading && i.domain_name}</BodyCell>
+              <BodyCell>{!isLoading && convertDate(i.createdAt)}</BodyCell>
+              <BodyCell>{!isLoading && i.metadata.status}</BodyCell>
+              <BodyCell>{!isLoading && i.actions}</BodyCell>
+            </BodyRow>
+          );
+        })}
     </table>
   );
 };
@@ -188,4 +197,4 @@ const LandingTables = ({ pages, headerData }) => {
   );
 };
 
-export { Tables, DomainTables, LandingTables };
+export { TransactionTable, DomainTables, LandingTables };
