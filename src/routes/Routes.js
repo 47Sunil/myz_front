@@ -4,6 +4,7 @@ import ForgetPassword from '../pages/ForgetPassword/index';
 import PaymentGateway from '../pages/PaymentGateways/Index';
 import Accounts from '../pages/Accounts/Accounts';
 import Dashboard from '../pages/Dashboard';
+import Subscription from '../pages/Subscription/Index';
 import LandingPage from '../pages/LandingPage/index';
 import UserAccount from '../pages/UserAccount/Index';
 import Domain from '../pages/Domain/index';
@@ -32,7 +33,11 @@ const Router = () => {
             element=<PaymentGateway />
           />
           <Route
-            path='/transaction'
+            path='/payment-gateway/:method'
+            element=<PaymentGateway />
+          />
+          <Route
+            path='/transactions'
             element=<Transaction />
           />
           <Route
@@ -48,8 +53,8 @@ const Router = () => {
             element=<UserAccount />
           />
           <Route
-            path='/signintemp'
-            element=<Logintest />
+            path='/subscription'
+            element=< Subscription/>
           />
         </Routes>
       </Layout>

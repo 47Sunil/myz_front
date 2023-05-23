@@ -6,7 +6,7 @@ const Logintest = () => {
 
   useEffect(() => {
     handleLogin();
-  }, []);
+  });
 
   const handleLogin = async () => {
     await loginMutation.mutateAsync({
