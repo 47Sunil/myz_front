@@ -41,7 +41,7 @@ export const data2 = [
   {
     label: 'Payment Options',
     icon: <PaymentLogo />,
-    path: 'payment',
+    path: 'payment-gateways',
     clicked: <PaymentLogo fillOpacity='1' />,
   },
   {

@@ -29,7 +29,7 @@ const Overlay2 = styled.div`
 `;
 
 const ProfileCommon = () => {
-  const [activeTab, setActiveTab] = useState(2);
+  const [activeTab, setActiveTab] = useState(1);
   return (
     <>
       <div className="flex flex-col">
