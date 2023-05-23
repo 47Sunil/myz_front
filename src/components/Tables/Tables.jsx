@@ -41,32 +41,32 @@ const BodyCell = styled.td`
   line-height: 26px;
   letter-spacing: 0.04em;
 `;
+const monthNames = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+function convertDate(date) {
+  const newFormatDate = new Date(date);
+  const day = newFormatDate.getDate().toString().padStart(2, '0');
+  const monthIndex = newFormatDate.getMonth();
+  const year = newFormatDate.getFullYear().toString();
+  const monthAbbreviation = monthNames[monthIndex];
+  const formattedDate = `${day} ${monthAbbreviation} ${year}`;
+  return formattedDate;
+}
 
 const Tables = ({ pages, data, headerData, isLoading }) => {
   console.log(data, 'transaction table data');
-  const monthNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-  function convertDate(date) {
-    const newFormatDate = new Date(date);
-    const day = newFormatDate.getDate().toString().padStart(2, '0');
-    const monthIndex = newFormatDate.getMonth();
-    const year = newFormatDate.getFullYear().toString();
-    const monthAbbreviation = monthNames[monthIndex];
-    const formattedDate = `${day} ${monthAbbreviation} ${year}`;
-    return formattedDate;
-  }
 
   return (
     <table className='w-full border-collapse mb-[41px]'>
@@ -156,7 +156,9 @@ const LandingTables = ({ pages, headerData }) => {
                   </div>
                 </div>
               </BodyCell>
-              <BodyCell className='w-[150px]'>{i.createdAt}</BodyCell>
+              <BodyCell className='w-[150px]'>
+                {convertDate(i.createdAt)}
+              </BodyCell>
               <BodyCell className=' flex justify-center h-full mt-3'>
                 <p className='bg-[rgba(255,107,0,0.23)] w-fit px-3 text-center border-2 border-dashed border-[#FA6A2C]'>
                   Draft
