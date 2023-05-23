@@ -55,11 +55,15 @@ const Router = () => {
           />
           <Route
             path='/subscription'
-            element=< Subscription/>
+            element=<Subscription />
           />
           <Route
             path='/other-settings'
-            element=< OtherSettings/>
+            element=<OtherSettings />
+          />
+          <Route
+            path='/signintemp'
+            element=<Logintest />
           />
         </Routes>
       </Layout>
