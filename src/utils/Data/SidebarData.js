@@ -26,7 +26,7 @@ export const data1 = [
   {
     label: 'Transactions',
     icon: <TransactionsLogo />,
-    path: 'transactions',
+    path: 'transaction',
     clicked: <TransactionsLogo fillOpacity='1' />,
   },
   {

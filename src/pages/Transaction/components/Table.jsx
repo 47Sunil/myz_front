@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import { Tables } from '../../../components/Tables/Tables';
 import Pagination from './Pagination';
 import { transactionTableData } from '../../../utils/Data/constant';
+import { useQuery } from 'react-query';
+import { useTransactionData } from '../../../actions/Transaction';
 
 const Table = () => {
   const [pages, setPages] = useState(5);
+  const { data, isLoading } = useQuery('transactions', useTransactionData);
   return (
     <div className='bg-[rgba(255,255,255,1)] border border-solid border-[rgba(255,255,255,0.15)] min-h-full rounded-t-3xl w-full  flex flex-col justify-between overflow-hidden'>
       <div className='flex flex-row justify-between p-4'>
@@ -19,7 +22,9 @@ const Table = () => {
       </div>
       <Tables
         pages={pages}
-        data={transactionTableData}
+        headerData={transactionTableData}
+        isLoading={isLoading}
+        data={data?.data}
       />
     </div>
   );

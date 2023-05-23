@@ -30,7 +30,6 @@ const TemplateManager = ({ open, setOpen }) => {
     setOpen(!open);
   }
   const { data, isLoading } = useQuery('templates', useTemplatesData);
-  console.log(data?.data);
   return (
     <div className='border-b lg:border-y border-solid border-white/20 pb-4 lg:py-4'>
       <div className='flex w-full gap-4 justify-between'>
