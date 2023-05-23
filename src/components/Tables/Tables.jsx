@@ -65,7 +65,7 @@ function convertDate(date) {
   const formattedDate = `${day} ${monthAbbreviation} ${year}`;
   return formattedDate;
 }
-const Tables = ({ pages, headerData }) => {
+const TransactionTable = ({ pages, headerData }) => {
   const { data, isLoading } = useQuery('transactions', useTransactionData);
   {
     !isLoading && console.log(data?.data);
@@ -190,4 +190,4 @@ const LandingTables = ({ pages, data }) => {
   );
 };
 
-export { Tables, DomainTables, LandingTables };
+export { TransactionTable, DomainTables, LandingTables };

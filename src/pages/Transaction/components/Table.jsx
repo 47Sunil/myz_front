@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Tables } from '../../../components/Tables/Tables';
+import { TransactionTable } from '../../../components/Tables/Tables';
 import Pagination from './Pagination';
 import { transactionTableData } from '../../../utils/Data/constant';
 import { useQuery } from 'react-query';
@@ -19,7 +19,7 @@ const Table = () => {
           setPages={setPages}
         />
       </div>
-      <Tables
+      <TransactionTable
         pages={pages}
         headerData={transactionTableData}
       />
