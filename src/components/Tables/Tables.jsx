@@ -5,6 +5,7 @@ import Eye from '../../assets/svg/Eye';
 import Bin from '../../assets/svg/Bin';
 import Notebook from '../../assets/svg/Notebook';
 import { useTransactionData } from '../../actions/Transaction';
+import { useDomainData } from '../../actions/DomainPage';
 import { useQuery } from 'react-query';
 
 const HeaderCell = styled.th`
@@ -100,8 +101,11 @@ const Tables = ({ pages, headerData }) => {
   );
 };
 
-const DomainTables = ({ pages, data, headerData, isLoading }) => {
-  console.log(data, 'adadaddadadaads');
+const DomainTables = ({ pages, headerData }) => {
+  const { data, isLoading } = useQuery('domains', useDomainData);
+  {
+    !isLoading && console.log(data, 'domain table data');
+  }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
@@ -111,16 +115,17 @@ const DomainTables = ({ pages, data, headerData, isLoading }) => {
           });
         })}
       </tr>
-      {data.map((i) => {
-        return (
-          <BodyRow>
-            <BodyCell>{!isLoading && i.domainName}</BodyCell>
-            <BodyCell>{!isLoading && i.date}</BodyCell>
-            <BodyCell>{!isLoading && i.status}</BodyCell>
-            <BodyCell>{!isLoading && i.actions}</BodyCell>
-          </BodyRow>
-        );
-      })}
+      {!isLoading &&
+        data?.data.map((i) => {
+          return (
+            <BodyRow>
+              <BodyCell>{!isLoading && i.domain_name}</BodyCell>
+              <BodyCell>{!isLoading && convertDate(i.createdAt)}</BodyCell>
+              <BodyCell>{!isLoading && i.metadata.status}</BodyCell>
+              <BodyCell>{!isLoading && i.actions}</BodyCell>
+            </BodyRow>
+          );
+        })}
     </table>
   );
 };
