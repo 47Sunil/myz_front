@@ -7,17 +7,19 @@ import ViewAllTemplatesModal from './components/ViewAllTemplatesModal';
 import Banner from './components/Banner';
 import FilterIcon from '../../assets/svg/FilterIcon';
 import Bitmoji from '../../assets/images/bitmoji_landingpage.png';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import CreateLandingPage from './components/CreateLandingPage';
 import { useTemplatesData } from '../../actions/LandingPage';
 import { useQuery } from 'react-query';
 import { LandingTables } from '../../components/Tables/Tables';
 import { landingTableData } from '../../utils/Data/constant';
+import { useQueryClient } from 'react-query';
 
 const LandingPages = () => {
   const [isOpened, setIsOpened] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
   const { method } = useParams();
+
   return (
     <>
       {method === 'home' ? (

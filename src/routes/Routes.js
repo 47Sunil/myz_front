@@ -32,7 +32,7 @@ const Router = () => {
           />
           <Route
             path='/accounts/:method'
-            element=<AuthGuard component={<Accounts />} />
+            element=<Accounts />
           />
           <Route
             path='/forgetPassword'
