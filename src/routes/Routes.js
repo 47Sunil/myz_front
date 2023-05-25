@@ -14,13 +14,14 @@ import Transaction from '../pages/Transaction/index';
 import Logintest from '../pages/SignIn_Temp/Index';
 import AuthGuard from '../Auth/AuthGuard';
 import { useAutoLoginData } from '../actions/User/Login';
+import Editor from '../pages/LandingPage/Editor/Editor';
 const Router = () => {
   const autoLogin = useAutoLoginData();
   const handleLogin = async () => {
     await autoLogin.mutateAsync();
   };
   useEffect(() => {
-    handleLogin();
+      handleLogin();
   }, []);
   return (
     <BrowserRouter>
@@ -69,6 +70,10 @@ const Router = () => {
           <Route
             path='/other-settings'
             element=<AuthGuard component={<OtherSettings />} />
+          />
+          <Route
+            path='/editor/:id'
+            element=<AuthGuard component={<Editor />} />
           />
           <Route
             path='/signintemp'

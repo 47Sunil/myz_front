@@ -6,6 +6,7 @@ import PlanOffers from "./PlanOffers";
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
   border-radius: 18px;
+  min-height: 100%;
 `;
 
 const Overlay1 = styled.div`
@@ -32,7 +33,7 @@ const Overlay2 = styled.div`
 const CommonHolder = () => {
   return (
     <div className="flex flex-row h-full relative w-full">
-      <Wrapper className="h-full w-60 z-10">
+      <Wrapper className="h-full w-60 z-10 grow ">
         <Overlay1>
           <Overlay2>
             <div className="absolute overflow-hidden -top-1 -left-1 h-28 w-28 ">
@@ -75,7 +76,7 @@ const CommonHolder = () => {
           </Overlay2>
         </Overlay1>
       </Wrapper>
-      <div className="grow bg-white my-7 -ml-9 rounded-xl flex flex-row overflow-y-scroll">
+      <div className="grow bg-white my-7 -ml-9 rounded-xl flex flex-row overflow-y-scroll max-h-full">
         <div className="bg-black/40 w-10 blur-xl"></div>
         <div className="p-9 flex flex-col w-full ">
           <div className="bg-gray-100 border border-gray-300/50 p-4 w-full rounded-xl flex items-center">

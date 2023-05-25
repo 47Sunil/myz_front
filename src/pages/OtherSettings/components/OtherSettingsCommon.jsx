@@ -57,4 +57,10 @@ const data1 = [
   },
 ];
 
+const data2 = [
+    {
+        label: ""
+    }
+]
+
 export default OtherSettingsCommon;

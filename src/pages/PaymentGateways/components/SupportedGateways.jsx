@@ -24,7 +24,7 @@ const Card = styled.div`
 const SupportedGateways = () => {
   return (
     <>
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-4 gap-8 items-center">
         {data.map((item) => {
           return <GatewayCard key={item.name} item={item} />;
         })}

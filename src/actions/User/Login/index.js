@@ -25,8 +25,13 @@ export function useAutoLoginData() {
   const queryClient = useQueryClient();
   return useMutation(
     async () => {
-      const res = await requestInstance.get('users/account');
-      return res;
+      try {
+        const res = await requestInstance.get('users/account');
+        return res;
+      } catch (error) {
+        console.log(error)
+      }
+     
     },
     {
       onSuccess: (data) => {

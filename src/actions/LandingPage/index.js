@@ -55,8 +55,13 @@ export function useLandingTablesMutation() {
   const queryClient = useQueryClient();
   return useMutation(
     async (id) => {
-      const res = await requestInstance.delete(`landingpages/${id}`);
+      try {
+        const res = await requestInstance.delete(`landingpages/${id}`);
       return res;
+      } catch (error) {
+        console.log(error)
+      }
+      
     },
     {
       onSuccess: () => {
