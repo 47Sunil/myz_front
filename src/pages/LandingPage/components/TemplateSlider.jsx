@@ -24,12 +24,21 @@ const ModalBtn = styled.button`
   background: linear-gradient(180deg, #f76f47 0%, #ff9900 100%);
 `;
 
-const TemplateManager = ({ open, setOpen }) => {
+const TemplateManager = ({
+  open,
+  setOpen,
+  createPageData,
+  setCreatePageData,
+}) => {
   const [templates, setTemplates] = useState([]);
+
   function handleClick() {
     setOpen(!open);
   }
   const { data, isLoading } = useQuery('templates', useTemplatesData);
+  {
+    !isLoading && console.log(data?.data);
+  }
   return (
     <div className='border-b lg:border-y border-solid border-white/20 pb-4 lg:py-4'>
       <div className='flex w-full gap-4 justify-between'>
@@ -53,58 +62,29 @@ const TemplateManager = ({ open, setOpen }) => {
                   <img
                     src={i.image}
                     alt=''
-                    className='w-full h-full object-cover rounded-xl '
+                    className='w-full h-full object-cover object-top rounded-xl '
                   />
                 )}
                 <div className='absolute bottom-0 w-full p-2 flex flex-col items-center gap-4'>
                   <div className='bg-white rounded-full w-[102px] h-[50px] border border-solid border-[#85878C] shadow-[0_0_19px_rgba(0,0,0,.25)] flex gap-2 p-1'>
-                    <div className='bg-gradient-template-eye w-[42px] h-[42px] rounded-full flex justify-center items-center'>
+                    <button className='bg-gradient-template-eye w-[42px] h-[42px] rounded-full flex justify-center items-center'>
                       <Eye eyeColor='#ffffff' />
-                    </div>
-                    <div className='bg-[#DFDEE2] w-[42px] h-[42px] rounded-full flex justify-center items-center'>
+                    </button>
+                    <Link
+                      to={`/landing-pages/create_landing_page?id=${i._id}`}
+                      className='bg-[#DFDEE2] w-[42px] h-[42px] rounded-full flex justify-center items-center'
+                    >
                       <p className='text-[#2C2B2B] text-[24px] '>+</p>
-                    </div>
+                    </Link>
                   </div>
                   <p className='bg-[#0A1118] text-[13px] leading-[34px] text-[rgba(255,255,255,.74)] text-center rounded-b-xl h-[34px] w-full'>
-                    Agency Course
+                    {i.name}
                   </p>
                 </div>
               </div>
             );
           })}
         </div>
-
-        {/* {templates.slice(0, 4).map((item) => {
-          return (
-            <div
-              className={`relative h-[250px] rounded-xl border bg-cover p-2`}
-              style={{
-                background: `url(${item.image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'top center',
-              }}
-            >
-              <button
-                className='absolute bottom-1.5 w-11/12 rounded-lg p-2 text-sm text-white'
-                style={{ background: '#0A1118' }}
-              >
-                {item.name}
-              </button>
-              <div className='absolute bottom-16 right-[50%] flex h-16 w-32 translate-x-[50%] gap-3 rounded-full border border-gray-600/60 bg-white p-1'>
-                <Link
-                  className='w-16'
-                  to={`/landing-pages/add?template=${item._id}&ai=${item.aiEnabled}`}
-                >
-                  <ModalBtn className='flex h-14 items-center justify-center rounded-full p-1 text-3xl font-medium text-white'>
-                    +
-                  </ModalBtn>
-                </Link>
-                <div className='flex h-14 w-16 items-center justify-center rounded-full bg-[#DFDEE2] p-1'></div>
-              </div>
-            </div>
-          );
-        })} */}
-
         <ModalBtn
           className='template-modal-btn w-[200px] flex-shrink-0 h-[250px] rounded-xl p-2'
           onClick={handleClick}

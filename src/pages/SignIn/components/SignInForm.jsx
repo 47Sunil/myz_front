@@ -13,8 +13,8 @@ import { useLoginMutation } from '../../../actions/User/Login';
 
 const SignForm = () => {
   const [loginRequest, setLoginRequest] = useState({
-    email: 'rrsonawne123@hotmail.com',
-    password: 'rohit123',
+    email: 'donotdelete@gmail.com',
+    password: 'donotdelete',
     rememberMe: false,
   });
 
