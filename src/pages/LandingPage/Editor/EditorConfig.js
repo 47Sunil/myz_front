@@ -39,9 +39,11 @@ export const geditorConfig = (id) => {
     })
 
     editor.on('load', () =>  {
+        console.log("HTML")
         axios.get(`/api/v1/landingpages/${id}/content`).then(response=> {
-            editor.DomComponents.addComponent(response.data.html)
-            editor.setStyle(response.data.css)
+            console.log(response)
+            editor.DomComponents.addComponent(response.data.data.html)
+            editor.setStyle(response.data.data.css)
         }) 
     })
 
