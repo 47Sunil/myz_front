@@ -26,11 +26,10 @@ const PlaceHolder = styled.p`
   width: 100%;
   height: fit-content;
 `;
-const Boxes = ({ icon, text, className, expanded, setIsBoxClicked }) => {
+const Boxes = ({ icon, text, className, expanded }) => {
   const [isClicked, setIsClicked] = useState(false);
   function handleActive() {
     setIsClicked(!isClicked);
-    setIsBoxClicked(isClicked);
   }
   const variants = {
     expanded: {

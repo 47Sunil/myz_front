@@ -80,6 +80,7 @@ const CreateLandingPage = () => {
   const [searchParams] = useSearchParams();
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('templates');
+
   const ID = searchParams.get('id');
   const [pageData, setPageData] = useState({
     funnelName: 'MY first',
@@ -95,6 +96,7 @@ const CreateLandingPage = () => {
     metadata: {},
   });
   const pageMutation = useLandingPageMutation();
+  let landingPageId;
   const handleCreatePage = async (data) => {
     await pageMutation.mutateAsync(data);
   };
