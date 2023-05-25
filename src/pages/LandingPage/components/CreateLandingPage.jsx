@@ -379,7 +379,10 @@ const CreateLandingPage = () => {
                   <div className='bg-[rgba(255,255,255,0.1)] border-2 border-dashed border-[rgba(255,107,0,0.2)] flex flex-col justify-center items-center p-[24px_15px] gap-3 h-[200px] rounded-[15px] hover:outline hover:outline-white hover:outline-offset-4 hover:outline-2'></div>
                 </div>
                 <div className='bg-[#181424] w-full py-4 flex justify-center items-center absolute bottom-0 left-0 gap-16'>
-                  <button className='rounded-[8px] bg-[rgba(255,255,255,0.12)] leading-[157.5%] text-[18px] py-2 w-[170px] font-medium text-white'>
+                  <button
+                    className='rounded-[8px] bg-[rgba(255,255,255,0.12)] leading-[157.5%] text-[18px] py-2 w-[170px] font-medium text-white'
+                    onClick={() => setPaymentSelect(!paymentSelect)}
+                  >
                     Cancel
                   </button>
                   <button
