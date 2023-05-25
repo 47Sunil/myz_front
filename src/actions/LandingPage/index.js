@@ -68,3 +68,31 @@ export function useLandingTablesMutation() {
     }
   );
 }
+
+export function useLandingPageMutation() {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (pageData) => {
+      const res = await requestInstance.post('/funnels', pageData);
+      return res;
+    },
+    {
+      onSuccess: (data) => {
+        queryClient.setQueryData('LandingPage', data);
+      },
+      onError: (error) => {
+        console.log('error occured: ' + error.message);
+      },
+    }
+  );
+}
+
+export async function useLandingPaymentData() {
+  const res = await requestInstance.get('/payments');
+  return res;
+}
+
+export async function useLandingDomainData() {
+  const res = await requestInstance.get('/domains');
+  return res;
+}

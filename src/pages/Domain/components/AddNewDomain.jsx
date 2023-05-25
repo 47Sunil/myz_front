@@ -26,6 +26,7 @@ const AddNewDomain = () => {
             className={
               'w-[62vw] h-[70vh] bg-[#100921] rounded-[22px] z-20 absolute top-[170px] left-[25%] flex flex-col'
             }
+            to='/domain/add_dns'
           >
             <div className='py-8 pl-4 flex-grow'>
               <div className='pr-[27rem]'>

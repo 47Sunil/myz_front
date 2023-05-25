@@ -64,7 +64,13 @@ const Boxes = ({ icon, text, className, expanded, setIsBoxClicked }) => {
   );
 };
 
-const BoxesDetails = ({ expanded, paymentSelect, setPaymentSelect }) => {
+const BoxesDetails = ({
+  expanded,
+  paymentSelect,
+  setPaymentSelect,
+  setPageData,
+  pageData,
+}) => {
   const variants = {
     expanded: {
       opacity: 1,
@@ -74,6 +80,17 @@ const BoxesDetails = ({ expanded, paymentSelect, setPaymentSelect }) => {
       opacity: 0,
       x: 140,
     },
+  };
+  const handleClick = () => {
+    setPaymentSelect(!paymentSelect);
+  };
+  const handleChangePrice = (e) => {
+    const value = e.target.value;
+    setPageData((prevState) => ({ ...prevState, price: value }));
+  };
+  const handleChangePdtName = (e) => {
+    const value = e.target.value;
+    setPageData((prevState) => ({ ...prevState, name: value }));
   };
   return (
     <motion.div
@@ -87,15 +104,19 @@ const BoxesDetails = ({ expanded, paymentSelect, setPaymentSelect }) => {
         type='text'
         placeholder='Set a Price'
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
+        onChange={(e) => handleChangePrice(e)}
+        value={pageData.price}
       />
       <input
         type='text'
         placeholder='Type your product name'
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
+        onChange={(e) => handleChangePdtName(e)}
+        value={pageData.name}
       />
       <button
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] text-[#7B7784] text-[12px] p-2 font-medium w-full hover:bg-gradient-landing-purple hover:text-white transition duration-500 hover:border-white'
-        onClick={() => setPaymentSelect(!paymentSelect)}
+        onClick={handleClick}
       >
         Select your payment gateway
       </button>
@@ -103,7 +124,14 @@ const BoxesDetails = ({ expanded, paymentSelect, setPaymentSelect }) => {
   );
 };
 
-const DropDown = ({ paymentSelect, setPaymentSelect }) => {
+const DropDown = ({
+  paymentSelect,
+  setPaymentSelect,
+  displayModal,
+  setDisplayModal,
+  setPageData,
+  pageData,
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
   function handleClick() {
     setIsExpanded(!isExpanded);
@@ -163,6 +191,10 @@ const DropDown = ({ paymentSelect, setPaymentSelect }) => {
             expanded={isExpanded}
             setPaymentSelect={setPaymentSelect}
             paymentSelect={paymentSelect}
+            displayModal={displayModal}
+            setDisplayModal={setDisplayModal}
+            setPageData={setPageData}
+            pageData={pageData}
           />
           {/* {isBoxClicked && (
             <Boxes
