@@ -6,9 +6,16 @@ import reaction from '../../../assets/icons/reaction.png';
 import { Link, useParams } from 'react-router-dom';
 import SecondScreenWrapper from '../../../components/SecondScreen/SecondScreenWrapper';
 import SecondScreenForm from '../../../components/SecondScreen/Form';
+import { useDomainMutation } from '../../../actions/DomainPage';
 const AddNewDomain = () => {
-  const [domainName, setDomainName] = useState('');
+  const [domainName, setDomainName] = useState({
+    domain_name: '',
+  });
   const { method } = useParams();
+  const domainMutation = useDomainMutation();
+  const handleDomainName = async (data) => {
+    await domainMutation.mutateAsync(data);
+  };
   return (
     <>
       {method === 'add_domain' ? (
@@ -27,6 +34,7 @@ const AddNewDomain = () => {
               'w-[62vw] h-[70vh] bg-[#100921] rounded-[22px] z-20 absolute top-[170px] left-[25%] flex flex-col'
             }
             to='/domain/add_dns'
+            onClick={() => handleDomainName(domainName)}
           >
             <div className='py-8 pl-4 flex-grow'>
               <div className='pr-[27rem]'>
@@ -35,7 +43,11 @@ const AddNewDomain = () => {
                   label='Enter Domain name'
                   isRequired={true}
                   placeholder={'Type Domain Here'}
-                  states={[domainName, setDomainName]}
+                  states={[
+                    domainName.domain_name,
+                    setDomainName,
+                    'domain_name',
+                  ]}
                   multiline={false}
                   type={'text'}
                 />

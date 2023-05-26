@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TransparentButton from '../../components/TransparentButton/TransparentButton';
 import TemplateSlider from './components/TemplateSlider';
-import LandingPagesList from './components/LandingPagesList';
-import LandingPageListItem from './components/LandingPagesListItem';
 import ViewAllTemplatesModal from './components/ViewAllTemplatesModal';
 import Banner from './components/Banner';
 import FilterIcon from '../../assets/svg/FilterIcon';
 import Bitmoji from '../../assets/images/bitmoji_landingpage.png';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CreateLandingPage from './components/CreateLandingPage';
-import { useTemplatesData } from '../../actions/LandingPage';
-import { useQuery } from 'react-query';
 import { LandingTables } from '../../components/Tables/Tables';
 import { landingTableData } from '../../utils/Data/constant';
-import { useQueryClient } from 'react-query';
 
 const LandingPages = () => {
   const [isOpened, setIsOpened] = useState(false);

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import { requestInstance } from '../axiosConfig';
 import { useMutation, useQueryClient } from 'react-query';
 export async function useTemplatesData() {
@@ -57,11 +58,10 @@ export function useLandingTablesMutation() {
     async (id) => {
       try {
         const res = await requestInstance.delete(`landingpages/${id}`);
-      return res;
+        return res;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-      
     },
     {
       onSuccess: () => {
@@ -76,6 +76,7 @@ export function useLandingTablesMutation() {
 
 export function useLandingPageMutation() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   return useMutation(
     async (pageData) => {
       const res = await requestInstance.post('/funnels', pageData);
@@ -84,6 +85,7 @@ export function useLandingPageMutation() {
     {
       onSuccess: (data) => {
         queryClient.setQueryData('LandingPage', data);
+        navigate(`/editor/${data?.data._id}`);
       },
       onError: (error) => {
         console.log('error occured: ' + error.message);
