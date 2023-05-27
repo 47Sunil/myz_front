@@ -11,24 +11,28 @@ import {
 } from '../../../actions/LandingPage';
 import PaymentModal from './Create Landing Page/PaymentModal';
 import FormScreen from './Create Landing Page/FormScreen';
+import { useLandingPaymentData } from '../../../actions/LandingPage/index';
 
 // * MAIN PAGE
 const CreateLandingPage = () => {
   const [searchParams] = useSearchParams();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isPaymentMethodSelected, setIsPaymentMethodSelected] = useState(false);
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('templates');
   const ID = searchParams.get('id');
+  const paymentData = useQuery('paymentData', useLandingPaymentData);
   const [pageData, setPageData] = useState({
-    funnelName: 'MY first',
+    funnelName: '',
     pageName: 'mist',
     pageGoal: 'purchase',
-    name: 'Most',
-    price: 144,
-    paymentGateway: '6459ed38ca86c1694f93d033',
-    template_id: '64241eaa1618af7a3b6f62e8',
-    domain: '646de61a2fbf77e799432df9',
-    redirectPage: 'https//google.com/',
-    customMessage: 'Hiee',
+    name: '',
+    price: '',
+    paymentGateway: '',
+    template_id: ID,
+    domain: '',
+    redirectPage: '',
+    customMessage: '',
     checkoutTitle: 'checkout',
     descriptionDetails: 'description',
     contactUs: {
@@ -41,10 +45,9 @@ const CreateLandingPage = () => {
     p2: 'Buye',
     metadata: {
       aidata: {
-        productName: 'Yoga pant',
-        Description:
-          'Yoga pants are a type of flexible and form-fitting athletic pants designed specifically for practicing yoga or engaging in various fitness activities.',
-        USP: 'Flexibility and Range of Motion:The stretchy fabrics used in their construction allow for unrestricted mobility, making them ideal for yoga poses, stretching, or any other physical activity that requires a full range of motion.',
+        productName: '',
+        Description: '',
+        USP: '',
       },
     },
   });
@@ -53,6 +56,7 @@ const CreateLandingPage = () => {
   const templateData = data?.data.filter((i) => {
     return i._id === ID;
   });
+  console.log(templateData, 'template data');
   const navigate = useNavigate();
   if (templateData === undefined) {
     navigate('/landing-pages/home');
@@ -109,13 +113,22 @@ const CreateLandingPage = () => {
               setPaymentSelect={setPaymentSelect}
               setPageData={setPageData}
               pageData={pageData}
+              isExpanded={isExpanded}
+              setIsExpanded={setIsExpanded}
+              isPaymentMethodSelected={isPaymentMethodSelected}
+              setIsPaymentMethodSelected={setIsPaymentMethodSelected}
             />
           </div>
           {paymentSelect && (
             <PaymentModal
               setPageData={setPageData}
+              pageData={pageData}
               setPaymentSelect={setPaymentSelect}
               paymentSelect={paymentSelect}
+              isExpanded={isExpanded}
+              setIsExpanded={setIsExpanded}
+              isPaymentMethodSelected={isPaymentMethodSelected}
+              setIsPaymentMethodSelected={setIsPaymentMethodSelected}
             />
           )}
         </SecondScreenWrapper>

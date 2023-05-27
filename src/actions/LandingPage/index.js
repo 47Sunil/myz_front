@@ -9,6 +9,8 @@ export async function useTemplatesData() {
 
 export async function useLandingTablesData() {
   const res = await requestInstance.get('/landingpages');
+  console.log(res, 'landing  tables data');
+
   return res;
 }
 
@@ -79,6 +81,7 @@ export function useLandingPageMutation() {
   const navigate = useNavigate();
   return useMutation(
     async (pageData) => {
+      pageData.price = Number(pageData.price);
       const res = await requestInstance.post('/funnels', pageData);
       return res;
     },

@@ -16,6 +16,7 @@ import star1 from '../../../../assets/images/Star-1.png';
 import domainBG from '../../../../assets/images/domainBG.png';
 import styled from 'styled-components';
 import GridLoader from 'react-spinners/GridLoader';
+import { useLocation } from 'react-router-dom';
 
 const Loader = styled.div`
   background: url(${domainBG});
@@ -38,40 +39,111 @@ const FormScreen = ({
   setPaymentSelect,
   setPageData,
   pageData,
+  isExpanded,
+  setIsExpanded,
+  isPaymentMethodSelected,
+  setIsPaymentMethodSelected,
 }) => {
+  console.log(isPaymentMethodSelected, 'isPaymentMethodSelected');
   const [enabled, setEnabled] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
+  console.log(isChecked1, 'is CHECKED 1');
+
   const [isChecked2, setIsChecked2] = useState(false);
+  console.log(isChecked2, 'is CHECKED 2');
+
   const [isChecked3, setIsChecked3] = useState(false);
+  console.log(isChecked3, 'is CHECKED 3');
+
+  const [isFunnelName, setIsFunnelName] = useState(false);
+  const [isDomainEmpty, setIsDomainEmpty] = useState(false);
+  const [isRedirectEmpty, setIsRedirectEmpty] = useState(false);
+  const [isCustomEmpty, setIsCustomEmpty] = useState(false);
+  const [isAiProductName, setIsAiProductName] = useState(false);
+  const [isAiDesc, setIsAiDesc] = useState(false);
+  const [isAiUsp, setIsAiUsp] = useState(false);
   const domainData = useQuery('domainData', useLandingDomainData);
+  const { search } = useLocation();
   const pageMutation = useLandingPageMutation();
   const handleCreatePage = async (data) => {
     await pageMutation.mutateAsync(data);
   };
+  const checkInputFields = () => {
+    if (
+      pageData.paymentGateway === '' ||
+      pageData.price === '' ||
+      pageData.name === ''
+    ) {
+      setIsPaymentMethodSelected(true);
+    } else if (pageData.funnelName === '') {
+      setIsFunnelName(true);
+    } else if (pageData.domain === '' && isChecked1) {
+      setIsDomainEmpty(true);
+    } else if (pageData.redirectPage === '' && isChecked2) {
+      setIsRedirectEmpty(true);
+    } else if (pageData.customMessage === '' && isChecked3) {
+      setIsCustomEmpty(true);
+    } else if (pageData.metadata.aidata.productName === '' && enabled) {
+      setIsAiProductName(true);
+    } else if (pageData.metadata.aidata.Description === '' && enabled) {
+      setIsAiDesc(true);
+    } else if (pageData.metadata.aidata.USP === '' && enabled) {
+      setIsAiUsp(true);
+    } else {
+      handleCreatePage(pageData);
+    }
+  };
+
+  const onChangeHandler = (e) => {
+    console.log(e, 'on change handler');
+    setEnabled(!enabled);
+  };
+  if (!enabled) {
+    pageData.metadata.aidata.productName = '';
+    pageData.metadata.aidata.Description = '';
+    pageData.metadata.aidata.USP = '';
+  }
   const handlePdtName = (e) => {
     const value = e.target.value;
     setPageData((prevState) => ({
       ...prevState,
       metadata: {
-        aidata: { ...prevState.metadata.aidata, productName: value },
+        aidata: {
+          ...prevState.metadata.aidata,
+          productName: value,
+        },
       },
     }));
+    if (value !== '') {
+      setIsAiProductName(false);
+    }
   };
   const handleDesc = (e) => {
     const value = e.target.value;
     setPageData((prevState) => ({
       ...prevState,
       metadata: {
-        aidata: { ...prevState.metadata.aidata, Description: value },
+        aidata: {
+          ...prevState.metadata.aidata,
+          Description: value,
+        },
       },
     }));
+    if (value !== '') {
+      setIsAiDesc(false);
+    }
   };
   const handleUSP = (e) => {
     const value = e.target.value;
     setPageData((prevState) => ({
       ...prevState,
-      metadata: { aidata: { ...prevState.metadata.aidata, USP: value } },
+      metadata: {
+        aidata: { ...prevState.metadata.aidata, USP: value },
+      },
     }));
+    if (value !== '') {
+      setIsAiUsp(false);
+    }
   };
   const variants = {
     grow: {
@@ -110,8 +182,8 @@ const FormScreen = ({
       className={
         'w-[62vw] h-[70vh] bg-[#100921] rounded-[22px] z-20 flex flex-col absolute top-[20%] left-[50%] translate-x-[-25%] overflow-hidden'
       }
-      to=''
-      onClick={() => handleCreatePage(pageData)}
+      to={`/landing-pages/create_landing_page/${search}`}
+      onClick={checkInputFields}
     >
       <motion.div
         initial={{ scale: 0 }}
@@ -188,7 +260,7 @@ const FormScreen = ({
         >
           <Switch
             checked={enabled}
-            onChange={setEnabled}
+            onChange={onChangeHandler}
             className={`bg-white
           relative inline-flex h-[14px] w-[34px] shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 drop-shadow-lg`}
           >
@@ -224,136 +296,225 @@ const FormScreen = ({
             multiline={false}
             type={'text'}
           />
-          <div className='px-5 relative flex items-center mb-4'>
+          {isFunnelName && (
+            <p className='text-red-500 text-[10px] ml-[2.3rem] mt-[-0.5rem] mb-[1rem]'>
+              Please enter a page title
+            </p>
+          )}
+          <div className='px-5 relative items-center'>
             <DropDown
               paymentSelect={paymentSelect}
               setPaymentSelect={setPaymentSelect}
               setPageData={setPageData}
               pageData={pageData}
+              isExpanded={isExpanded}
+              setIsExpanded={setIsExpanded}
             />
+            {isPaymentMethodSelected && (
+              <p className='text-red-500 text-[10px] absolute top-[3.5rem] ml-[1rem]'>
+                Please fill above fields
+              </p>
+            )}
           </div>
-          <p className='text-[rgba(255,255,255,0.67)] text-[15px] font-normal px-5 mt-[5rem]'>
+
+          <p
+            className={`text-[rgba(255,255,255,0.67)] text-[15px] font-normal px-5 ${
+              isPaymentMethodSelected
+                ? 'mt-[6rem]'
+                : isFunnelName
+                ? 'mt-[5rem]'
+                : 'mt-[4rem]'
+            } `}
+          >
             What Exactly you want from this Page
           </p>
         </div>
         <div className=' w-[51%] pl-[20px]'>
           <p className=' my-[10px] text-white'>Advance Options</p>
-          <div className='flex justify-between items-center mb-[8px]'>
-            {' '}
-            <AdvanceOptions
-              label={'Custom Domain'}
-              id={'customDomain'}
-              isChecked={isChecked1}
-              setIsChecked={setIsChecked1}
-            />{' '}
-            {isChecked1 && (
-              <select
-                name='custom_domain'
-                id='custom_domain'
-                className='h-8 px-4 bg-[#2A2439] text-[#7B7784] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer w-[60%]'
-                value={'Select your Custom Domain'}
-                onChange={(e) =>
-                  setPageData((prevState) => ({
-                    ...prevState,
-                    domain: e.target.value,
-                  }))
-                }
-              >
-                <option
-                  hidden
-                  value='select a custom domain'
+          <div className='flex flex-col mb-[8px] gap-2'>
+            <div className='flex justify-between items-center'>
+              {' '}
+              <AdvanceOptions
+                label={'Custom Domain'}
+                id={'customDomain'}
+                isChecked={isChecked1}
+                setIsChecked={setIsChecked1}
+                setPageData={setPageData}
+                propName={'domain'}
+                setIsDomainEmpty={setIsDomainEmpty}
+              />{' '}
+              {isChecked1 && (
+                <select
+                  name='custom_domain'
+                  id='custom_domain'
+                  className='h-8 px-4 bg-[#2A2439] text-[#7B7784] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer w-[60%]'
+                  value={pageData.domain}
+                  onChange={(e) =>
+                    setPageData((prevState) => ({
+                      ...prevState,
+                      domain: e.target.value,
+                    }))
+                  }
                 >
-                  Select your Custom Domain
-                </option>
-                {!domainData.isLoading &&
-                  domainData?.data.data.map((i) => {
-                    return <option value={i._id}>{i.domain_name}</option>;
-                  })}
-              </select>
+                  <option
+                    hidden
+                    value='Select a custom domain'
+                  >
+                    Select your Custom Domain
+                  </option>
+                  {!domainData.isLoading &&
+                    domainData?.data.data.map((i) => {
+                      return <option value={i._id}>{i.domain_name}</option>;
+                    })}
+                </select>
+              )}
+            </div>
+            {isChecked1 && isDomainEmpty && (
+              <p className='text-red-500 text-[10px] self-end'>
+                Please fill above fields
+              </p>
             )}
           </div>
-          <div className='flex justify-between items-center mb-[8px] '>
-            {' '}
-            <AdvanceOptions
-              label={'Redirect After Payment'}
-              id={'redirect'}
-              isChecked={isChecked2}
-              setIsChecked={setIsChecked2}
-            />{' '}
-            {isChecked2 && (
-              <input
-                type='text'
-                className='h-8 px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white'
-                placeholder='URL To Redirect'
-              />
+          <div className='flex flex-col mb-[8px] gap-2'>
+            <div className='flex justify-between items-center'>
+              {' '}
+              <AdvanceOptions
+                label={'Redirect After Payment'}
+                id={'redirect'}
+                isChecked={isChecked2}
+                setIsChecked={setIsChecked2}
+                setPageData={setPageData}
+                propName={'redirectPage'}
+                setIsRedirectEmpty={setIsRedirectEmpty}
+              />{' '}
+              {isChecked2 && (
+                <input
+                  type='text'
+                  className='h-8 px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white'
+                  placeholder='URL To Redirect'
+                  value={pageData.redirectPage}
+                  onChange={(e) =>
+                    setPageData((prevState) => ({
+                      ...prevState,
+                      redirectPage: e.target.value,
+                    }))
+                  }
+                />
+              )}
+            </div>
+            {isChecked2 && isRedirectEmpty && (
+              <p className='text-red-500 text-[10px] self-end'>
+                Please fill above fields
+              </p>
             )}
           </div>
-          <div className='flex justify-between items-start mb-[20px]'>
-            {' '}
-            <AdvanceOptions
-              label={'Show Custom Message After Payment'}
-              id={'customMssg'}
-              isChecked={isChecked3}
-              setIsChecked={setIsChecked3}
-            />{' '}
-            {isChecked3 && (
-              <textarea
-                type='text'
-                className='px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white resize-none h-[150px] overflow-y-scroll py-2'
-                placeholder='Type your message'
-              />
+          <div className='flex flex-col mb-[20px] gap-2'>
+            <div className='flex justify-between items-start'>
+              {' '}
+              <AdvanceOptions
+                label={'Show Custom Message After Payment'}
+                id={'customMssg'}
+                isChecked={isChecked3}
+                setIsChecked={setIsChecked3}
+                setPageData={setPageData}
+                propName={'customMessage'}
+                setIsCustomEmpty={setIsCustomEmpty}
+              />{' '}
+              {isChecked3 && (
+                <textarea
+                  type='text'
+                  className='px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white resize-none h-[150px] overflow-y-scroll py-2'
+                  placeholder='Type your message'
+                  value={pageData.customMessage}
+                  onChange={(e) =>
+                    setPageData((prevState) => ({
+                      ...prevState,
+                      customMessage: e.target.value,
+                    }))
+                  }
+                />
+              )}
+            </div>
+            {isChecked3 && isCustomEmpty && (
+              <p className='text-red-500 text-[10px] self-end'>
+                Please fill above fields
+              </p>
             )}
           </div>
         </div>
         {enabled && (
           <div className=' w-[51%] pl-[20px]'>
             <p className=' my-[10px] text-white'>AI Options</p>
-            <div className='flex justify-between items-center mb-[8px]'>
-              {' '}
-              <label
-                htmlFor='productName'
-                className='text-white text-[12px] cursor-pointer'
-              >
-                Product Name
-              </label>
-              <input
-                type='text'
-                id='productName'
-                className='h-8 px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white'
-                placeholder='Product Name'
-                onChange={(e) => handlePdtName(e)}
-              />
+            <div className='flex flex-col gap-2 mb-[8px]'>
+              <div className='flex justify-between items-center'>
+                {' '}
+                <label
+                  htmlFor='productName'
+                  className='text-white text-[12px] cursor-pointer'
+                >
+                  Product Name
+                </label>
+                <input
+                  type='text'
+                  id='productName'
+                  className='h-8 px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white'
+                  placeholder='Product Name'
+                  onChange={(e) => handlePdtName(e)}
+                  value={enabled ? pageData.metadata.aidata.productName : ''}
+                />
+              </div>
+              {enabled && isAiProductName && (
+                <p className='text-red-500 text-[10px] self-end'>
+                  Please fill above fields
+                </p>
+              )}
             </div>
-            <div className='flex justify-between items-start mb-[8px] '>
-              {' '}
-              <label
-                htmlFor='description'
-                className='text-white text-[12px] cursor-pointer'
-              >
-                Description
-              </label>
-              <textarea
-                type='text'
-                id='description'
-                className='px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white resize-none h-[150px] overflow-y-scroll py-2'
-                placeholder='Describe your product'
-                onChange={(e) => handleDesc(e)}
-              />
+            <div className='flex flex-col gap-2 mb-[8px]'>
+              <div className='flex justify-between items-start  '>
+                {' '}
+                <label
+                  htmlFor='description'
+                  className='text-white text-[12px] cursor-pointer'
+                >
+                  Description
+                </label>
+                <textarea
+                  type='text'
+                  id='description'
+                  className='px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white resize-none h-[150px] overflow-y-scroll py-2'
+                  placeholder='Describe your product'
+                  onChange={(e) => handleDesc(e)}
+                  value={enabled ? pageData.metadata.aidata.Description : ''}
+                />
+              </div>
+              {enabled && isAiDesc && (
+                <p className='text-red-500 text-[10px] self-end'>
+                  Please fill above fields
+                </p>
+              )}
             </div>
-            <div className='flex justify-between items-center mb-[20px]'>
-              <label
-                htmlFor='USP'
-                className='text-white text-[12px] cursor-pointer'
-              >
-                USP
-              </label>
-              <input
-                type='text'
-                id='USP'
-                className='h-8 px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white'
-                placeholder='USP of the product'
-                onChange={(e) => handleUSP(e)}
-              />
+            <div className='flex flex-col mb-[20px] gap-2'>
+              <div className='flex justify-between items-center '>
+                <label
+                  htmlFor='USP'
+                  className='text-white text-[12px] cursor-pointer'
+                >
+                  USP
+                </label>
+                <input
+                  type='text'
+                  id='USP'
+                  className='h-8 px-4 bg-[#2A2439] text-[#b2adbe] border border-solid border-[#4C4759] rounded-[11px] cursor-pointer placeholder:text-[#7B7784] w-[60%] focus:outline-none focus:border-white'
+                  placeholder='USP of the product'
+                  onChange={(e) => handleUSP(e)}
+                  value={enabled ? pageData.metadata.aidata.USP : ''}
+                />
+              </div>
+              {enabled && isAiUsp && (
+                <p className='text-red-500 text-[10px] self-end'>
+                  Please fill above fields
+                </p>
+              )}
             </div>
           </div>
         )}

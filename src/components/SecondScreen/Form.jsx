@@ -1,6 +1,6 @@
 import React from 'react';
 import DynamicInputManager from '../DynamicInputManager/DynamicInputManager';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 const Form = ({ headingText, btnText, children, className, to, onClick }) => {
   return (
     <div className={className}>

@@ -47,7 +47,18 @@ const Boxes = ({ icon, text, className, expanded }) => {
     </div>
   );
 };
+const InputNumber = styled.input`
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
+  /* Works for Firefox */
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+`;
 const BoxesDetails = ({
   expanded,
   paymentSelect,
@@ -84,17 +95,22 @@ const BoxesDetails = ({
       transition={{ duration: 1 }}
       className='bg-[rgba(255,255,255,0.05)] rounded-[14px] p-3 col-span-2 flex flex-col items-center justify-center gap-4'
     >
-      <input
-        type='text'
+      <InputNumber
+        type='number'
+        pattern='[0-9]*'
         placeholder='Set a Price'
-        className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
+        className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white appearance-none'
         onChange={(e) => handleChangePrice(e)}
+        value={pageData.price}
+        required
       />
       <input
         type='text'
         placeholder='Type your product name'
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
         onChange={(e) => handleChangePdtName(e)}
+        value={pageData.name}
+        required
       />
       <button
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] text-[#7B7784] text-[12px] p-2 font-medium w-full hover:bg-gradient-landing-purple hover:text-white transition duration-500 hover:border-white'
@@ -109,12 +125,11 @@ const BoxesDetails = ({
 const DropDown = ({
   paymentSelect,
   setPaymentSelect,
-  displayModal,
-  setDisplayModal,
   setPageData,
   pageData,
+  isExpanded,
+  setIsExpanded,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   function handleClick() {
     setIsExpanded(!isExpanded);
   }
@@ -173,8 +188,6 @@ const DropDown = ({
             expanded={isExpanded}
             setPaymentSelect={setPaymentSelect}
             paymentSelect={paymentSelect}
-            displayModal={displayModal}
-            setDisplayModal={setDisplayModal}
             setPageData={setPageData}
             pageData={pageData}
           />

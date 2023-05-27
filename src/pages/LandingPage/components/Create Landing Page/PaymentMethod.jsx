@@ -1,8 +1,18 @@
 import razorPayLogo from '../../../../assets/icons/razorpay.png';
 // * INDIVIDUAL PAYEMENT METHOD COMPONENT
-const PaymentMethod = ({ title, brand, id, setIsSelected, isSelected }) => {
+const PaymentMethod = ({
+  title,
+  brand,
+  id,
+  setIsSelected,
+  isSelected,
+  setIsPaymentMethodSelected,
+}) => {
   return (
-    <div className='bg-[rgba(255,255,255,0.1)] border-2 border-dashed border-[rgba(255,107,0,0.2)] flex flex-col justify-center items-center p-[24px_15px] gap-3 h-[200px] rounded-[15px] relative hover:outline hover:outline-white hover:outline-offset-4 hover:outline-2'>
+    <div
+      id={id}
+      className='bg-[rgba(255,255,255,0.1)] border-2 border-dashed border-[rgba(255,107,0,0.2)] flex flex-col justify-center items-center p-[24px_15px] gap-3 h-[200px] rounded-[15px] relative hover:outline hover:outline-white hover:outline-offset-4 hover:outline-2'
+    >
       <div className='bg-white p-2 rounded-b-[30px] absolute top-0'>
         <img
           src={razorPayLogo}
@@ -25,7 +35,9 @@ const PaymentMethod = ({ title, brand, id, setIsSelected, isSelected }) => {
         <div className='bg-gradient-landing-orange rounded-[6px] w-full'>
           <button
             className='bg-[rgba(0,0,0,.62)] text-white text-[14px] leading-[18.9px] text-center font-medium w-full rounded-[6px] py-1'
-            onClick={() => setIsSelected('')}
+            onClick={() => (
+              setIsSelected(''), setIsPaymentMethodSelected(true)
+            )}
           >
             Selected
           </button>
@@ -33,7 +45,7 @@ const PaymentMethod = ({ title, brand, id, setIsSelected, isSelected }) => {
       ) : (
         <button
           className='bg-gradient-landing-orange text-white text-[14px] leading-[18.9px] text-center font-medium w-full rounded-[6px] py-1'
-          onClick={() => setIsSelected(id)}
+          onClick={() => (setIsSelected(id), setIsPaymentMethodSelected(false))}
         >
           Select
         </button>
