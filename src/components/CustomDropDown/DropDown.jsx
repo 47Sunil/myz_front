@@ -1,24 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Purchase from '../../assets/svg/Purchase';
-import Lead from '../../assets/svg/Lead';
-import Other from '../../assets/svg/Other';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { motion } from 'framer-motion';
-import { delay } from 'q';
 
-const DropDownCustom = styled.div`
-  background: #2a2439;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 11px;
-  padding: 10px 20px;
-  color: white;
-  width: 92%;
-  top: 0.25rem;
-  position: absolute;
-  z-index: 10;
-  min-height: ${(props) => props.expanded && '100px'};
-`;
 const PlaceHolder = styled.p`
   font-size: 15px;
   font-weight: normal;
@@ -104,14 +89,12 @@ const BoxesDetails = ({
         placeholder='Set a Price'
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
         onChange={(e) => handleChangePrice(e)}
-        value={pageData.price}
       />
       <input
         type='text'
         placeholder='Type your product name'
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
         onChange={(e) => handleChangePdtName(e)}
-        value={pageData.name}
       />
       <button
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] text-[#7B7784] text-[12px] p-2 font-medium w-full hover:bg-gradient-landing-purple hover:text-white transition duration-500 hover:border-white'
@@ -154,7 +137,7 @@ const DropDown = ({
 
   return (
     <motion.div
-      className='bg-[#2a2439] border border-solid border-[rgba(255,255,255,0.16)] rounded-[11px] p-[10px_20px] text-white w-[92%] absolute top-1 z-10'
+      className='bg-[#2a2439] border border-solid border-[rgba(255,255,255,0.16)] rounded-[11px] p-[10px_20px] text-white w-[92%] absolute top-1 z-30'
       variants={variants}
       animate={isExpanded ? 'expanded' : 'shrinked'}
     >

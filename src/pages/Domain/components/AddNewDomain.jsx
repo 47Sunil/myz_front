@@ -3,10 +3,11 @@ import starbg from '../../../assets/images/Star.png';
 import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
 import thumbsUp from '../../../assets/icons/ThumbsUp.png';
 import reaction from '../../../assets/icons/reaction.png';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import SecondScreenWrapper from '../../../components/SecondScreen/SecondScreenWrapper';
 import SecondScreenForm from '../../../components/SecondScreen/Form';
 import { useDomainMutation } from '../../../actions/DomainPage';
+import { useQueryClient } from 'react-query';
 const AddNewDomain = () => {
   const [domainName, setDomainName] = useState({
     domain_name: '',
@@ -33,7 +34,7 @@ const AddNewDomain = () => {
             className={
               'w-[62vw] h-[70vh] bg-[#100921] rounded-[22px] z-20 absolute top-[170px] left-[25%] flex flex-col'
             }
-            to='/domain/add_dns'
+            to=''
             onClick={() => handleDomainName(domainName)}
           >
             <div className='py-8 pl-4 flex-grow'>
@@ -114,7 +115,11 @@ const AddNewDomain = () => {
                   label='Enter Domain name'
                   isRequired={true}
                   placeholder={'tedx.com'}
-                  states={[domainName, setDomainName]}
+                  states={[
+                    domainName.domain_name,
+                    setDomainName,
+                    'domain_name',
+                  ]}
                   multiline={false}
                   type={'text'}
                   lock={true}
@@ -130,37 +135,25 @@ const AddNewDomain = () => {
                     <h3 className='text-white text-center'>Value</h3>
                     <h3 className='text-white text-center'>Type</h3>
                     <div className='bg-[#121019] rounded-[9px] flex flex-col px-2 py-1'>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] py-2'>
-                        domain_verification and dns_verification
-                      </p>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] py-2'>
-                        domain_verification and dns_verification
-                      </p>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis py-2'>
-                        domain_verification and dns_verification93ubf38gw3hg4830
-                      </p>
+                      {domainMutation.data.records.map((i) => (
+                        <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] py-2'>
+                          {i.name}
+                        </p>
+                      ))}
                     </div>
                     <div className='bg-[#121019] rounded-[9px]'>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] px-1 py-2'>
-                        93ubf38gw3hg483093ubf38gw3hg4830
-                      </p>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] px-1 py-2'>
-                        93ubf38gw3hg483093ubf38gw3hg4830
-                      </p>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis px-1 py-2'>
-                        93ubf38gw3hg483093ubf38gw3hg4830
-                      </p>
+                      {domainMutation.data.records.map((i) => (
+                        <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] px-1 py-2'>
+                          {i.value}
+                        </p>
+                      ))}
                     </div>
                     <div className='bg-[#121019] rounded-[9px]'>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] py-2 text-center'>
-                        TXT
-                      </p>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] py-2 text-center'>
-                        TXT
-                      </p>
-                      <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis  py-2 text-center'>
-                        TXT
-                      </p>
+                      {domainMutation.data.records.map((i) => (
+                        <p className='text-[rgba(255,255,255,0.66)] text-[14px] leading-[121%] whitespace-nowrap overflow-hidden text-ellipsis border-b border-solid border-[rgba(255,255,255,.14)] py-2 px-3 text-center'>
+                          {i.type}
+                        </p>
+                      ))}
                     </div>
                   </div>
                 </div>

@@ -95,6 +95,23 @@ const DynamicInputManager = ({
           id={htmlId}
           value={states[0]}
         />
+      ) : lock ? (
+        <Input
+          icon={icon}
+          varient={varient}
+          required={isRequired ? true : false}
+          onChange={(e) => {
+            states.length > 2
+              ? objsetter(states[0], states[1], e.target.value, states[2])
+              : setter(states[1], e.target.value);
+          }}
+          type={type}
+          placeholder={placeholder}
+          name={htmlId}
+          id={htmlId}
+          value={states[0]}
+          disabled
+        />
       ) : (
         <Input
           icon={icon}
@@ -110,7 +127,6 @@ const DynamicInputManager = ({
           name={htmlId}
           id={htmlId}
           value={states[0]}
-          lock={lock}
         />
       )}
     </div>

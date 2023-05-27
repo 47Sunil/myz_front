@@ -26,6 +26,7 @@ const TransparentButton = ({
   icon,
   dark,
   active = false,
+  onClick,
 }) => {
   const [isActive, setIsActive] = useState(false);
   function handleClick() {
@@ -39,7 +40,7 @@ const TransparentButton = ({
       filterBtn={filterBtn}
       active={isActive}
       className='flex items-center gap-3 flex-shrink-0'
-      onClick={handleClick}
+      onClick={onClick}
       dark={dark}
     >
       {icon}

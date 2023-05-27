@@ -24,14 +24,31 @@ const CreateLandingPage = () => {
     pageGoal: 'purchase',
     name: 'Most',
     price: 144,
-    paymentGateway: '',
-    template_id: ID,
+    paymentGateway: '6459ed38ca86c1694f93d033',
+    template_id: '64241eaa1618af7a3b6f62e8',
     domain: '646de61a2fbf77e799432df9',
     redirectPage: 'https//google.com/',
     customMessage: 'Hiee',
-    metadata: {},
+    checkoutTitle: 'checkout',
+    descriptionDetails: 'description',
+    contactUs: {
+      email: 'String@gmail.com',
+      phone: 9004114105,
+    },
+    termsAndConditions: ['Hii'],
+    thankYouTitle: 'thankYouTitle',
+    p1: 'Hii',
+    p2: 'Buye',
+    metadata: {
+      aidata: {
+        productName: 'Yoga pant',
+        Description:
+          'Yoga pants are a type of flexible and form-fitting athletic pants designed specifically for practicing yoga or engaging in various fitness activities.',
+        USP: 'Flexibility and Range of Motion:The stretchy fabrics used in their construction allow for unrestricted mobility, making them ideal for yoga poses, stretching, or any other physical activity that requires a full range of motion.',
+      },
+    },
   });
-
+  console.log(pageData, 'page data');
   const [paymentSelect, setPaymentSelect] = useState(false);
   const templateData = data?.data.filter((i) => {
     return i._id === ID;
@@ -85,6 +102,7 @@ const CreateLandingPage = () => {
                   buttonText={'Switch Template'}
                   icon={<AiOutlineSwap />}
                   dark={true}
+                  onClick={() => navigate('/landing-pages/home')}
                 />
               </div>
             </div>

@@ -60,6 +60,10 @@ module.exports = {
           'linear-gradient(180deg, #FF6B00 0%, #FF9900 97.4%);',
         'gradient-template-eye':
           'linear-gradient(180deg, #FF9900 0%, #FF6B00 100%)',
+        'gradient-ai-bg-enabled':
+          'linear-gradient(92.24deg, #282038 7.51%, #282038 104.06%)',
+        'gradient-ai-solar':
+          'linear-gradient(196.17deg, #7649D6 9.37%, #2F1369 54.7%);',
       },
       gridTemplateColumns: {
         reports: 'repeat(2,minmax(300px,1fr))',
