@@ -13,6 +13,24 @@ import { motion } from 'framer-motion';
 import solar from '../../../../assets/images/solar.png';
 import ai from '../../../../assets/images/ai.png';
 import star1 from '../../../../assets/images/Star-1.png';
+import domainBG from '../../../../assets/images/domainBG.png';
+import styled from 'styled-components';
+import GridLoader from 'react-spinners/GridLoader';
+
+const Loader = styled.div`
+  background: url(${domainBG});
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+`;
 
 // * form component
 const FormScreen = ({
@@ -77,6 +95,14 @@ const FormScreen = ({
       x: 0,
     },
   };
+  if (pageMutation.isLoading) {
+    return (
+      <Loader>
+        <GridLoader color='#F87837' />
+        <h1 className='text-[#ddd]'>Loading Editor ...</h1>
+      </Loader>
+    );
+  }
   return (
     <SecondScreenForm
       headingText={'Create Landing Page'}

@@ -67,13 +67,11 @@ const CreateLandingPage = () => {
       console.log('no template data');
     }
   }, []);
-
   return (
     <>
       {templateData === undefined ? (
         navigate('/landing-pages/home')
       ) : (
-        // * THIS WRAPPER IS A GLOBAL COMPONENT, IT IS USED IN  DOMAIN SCREEN ALSO
         <SecondScreenWrapper>
           <div className='w-full h-full flex items-center justify-center z-10 absolute inset-0'>
             <div className='bg-gradient-landing-blue w-[30vw] h-[80vh] rounded-[63px] overflow-hidden absolute left-[8%] top-[15%]'>
