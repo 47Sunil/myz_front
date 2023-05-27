@@ -4,17 +4,24 @@ import { AiOutlineSearch, AiFillCaretDown } from 'react-icons/ai';
 import templateImage from '../../../assets/images/myzer-templates.png';
 import DropDown from '../../../components/DropDown/DropDown';
 import { Menu } from '@headlessui/react';
+import { useQuery } from 'react-query';
+import { useAllTemplatesData } from '../../../actions/LandingPage';
 
 const ViewAllTemplatesModal = () => {
   const [isClosed, setIsClosed] = useState(true);
   function handleClick() {
     setIsClosed(!isClosed);
   }
+  const [page, setPage] = useState(4);
+  const allTemplates = useAllTemplatesData(page);
+  {
+    !allTemplates.isLoading && console.log(allTemplates, 'allTemplates');
+  }
   return (
     <>
       {isClosed && (
         <div className='fixed w-screen h-screen z-[33333388] bg-[rgba(10,17,24,0.74)] flex justify-center items-center overflow-hidden inset-0'>
-          <div className='w-[65vw] h-[65vh] bg-[#0A1118] rounded-[9px]'>
+          <div className='w-[65vw] h-[80vh] bg-[#0A1118] relative rounded-[9px] overflow-hidden'>
             <div className='h-[50px] bg-white rounded-t-[9px] px-8 py-2 flex justify-between items-center w-full'>
               <h1 className='text-[20px] font-medium capitalize'>
                 our premium templates
@@ -72,8 +79,36 @@ const ViewAllTemplatesModal = () => {
                   </DropDown>
                 </div>
               </div>
-              <div className='grid grid-cols-landingPage overflow-hidden gap-3'>
-                <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
+              <div className='grid grid-cols-landingPage gap-3 h-full overflow-y-scroll pb-[10rem]'>
+                {!allTemplates.isLoading &&
+                  allTemplates.data.data.map((i) => (
+                    <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
+                      <figure className='w-full h-full'>
+                        <img
+                          src={i.image}
+                          alt=''
+                          className='mb-1 w-full h-[180px] object-cover object-top'
+                        />
+                        <figcaption className='font-medium text-[14px] text-white'>
+                          {i.name}
+                          <span className='block text-[11px]'>
+                            by{' '}
+                            <span className='bg-gradient-landing-text text-transparent bg-clip-text'>
+                              {i.author}
+                            </span>
+                          </span>
+                        </figcaption>
+                      </figure>
+                      <div className='bg-gradient-orange-text rounded-full w-[95px] h-[22px] text-white text-center leading-[22px] text-[13px] absolute right-3 top-3'>
+                        Featured
+                      </div>
+                      <div className='text-[#474040] text-[10px] bg-white text-center w-[116px] h-[21px] leading-[21px] uppercase rounded-t-[10px] absolute bottom-0'>
+                        {i.description}
+                      </div>
+                    </div>
+                  ))}
+
+                {/* <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
                   <figure>
                     <img
                       src={templateImage}
@@ -144,32 +179,35 @@ const ViewAllTemplatesModal = () => {
                   <div className='text-[#474040] text-[10px] bg-white text-center w-[116px] h-[21px] leading-[21px] uppercase rounded-t-[10px] absolute bottom-0'>
                     ai ready template
                   </div>
-                </div>
-                <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
-                  <figure>
-                    <img
-                      src={templateImage}
-                      alt=''
-                      className='mb-1'
-                    />
-                    <figcaption className='font-medium text-[14px] text-white'>
-                      Agency Course Template
-                      <span className='block text-[11px]'>
-                        by{' '}
-                        <span className='bg-gradient-landing-text text-transparent bg-clip-text'>
-                          Myzer.ai
-                        </span>
-                      </span>
-                    </figcaption>
-                  </figure>
-                  <div className='bg-gradient-orange-text rounded-full w-[95px] h-[22px] text-white text-center leading-[22px] text-[13px] absolute right-3 top-3'>
-                    Featured
-                  </div>
-                  <div className='text-[#474040] text-[10px] bg-white text-center w-[116px] h-[21px] leading-[21px] uppercase rounded-t-[10px] absolute bottom-0'>
-                    ai ready template
-                  </div>
-                </div>
+                </div> */}
               </div>
+            </div>
+            <div className='w-full h-[50px] bg-[#ddd] absolute bottom-0 flex justify-center items-center gap-4'>
+              <button
+                className='bg-slate-600'
+                onClick={() => setPage((old) => Math.max(old - 1, 1))}
+                disabled={page === 1}
+              >
+                Prev
+              </button>
+              <button
+                className='bg-slate-600'
+                onClick={() => {
+                  if (
+                    !allTemplates.isPreviousData &&
+                    Math.ceil(allTemplates.data.totaltemplate / 10)
+                  ) {
+                    setPage((old) => old + 1);
+                  }
+                }}
+                disabled={
+                  allTemplates.isPreviousData ||
+                  page === Math.ceil(allTemplates.data.totaltemplate / 10)
+                }
+              >
+                next
+              </button>
+              {allTemplates.isFetching ? <span> Loading...</span> : null}{' '}
             </div>
           </div>
         </div>

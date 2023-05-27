@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import PaymentMethod from './PaymentMethod';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
-import { useQuery } from 'react-query';
-import { useLandingPaymentData } from '../../../../actions/LandingPage';
-const PaymentModal = ({ setPageData, paymentSelect, setPaymentSelect }) => {
-  const [isSelected, setIsSelected] = useState('');
-  const paymentData = useQuery('paymentData', useLandingPaymentData);
-
+import { useQuery, useQueryClient } from 'react-query';
+const PaymentModal = ({
+  setPageData,
+  paymentSelect,
+  setPaymentSelect,
+  isExpanded,
+  setIsExpanded,
+  isPaymentMethodSelected,
+  setIsPaymentMethodSelected,
+  pageData,
+}) => {
+  const [isSelected, setIsSelected] = useState(pageData.paymentGateway);
+  const queryClient = useQueryClient();
+  const paymentData = queryClient.getQueryData('paymentData');
+  console.log(paymentData, 'payment modal payment data');
+  console.log(isSelected, 'is selected');
   return (
     <div className='absolute inset-0 w-full h-full bg-[rgba(0,0,0,0.54)] z-30 flex justify-center items-center'>
       <div className='bg-[#0A031B] rounded-[31px] border border-solid border-[rgba(255,255,255,0.29)] w-[60vw] h-[80vh] p-[34px_68px] overflow-hidden relative'>
@@ -28,14 +38,17 @@ const PaymentModal = ({ setPageData, paymentSelect, setPaymentSelect }) => {
           </div>
 
           {!paymentData.isLoading &&
-            paymentData?.data.data.map((i) => {
+            paymentData?.data.map((i) => {
               return (
                 <PaymentMethod
                   title={i.title}
                   brand={i.brand}
                   id={i._id}
+                  key={i._id}
                   setIsSelected={setIsSelected}
                   isSelected={isSelected}
+                  isPaymentMethodSelected={isPaymentMethodSelected}
+                  setIsPaymentMethodSelected={setIsPaymentMethodSelected}
                 />
               );
             })}
@@ -43,13 +56,22 @@ const PaymentModal = ({ setPageData, paymentSelect, setPaymentSelect }) => {
         <div className='bg-[#181424] w-full py-4 flex justify-center items-center absolute bottom-0 left-0 gap-16'>
           <button
             className='rounded-[8px] bg-[rgba(255,255,255,0.12)] leading-[157.5%] text-[18px] py-2 w-[170px] font-medium text-white'
-            onClick={() => setPaymentSelect(!paymentSelect)}
+            onClick={() => (
+              setIsExpanded(!isExpanded),
+              setPaymentSelect(!paymentSelect),
+              setPageData((prevState) => ({
+                ...prevState,
+                paymentGateway: '',
+              })),
+              setIsPaymentMethodSelected(true)
+            )}
           >
             Cancel
           </button>
           <button
             className='rounded-[8px] bg-gradient-landing-orange leading-[157.5%] text-[18px] py-2 w-[170px] font-medium text-white'
             onClick={() => (
+              setIsExpanded(!isExpanded),
               setPaymentSelect(!paymentSelect),
               setPageData((prevState) => ({
                 ...prevState,
