@@ -1,10 +1,29 @@
 import { useNavigate } from 'react-router';
 import { requestInstance } from '../axiosConfig';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient, useQuery } from 'react-query';
+
 export async function useTemplatesData() {
   const res = await requestInstance.get('/templates/list');
   console.log(res, 'landing pages');
   return res;
+}
+// export async function useAllTemplatesData(pageNum) {
+//   const res = await requestInstance.get(`/templates/list?page=${pageNum}`);
+//   console.log(res, 'landing pages all');
+//   return res;
+// }
+export function useAllTemplatesData(pageNum) {
+  return useQuery(
+    ['allTemplates', pageNum],
+    async () => {
+      const res = await requestInstance.get(`/templates/list?page=${pageNum}`);
+      console.log(res, 'landing pages all');
+      return res;
+    },
+    {
+      keepPreviousData: true,
+    }
+  );
 }
 
 export async function useLandingTablesData() {
