@@ -13,17 +13,18 @@ export async function useTemplatesData() {
 //   return res;
 // }
 export function useAllTemplatesData(pageNum) {
-  return useQuery(
+  const { data, isLoading, isPreviousData, isFetching } = useQuery(
     ['allTemplates', pageNum],
     async () => {
       const res = await requestInstance.get(`/templates/list?page=${pageNum}`);
-      console.log(res, 'landing pages all');
+      console.log(res, 'landing pages all dadadasdads');
       return res;
     },
     {
       keepPreviousData: true,
     }
   );
+  return { data, isLoading, isPreviousData, isFetching };
 }
 
 export async function useLandingTablesData() {
