@@ -1,22 +1,37 @@
 import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 import { AiOutlineSearch, AiFillCaretDown } from 'react-icons/ai';
+import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
 import templateImage from '../../../assets/images/myzer-templates.png';
 import DropDown from '../../../components/DropDown/DropDown';
 import { Menu } from '@headlessui/react';
 import { useQuery } from 'react-query';
 import { useAllTemplatesData } from '../../../actions/LandingPage';
+import { motion, stagger } from 'framer-motion';
 
 const ViewAllTemplatesModal = () => {
   const [isClosed, setIsClosed] = useState(true);
   function handleClick() {
     setIsClosed(!isClosed);
   }
-  const [page, setPage] = useState(4);
-  const allTemplates = useAllTemplatesData(page);
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isPreviousData, isFetching } =
+    useAllTemplatesData(page);
   {
-    !allTemplates.isLoading && console.log(allTemplates, 'allTemplates');
+    !isLoading &&
+      console.log(data, 'allTemplates', isLoading, 'isLoading or not');
   }
+  const variants = {
+    initial: {
+      y: 100,
+      opacity: 0,
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+      transition: { staggerChildren: 0.3 },
+    },
+  };
   return (
     <>
       {isClosed && (
@@ -79,10 +94,18 @@ const ViewAllTemplatesModal = () => {
                   </DropDown>
                 </div>
               </div>
-              <div className='grid grid-cols-landingPage gap-3 h-full overflow-y-scroll pb-[10rem]'>
-                {!allTemplates.isLoading &&
-                  allTemplates.data.data.map((i) => (
-                    <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
+              <motion.div
+                variants={variants}
+                initial='initial'
+                animate='animate'
+                className='grid grid-cols-landingPage gap-3 h-full overflow-y-scroll pb-[10rem]'
+              >
+                {!isLoading &&
+                  data?.data.map((i) => (
+                    <motion.div
+                      variants={variants}
+                      className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'
+                    >
                       <figure className='w-full h-full'>
                         <img
                           src={i.image}
@@ -105,7 +128,7 @@ const ViewAllTemplatesModal = () => {
                       <div className='text-[#474040] text-[10px] bg-white text-center w-[116px] h-[21px] leading-[21px] uppercase rounded-t-[10px] absolute bottom-0'>
                         {i.description}
                       </div>
-                    </div>
+                    </motion.div>
                   ))}
 
                 {/* <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
@@ -180,34 +203,31 @@ const ViewAllTemplatesModal = () => {
                     ai ready template
                   </div>
                 </div> */}
-              </div>
+              </motion.div>
             </div>
             <div className='w-full h-[50px] bg-[#ddd] absolute bottom-0 flex justify-center items-center gap-4'>
               <button
-                className='bg-slate-600'
+                className='rounded-md px-4 py-1 text-2xl bg-transparent hover:bg-gradient-landing-blue hover:text-white border border-solid border-black hover:border-white transition duration-500'
                 onClick={() => setPage((old) => Math.max(old - 1, 1))}
                 disabled={page === 1}
               >
-                Prev
+                <MdNavigateBefore />
               </button>
+              <p>{page}</p>
               <button
-                className='bg-slate-600'
+                className='rounded-md px-4 py-1 text-2xl bg-transparent hover:bg-gradient-landing-blue hover:text-white border border-solid border-black hover:border-white transition duration-500'
                 onClick={() => {
-                  if (
-                    !allTemplates.isPreviousData &&
-                    Math.ceil(allTemplates.data.totaltemplate / 10)
-                  ) {
+                  if (!isPreviousData && Math.ceil(data?.totaltemplate / 10)) {
                     setPage((old) => old + 1);
                   }
                 }}
                 disabled={
-                  allTemplates.isPreviousData ||
-                  page === Math.ceil(allTemplates.data.totaltemplate / 10)
+                  isPreviousData || page === Math.ceil(data?.totaltemplate / 10)
                 }
               >
-                next
+                <MdNavigateNext />
               </button>
-              {allTemplates.isFetching ? <span> Loading...</span> : null}{' '}
+              {isFetching ? <span> Loading...</span> : null}{' '}
             </div>
           </div>
         </div>
