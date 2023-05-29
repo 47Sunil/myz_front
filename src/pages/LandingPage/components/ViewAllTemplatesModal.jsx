@@ -86,7 +86,7 @@ const ViewAllTemplatesModal = () => {
               <div className='grid grid-cols-landingPage gap-3 h-full overflow-y-scroll pb-[10rem]'>
                 {!isLoading &&
                   data?.data.map((i) => (
-                    <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relativegit '>
+                    <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
                       <figure className='w-full h-full'>
                         <img
                           src={i.image}
