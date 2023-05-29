@@ -1,24 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Purchase from '../../assets/svg/Purchase';
-import Lead from '../../assets/svg/Lead';
-import Other from '../../assets/svg/Other';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { motion } from 'framer-motion';
-import { delay } from 'q';
 
-const DropDownCustom = styled.div`
-  background: #2a2439;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 11px;
-  padding: 10px 20px;
-  color: white;
-  width: 92%;
-  top: 0.25rem;
-  position: absolute;
-  z-index: 10;
-  min-height: ${(props) => props.expanded && '100px'};
-`;
 const PlaceHolder = styled.p`
   font-size: 15px;
   font-weight: normal;
@@ -26,11 +11,10 @@ const PlaceHolder = styled.p`
   width: 100%;
   height: fit-content;
 `;
-const Boxes = ({ icon, text, className, expanded, setIsBoxClicked }) => {
+const Boxes = ({ icon, text, className, expanded }) => {
   const [isClicked, setIsClicked] = useState(false);
   function handleActive() {
     setIsClicked(!isClicked);
-    setIsBoxClicked(isClicked);
   }
   const variants = {
     expanded: {
@@ -63,7 +47,18 @@ const Boxes = ({ icon, text, className, expanded, setIsBoxClicked }) => {
     </div>
   );
 };
+const InputNumber = styled.input`
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
+  /* Works for Firefox */
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+`;
 const BoxesDetails = ({
   expanded,
   paymentSelect,
@@ -100,12 +95,14 @@ const BoxesDetails = ({
       transition={{ duration: 1 }}
       className='bg-[rgba(255,255,255,0.05)] rounded-[14px] p-3 col-span-2 flex flex-col items-center justify-center gap-4'
     >
-      <input
-        type='text'
+      <InputNumber
+        type='number'
+        pattern='[0-9]*'
         placeholder='Set a Price'
-        className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
+        className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white appearance-none'
         onChange={(e) => handleChangePrice(e)}
         value={pageData.price}
+        required
       />
       <input
         type='text'
@@ -113,6 +110,7 @@ const BoxesDetails = ({
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
         onChange={(e) => handleChangePdtName(e)}
         value={pageData.name}
+        required
       />
       <button
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] text-[#7B7784] text-[12px] p-2 font-medium w-full hover:bg-gradient-landing-purple hover:text-white transition duration-500 hover:border-white'
@@ -127,12 +125,11 @@ const BoxesDetails = ({
 const DropDown = ({
   paymentSelect,
   setPaymentSelect,
-  displayModal,
-  setDisplayModal,
   setPageData,
   pageData,
+  isExpanded,
+  setIsExpanded,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   function handleClick() {
     setIsExpanded(!isExpanded);
   }
@@ -155,7 +152,7 @@ const DropDown = ({
 
   return (
     <motion.div
-      className='bg-[#2a2439] border border-solid border-[rgba(255,255,255,0.16)] rounded-[11px] p-[10px_20px] text-white w-[92%] absolute top-1 z-10'
+      className='bg-[#2a2439] border border-solid border-[rgba(255,255,255,0.16)] rounded-[11px] p-[10px_20px] text-white w-[92%] absolute top-1 z-30'
       variants={variants}
       animate={isExpanded ? 'expanded' : 'shrinked'}
     >
@@ -191,8 +188,6 @@ const DropDown = ({
             expanded={isExpanded}
             setPaymentSelect={setPaymentSelect}
             paymentSelect={paymentSelect}
-            displayModal={displayModal}
-            setDisplayModal={setDisplayModal}
             setPageData={setPageData}
             pageData={pageData}
           />

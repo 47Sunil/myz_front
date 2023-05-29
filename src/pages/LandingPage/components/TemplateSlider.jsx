@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useTemplatesData } from '../../../actions/LandingPage';
+import {
+  useAllTemplatesData,
+  useTemplatesData,
+} from '../../../actions/LandingPage';
 import { useQuery } from 'react-query';
 import Eye from '../../../assets/svg/Eye';
 
@@ -36,6 +39,7 @@ const TemplateManager = ({
     setOpen(!open);
   }
   const { data, isLoading } = useQuery('templates', useTemplatesData);
+
   {
     !isLoading && console.log(data?.data);
   }

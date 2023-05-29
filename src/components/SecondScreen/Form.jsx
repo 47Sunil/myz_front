@@ -1,6 +1,6 @@
 import React from 'react';
 import DynamicInputManager from '../DynamicInputManager/DynamicInputManager';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 const Form = ({ headingText, btnText, children, className, to, onClick }) => {
   return (
     <div className={className}>
@@ -16,7 +16,7 @@ const Form = ({ headingText, btnText, children, className, to, onClick }) => {
         </p>
       </div>
       {children}
-      <div className='w-full h-[100px] bg-[rgba(255,255,255,0.04);] rounded-b-[22px] flex items-center py-4 px-8 '>
+      <div className='w-full h-[100px] bg-[rgba(255,255,255,0.04);] rounded-b-[22px] flex items-center py-4 px-8 z-30'>
         <Link
           to={to}
           className='w-[300px] h-[58px] rounded-[10px] font-semibold text-xl leading-[58px] text-center bg-gradient-orange-text text-white'
