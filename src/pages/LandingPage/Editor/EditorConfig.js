@@ -19,13 +19,13 @@ import { CanvasManager } from './Editor__CanvasManager';
 import axios from 'axios';
 
 
-export const geditorConfig = (id) => {
+export const geditorConfig = (id, pageType) => {
     const editor = grapesjs.init({
         container: '#gjs',
         height: 'calc(100vh - 101px)',
         width: 'calc(100vw - 350px)',
         styleManager: StyleManager,
-        storageManager: StorageManager(id),
+        storageManager: StorageManager(id, pageType),
         selectorManager: SelectorManager,
         assetManager: AssetManager(id),
         plugins: [basicBlocksPlugin, countdownPlugin, touchPlugin, postCssPlugin, imageEditorPlugin, styleBgPlugin],
@@ -40,7 +40,7 @@ export const geditorConfig = (id) => {
 
     editor.on('load', () =>  {
         console.log("HTML")
-        axios.get(`/api/v1/landingpages/${id}/content`).then(response=> {
+        axios.get(`/api/v1/${pageType}/${id}/content`).then(response=> {
             console.log(response)
             editor.DomComponents.addComponent(response.data.data.html)
             editor.setStyle(response.data.data.css)

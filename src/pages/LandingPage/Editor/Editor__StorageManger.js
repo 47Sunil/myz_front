@@ -1,4 +1,4 @@
-export const StorageManager = (id) => {
+export const StorageManager = (id, pageType) => {
     return{
     type: "remote",
     autosave: false,
@@ -13,7 +13,7 @@ export const StorageManager = (id) => {
     options: {
       remote: {
         id: "myzer-",
-        urlStore: `/api/v1/landingpages/${id}/content`,
+        urlStore: `/api/v1/${pageType}/${id}/content`,
         onStore: (data, editor) => {
           const pagesHtml = editor.Pages.getAll().map(page => {
             const component = page.getMainComponent();
@@ -24,7 +24,7 @@ export const StorageManager = (id) => {
           });
           return { data, pagesHtml };
         },
-        urlLoad: `/api/v1/landingpages/${id}/content`,
+        urlLoad: `/api/v1/${pageType}/${id}/content`,
         onLoad: (result) => {
           var finalResult=result.data;
           if (!result.page.data){

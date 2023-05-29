@@ -72,7 +72,7 @@ const Router = () => {
             element=<AuthGuard component={<OtherSettings />} />
           />
           <Route
-            path='/editor/:id'
+            path=':pageType/editor/:id'
             element=<AuthGuard component={<Editor />} />
           />
           <Route

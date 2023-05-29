@@ -11,11 +11,11 @@ import RightSidebar from './Design/RightSidebar';
 
 const Editor = () => {
 
-    const {id} = useParams();
+    const {id, pageType} = useParams();
     const [editor, setEditor] = useState(null);
 
     useEffect(() => {
-        setEditor(EditorConfig(id));
+        setEditor(EditorConfig(id, pageType));
       }, []);
 
     return (
