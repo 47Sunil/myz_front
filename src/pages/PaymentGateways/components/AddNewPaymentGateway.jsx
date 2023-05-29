@@ -1,7 +1,9 @@
-import { useParams, useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { data } from "../../../utils/Data/PaymentOptionsData";
-import styled from "styled-components";
+import { useParams, useSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { data } from '../../../utils/Data/PaymentOptionsData';
+import styled from 'styled-components';
+import { MdNavigateNext } from 'react-icons/md';
+import { usePaymentMutation } from '../../../actions/Payment';
 
 const FormContainer = styled.div`
   background: linear-gradient(
@@ -46,16 +48,21 @@ const AddNewPaymentGateway = () => {
   const [requestData, setRequestData] = useState({
     payment_gateway: paymentGateway.id,
     payment_gateway_status: true,
-    payment_title: "",
+    payment_title: '',
     payment_gateway_data: {},
   });
+  console.log(requestData, 'id payment');
+  const addPaymentGateway = usePaymentMutation();
+  const handleAddPaymentGateway = async (data) => {
+    (await addPaymentGateway).mutateAsync(data);
+  };
 
   const handleInputChange = (event) => {
     const { name, value, type } = event.target;
 
     // Update the payment_gateway_status field
-    if (name === "payment_gateway_status") {
-      const newValue = type === "checkbox" ? event.target.checked : value;
+    if (name === 'payment_gateway_status') {
+      const newValue = type === 'checkbox' ? event.target.checked : value;
       setRequestData((prevData) => ({
         ...prevData,
         [name]: newValue,
@@ -63,7 +70,7 @@ const AddNewPaymentGateway = () => {
     }
 
     // Update the payment_title field
-    else if (name === "payment_title") {
+    else if (name === 'payment_title') {
       setRequestData((prevData) => ({
         ...prevData,
         [name]: value,
@@ -88,58 +95,71 @@ const AddNewPaymentGateway = () => {
   };
 
   useEffect(() => {
-    const gateway = searchParams.get("gateway");
+    const gateway = searchParams.get('gateway');
     setPaymentGateway(searchInPgData(gateway));
+    setRequestData((prevState) => ({
+      ...prevState,
+      payment_gateway: searchParams.get('gateway'),
+    }));
   }, [searchParams]);
 
   return (
     <>
-      <div className="h-full grid grid-cols-12 rounded-3xl overflow-hidden">
-        <FormContainer className="col-span-7 h-full p-5">
-          <h4 className="text-xl font-medium tracking-wider text-white pb-5 border-b border-white/30">
+      <div className='h-full grid grid-cols-12 rounded-3xl overflow-hidden'>
+        <FormContainer className='col-span-7 h-full p-5'>
+          <h4 className='text-xl font-medium tracking-wider text-white pb-5 border-b border-white/30'>
             Adding {paymentGateway.name}
           </h4>
-          <div className="flex mt-4 flex-col w-4/6 gap-3">
-            <div className="w-full flex flex-col">
+          <div className='flex mt-4 flex-col w-4/6 gap-3'>
+            <div className='w-full flex flex-col'>
               <label
-                HtmlFor="payment_gateway_title"
-                className="text-md text-white/80 mb-2 font-medium tracking-wide"
+                HtmlFor='payment_gateway_title'
+                className='text-md text-white/80 mb-2 font-medium tracking-wide'
               >
                 Title
               </label>
               <input
-                type="text"
-                name="payment_title"
-                id="payment_gateway_title"
+                type='text'
+                name='payment_title'
+                id='payment_gateway_title'
                 value={requestData.payment_title}
                 onChange={handleInputChange}
-                className="bg-[#FFFFFF] shadow py-3 px-4 rounded-lg outline-none border border-[#FFFFFF36] text-gray-800 font-medium text-md"
+                className='bg-[#FFFFFF] shadow py-3 px-4 rounded-lg outline-none border border-[#FFFFFF36] text-gray-800 font-medium text-md'
               />
             </div>
           </div>
           {paymentGateway?.fields?.map((item) => {
             return (
-              <div key={item.name} className="flex mt-4 flex-col w-4/6 gap-3">
-                <div className="w-full flex flex-col">
-                  <label className="text-md text-white/80 mb-2">
+              <div
+                key={item.name}
+                className='flex mt-4 flex-col w-4/6 gap-3'
+              >
+                <div className='w-full flex flex-col'>
+                  <label className='text-md text-white/80 mb-2'>
                     {item.label}
                   </label>
                   <input
-                    type="text"
+                    type='text'
                     name={item.name}
                     value={requestData.payment_gateway_data[item.name]}
                     onChange={handleInputChange}
-                    className="bg-[#FFFFFF] py-3 px-4 rounded-lg outline-none border border-[#FFFFFF36] text-gray-800 font-medium"
+                    className='bg-[#FFFFFF] py-3 px-4 rounded-lg outline-none border border-[#FFFFFF36] text-gray-800 font-medium'
                   />
                 </div>
               </div>
             );
           })}
-          <Cta className="text-white p-4 w-4/6 mt-[50px] rounded-md text-xl font-medium">
+          <Cta
+            className='text-white p-4 w-4/6 mt-[50px] rounded-md text-xl font-medium'
+            onClick={() => handleAddPaymentGateway(requestData)}
+          >
             Add {paymentGateway.name}
           </Cta>
         </FormContainer>
-        <HelpPart className="col-span-5" gateway={paymentGateway} />
+        <HelpPart
+          className='col-span-5'
+          gateway={paymentGateway}
+        />
       </div>
     </>
   );
@@ -163,32 +183,32 @@ const HelpContainer = styled.div`
 const HelpPart = ({ className, gateway }) => {
   return (
     <HelpContainer className={className}>
-      <div className=" help-overlay h-full py-2 flex items-center flex-col">
-        <div className="bg-white p-2 w-full shadow ">
+      <div className=' help-overlay h-full py-2 flex items-center flex-col'>
+        <div className='bg-white p-2 w-full shadow '>
           <img
             src={gateway.logo}
             alt={gateway.name}
-            className="h-12 object-contain mx-auto w-full"
+            className='h-12 object-contain mx-auto w-full'
           />
         </div>
-        <div className="flex mx-auto mt-8 flex-col gap-4">
-          <h4 className="font-medium text-2xl text-white">
+        <div className='flex mx-auto mt-8 flex-col gap-4'>
+          <h4 className='font-medium text-2xl text-white'>
             Having Problem in Adding?
           </h4>
-          <div className="w-full bg-white shadow rounded p-3 flex flex-row cursor-pointer items-between">
-            <div className="grow text-gray-800 text-xs flex items-center">
+          <div className='w-full bg-white shadow rounded p-3 flex flex-row cursor-pointer items-between'>
+            <div className='grow text-gray-800 text-xs flex items-center'>
               How to get Payment Gateway Credentials?
             </div>
-            <div className=" font-bold text-gray-900 bg-gray-200 p-1 w-8 text-center rounded">
-              >
+            <div className=' font-bold text-gray-900 bg-gray-200 p-1 text-xl text-center rounded'>
+              <MdNavigateNext />
             </div>
           </div>
-          <div className="w-full bg-white shadow rounded p-3 flex flex-row cursor-pointer items-between">
-            <div className="grow text-gray-800 text-xs flex items-center">
+          <div className='w-full bg-white shadow rounded p-3 flex flex-row cursor-pointer items-between'>
+            <div className='grow text-gray-800 text-xs flex items-center'>
               How to Apply {gateway.name} Payment Gateway?
             </div>
-            <div className=" font-bold text-gray-900 bg-gray-200 p-1 w-8 text-center rounded">
-              >
+            <div className=' font-bold text-gray-900 bg-gray-200 p-1 text-xl text-center rounded'>
+              <MdNavigateNext />
             </div>
           </div>
         </div>
