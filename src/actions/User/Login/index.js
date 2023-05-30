@@ -29,13 +29,13 @@ export function useAutoLoginData() {
         const res = await requestInstance.get('users/account');
         return res;
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-     
     },
     {
       onSuccess: (data) => {
         queryClient.setQueryData('user', data);
+        queryClient.invalidateQueries('user');
       },
       onError: (error) => {
         console.log('error occured: ' + error.message);

@@ -4,7 +4,7 @@ import AccountDetails from './AccountDetails';
 import PaymentHistory from './PaymentHistory';
 import { FiEdit, FiCheckSquare } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { useUserUpdateMutation } from '../../../actions/User/Accounts';
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
@@ -33,6 +33,8 @@ const Overlay2 = styled.div`
 
 const ProfileCommon = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const queryClient = useQueryClient();
+  const data = queryClient.getQueryData('user');
   return (
     <>
       <div className='flex flex-col'>
@@ -41,7 +43,7 @@ const ProfileCommon = () => {
             <Overlay2 className='relative'>
               <div className='w-32 h-32 absolute translate-x-1/2 right-1/2 bottom-0 rounded-full translate-y-1/2 bg-[#221154] p-1'>
                 <img
-                  src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80'
+                  src={data?.user.profile}
                   alt='User Img'
                   className='rounded-full'
                 />
@@ -51,7 +53,7 @@ const ProfileCommon = () => {
         </Wrapper>
         <div className='bg-black/50 w-11/12 mx-auto h-4  z-10 -mt-3 blur-md'></div>
         <div className='bg-white w-11/12 mx-auto -mt-2 pt-16 rounded-b-xl'>
-          <h4 className='w-full text-center py-4 text-lg'>Ravinder Singh</h4>
+          <h4 className='w-full text-center py-4 text-lg'>{data?.user.name}</h4>
           <div className='w-[500px] bg-gray-100 p-2 mx-auto rounded-full grid grid-cols-3 gap-2 text-sm'>
             <div
               className={
