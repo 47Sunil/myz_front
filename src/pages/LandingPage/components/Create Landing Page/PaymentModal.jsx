@@ -45,6 +45,7 @@ const PaymentModal = ({
                   brand={i.brand}
                   id={i._id}
                   key={i._id}
+                  icon={i.icon}
                   setIsSelected={setIsSelected}
                   isSelected={isSelected}
                   isPaymentMethodSelected={isPaymentMethodSelected}

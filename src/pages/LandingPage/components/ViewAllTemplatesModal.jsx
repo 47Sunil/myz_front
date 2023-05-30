@@ -21,17 +21,6 @@ const ViewAllTemplatesModal = () => {
     !isLoading &&
       console.log(data, 'allTemplates', isLoading, 'isLoading or not');
   }
-  const variants = {
-    initial: {
-      y: 100,
-      opacity: 0,
-    },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: { staggerChildren: 0.3 },
-    },
-  };
   return (
     <>
       {isClosed && (
@@ -94,18 +83,10 @@ const ViewAllTemplatesModal = () => {
                   </DropDown>
                 </div>
               </div>
-              <motion.div
-                variants={variants}
-                initial='initial'
-                animate='animate'
-                className='grid grid-cols-landingPage gap-3 h-full overflow-y-scroll pb-[10rem]'
-              >
+              <div className='grid grid-cols-landingPage gap-3 h-full overflow-y-scroll pb-[10rem]'>
                 {!isLoading &&
                   data?.data.map((i) => (
-                    <motion.div
-                      variants={variants}
-                      className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'
-                    >
+                    <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
                       <figure className='w-full h-full'>
                         <img
                           src={i.image}
@@ -128,7 +109,7 @@ const ViewAllTemplatesModal = () => {
                       <div className='text-[#474040] text-[10px] bg-white text-center w-[116px] h-[21px] leading-[21px] uppercase rounded-t-[10px] absolute bottom-0'>
                         {i.description}
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
 
                 {/* <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
@@ -203,7 +184,7 @@ const ViewAllTemplatesModal = () => {
                     ai ready template
                   </div>
                 </div> */}
-              </motion.div>
+              </div>
             </div>
             <div className='w-full h-[50px] bg-[#ddd] absolute bottom-0 flex justify-center items-center gap-4'>
               <button
