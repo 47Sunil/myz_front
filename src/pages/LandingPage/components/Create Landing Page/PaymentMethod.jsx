@@ -4,6 +4,7 @@ const PaymentMethod = ({
   title,
   brand,
   id,
+  icon,
   setIsSelected,
   isSelected,
   setIsPaymentMethodSelected,
@@ -13,16 +14,18 @@ const PaymentMethod = ({
       id={id}
       className='bg-[rgba(255,255,255,0.1)] border-2 border-dashed border-[rgba(255,107,0,0.2)] flex flex-col justify-center items-center p-[24px_15px] gap-3 h-[200px] rounded-[15px] relative hover:outline hover:outline-white hover:outline-offset-4 hover:outline-2'
     >
-      <div className='bg-white p-2 rounded-b-[30px] absolute top-0'>
+      <div className='bg-white p-2 h-[6rem] rounded-b-[30px] absolute top-0 flex justify-center'>
         <img
-          src={razorPayLogo}
+          src={icon}
           alt=''
+          className='w-[95%] h-full object-cover'
         />
       </div>
-      <div className='bg-white p-1 rounded-b-[30px]  invisible'>
+      <div className=' p-1 h-[5rem] rounded-b-[30px]  invisible'>
         <img
-          src={razorPayLogo}
+          src={icon}
           alt=''
+          className='w-full h-full object-cover'
         />
       </div>
       <div className='w-full text-center'>
