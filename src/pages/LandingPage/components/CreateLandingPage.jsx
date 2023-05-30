@@ -22,6 +22,7 @@ const CreateLandingPage = () => {
   const data = queryClient.getQueryData('templates');
   const ID = searchParams.get('id');
   const paymentData = useQuery('paymentData', useLandingPaymentData);
+  console.log(paymentData, 'payment data');
   const [pageData, setPageData] = useState({
     funnelName: '',
     pageName: 'mist',
