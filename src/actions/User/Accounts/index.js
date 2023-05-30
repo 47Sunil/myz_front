@@ -1,5 +1,28 @@
 import { requestInstance } from '../../axiosConfig';
-export async function useAccountData() {
-  const res = await requestInstance.get('/users/account');
-  return res;
+import { useQueryClient, useMutation } from 'react-query';
+
+export function useUserUpdateMutation() {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async ({ id, name }) => {
+      try {
+        console.log(id + name);
+        const res = await requestInstance.patch(`users/${id}`, {
+          name: name,
+        });
+        return res;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    {
+      onSuccess: (data) => {
+        queryClient.setQueryData('user', data);
+        queryClient.invalidateQueries('user');
+      },
+      onError: (error) => {
+        console.log('error occured: ' + error.message);
+      },
+    }
+  );
 }

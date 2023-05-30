@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import AccountDetails from './AccountDetails';
 import PaymentHistory from './PaymentHistory';
 import { FiEdit, FiCheckSquare } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useMutation } from 'react-query';
+import { useUserUpdateMutation } from '../../../actions/User/Accounts';
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
   border-radius: 18px;
@@ -89,8 +91,16 @@ export const ContentItem = ({
   setFieldChanges,
   isEditable = true,
   stateKey,
+  id,
+  fieldChanges,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const updateUser = useUserUpdateMutation();
+  const ID = id;
+  const handleUpdateUser = async (id, name) => {
+    await updateUser.mutateAsync({ id, name });
+  };
+
   return (
     <>
       <div className={`relative flex flex-col overflow-hidden ` + width}>
@@ -129,7 +139,10 @@ export const ContentItem = ({
               <motion.button
                 initial={{ x: 100 }}
                 animate={{ x: 0 }}
-                onClick={() => setIsEditing(!isEditing)}
+                onClick={() => (
+                  setIsEditing(!isEditing),
+                  handleUpdateUser(ID, fieldChanges.name)
+                )}
               >
                 <FiCheckSquare />
               </motion.button>
