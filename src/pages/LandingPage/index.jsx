@@ -20,7 +20,7 @@ const LandingPages = () => {
       {method === 'home' ? (
         <div>
           {isOpened && <ViewAllTemplatesModal />}
-          <div className=' relative z-[33333] overflow-y-scroll'>
+          <div className=' relative z-[33333]'>
             <Banner />
             <TemplateSlider
               open={isOpened}

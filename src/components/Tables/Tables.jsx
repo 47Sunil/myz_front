@@ -141,7 +141,10 @@ const DomainTables = ({ pages, headerData }) => {
 
 const LandingTables = ({ pages, headerData }) => {
   // * fetching data for populating the table
-  const { data, isLoading } = useQuery('LandingTables', useLandingTablesData);
+  const { data, isLoading, isFetching } = useQuery(
+    'LandingTables',
+    useLandingTablesData
+  );
 
   // * fetching data for page views for the table
   const pageViews = useQuery('PageViews', useLandingPagesData);
@@ -164,7 +167,11 @@ const LandingTables = ({ pages, headerData }) => {
   // * modifying the data when send to draft or send to publish is clicked
   // patch -- changes publish to true
   const tableDraftPatchMutation = useLandingPublishPatchMutation();
+
+  const [loadingElement, setLoadingElement] = useState('');
+
   const handlePublishPatch = async (id) => {
+    setLoadingElement(id);
     (await tableDraftPatchMutation).mutateAsync({ id });
   };
   const handlePublishTrue = (id) => {
@@ -174,6 +181,7 @@ const LandingTables = ({ pages, headerData }) => {
   // put -- changes publish to false
   const tableDraftPutMutation = useLandingPublishPutMutation();
   const handlePublishPut = async (id) => {
+    setLoadingElement(id);
     (await tableDraftPutMutation).mutateAsync({ id });
   };
   const handlePublishFalse = (id) => {
@@ -231,7 +239,9 @@ const LandingTables = ({ pages, headerData }) => {
                 {convertDate(i.createdAt)}
               </BodyCell>
               <BodyCell className=' flex justify-center h-full mt-3'>
-                {i.published ? (
+                {isFetching && loadingElement === i._id ? (
+                  'loading'
+                ) : i.published ? (
                   <p className='bg-[#40ff003b] w-fit px-3 text-center border-2 border-dashed border-[#40ff00]'>
                     Publish
                   </p>
@@ -246,14 +256,14 @@ const LandingTables = ({ pages, headerData }) => {
                 <div className='flex gap-2 justify-center'>
                   {i.published ? (
                     <button
-                      className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-4 text-[15px]'
+                      className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-4 text-[15px] hover:bg-[#494949] hover:text-white'
                       onClick={() => handlePublishFalse(i._id)}
                     >
-                      Send to Draft
+                      Send To Draft
                     </button>
                   ) : (
                     <button
-                      className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-4 text-[15px]'
+                      className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-4 text-[15px] hover:bg-[#494949] hover:text-white'
                       onClick={() => handlePublishTrue(i._id)}
                     >
                       Send to Publish
