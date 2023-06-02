@@ -12,21 +12,41 @@ export async function useTemplatesData() {
 //   console.log(res, 'landing pages all');
 //   return res;
 // }
+// export function useAllTemplatesData(pageNum) {
+//   const { data, isLoading, isPreviousData, isFetching } = useQuery(
+//     ['allTemplates', pageNum],
+//     async () => {
+//       const res = await requestInstance.get(`/templates/list?page=${pageNum}`);
+//       console.log(res, 'landing pages all dadadasdads');
+//       return res;
+//     },
+//     {
+//       keepPreviousData: true,
+//     }
+//   );
+//   return { data, isLoading, isPreviousData, isFetching };
+// }
 export function useAllTemplatesData(pageNum) {
-  const { data, isLoading, isPreviousData, isFetching } = useQuery(
-    ['allTemplates', pageNum],
-    async () => {
+  const fetchAllTemplatesData = async () => {
+    try {
       const res = await requestInstance.get(`/templates/list?page=${pageNum}`);
       console.log(res, 'landing pages all dadadasdads');
       return res;
-    },
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { data, isLoading, isPreviousData, isFetching } = useQuery(
+    ['allTemplates', pageNum],
+    fetchAllTemplatesData,
     {
       keepPreviousData: true,
     }
   );
+
   return { data, isLoading, isPreviousData, isFetching };
 }
-
 export async function useLandingTablesData() {
   const res = await requestInstance.get('/landingpages');
   console.log(res, 'landing  tables data');

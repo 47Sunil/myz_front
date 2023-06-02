@@ -1,3 +1,4 @@
+import { useQueryClient } from 'react-query';
 import {
   AccountLogo,
   DashboardLogo,
@@ -53,7 +54,7 @@ export const data2 = [
   {
     label: 'Subscription',
     icon: <SubscriptionLogo />,
-    path: 'subscription',
+    path: `subscription`,
     clicked: <SubscriptionLogo fillOpacity='1' />,
   },
   {
