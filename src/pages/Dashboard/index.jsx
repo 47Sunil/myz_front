@@ -91,24 +91,18 @@ const Dashboard = () => {
 
   return (
     <main className='w-full  h-screen z-[33333] relative '>
-      <div className='h-full w-full grid grid-cols-[237px_1fr]'>
-        <div className='block min-w-[83vw] max-w-[100vw]'>
-          <div className='p-[1.188rem_2.813rem_1.375rem_2.313rem] flex gap-[1.875rem]'>
-            <div className='flex-grow flex flex-col gap-[1.125rem]'>
-              <DateSection />
-              <ReportSection dashBoardData={dashBoardData} />
-              <div className='flex-grow grid grid-cols-reports grid-rows-reports gap-4'>
-                <AreaChart />
-                <CountryTables
-                  heading={'Online store by sessions by location'}
-                />
-                <TopSellingTables heading={'Top Products by units sell'} />
-                <BarChart />
-              </div>
-            </div>
-            <OrderActivity ordersActivity={ordersActivity} />
+      <div className='flex gap-[1.875rem]'>
+        <div className='flex-grow flex flex-col gap-[1.125rem]'>
+          <DateSection />
+          <ReportSection dashBoardData={dashBoardData} />
+          <div className='flex-grow grid grid-cols-reports grid-rows-reports min-[1600px]:grid-cols-4 gap-4'>
+            <AreaChart />
+            <CountryTables heading={'Online store by sessions by location'} />
+            <TopSellingTables heading={'Top Products by units sell'} />
+            <BarChart />
           </div>
         </div>
+        <OrderActivity ordersActivity={ordersActivity} />
       </div>
     </main>
   );
