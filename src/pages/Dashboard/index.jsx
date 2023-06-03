@@ -90,20 +90,35 @@ const Dashboard = () => {
   // }, []);
 
   return (
-    <main className='w-full  h-screen z-[33333] relative '>
-      <div className='flex gap-[1.875rem]'>
-        <div className='flex-grow flex flex-col gap-[1.125rem]'>
-          <DateSection />
-          <ReportSection dashBoardData={dashBoardData} />
-          <div className='flex-grow grid grid-cols-reports grid-rows-reports min-[1600px]:grid-cols-4 gap-4'>
-            <AreaChart />
-            <CountryTables heading={'Online store by sessions by location'} />
-            <TopSellingTables heading={'Top Products by units sell'} />
-            <BarChart />
-          </div>
-        </div>
+    <main className='w-full  h-screen z-[33333] relative grid grid-cols-dashboard grid-rows-dashboard gap-[.5rem]'>
+      <div class='col-start-1 col-end-5 row-start-1 row-end-2 '>
+        <DateSection />
+      </div>
+      <div class='col-start-1 col-end-5 row-start-2 row-end-7 '>
+        <ReportSection dashBoardData={dashBoardData} />
+      </div>
+      <div class='col-start-1 col-end-3 row-start-7 row-end-[14] min-[1550px]:col-start-1  min-[1550px]:col-end-2'>
+        <AreaChart />
+      </div>
+      <div class='col-start-3 col-end-5 row-start-7 row-end-[14] min-[1550px]:row-start-7 min-[1550px]:row-end-14 min-[1550px]:col-start-2  min-[1550px]:col-end-3'>
+        <CountryTables heading={'Online store by sessions by location'} />
+      </div>
+      <div class='col-start-1 col-end-3 row-start-[14] row-end-[21] min-[1550px]:col-start-3 min-[1550px]:col-end-4 min-[1550px]:row-start-7 min-[1550px]:row-end-14'>
+        <TopSellingTables heading={'Top Products by units sell'} />
+      </div>
+      <div class='col-start-3 col-end-5 row-start-[14] row-end-[21] min-[1550px]:row-start-7 min-[1550px]:row-end-14 min-[1550px]:col-start-4  min-[1550px]:col-end-5'>
+        <BarChart />
+      </div>
+      <div class='col-start-5 col-end-6 row-start-1 row-end-[11] '>
         <OrderActivity ordersActivity={ordersActivity} />
       </div>
+      {/* <DateSection />
+      <ReportSection dashBoardData={dashBoardData} />
+      <AreaChart />
+      <CountryTables heading={'Online store by sessions by location'} />
+      <TopSellingTables heading={'Top Products by units sell'} />
+      <BarChart />
+      <OrderActivity ordersActivity={ordersActivity} /> */}
     </main>
   );
 };

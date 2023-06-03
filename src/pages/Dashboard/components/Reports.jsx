@@ -8,7 +8,7 @@ const ReportSection = ({ dashBoardData }) => {
   } = dashBoardData;
 
   return (
-    <div className='bg-gradient-report shadow-[0_0_50px_rgba(30, 14, 75, 0.4)] rounded-[9px] flex gap-[2.563] p-[.938rem_1.063rem]'>
+    <div className='bg-gradient-report shadow-[0_0_50px_rgba(30, 14, 75, 0.4)] rounded-[9px] flex gap-[2.563] p-[.938rem_1.063rem] h-full w-full'>
       <div className='w-[20rem] h-full text-center self-center border border-solid border-white bg-[rgba(255,255,255,.03)] shadow-bitmoji rounded-[17px]'>
         <img
           src={Bitmoji}

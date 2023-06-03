@@ -3,7 +3,7 @@ import Workflow from '../../../assets/images/workflow.png';
 import ProfileImage from '../../../assets/icons/profileimagelogo.png';
 const OrderActivity = ({ ordersActivity }) => {
   return (
-    <div className='max-w-[400px] mt-4 p-[1.313rem_1rem]  h-[71.29vh] bg-[rgba(255,255,255,0.08)] border border-solid border-[rgba(255,255,255,.3)] rounded-[29px]'>
+    <div className='w-full mt-4 p-[1.313rem_1rem]  h-full bg-[rgba(255,255,255,0.08)] border border-solid border-[rgba(255,255,255,.3)] rounded-[29px]'>
       <div className='flex gap-4'>
         <div className='bg-white p-[9px] rounded-[10px] border-2 border-solid border-[rgba(255,107,0,1)] h-fit aspect-square object-cover w-[5rem]'>
           <img

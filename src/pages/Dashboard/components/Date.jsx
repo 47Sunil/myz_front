@@ -3,7 +3,7 @@ import ArrowIcon2 from '../../../assets/svg/Arrow2';
 
 const DateSection = () => {
   return (
-    <div className='h-[2.688rem] flex items-center justify-between'>
+    <div className='h-full flex items-center justify-between '>
       <div className='flex justify-between w-[24.875rem] items-center h-full'>
         <input
           type='date'

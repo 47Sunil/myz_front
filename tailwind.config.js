@@ -69,9 +69,11 @@ module.exports = {
         reports: 'repeat(2,minmax(300px,1fr))',
         domain: '183px 183px 50px',
         landingPage: 'repeat(4,minmax(220px,1fr))',
+        dashboard: 'repeat(5, minmax(100px, 1fr))',
       },
       gridTemplateRows: {
         reports: 'repeat(2,minmax(300px,1fr))',
+        dashboard: 'repeat(20, minmax(50px, 1fr))',
       },
       boxShadow: {
         'white-inner': 'inset 6px 9px 40px rgba(255, 255, 255, 0.25);',
