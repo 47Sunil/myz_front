@@ -77,7 +77,7 @@ const CreateLandingPage = () => {
       {templateData === undefined ? (
         navigate('/landing-pages/home')
       ) : (
-        <SecondScreenWrapper>
+        <SecondScreenWrapper gobackLink='/landing-pages/home'>
           <div className='w-full h-full flex items-center justify-center z-10 absolute inset-0'>
             <div className='bg-gradient-landing-blue w-[30vw] h-[80vh] rounded-[63px] overflow-hidden absolute left-[8%] top-[15%]'>
               <img

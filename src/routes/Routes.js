@@ -29,6 +29,10 @@ const Router = () => {
       <Layout>
         <Routes>
           <Route
+            path='/'
+            element=<AuthGuard component={<></>} />
+          />
+          <Route
             path='/dashboard'
             element=<AuthGuard component={<Dashboard />} />
           />

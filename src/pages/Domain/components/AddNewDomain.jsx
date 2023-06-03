@@ -20,7 +20,7 @@ const AddNewDomain = () => {
   return (
     <>
       {method === 'add_domain' ? (
-        <SecondScreenWrapper>
+        <SecondScreenWrapper gobackLink='/domain/home'>
           <div className='w-[60vw] h-[80vh] bg-gradient-add-domain-orange z-10 rounded-[63px] absolute top-[130px] left-[50%] translate-x-[-50%] overflow-hidden'>
             <img
               src={starbg}

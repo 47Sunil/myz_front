@@ -8,8 +8,9 @@ import styled from 'styled-components';
 const BgDiv = styled.div`
   background-image: url(${bg});
   background-repeat: no-repeat;
+  background-size: cover;
 `;
-const SecondScreenWrapper = ({ children }) => {
+const SecondScreenWrapper = ({ children, gobackLink }) => {
   return (
     <BgDiv className='h-screen w-screen relative px-16 py-8'>
       <img
@@ -19,7 +20,10 @@ const SecondScreenWrapper = ({ children }) => {
       />
       <div className='flex w-full justify-between items-center '>
         <MyzerLogo />
-        <BackToHome text={'Go Back'} />
+        <BackToHome
+          text={'Go Back'}
+          gobackLink={gobackLink}
+        />
       </div>
       {children}
     </BgDiv>
