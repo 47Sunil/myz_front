@@ -65,6 +65,7 @@ const BoxesDetails = ({
   setPaymentSelect,
   setPageData,
   pageData,
+  setPageGoal,
 }) => {
   const variants = {
     expanded: {
@@ -82,10 +83,12 @@ const BoxesDetails = ({
   const handleChangePrice = (e) => {
     const value = e.target.value;
     setPageData((prevState) => ({ ...prevState, price: value }));
+    setPageGoal((prev) => ({ ...prev, price: value }));
   };
   const handleChangePdtName = (e) => {
     const value = e.target.value;
     setPageData((prevState) => ({ ...prevState, name: value }));
+    setPageGoal((prev) => ({ ...prev, productName: value }));
   };
   return (
     <motion.div
@@ -149,7 +152,10 @@ const DropDown = ({
       height: '45px',
     },
   };
-
+  const [pageGoal, setPageGoal] = useState({
+    price: '',
+    productName: '',
+  });
   return (
     <motion.div
       className='bg-[#2a2439] border border-solid border-[rgba(255,255,255,0.16)] rounded-[11px] p-[10px_20px] text-white w-[92%] absolute top-1 z-30'
@@ -162,7 +168,11 @@ const DropDown = ({
           onClick={handleClick}
           className='cursor-pointer select-none'
         >
-          Select a Page Goal*
+          {pageGoal.price === '' && pageGoal.productName === ''
+            ? 'Select a Page Goal*'
+            : `Product Name:${'  '}${
+                pageGoal.productName
+              }${'  '}${'  '} Price:${'  '}${pageGoal.price}`}
         </PlaceHolder>
         <motion.button
           onClick={handleClick}
@@ -190,6 +200,7 @@ const DropDown = ({
             paymentSelect={paymentSelect}
             setPageData={setPageData}
             pageData={pageData}
+            setPageGoal={setPageGoal}
           />
           {/* {isBoxClicked && (
             <Boxes
