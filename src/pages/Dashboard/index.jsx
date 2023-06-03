@@ -90,23 +90,23 @@ const Dashboard = () => {
   // }, []);
 
   return (
-    <main className='w-full  h-screen z-[33333] relative grid grid-cols-dashboard grid-rows-dashboard gap-[.5rem]'>
+    <main className='w-full  h-screen z-[33333] relative grid grid-cols-dashboard min-[3000px]:grid-cols-dashboardLG grid-rows-dashboard gap-[1rem]'>
       <div class='col-start-1 col-end-5 row-start-1 row-end-2 '>
         <DateSection />
       </div>
       <div class='col-start-1 col-end-5 row-start-2 row-end-7 '>
         <ReportSection dashBoardData={dashBoardData} />
       </div>
-      <div class='col-start-1 col-end-3 row-start-7 row-end-[14] min-[1550px]:col-start-1  min-[1550px]:col-end-2'>
+      <div class='col-start-1 col-end-3 row-start-7 row-end-[14] min-[3000px]:col-start-1  min-[3000px]:col-end-2'>
         <AreaChart />
       </div>
-      <div class='col-start-3 col-end-5 row-start-7 row-end-[14] min-[1550px]:row-start-7 min-[1550px]:row-end-14 min-[1550px]:col-start-2  min-[1550px]:col-end-3'>
+      <div class='col-start-3 col-end-5 row-start-7 row-end-[14] min-[3000px]:row-start-7 min-[3000px]:row-end-[14] min-[3000px]:col-start-2  min-[3000px]:col-end-3'>
         <CountryTables heading={'Online store by sessions by location'} />
       </div>
-      <div class='col-start-1 col-end-3 row-start-[14] row-end-[21] min-[1550px]:col-start-3 min-[1550px]:col-end-4 min-[1550px]:row-start-7 min-[1550px]:row-end-14'>
+      <div class='col-start-1 col-end-3 row-start-[14] row-end-[21] min-[3000px]:col-start-3 min-[3000px]:col-end-4 min-[3000px]:row-start-7 min-[3000px]:row-end-[14]'>
         <TopSellingTables heading={'Top Products by units sell'} />
       </div>
-      <div class='col-start-3 col-end-5 row-start-[14] row-end-[21] min-[1550px]:row-start-7 min-[1550px]:row-end-14 min-[1550px]:col-start-4  min-[1550px]:col-end-5'>
+      <div class='col-start-3 col-end-5 row-start-[14] row-end-[21] min-[3000px]:row-start-7 min-[3000px]:row-end-[14] min-[3000px]:col-start-4  min-[3000px]:col-end-5'>
         <BarChart />
       </div>
       <div class='col-start-5 col-end-6 row-start-1 row-end-[11] '>

@@ -70,6 +70,7 @@ module.exports = {
         domain: '183px 183px 50px',
         landingPage: 'repeat(4,minmax(220px,1fr))',
         dashboard: 'repeat(5, minmax(100px, 1fr))',
+        dashboardLG: '1fr 1fr 1fr 1fr 350px',
       },
       gridTemplateRows: {
         reports: 'repeat(2,minmax(300px,1fr))',
