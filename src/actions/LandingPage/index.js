@@ -128,7 +128,7 @@ export function useLandingPageMutation() {
     {
       onSuccess: (data) => {
         queryClient.setQueryData('LandingPage', data);
-        navigate(`/editor/${data?.data._id}`);
+        navigate(`landingpages/editor/${data?.data._id}`);
       },
       onError: (error) => {
         console.log('error occured: ' + error.message);

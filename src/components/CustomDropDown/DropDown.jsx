@@ -101,6 +101,7 @@ const BoxesDetails = ({
       <InputNumber
         type='number'
         pattern='[0-9]*'
+        min={0}
         placeholder='Set a Price'
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white appearance-none'
         onChange={(e) => handleChangePrice(e)}
@@ -166,7 +167,9 @@ const DropDown = ({
         <PlaceHolder
           expanded={isExpanded}
           onClick={handleClick}
-          className='cursor-pointer select-none'
+          className={`cursor-pointer select-none ${
+            pageGoal.price !== '' && pageGoal.productName !== '' && 'text-white'
+          }`}
         >
           {pageGoal.price === '' && pageGoal.productName === ''
             ? 'Select a Page Goal*'
