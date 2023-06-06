@@ -27,7 +27,7 @@ const CreateLandingPage = () => {
     funnelName: '',
     pageName: 'mist',
     pageGoal: 'purchase',
-    name: '',
+    productName: '',
     price: '',
     paymentGateway: '',
     template_id: ID,

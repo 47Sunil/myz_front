@@ -16,6 +16,7 @@ import AuthGuard from '../Auth/AuthGuard';
 import { useAutoLoginData } from '../actions/User/Login';
 import Editor from '../pages/LandingPage/Editor/Editor';
 import Logout from '../pages/Logout';
+import NotFound from '../pages/404NotFound';
 const Router = () => {
   const autoLogin = useAutoLoginData();
   const handleLogin = async () => {
@@ -31,6 +32,10 @@ const Router = () => {
           <Route
             path='/'
             element=<AuthGuard component={<></>} />
+          />
+          <Route
+            path='*'
+            element=<NotFound />
           />
           <Route
             path='/dashboard'

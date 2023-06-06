@@ -87,7 +87,7 @@ const BoxesDetails = ({
   };
   const handleChangePdtName = (e) => {
     const value = e.target.value;
-    setPageData((prevState) => ({ ...prevState, name: value }));
+    setPageData((prevState) => ({ ...prevState, productName: value }));
     setPageGoal((prev) => ({ ...prev, productName: value }));
   };
   return (
@@ -113,7 +113,7 @@ const BoxesDetails = ({
         placeholder='Type your product name'
         className='bg-[#2A2439] rounded-[11px] border border-solid border-[#4C4759] placeholder:text-[#7B7784] text-white text-[12px] p-2 font-medium w-full focus:outline-none focus:border-white'
         onChange={(e) => handleChangePdtName(e)}
-        value={pageData.name}
+        value={pageData.productName}
         required
       />
       <button
