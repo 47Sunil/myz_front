@@ -1,9 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import { requestInstance } from '../axiosConfig';
-import { useMutation, useQueryClient } from 'react-query';
-export async function useDomainData() {
-  const res = await requestInstance.get('/domains');
-  return res;
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+export function useDomainData(page) {
+  const { isLoading, data } = useQuery({
+    queryKey: ['domains', page],
+    queryFn: (page) => {
+      return requestInstance.get(`/domains?page=${page}`);
+    },
+  });
+  return { isLoading, data };
 }
 
 export function useDomainMutation() {

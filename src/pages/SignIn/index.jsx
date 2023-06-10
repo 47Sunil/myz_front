@@ -21,7 +21,7 @@ const SignInLeft = styled.div`
 const SignIn = () => {
   return (
     <div className='relative flex w-screen h-screen overflow-hidden'>
-      <SignInLeft className='overflow-y-scroll'>
+      <SignInLeft className=''>
         <FormLeft
           logo={logo}
           heading={'Sign In'}

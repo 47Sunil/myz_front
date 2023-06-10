@@ -27,9 +27,9 @@ const HeaderBar = () => {
               {data?.user.subscription.planName}
             </p>
           </div>
-          <div className='col-span-4'>
+          <div className='col-span-4 w-9 h-9'>
             <img
-              className='rounded-circle w-9 rounded-full'
+              className='rounded-circle  rounded-full object-cover w-full h-full'
               src={data?.user.profile}
               alt=''
             />

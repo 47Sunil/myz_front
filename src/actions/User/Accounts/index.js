@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { requestInstance } from '../../axiosConfig';
 import { useQueryClient, useMutation } from 'react-query';
+import { toast } from 'react-toastify';
 
 export function useUserUpdateMutation() {
   const queryClient = useQueryClient();
@@ -27,4 +28,15 @@ export function useUserUpdateMutation() {
       },
     }
   );
+}
+
+export function useChangePasswordMutation() {
+  const queryClient = useQueryClient();
+  return useMutation(async ({ oldPassword, newPassword }) => {
+    const res = await requestInstance.patch('users/update-password', {
+      oldPassword,
+      newPassword,
+    });
+    return res;
+  });
 }

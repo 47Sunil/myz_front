@@ -1,8 +1,62 @@
 import { useState, useEffect } from 'react';
 import { ContentItem } from './ProfileCommon';
 import { useQuery, useQueryClient } from 'react-query';
-import { useAccountData } from '../../../actions/User/Accounts';
+import {
+  useAccountData,
+  useChangePasswordMutation,
+} from '../../../actions/User/Accounts';
+import { RiCloseLine } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import toast from 'react-hot-toast';
+const ChangePasswordModal = styled.div`
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 const AccountDetails = () => {
+  const [modal, setModal] = useState(false);
+  const [updatePassword, setUpdatePassword] = useState({
+    oldPass: '',
+    newPass: '',
+    cnfPass: '',
+  });
+  const [errorMsg, setErrorMsg] = useState('');
+  const handleChangePassword = async () => {
+    try {
+      if (
+        updatePassword.oldPass === '' ||
+        updatePassword.newPass === '' ||
+        updatePassword.cnfPass === ''
+      ) {
+        toast.error('Password cannot be empty');
+      } else if (updatePassword.oldPass === updatePassword.newPass) {
+        toast.error('New password cannot be same as old password');
+      } else if (updatePassword.newPass !== updatePassword.cnfPass) {
+        toast.error('New passwords do not match');
+      } else {
+        const res = await changePassword({
+          oldPassword: updatePassword.oldPass,
+          newPassword: updatePassword.newPass,
+        });
+        toast.success(res.message);
+        setModal(!modal);
+      }
+    } catch (error) {
+      toast.error(`${error.response.data.message} entered`);
+    }
+  };
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+  const { isLoading, mutateAsync: changePassword } =
+    useChangePasswordMutation();
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('user');
   const [fieldChanges, setFieldChanges] = useState({
@@ -116,15 +170,84 @@ const AccountDetails = () => {
       </div>
       <div className='bg-gray-100/70 rounded-lg'>
         <h4 className='text-center text-md p-4'>Quick Actions</h4>
-        <div className='cursor-pointer bg-white shadow py-3 px-4 w-9/12 mx-auto rounded-md text-sm flex flex-row items-center justify-between'>
+        <button
+          className='cursor-pointer bg-white shadow py-3 px-4 w-9/12 mx-auto rounded-md text-sm flex flex-row items-center justify-between'
+          onClick={toggleModal}
+        >
           Change Password
           <div className='bg-gray-200 py-1 px-4 text-lg rounded'>&gt;</div>
-        </div>
-        <div className=' mt-4 cursor-pointer bg-white shadow py-3 px-4 w-9/12 mx-auto rounded-md text-sm flex flex-row items-center justify-between'>
+        </button>
+        <Link
+          to='/subscription'
+          className=' mt-4 cursor-pointer bg-white shadow py-3 px-4 w-9/12 mx-auto rounded-md text-sm flex flex-row items-center justify-between'
+        >
           Check Subscription
           <div className='bg-gray-200 py-1 px-4 text-lg rounded'>&gt;</div>
-        </div>
+        </Link>
       </div>
+      {modal && (
+        <ChangePasswordModal>
+          <div className='min-w-[400px] w-[50vw] flex flex-col h-[55vh] bg-[#ddd] rounded-2xl overflow-hidden'>
+            <div className='min-h-[50px] w-full bg-gradient-landing-blue flex justify-between px-4 py-2 items-center text-white rounded-t-2xl'>
+              <h2>Change Password</h2>
+              <RiCloseLine
+                className='text-2xl cursor-pointer'
+                onClick={toggleModal}
+              />
+            </div>
+            <div className=' w-full h-full rounded-b-2xl py-4 px-8 flex justify-center items-center flex-col gap-4'>
+              <div className='flex flex-col gap-2 w-full'>
+                <label htmlFor='oldPassword'>Old Password</label>
+                <input
+                  type='password'
+                  id='oldPassword'
+                  className='bg-[rgba(255,255,255,.5)] px-3 py-1 rounded-lg '
+                  onChange={(e) =>
+                    setUpdatePassword((prev) => ({
+                      ...prev,
+                      oldPass: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+              <div className='flex flex-col gap-2 w-full'>
+                <label htmlFor='newPassword'>New Password</label>
+                <input
+                  type='password'
+                  id='newPassword'
+                  className='bg-[rgba(255,255,255,.5)] px-3 py-1 rounded-lg '
+                  onChange={(e) =>
+                    setUpdatePassword((prev) => ({
+                      ...prev,
+                      newPass: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+              <div className='flex flex-col gap-2 w-full'>
+                <label htmlFor='confirmPassword'>Confirm Password</label>
+                <input
+                  type='password'
+                  id='confirmPassword'
+                  className='bg-[rgba(255,255,255,.5)] px-3 py-1 rounded-lg '
+                  onChange={(e) =>
+                    setUpdatePassword((prev) => ({
+                      ...prev,
+                      cnfPass: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+              <button
+                className='bg-gradient-landing-orange text-whote px-2 py-1 mt-4 rounded-xl text-white'
+                onClick={handleChangePassword}
+              >
+                {!isLoading ? 'Update Password' : 'Changing Password'}
+              </button>
+            </div>
+          </div>
+        </ChangePasswordModal>
+      )}
     </div>
   );
 };

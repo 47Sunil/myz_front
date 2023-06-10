@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CopyIcon from '../../assets/svg/CopyIcon';
 import Eye from '../../assets/svg/Eye';
 import Bin from '../../assets/svg/Bin';
 import Notebook from '../../assets/svg/Notebook';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import {
   useLandingPagesData,
   useLandingPublishPatchMutation,
@@ -16,6 +16,7 @@ import { useTransactionData } from '../../actions/Transaction';
 import { useDomainData } from '../../actions/DomainPage';
 import { Tooltip, IconButton } from '@mui/material';
 import PageLoader from '../../pages/LandingPage/components/PageLoader';
+import { Modal, Box, Typography } from '@mui/material';
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
   font-weight: 400;
@@ -74,10 +75,11 @@ function convertDate(date) {
   return formattedDate;
 }
 
-const TransactionTable = ({ pages, headerData }) => {
-  const { data, isLoading } = useQuery('transactions', useTransactionData);
+const TransactionTable = ({ page, headerData, setTotalPages, setLength }) => {
+  const { data, isLoading } = useTransactionData(page);
   {
-    !isLoading && console.log(data?.data);
+    !isLoading && setTotalPages(data?.TotalOrders);
+    !isLoading && setLength(data?.data.length);
   }
   return (
     <table className='w-full border-collapse mb-[41px]'>
@@ -89,7 +91,7 @@ const TransactionTable = ({ pages, headerData }) => {
         })}
       </tr>
       {!isLoading &&
-        data?.data.map((i) => {
+        data?.data?.map((i) => {
           return (
             <BodyRow>
               <BodyCell>
@@ -110,13 +112,14 @@ const TransactionTable = ({ pages, headerData }) => {
   );
 };
 
-const DomainTables = ({ pages, headerData }) => {
-  const { data, isLoading } = useQuery('domains', useDomainData);
+const DomainTables = ({ page, setTotalPages, headerData, setLength }) => {
+  const { data, isLoading } = useDomainData(page);
   {
-    !isLoading && console.log(data, 'domain table data');
+    !isLoading && setTotalPages(data?.totalDomains);
+    !isLoading && setLength(data?.length);
   }
   return (
-    <table className='w-full border-collapse mb-[41px]'>
+    <table className='w-full border-collapse'>
       <tr>
         {headerData.map((i) => {
           return i.header.map((j) => {
@@ -139,13 +142,28 @@ const DomainTables = ({ pages, headerData }) => {
   );
 };
 
-const LandingTables = ({ pages, headerData }) => {
+const LandingTables = ({
+  pages,
+  headerData,
+  setTotalPages,
+  page,
+  setLength,
+  setDeleteCNF,
+}) => {
   // * fetching data for populating the table
-  const { data, isLoading, isFetching } = useQuery(
-    'LandingTables',
-    useLandingTablesData
-  );
-
+  // const { data, isLoading, isFetching } = useQuery(
+  //   'LandingTables',
+  //   useLandingTablesData
+  // );
+  const { data, isLoading, isPreviousData, isFetching } =
+    useLandingTablesData(page);
+  // const queryClient = useQueryClient()
+  // const data = queryClient.getQueryData(['LandingTablesAll',])
+  console.log(data, 'ADADADADADAAD');
+  {
+    !isLoading && setTotalPages(data.numOfPages);
+    !isLoading && setLength(data.length);
+  }
   // * fetching data for page views for the table
   const pageViews = useQuery('PageViews', useLandingPagesData);
 
@@ -155,14 +173,20 @@ const LandingTables = ({ pages, headerData }) => {
     !pageViews.isLoading && console.log(pageViewsData, 'adaddaadad');
   }
   // * modifying the data when delete button is clicked
-  const tableMutation = useLandingTablesMutation();
-  const handleDeleteRow = async (id) => {
-    await tableMutation.mutateAsync(id);
-  };
-  const handleClickDelete = (id) => {
-    console.log(id, 'row id ');
-    handleDeleteRow(id);
-  };
+  // const tableMutation = useLandingTablesMutation();
+  // const handleDeleteRow = async (id) => {
+  //   await tableMutation.mutateAsync(id);
+  // };
+  // console.log(deleteRow, 'adadadaadaad');
+
+  // const handleClickDelete = (id) => {
+  //   console.log(id, 'row id ');
+  //   setDeleteCNF(true);
+  //   if (deleteRow) {
+  //     handleDeleteRow(id);
+  //     console.log('first');
+  //   }
+  // };
 
   // * modifying the data when send to draft or send to publish is clicked
   // patch -- changes publish to true
@@ -205,16 +229,16 @@ const LandingTables = ({ pages, headerData }) => {
           });
         })}
       </tr>
-      {isLoading ? (
+      {isFetching ? (
         <PageLoader />
       ) : (
-        data?.data.map((i, idx) => {
+        data?.data?.map((i, idx) => {
           return (
             <BodyRow>
               <BodyCell className='w-[300px]'>
                 {' '}
                 <div className='w-full text-sm text-gray-900 font-medium'>
-                  <h2>{i.name}</h2>
+                  <h2>{i.funnel}</h2>
                   <div className=' flex mt-1 bg-gray-200 rounded overflow-hidden relative w-fit'>
                     <p className='bg-gray-800 text-white py-1 px-2 text-xs'>
                       {i.url.split('/')[2]}
@@ -277,7 +301,7 @@ const LandingTables = ({ pages, headerData }) => {
                   </button>
                   <button
                     className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'
-                    onClick={() => handleClickDelete(i._id)}
+                    onClick={() => setDeleteCNF(i._id)}
                   >
                     <Bin />
                   </button>

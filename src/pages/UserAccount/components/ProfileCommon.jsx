@@ -45,7 +45,7 @@ const ProfileCommon = () => {
                 <img
                   src={data?.user.profile}
                   alt='User Img'
-                  className='rounded-full'
+                  className='rounded-full w-full h-full object-cover'
                 />
               </div>
             </Overlay2>

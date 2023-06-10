@@ -10,6 +10,7 @@ import DynamicInputManager from '../../../components/DynamicInputManager/Dynamic
 import RememberMe from './RememberMe';
 import useSlide from '../../../hooks/useSlideAnimation';
 import { useLoginMutation } from '../../../actions/User/Login';
+import { toast } from 'react-hot-toast';
 
 const SignForm = () => {
   const [loginRequest, setLoginRequest] = useState({
@@ -26,7 +27,12 @@ const SignForm = () => {
   };
 
   const handleLogin = async () => {
-    await loginMutation.mutateAsync(loginRequest);
+    try {
+      await loginMutation.mutateAsync(loginRequest);
+      toast.success('Welcome To Myzer');
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
   };
   const { handleChange } = useSlide();
   console.log(loginRequest);

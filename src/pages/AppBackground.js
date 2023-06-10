@@ -37,6 +37,7 @@ const Overlay = styled.div`
   width: 100%;
   background-color: rgba(30, 30, 30, 0.8);
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
   inset: 0;
@@ -47,7 +48,9 @@ const Header = styled.header`
   grid-column: 2;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 0 0 22px 0;
-  z-index: 3333;
+  z-index: 2;
+
+  ${'' /* z-index: 3333; */}
 `;
 
 const Sidebar = styled.div`
@@ -58,7 +61,8 @@ const Sidebar = styled.div`
     rgba(255, 255, 255, 0.0153) 0%,
     rgba(255, 255, 255, 0.09) 100%
   );
-  z-index: 33333;
+  ${'' /* z-index: 33333; */}
+  z-index:2;
   border-right: 1px solid rgba(255, 255, 255, 0.21);
 `;
 

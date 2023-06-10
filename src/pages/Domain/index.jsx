@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Banner from './components/Banner';
 import AddDomain from './components/AddDomain';
 import Table from './components/Table';
@@ -7,6 +7,7 @@ import AddNewDomain from './components/AddNewDomain';
 
 const Domain = () => {
   const { method } = useParams();
+
   return (
     <>
       {method === 'home' ? (
