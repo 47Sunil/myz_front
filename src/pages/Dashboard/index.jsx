@@ -9,6 +9,7 @@ import SplineChart from './components/SplineChart';
 import BarChart from './components/BarChart';
 import { CountryTables, Tables, TopSellingTables } from './components/Tables';
 import AreaChart from './components/AreaChart';
+import Datepicker from 'react-tailwindcss-datepicker';
 
 const Dashboard = () => {
   const [dashBoardData, setDashBoardData] = useState({
@@ -88,12 +89,30 @@ const Dashboard = () => {
   //     setOrdersActivity(ordersActivityData);
   //   });
   // }, []);
+  const [value, setValue] = useState({
+    startDate: new Date(),
+    endDate: new Date().setMonth(11),
+  });
+  const handleValueChange = (newValue) => {
+    console.log('newValue:', newValue);
+    setValue(newValue);
+  };
 
   return (
-    <main className='w-full  h-screen z-[33333] relative grid grid-cols-dashboard min-[3000px]:grid-cols-dashboardLG grid-rows-dashboard gap-[1rem]'>
-      <div class='col-start-1 col-end-5 row-start-1 row-end-2 '>
-        <DateSection />
+    <main className='w-full  h-screen   relative grid grid-cols-dashboard min-[3000px]:grid-cols-dashboardLG grid-rows-dashboard gap-[1rem]'>
+      <div class='col-start-1 col-end-3 row-start-1 row-end-2 '>
+        {/* <DateSection />
+         */}
+        <Datepicker
+          value={value}
+          onChange={handleValueChange}
+          primaryColor={'orange'}
+          containerClassName={'bg-white h-full w-[60%] rounded-lg px-2'}
+          inputClassName={'bg-white h-full w-[90%] rounded-lg outline-none'}
+          toggleClassName={'text-black'}
+        />
       </div>
+
       <div class='col-start-1 col-end-5 row-start-2 row-end-7 '>
         <ReportSection dashBoardData={dashBoardData} />
       </div>

@@ -1856,3 +1856,5 @@ export const landingTableData = [
     ],
   },
 ];
+
+export const filterData = ['All orders', 'Paid', 'Failed', 'Partial'];

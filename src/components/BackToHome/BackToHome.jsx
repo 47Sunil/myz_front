@@ -21,7 +21,10 @@ const GoToHomeBtn = ({ text, gobackLink }) => {
         onClick={() => navigate(gobackLink)}
         className='cursor-pointer z-50 relative'
       />
-      <p className='font-normal text-[20px]  text-[rgba(255,255,255,0.82)]'>
+      <p
+        className='font-normal text-[20px]  text-[rgba(255,255,255,0.82)] cursor-pointer'
+        onClick={() => navigate(gobackLink)}
+      >
         {text}
       </p>
     </div>

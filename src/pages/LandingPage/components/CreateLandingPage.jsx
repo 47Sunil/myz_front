@@ -111,6 +111,7 @@ const CreateLandingPage = () => {
             </div>
             <FormScreen
               paymentSelect={paymentSelect}
+              templateData={templateData}
               setPaymentSelect={setPaymentSelect}
               setPageData={setPageData}
               pageData={pageData}

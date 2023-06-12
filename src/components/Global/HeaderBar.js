@@ -1,12 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BellIcon from '../../assets/svg/BellLogo';
 import NegativeRadius from '../../assets/svg/NegativeRadius';
 import { useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { Popover } from '@headlessui/react';
 
+function MyPopover() {
+  const [notification, setNotification] = useState([]);
+  return (
+    <Popover className='relative'>
+      <Popover.Button>
+        {' '}
+        <BellIcon />
+      </Popover.Button>
+
+      <Popover.Panel className='absolute top-12 right-0  bg-[#fff] text-black py-2 px-4 rounded-lg  w-fit'>
+        <ul className='grid place-content-center'>
+          {notification.map((i) => (
+            <li>i</li>
+          ))}
+        </ul>
+
+        {/* <img src="/solutions.jpg" alt="" /> */}
+      </Popover.Panel>
+    </Popover>
+  );
+}
 const HeaderBar = () => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('user');
   console.log(data?.user.name);
+  const navigate = useNavigate();
   return (
     <>
       <div className='h-full flex p-2 items-center flex-row justify-end relative'>
@@ -18,20 +42,29 @@ const HeaderBar = () => {
         ></NegativeRadius>
 
         <div className='my-2 px-4 border-y-0  border border-[#FFFFFF1A] text-[#908C99]'>
-          <BellIcon />
+          <MyPopover />
         </div>
         <div className='p-2  grid grid-cols-12 gap-2'>
           <div className='col-span-8 flex flex-col items-end justify-center'>
-            <p className='text-sm text-white'>{data?.user.name}</p>
-            <p className='text-xs -mt-0.5 text-[#FFFFFFB5]'>
+            <p
+              className='text-sm text-white cursor-pointer'
+              onClick={() => navigate('/account')}
+            >
+              {data?.user.name}
+            </p>
+            <p
+              className='text-xs -mt-0.5 text-[#FFFFFFB5] cursor-pointer'
+              onClick={() => navigate('/subscription')}
+            >
               {data?.user.subscription.planName}
             </p>
           </div>
           <div className='col-span-4 w-9 h-9'>
             <img
-              className='rounded-circle  rounded-full object-cover w-full h-full'
+              className='rounded-circle rounded-full object-cover w-full h-full cursor-pointer'
               src={data?.user.profile}
               alt=''
+              onClick={() => navigate('/account')}
             />
           </div>
         </div>

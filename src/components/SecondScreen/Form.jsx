@@ -1,7 +1,17 @@
 import React from 'react';
 import DynamicInputManager from '../DynamicInputManager/DynamicInputManager';
 import { Link, useLocation } from 'react-router-dom';
-const Form = ({ headingText, btnText, children, className, to, onClick }) => {
+import { CleaningServices } from '@mui/icons-material';
+const Form = ({
+  headingText,
+  btnText,
+  children,
+  className,
+  to,
+  onClick,
+  loader,
+  onKeyPress,
+}) => {
   return (
     <div className={className}>
       <div className='w-full h-[100px] bg-black rounded-t-[22px] border-b border-solid border-b-[rgba(255,255,255,.15)] flex flex-col py-4 px-8 justify-between'>
@@ -19,10 +29,11 @@ const Form = ({ headingText, btnText, children, className, to, onClick }) => {
       <div className='w-full h-[100px] bg-[rgba(255,255,255,0.04);] rounded-b-[22px] flex items-center py-4 px-8 z-30'>
         <Link
           to={to}
-          className='w-[300px] h-[58px] rounded-[10px] font-semibold text-xl leading-[58px] text-center bg-gradient-orange-text text-white'
+          className='w-[300px] h-[58px] rounded-[10px] font-semibold text-xl leading-[58px] text-center bg-gradient-orange-text text-white flex justify-center items-center'
           onClick={onClick}
         >
           {btnText}
+          {loader}
         </Link>
       </div>
     </div>

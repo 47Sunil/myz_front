@@ -69,8 +69,9 @@ const Sidebar = styled.div`
 const Main = styled.main`
   grid-row: 2 / span 1;
   grid-column: 2;
-  background: #ff000;
+  /* background: #ff0000; */
   max-height: calc(100vh - 50px);
+  z-index: 1;
   padding: 1rem;
   overflow-y: scroll;
 `;
@@ -95,7 +96,7 @@ const AppBackground = ({ children }) => {
           <Sidebar>
             <AppSidebar />
           </Sidebar>
-          <Main className='p-4 z-10'>{children}</Main>
+          <Main className='p-4 '>{children}</Main>
           {/* <ViewAllTemplatesModal /> */}
         </Background>
       ) : (

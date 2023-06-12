@@ -8,6 +8,8 @@ import SecondScreenWrapper from '../../../components/SecondScreen/SecondScreenWr
 import SecondScreenForm from '../../../components/SecondScreen/Form';
 import { useDomainMutation } from '../../../actions/DomainPage';
 import { useQueryClient } from 'react-query';
+import { toast } from 'react-hot-toast';
+import { Oval } from 'react-loader-spinner';
 const AddNewDomain = () => {
   const [domainName, setDomainName] = useState({
     domain_name: '',
@@ -30,7 +32,23 @@ const AddNewDomain = () => {
           </div>
           <SecondScreenForm
             headingText={'Adding Domain'}
-            btnText={'Next'}
+            btnText={domainMutation.isLoading ? 'Adding New Domain' : 'Next'}
+            loader={
+              domainMutation.isLoading && (
+                <Oval
+                  height={20}
+                  width={20}
+                  color='#fff'
+                  wrapperStyle={{}}
+                  wrapperClass=''
+                  visible={true}
+                  ariaLabel='oval-loading'
+                  secondaryColor='#ddd'
+                  strokeWidth={2}
+                  strokeWidthSecondary={2}
+                />
+              )
+            }
             className={
               'w-[62vw] h-[70vh] bg-[#100921] rounded-[22px] z-20 absolute top-[170px] left-[25%] flex flex-col'
             }
@@ -49,6 +67,9 @@ const AddNewDomain = () => {
                     setDomainName,
                     'domain_name',
                   ]}
+                  onKeyDown={(e) =>
+                    e.key === 'Enter' && handleDomainName(domainName)
+                  }
                   multiline={false}
                   type={'text'}
                 />

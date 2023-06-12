@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { requestInstance } from '../axiosConfig';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { toast } from 'react-hot-toast';
 export function useDomainData(page) {
   const { isLoading, data } = useQuery({
     queryKey: ['domains', page],
@@ -16,16 +17,23 @@ export function useDomainMutation() {
   const navigate = useNavigate();
   return useMutation(
     async (domainData) => {
-      const res = await requestInstance.post('/domains', domainData);
-      return res;
+      try {
+        const res = await requestInstance.post('/domains', domainData);
+        // toast.success('domain added successfully');
+        return res;
+      } catch (err) {
+        toast.error(err.response.data.message);
+      }
     },
     {
       onSuccess: (data) => {
         queryClient.setQueryData('DomainNameData', data);
-        navigate('/domain/verification');
+        data && toast.success('Domain Added');
+        data && navigate('/domain/verification');
       },
       onError: (error) => {
         console.log('error occured: ' + error.message);
+        // toast.error(error.response.data.message);
       },
     }
   );

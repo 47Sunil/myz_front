@@ -17,6 +17,7 @@ import { useDomainData } from '../../actions/DomainPage';
 import { Tooltip, IconButton } from '@mui/material';
 import PageLoader from '../../pages/LandingPage/components/PageLoader';
 import { Modal, Box, Typography } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
   font-weight: 400;
@@ -220,6 +221,7 @@ const LandingTables = ({
     !isLoading && console.log(data, 'landing pages table data');
   }
   const pattern = /\/([^/]+)$/;
+  const navigate = useNavigate();
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
@@ -229,7 +231,7 @@ const LandingTables = ({
           });
         })}
       </tr>
-      {isFetching ? (
+      {isLoading || isFetching ? (
         <PageLoader />
       ) : (
         data?.data?.map((i, idx) => {
@@ -293,12 +295,18 @@ const LandingTables = ({
                       Send to Publish
                     </button>
                   )}
-                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'>
+                  <Link
+                    className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px] flex justify-center items-center'
+                    to={`${i.url}`}
+                  >
                     <Eye />
-                  </button>
-                  <button className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'>
+                  </Link>
+                  <Link
+                    to={`/landingpages/editor/${i._id}`}
+                    className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px] flex items-center justify-center'
+                  >
                     <Notebook />
-                  </button>
+                  </Link>
                   <button
                     className='bg-[#EFEFEF] border border-solid border-[#E0DBDB] rounded-[8px] text-[#494949] font-normal px-1 text-[15px]'
                     onClick={() => setDeleteCNF(i._id)}

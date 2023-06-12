@@ -6,8 +6,13 @@ import templateImage from '../../../assets/images/myzer-templates.png';
 import DropDown from '../../../components/DropDown/DropDown';
 import { Menu } from '@headlessui/react';
 import { useQuery } from 'react-query';
-import { useAllTemplatesData } from '../../../actions/LandingPage';
+import {
+  useAllTemplatesData,
+  useCategoryData,
+} from '../../../actions/LandingPage';
 import { motion, stagger } from 'framer-motion';
+import Eye from '../../../assets/svg/Eye';
+import { Link } from 'react-router-dom';
 
 const ViewAllTemplatesModal = () => {
   const [isClosed, setIsClosed] = useState(true);
@@ -21,6 +26,11 @@ const ViewAllTemplatesModal = () => {
     !isLoading &&
       console.log(data, 'allTemplates', isLoading, 'isLoading or not');
   }
+  const { isLoading: categoryLoading, data: categoryData } = useCategoryData();
+  const [categoryFilter, setCategoryFilter] = useState('All');
+  const handleCategoryFilter = (category) => {
+    setCategoryFilter(category);
+  };
   return (
     <>
       {isClosed && (
@@ -60,11 +70,28 @@ const ViewAllTemplatesModal = () => {
                     menuClass={
                       'bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px] h-[50px] text-white w-[220px] flex justify-center relative'
                     }
-                    menuBtnText={'Category'}
+                    menuBtnText={categoryFilter}
                     menuBtnClass={'text-[22px] font-medium'}
                   >
+                    {/* <AiFillCaretDown className='text-[#85878c] text-xl relative z-[100]' /> */}
                     <Menu.Items className='absolute top-[50px] z-[20] flex flex-col gap-4 bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px]  text-white w-[220px] p-4 overflow-y-scroll h-[182px]'>
+                      {!categoryLoading &&
+                        categoryData.map((item) => (
+                          <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                            <button
+                              onClick={() => handleCategoryFilter(item)}
+                              className='w-full'
+                            >
+                              {item}
+                            </button>
+                          </Menu.Item>
+                        ))}
                       <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                        <button onClick={() => setCategoryFilter('All')}>
+                          All
+                        </button>
+                      </Menu.Item>
+                      {/* <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
                         <button>Course</button>
                       </Menu.Item>
                       <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
@@ -78,39 +105,94 @@ const ViewAllTemplatesModal = () => {
                       </Menu.Item>
                       <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
                         <button>Digital Product</button>
-                      </Menu.Item>
+                      </Menu.Item> */}
                     </Menu.Items>
                   </DropDown>
                 </div>
               </div>
               <div className='grid grid-cols-landingPage gap-3 h-full overflow-y-scroll pb-[10rem]'>
-                {!isLoading &&
-                  data?.data.map((i) => (
-                    <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
-                      <figure className='w-full h-full'>
-                        <img
-                          src={i.image}
-                          alt=''
-                          className='mb-1 w-full h-[180px] object-cover object-top'
-                        />
-                        <figcaption className='font-medium text-[14px] text-white'>
-                          {i.name}
-                          <span className='block text-[11px]'>
-                            by{' '}
-                            <span className='bg-gradient-landing-text text-transparent bg-clip-text'>
-                              {i.author}
+                {!isLoading && categoryFilter === 'All'
+                  ? data?.data.map((i) => (
+                      <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
+                        <figure className='w-full h-full'>
+                          <img
+                            src={i.image}
+                            alt=''
+                            className='mb-1 w-full h-[180px] object-cover object-top'
+                          />
+                          <figcaption className='font-medium text-[14px] text-white'>
+                            {i.name}
+                            <span className='block text-[11px]'>
+                              by{' '}
+                              <span className='bg-gradient-landing-text text-transparent bg-clip-text'>
+                                {i.author}
+                              </span>
                             </span>
-                          </span>
-                        </figcaption>
-                      </figure>
-                      <div className='bg-gradient-orange-text rounded-full w-[95px] h-[22px] text-white text-center leading-[22px] text-[13px] absolute right-3 top-3'>
-                        Featured
+                          </figcaption>
+                        </figure>
+                        <div className='bg-gradient-orange-text rounded-full w-[95px] h-[22px] text-white text-center leading-[22px] text-[13px] absolute right-3 top-3'>
+                          Featured
+                        </div>
+                        <div className='bg-white rounded-full w-[80px] h-[40px] border border-solid border-[#85878C] shadow-[0_0_19px_rgba(0,0,0,.25)] flex gap-2 p-1 absolute bottom-8 right-3'>
+                          <button className='bg-gradient-template-eye w-[32px] h-[32px] rounded-full flex justify-center items-center'>
+                            <Eye eyeColor='#ffffff' />
+                          </button>
+                          <Link
+                            to={`/landing-pages/create_landing_page?id=${i._id}`}
+                            className='bg-[#DFDEE2] w-[32px] h-[32px] rounded-full flex justify-center items-center'
+                          >
+                            <p className='text-[#2C2B2B] text-[24px] '>+</p>
+                          </Link>
+                        </div>
+                        <div className='text-[#474040] text-[10px] bg-white text-center w-[116px] h-[21px] leading-[21px] uppercase rounded-t-[10px] absolute bottom-0'>
+                          {i.description}
+                        </div>
                       </div>
-                      <div className='text-[#474040] text-[10px] bg-white text-center w-[116px] h-[21px] leading-[21px] uppercase rounded-t-[10px] absolute bottom-0'>
-                        {i.description}
-                      </div>
-                    </div>
-                  ))}
+                    ))
+                  : data?.data
+                      .filter((i) => {
+                        {
+                          /* console.log(i.category[0]); */
+                        }
+                        return i.category[0] === categoryFilter;
+                      })
+                      .map((i) => (
+                        <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
+                          <figure className='w-full h-full'>
+                            <img
+                              src={i.image}
+                              alt=''
+                              className='mb-1 w-full h-[180px] object-cover object-top'
+                            />
+                            <figcaption className='font-medium text-[14px] text-white'>
+                              {i.name}
+                              <span className='block text-[11px]'>
+                                by{' '}
+                                <span className='bg-gradient-landing-text text-transparent bg-clip-text'>
+                                  {i.author}
+                                </span>
+                              </span>
+                            </figcaption>
+                          </figure>
+                          <div className='bg-gradient-orange-text rounded-full w-[95px] h-[22px] text-white text-center leading-[22px] text-[13px] absolute right-3 top-3'>
+                            Featured
+                          </div>
+                          <div className='bg-white rounded-full w-[80px] h-[40px] border border-solid border-[#85878C] shadow-[0_0_19px_rgba(0,0,0,.25)] flex gap-2 p-1 absolute bottom-8 right-3'>
+                            <button className='bg-gradient-template-eye w-[32px] h-[32px] rounded-full flex justify-center items-center'>
+                              <Eye eyeColor='#ffffff' />
+                            </button>
+                            <Link
+                              to={`/landing-pages/create_landing_page?id=${i._id}`}
+                              className='bg-[#DFDEE2] w-[32px] h-[32px] rounded-full flex justify-center items-center'
+                            >
+                              <p className='text-[#2C2B2B] text-[24px] '>+</p>
+                            </Link>
+                          </div>
+                          <div className='text-[#474040] text-[10px] bg-white text-center w-[116px] h-[21px] leading-[21px] uppercase rounded-t-[10px] absolute bottom-0'>
+                            {i.description}
+                          </div>
+                        </div>
+                      ))}
 
                 {/* <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
                   <figure>

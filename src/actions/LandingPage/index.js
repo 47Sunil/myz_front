@@ -8,6 +8,17 @@ export async function useTemplatesData() {
   console.log(res, 'landing pages');
   return res;
 }
+
+export const useCategoryData = () => {
+  const { isLoading, data } = useQuery({
+    queryKey: ['category'],
+    queryFn: async () => {
+      const { data } = await requestInstance.get('templates/Unique');
+      return data;
+    },
+  });
+  return { isLoading, data };
+};
 // export async function useAllTemplatesData(pageNum) {
 //   const res = await requestInstance.get(`/templates/list?page=${pageNum}`);
 //   console.log(res, 'landing pages all');
@@ -90,7 +101,7 @@ export async function useLandingPublishPatchMutation() {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('LandingTables');
+        queryClient.invalidateQueries('LandingTablesAll');
       },
       onError: (error) => {
         console.log('error occured: ' + error.message);
@@ -107,7 +118,7 @@ export async function useLandingPublishPutMutation() {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('LandingTables');
+        queryClient.invalidateQueries('LandingTablesAll');
       },
       onError: (error) => {
         console.log('error occured: ' + error.message);

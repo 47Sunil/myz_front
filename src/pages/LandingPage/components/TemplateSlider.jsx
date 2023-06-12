@@ -48,9 +48,16 @@ const TemplateManager = ({
       <div className='flex w-full gap-4 justify-between'>
         <div className='new-page w-[200px] flex-shrink-0 h-[250px] rounded-xl border border-white/10 bg-white/5 p-2'>
           <div className='align-center relative flex h-full flex-col items-center justify-center rounded-lg border border-dashed border-white/70'>
-            <Button className='w-50px h-50px align-center flex justify-center text-xl'>
-              +
-            </Button>
+            <Link
+              to={
+                '/landing-pages/create_landing_page?id=6486b0ee8fc0297517732fa1'
+              }
+            >
+              <Button className='w-50px h-50px align-center flex justify-center text-xl'>
+                +
+              </Button>
+            </Link>
+
             <p className='absolute bottom-5 mt-2 text-sm leading-4 text-white/80'>
               Use Blank <br></br>Template
             </p>

@@ -43,6 +43,7 @@ const FormScreen = ({
   setIsExpanded,
   isPaymentMethodSelected,
   setIsPaymentMethodSelected,
+  templateData,
 }) => {
   console.log(isPaymentMethodSelected, 'isPaymentMethodSelected');
   const [enabled, setEnabled] = useState(false);
@@ -253,39 +254,41 @@ const FormScreen = ({
             />
           </motion.div>
         </motion.div>
-        <div
-          className={`${
-            !enabled ? 'bg-gradient-ai-magic' : 'bg-[#100921]'
-          } w-[250px] flex items-center gap-3 rounded-b-[16px] p-2 fixed top-[85px] left-[50%] translate-x-[-50%] z-50`}
-        >
-          <Switch
-            checked={enabled}
-            onChange={onChangeHandler}
-            className={`bg-white
-          relative inline-flex h-[14px] w-[34px] shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 drop-shadow-lg`}
+        {templateData[0]?.name === '' && (
+          <div
+            className={`${
+              !enabled ? 'bg-gradient-ai-magic' : 'bg-[#100921]'
+            } w-[250px] flex items-center gap-3 rounded-b-[16px] p-2 fixed top-[85px] left-[50%] translate-x-[-50%] z-50`}
           >
-            <span
-              aria-hidden='true'
-              className={`${
-                enabled
-                  ? 'translate-x-4 translate-y-[-2.5px] bg-gradient-ai-magic-toggle'
-                  : 'translate-x-0 translate-y-[-2.5px] bg-[#100921]'
-              }
+            <Switch
+              checked={enabled}
+              onChange={onChangeHandler}
+              className={`bg-white
+          relative inline-flex h-[14px] w-[34px] shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 drop-shadow-lg`}
+            >
+              <span
+                aria-hidden='true'
+                className={`${
+                  enabled
+                    ? 'translate-x-4 translate-y-[-2.5px] bg-gradient-ai-magic-toggle'
+                    : 'translate-x-0 translate-y-[-2.5px] bg-[#100921]'
+                }
             pointer-events-none inline-block h-[20px] w-[20px] transform rounded-full  shadow-lg ring-0 transition-all duration-200 ease-in-out`}
-            />
-          </Switch>
-          <div className='flex items-center gap-1'>
-            <img
-              src={magic}
-              alt=''
-            />
-            {enabled ? (
-              <p className='text-[18px] text-white'>Disable AI Magic</p>
-            ) : (
-              <p className='text-[18px] text-white'>Enable AI Magic</p>
-            )}
+              />
+            </Switch>
+            <div className='flex items-center gap-1'>
+              <img
+                src={magic}
+                alt=''
+              />
+              {enabled ? (
+                <p className='text-[18px] text-white'>Disable AI Magic</p>
+              ) : (
+                <p className='text-[18px] text-white'>Enable AI Magic</p>
+              )}
+            </div>
           </div>
-        </div>
+        )}
         <div className='pr-[27rem] mt-6'>
           <DynamicInputManager
             htmlId='title-name'

@@ -30,9 +30,9 @@ const TransparentButton = ({
 }) => {
   const [isActive, setIsActive] = useState(false);
   function handleClick() {
-    if (active) {
-      setIsActive(!isActive);
-    }
+    setIsActive(!isActive);
+    transparent = isActive;
+    dark = !isActive;
   }
   return (
     <TransparentBtn
