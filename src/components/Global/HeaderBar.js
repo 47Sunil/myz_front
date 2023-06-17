@@ -9,16 +9,18 @@ function MyPopover() {
   const [notification, setNotification] = useState([]);
   return (
     <Popover className='relative'>
-      <Popover.Button>
+      <Popover.Button className={'outline-none'}>
         {' '}
         <BellIcon />
       </Popover.Button>
 
-      <Popover.Panel className='absolute top-12 right-0  bg-[#fff] text-black py-2 px-4 rounded-lg  w-fit'>
+      <Popover.Panel className='absolute top-12 right-0 w-[10rem] bg-[#fff] text-black py-2 px-4 rounded-lg'>
         <ul className='grid place-content-center'>
-          {notification.map((i) => (
-            <li>i</li>
-          ))}
+          {!notification.length < 1 ? (
+            notification.map((i) => <li>i</li>)
+          ) : (
+            <h1>You have no new notification</h1>
+          )}
         </ul>
 
         {/* <img src="/solutions.jpg" alt="" /> */}

@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import SignIn from '../SignIn/index';
 import SignUp from '../SignUp/index';
+import Verify from '../SignUp/components/Verify';
 
 const Accounts = () => {
   const { method } = useParams();
@@ -11,8 +12,10 @@ const Accounts = () => {
         <SignIn />
       ) : method === 'signup' ? (
         <SignUp />
+      ) : method === 'verify' ? (
+        <Verify />
       ) : (
-        'error 404'
+        <h1>Error</h1>
       )}
     </>
   );

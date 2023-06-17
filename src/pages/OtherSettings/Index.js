@@ -1,9 +1,17 @@
-import OtherSettingsCommon from "./components/OtherSettingsCommon"
+import { useState } from 'react';
+import OtherSettingsCommon from './components/OtherSettingsCommon';
+import {
+  useIntegrationMutation,
+  useIntegrationPhoneMutation,
+} from '../../actions/OtherSettings';
+import { toast } from 'react-hot-toast';
 
 const Index = () => {
   return (
-    <OtherSettingsCommon/>
-  )
-}
+    <>
+      <OtherSettingsCommon />
+    </>
+  );
+};
 
-export default Index
+export default Index;

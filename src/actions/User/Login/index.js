@@ -13,6 +13,7 @@ export function useLoginMutation() {
     {
       onSuccess: (data) => {
         queryClient.setQueryData('user', data);
+        queryClient.invalidateQueries('user');
         navigate('/dashboard');
       },
       onError: (error) => {

@@ -16,7 +16,7 @@ import { toast } from 'react-hot-toast';
 
 const LandingPages = () => {
   const [isOpened, setIsOpened] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(true);
+  const [isEmpty, setIsEmpty] = useState(false);
   const { method } = useParams();
   const [totalPages, setTotalPages] = useState('');
   const [page, setPage] = useState(1);
@@ -110,7 +110,7 @@ const LandingPages = () => {
                 )}
               </div>
             </div>
-            {!isEmpty ? (
+            {isEmpty ? (
               <div className='rounded-xl mt-3 py-14 border w-full border-gray-50/20 flex items-center gap-16 bg-[rgba(255,255,255,.1)]'>
                 <div className='bg-[#1e2833] w-[500px] h-[200px] rounded-r-[300px] relative'>
                   <img
@@ -137,6 +137,7 @@ const LandingPages = () => {
                   page={page}
                   setLength={setLength}
                   setDeleteCNF={setDeleteCNF}
+                  setIsEmpty={setIsEmpty}
                 />
               </div>
             )}

@@ -1,8 +1,10 @@
 import { requestInstance } from '../../axiosConfig';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { exact } from 'prop-types';
 export function useLogoutMutation() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   return useMutation(
     async () => {
       try {
@@ -15,6 +17,7 @@ export function useLogoutMutation() {
     {
       onSuccess: () => {
         navigate('/accounts/signin');
+        queryClient.removeQueries('user', 'invoice');
       },
       onError: (error) => {
         console.log('error occured: ' + error.message);

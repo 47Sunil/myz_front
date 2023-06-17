@@ -8,6 +8,8 @@ import GoToHomeBtn from '../../../components/BackToHome/BackToHome';
 import { Link } from 'react-router-dom';
 import { countryCode } from '../../../utils/Data/constant';
 import PinkButton from '../../../components/PinkButton/PinkButton';
+import { useSignupMutation } from '../../../actions/User/Signup';
+import { useQueryClient } from 'react-query';
 
 const CountryCodeSelector = ({ setCountryCode }) => {
   const selectHandler = (e) => {
@@ -38,14 +40,26 @@ const CountryCodeSelector = ({ setCountryCode }) => {
 
 const SignUpForm = ({ setSignUpError }) => {
   const [countryCode, setCountryCode] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const [signupData, setSignupData] = useState({
+    name: 'arsh ali',
+    email: 'arshali.763z@gmail.com',
+    phone: '9956440846',
+    password: 'localhost',
+  });
+  const { mutateAsync: signup } = useSignupMutation();
+  const handleSubmit = async (e, data) => {
+    e.preventDefault();
+    try {
+      await signup(data);
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
   return (
     <form
-      action=''
+      method='POST'
       className='mb-[1.6rem] flex flex-col'
+      onSubmit={(e) => handleSubmit(e, signupData)}
     >
       <DynamicInputManager
         htmlId='name'
@@ -55,7 +69,7 @@ const SignUpForm = ({ setSignUpError }) => {
         multiline={false}
         type='text'
         icon={<UserIcon />}
-        states={[name, setName]}
+        states={[signupData.name, setSignupData, 'name']}
       />
       <DynamicInputManager
         htmlId='email'
@@ -64,7 +78,7 @@ const SignUpForm = ({ setSignUpError }) => {
         multiline={false}
         type='email'
         icon={<MailIcon />}
-        states={[email, setEmail]}
+        states={[signupData.email, setSignupData, 'email']}
       />
       <DynamicInputManager
         htmlId='phone'
@@ -73,7 +87,7 @@ const SignUpForm = ({ setSignUpError }) => {
         multiline={false}
         type='tel'
         icon={<PhoneIcon />}
-        states={[phone, setPhone]}
+        states={[signupData.phone, setSignupData, 'phone']}
       />
       <DynamicInputManager
         htmlId='password'
@@ -82,7 +96,7 @@ const SignUpForm = ({ setSignUpError }) => {
         multiline={false}
         type='password'
         icon={<LockIcon />}
-        states={[password, setPassword]}
+        states={[signupData.password, setSignupData, 'password']}
       />
       <PinkButton text='Sign Up' />
       <p className='mt-4 font-normal text-[20px] leading-8 text-[rgba(255,255,255,.82)] px-5 pb-5'>
@@ -94,9 +108,9 @@ const SignUpForm = ({ setSignUpError }) => {
           <span>Sign In</span>
         </Link>
       </p>
-      <div className='px-5 pb-5'>
+      {/* <div className='px-5 pb-5'>
         <GoToHomeBtn text={'Go Back To Home'} />
-      </div>
+      </div> */}
     </form>
   );
 };

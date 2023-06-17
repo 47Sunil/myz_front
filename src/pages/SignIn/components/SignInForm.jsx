@@ -82,9 +82,9 @@ const SignForm = () => {
           <span>Sign Up</span>
         </Link>
       </p>
-      <div className='px-5 pb-5'>
+      {/* <div className='px-5 pb-5'>
         <GoToHomeBtn text={'Go Back To Home'} />
-      </div>
+      </div> */}
     </form>
   );
 };

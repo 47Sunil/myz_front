@@ -38,3 +38,47 @@ export function useDomainMutation() {
     }
   );
 }
+
+export function useDomainMutationDelete() {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async (id) => {
+      try {
+        const res = requestInstance.delete(`/domains/${id}`);
+        return res;
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('domains');
+        toast.success('Deleted');
+      },
+    }
+  );
+}
+
+export function useDomainRefresh() {
+  const queryClient = useQueryClient();
+  return useMutation(
+    'domainRefresh',
+    async (id) => {
+      try {
+        const res = await requestInstance.patch(`domains/ref?id=${id}`);
+        return res;
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('domains');
+        toast.success('Status Updated');
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message);
+      },
+    }
+  );
+}

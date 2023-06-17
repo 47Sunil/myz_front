@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiX } from 'react-icons/fi';
 import { AiOutlineSearch, AiFillCaretDown } from 'react-icons/ai';
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
@@ -19,9 +19,11 @@ const ViewAllTemplatesModal = () => {
   function handleClick() {
     setIsClosed(!isClosed);
   }
+  const [searchTemplate, setSearchTemplate] = useState('');
   const [page, setPage] = useState(1);
-  const { data, isLoading, isPreviousData, isFetching } =
-    useAllTemplatesData(page);
+  const { data, isLoading, isPreviousData, isFetching, refetch, isRefetching } =
+    useAllTemplatesData(page, searchTemplate);
+
   {
     !isLoading &&
       console.log(data, 'allTemplates', isLoading, 'isLoading or not');
@@ -31,6 +33,18 @@ const ViewAllTemplatesModal = () => {
   const handleCategoryFilter = (category) => {
     setCategoryFilter(category);
   };
+  const handleSearchTemplate = (e) => {
+    if (e.target.value !== '') {
+      setSearchTemplate(e.target.value);
+      setTimeout(() => {
+        refetch();
+      }, 1000);
+    } else {
+      setSearchTemplate('');
+      refetch();
+    }
+  };
+
   return (
     <>
       {isClosed && (
@@ -57,6 +71,8 @@ const ViewAllTemplatesModal = () => {
                     type='text'
                     id='search-templates'
                     className='bg-[rgba(255,255,255,0.05)] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px] h-[50px] text-white w-full  px-10'
+                    placeholder='Search Templates'
+                    onChange={handleSearchTemplate}
                   />
                 </div>
                 <div className='relative flex items-center'>
@@ -111,7 +127,7 @@ const ViewAllTemplatesModal = () => {
                 </div>
               </div>
               <div className='grid grid-cols-landingPage gap-3 h-full overflow-y-scroll pb-[10rem]'>
-                {!isLoading && categoryFilter === 'All'
+                {!isLoading && categoryFilter === 'All' && !isRefetching
                   ? data?.data.map((i) => (
                       <div className='bg-black border border-solid border-[rgba(255,255,255,.15)] rounded-[15px] h-[269px] p-2 flex flex-col items-center relative'>
                         <figure className='w-full h-full'>
@@ -151,9 +167,6 @@ const ViewAllTemplatesModal = () => {
                     ))
                   : data?.data
                       .filter((i) => {
-                        {
-                          /* console.log(i.category[0]); */
-                        }
                         return i.category[0] === categoryFilter;
                       })
                       .map((i) => (

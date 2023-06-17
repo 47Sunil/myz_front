@@ -83,9 +83,11 @@ const AppBackground = ({ children }) => {
     <>
       {path !== 'accountssignin' &&
       path !== 'accountssignup' &&
+      path !== 'verify' &&
       path !== 'domainadd_domain' &&
       path !== 'domainadd_dns' &&
       path !== 'domainverification' &&
+      path !== 'checkout' &&
       !path.includes('editor') &&
       path !== 'landing-pagescreate_landing_page' ? (
         <Background>

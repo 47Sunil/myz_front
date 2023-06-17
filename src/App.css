@@ -10,3 +10,17 @@ body {
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
 }
+.removeSpinBtn {
+  width: 100% !important;
+  height: 4rem;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.16);
+  outline: none;
+  color: white;
+  border-radius: 11px;
+}
+.removeSpinBtn::-webkit-inner-spin-button,
+.removeSpinBtn::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}

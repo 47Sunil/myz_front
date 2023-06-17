@@ -73,6 +73,7 @@ const DynamicInputManager = ({
   type,
   lock,
   onKeyDown,
+  max,
 }) => {
   return (
     <div className='myzer-form-page-field w-full flex flex-col px-5 pb-5'>
@@ -111,6 +112,7 @@ const DynamicInputManager = ({
           name={htmlId}
           id={htmlId}
           value={states[0]}
+          max={max}
           disabled
         />
       ) : (
@@ -129,6 +131,7 @@ const DynamicInputManager = ({
           id={htmlId}
           value={states[0]}
           onKeyDown={onKeyDown}
+          max={max}
         />
       )}
     </div>

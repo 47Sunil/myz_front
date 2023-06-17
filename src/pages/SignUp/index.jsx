@@ -23,7 +23,7 @@ const SignUp = () => {
   return (
     <>
       <div className='relative flex w-screen h-screen overflow-hidden'>
-        <SignUpLeft className='overflow-y-scroll'>
+        <SignUpLeft className='overflow-hidden'>
           <FormLeft
             logo={logo}
             heading={'Sign Up'}

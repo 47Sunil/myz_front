@@ -38,10 +38,12 @@ export const useCategoryData = () => {
 //   );
 //   return { data, isLoading, isPreviousData, isFetching };
 // }
-export function useAllTemplatesData(pageNum) {
+export function useAllTemplatesData(pageNum, name) {
   const fetchAllTemplatesData = async () => {
     try {
-      const res = await requestInstance.get(`/templates/list?page=${pageNum}`);
+      const res = await requestInstance.get(
+        `/templates/list?page=${pageNum}&name=${name}`
+      );
       console.log(res, 'landing pages all dadadasdads');
       return res;
     } catch (error) {
@@ -49,7 +51,7 @@ export function useAllTemplatesData(pageNum) {
     }
   };
 
-  const { data, isLoading, isPreviousData, isFetching } = useQuery(
+  const { data, isLoading, isPreviousData, isFetching, refetch } = useQuery(
     ['allTemplates', pageNum],
     fetchAllTemplatesData,
     {
@@ -57,7 +59,7 @@ export function useAllTemplatesData(pageNum) {
     }
   );
 
-  return { data, isLoading, isPreviousData, isFetching };
+  return { data, isLoading, isPreviousData, isFetching, refetch };
 }
 export function useLandingTablesData(pageNum) {
   const fetchAllTablesData = async () => {

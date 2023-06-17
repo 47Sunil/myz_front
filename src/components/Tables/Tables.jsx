@@ -13,11 +13,18 @@ import {
   useLandingTablesMutation,
 } from '../../actions/LandingPage';
 import { useTransactionData } from '../../actions/Transaction';
-import { useDomainData } from '../../actions/DomainPage';
+import {
+  useDomainData,
+  useDomainMutationDelete,
+  useDomainRefresh,
+} from '../../actions/DomainPage';
 import { Tooltip, IconButton } from '@mui/material';
 import PageLoader from '../../pages/LandingPage/components/PageLoader';
 import { Modal, Box, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { IoMdRefresh } from 'react-icons/io';
+import { RiDeleteBin2Fill } from 'react-icons/ri';
+import { toast } from 'react-hot-toast';
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
   font-weight: 400;
@@ -114,11 +121,19 @@ const TransactionTable = ({ page, headerData, setTotalPages, setLength }) => {
 };
 
 const DomainTables = ({ page, setTotalPages, headerData, setLength }) => {
-  const { data, isLoading } = useDomainData(page);
+  const { data, isLoading, isFetching } = useDomainData(page);
+  const { mutateAsync: refresh } = useDomainRefresh();
+  const refreshDomain = (id) => {
+    refresh(id);
+  };
   {
     !isLoading && setTotalPages(data?.totalDomains);
     !isLoading && setLength(data?.length);
   }
+  const { mutateAsync } = useDomainMutationDelete();
+  const deleteDomain = (id) => {
+    mutateAsync(id);
+  };
   return (
     <table className='w-full border-collapse'>
       <tr>
@@ -134,8 +149,18 @@ const DomainTables = ({ page, setTotalPages, headerData, setLength }) => {
             <BodyRow>
               <BodyCell>{!isLoading && i.domain_name}</BodyCell>
               <BodyCell>{!isLoading && convertDate(i.createdAt)}</BodyCell>
-              <BodyCell>{!isLoading && i.metadata.status}</BodyCell>
-              <BodyCell>{!isLoading && i.actions}</BodyCell>
+              <BodyCell>{i.metadata.status}</BodyCell>
+              <BodyCell>
+                <button className='text-2xl'>
+                  <IoMdRefresh onClick={() => refreshDomain(i.metadata.id)} />
+                </button>
+                <button
+                  className='text-2xl ml-4'
+                  onClick={() => deleteDomain(i._id)}
+                >
+                  <RiDeleteBin2Fill />
+                </button>
+              </BodyCell>
             </BodyRow>
           );
         })}
@@ -150,6 +175,7 @@ const LandingTables = ({
   page,
   setLength,
   setDeleteCNF,
+  setIsEmpty,
 }) => {
   // * fetching data for populating the table
   // const { data, isLoading, isFetching } = useQuery(
@@ -161,10 +187,16 @@ const LandingTables = ({
   // const queryClient = useQueryClient()
   // const data = queryClient.getQueryData(['LandingTablesAll',])
   console.log(data, 'ADADADADADAAD');
-  {
-    !isLoading && setTotalPages(data.numOfPages);
-    !isLoading && setLength(data.length);
+  if (!isFetching && data === undefined) {
+    setIsEmpty(true);
+  } else {
+    setIsEmpty(false);
   }
+  {
+    !isLoading && setTotalPages(data?.numOfPages);
+    !isLoading && setLength(data?.length);
+  }
+
   // * fetching data for page views for the table
   const pageViews = useQuery('PageViews', useLandingPagesData);
 

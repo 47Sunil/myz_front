@@ -45,7 +45,6 @@ const FormScreen = ({
   setIsPaymentMethodSelected,
   templateData,
 }) => {
-  console.log(isPaymentMethodSelected, 'isPaymentMethodSelected');
   const [enabled, setEnabled] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
   console.log(isChecked1, 'is CHECKED 1');
@@ -254,7 +253,7 @@ const FormScreen = ({
             />
           </motion.div>
         </motion.div>
-        {templateData[0]?.name === '' && (
+        {templateData[0]?.name !== undefined && (
           <div
             className={`${
               !enabled ? 'bg-gradient-ai-magic' : 'bg-[#100921]'

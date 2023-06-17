@@ -1,5 +1,6 @@
 import { useQuery, useQueryClient } from 'react-query';
 import { requestInstance } from '../axiosConfig';
+import { toast } from 'react-hot-toast';
 
 // export async function useSubscriptionPlanData(id) {
 //   try {
@@ -24,4 +25,27 @@ export function useSubscriptionPlanData() {
   };
 
   return useQuery('subsPlan', fetchSubscriptionPlanData);
+}
+
+export function useInvoiceData() {
+  const queryClient = useQueryClient();
+  return useQuery(
+    ['invoice'],
+    async () => {
+      try {
+        const res = requestInstance.get('/subscriptions/invoice/list');
+        return res;
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    },
+    {
+      onSuccess: () => {
+        // toast.success('Invoice Updated');
+      },
+      onError: (err) => {
+        toast.error(err.response.data.message);
+      },
+    }
+  );
 }

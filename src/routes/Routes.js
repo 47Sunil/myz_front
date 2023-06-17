@@ -17,6 +17,8 @@ import { useAutoLoginData } from '../actions/User/Login';
 import Editor from '../pages/LandingPage/Editor/Editor';
 import Logout from '../pages/Logout';
 import NotFound from '../pages/404NotFound';
+import Verify from '../pages/SignUp/components/Verify';
+import Checkout from '../pages/SubsCheckout';
 const Router = () => {
   const autoLogin = useAutoLoginData();
   const handleLogin = async () => {
@@ -44,6 +46,10 @@ const Router = () => {
           <Route
             path='/accounts/:method'
             element=<Accounts />
+          />
+          <Route
+            path='/verify'
+            element=<AuthGuard component={<Verify />} />
           />
           <Route
             path='/forgetPassword'
@@ -76,6 +82,10 @@ const Router = () => {
           <Route
             path='/subscription'
             element=<AuthGuard component={<Subscription />} />
+          />
+          <Route
+            path='/checkout'
+            element=<AuthGuard component={<Checkout />} />
           />
           <Route
             path='/other-settings'
