@@ -6,6 +6,7 @@ import { FiEdit, FiCheckSquare } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation, useQueryClient } from 'react-query';
 import { useUserUpdateMutation } from '../../../actions/User/Accounts';
+import user from '../../../assets/icons/user.png';
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
   border-radius: 18px;
@@ -33,6 +34,7 @@ const Overlay2 = styled.div`
 
 const ProfileCommon = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const [isEditing, setIsEditing] = useState(false);
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('user');
   return (
@@ -41,12 +43,21 @@ const ProfileCommon = () => {
         <Wrapper className='w-full h-36 z-20 '>
           <Overlay1>
             <Overlay2 className='relative'>
-              <div className='w-32 h-32 absolute translate-x-1/2 right-1/2 bottom-0 rounded-full translate-y-1/2 bg-[#221154] p-1'>
+              <div className='w-32 h-32 absolute translate-x-1/2 right-1/2 bottom-0 rounded-full translate-y-1/2 bg-[#221154] p-1 '>
                 <img
-                  src={data?.user.profile}
+                  src={data?.user.profile || user}
                   alt='User Img'
                   className='rounded-full w-full h-full object-cover'
                 />
+                {/* <input
+                  type='file'
+                  className='appearance-none'
+                />
+                {isEditing ? (
+                  <FiCheckSquare className='absolute top-0' />
+                ) : (
+                  <FiEdit className='absolute bottom-0 right-0 cursor-pointer ' />
+                )} */}
               </div>
             </Overlay2>
           </Overlay1>

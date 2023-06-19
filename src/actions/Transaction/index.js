@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { requestInstance } from '../axiosConfig';
 
 // export async function useTransactionData() {
@@ -6,13 +6,21 @@ import { requestInstance } from '../axiosConfig';
 //   return res;
 // }
 
-export const useTransactionData = (page) => {
-  const { isLoading, data } = useQuery({
+export const useTransactionData = (page, search) => {
+  const queryClient = useQueryClient();
+  const { isLoading, data, refetch, isRefetching } = useQuery({
     queryKey: ['transactions', page],
-    queryFn: () => {
+    queryFn: async () => {
       console.log(page, 'asdadsadadadadsdsad');
-      return requestInstance.get(`/orders/list?page=${page}`);
+      try {
+        const res = await requestInstance.get(
+          `/orders/list?page=${page}&s=${search}`
+        );
+        return res;
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
-  return { isLoading, data };
+  return { isLoading, data, refetch, isRefetching };
 };

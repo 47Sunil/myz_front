@@ -16,9 +16,30 @@ export const useCheckoutMutation = () => {
     {
       onSuccess: (data) => {
         data && toast.success('Redirecting to Payment');
-        window.location.replace(`${data.paymentDetails.paymentLink}`);
+        console.log('url', data.paymentDetails.paymentLink);
+        // const encodedURL = encodeURIComponent(data.paymentDetails.paymentLink);
+        // window.location.replace(`https://myzer.io/?url=${encodedURL}`);
         // <Navigate to={} />;
         // navigate();
+      },
+    }
+  );
+};
+
+export const useCheckoutUpgradeMutation = () => {
+  return useMutation(
+    async (data) => {
+      data.plan_id = Number(data.plan_id);
+      try {
+        const res = await requestInstance.put('/subscriptions/subs', data);
+        return res;
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    },
+    {
+      onSuccess: (data) => {
+        data && toast.success('Redirecting to Payment');
       },
     }
   );

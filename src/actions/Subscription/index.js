@@ -13,6 +13,16 @@ import { toast } from 'react-hot-toast';
 //     console.log(error);
 //   }
 // }
+export const useAllPlans = () => {
+  return useQuery('allPlans', async () => {
+    try {
+      const res = await requestInstance.get('/subscriptions/subs');
+      return res;
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  });
+};
 
 export function useSubscriptionPlanData() {
   const fetchSubscriptionPlanData = async () => {

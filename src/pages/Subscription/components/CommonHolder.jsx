@@ -30,7 +30,7 @@ const Overlay2 = styled.div`
   border-radius: 18px;
 `;
 
-const CommonHolder = () => {
+const CommonHolder = ({ setModal, modal }) => {
   return (
     <div className='flex flex-row h-full relative w-full'>
       <Wrapper className='h-full w-60 z-10 grow '>
@@ -66,7 +66,10 @@ const CommonHolder = () => {
               Next Payment Date: 15 June 2023
             </p>
             <div className='mx-3 mt-6'>
-              <button className='bg-[#3D1981] py-2 w-full  text-white text-sm rounded-lg'>
+              <button
+                className='bg-[#3D1981] py-2 w-full  text-white text-sm rounded-lg'
+                onClick={() => setModal(!modal)}
+              >
                 Upgrade Plan
               </button>
               <p className='text-white/80 py-2 text-xs text-center'>

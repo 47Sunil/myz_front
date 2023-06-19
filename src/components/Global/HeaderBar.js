@@ -4,6 +4,7 @@ import NegativeRadius from '../../assets/svg/NegativeRadius';
 import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { Popover } from '@headlessui/react';
+import user from '../../assets/icons/user.png';
 
 function MyPopover() {
   const [notification, setNotification] = useState([]);
@@ -64,7 +65,7 @@ const HeaderBar = () => {
           <div className='col-span-4 w-9 h-9'>
             <img
               className='rounded-circle rounded-full object-cover w-full h-full cursor-pointer'
-              src={data?.user.profile}
+              src={data?.user.profile || user}
               alt=''
               onClick={() => navigate('/account')}
             />

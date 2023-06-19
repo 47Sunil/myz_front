@@ -83,12 +83,19 @@ function convertDate(date) {
   return formattedDate;
 }
 
-const TransactionTable = ({ page, headerData, setTotalPages, setLength }) => {
-  const { data, isLoading } = useTransactionData(page);
-  {
-    !isLoading && setTotalPages(data?.TotalOrders);
-    !isLoading && setLength(data?.data.length);
-  }
+const TransactionTable = ({
+  page,
+  headerData,
+  setTotalPages,
+  setLength,
+  data,
+  isLoading,
+}) => {
+  // const { data, isLoading } = useTransactionData(page);
+  // {
+  //   !isLoading && setTotalPages(data?.TotalOrders);
+  //   !isLoading && setLength(data?.data.length);
+  // }
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>
