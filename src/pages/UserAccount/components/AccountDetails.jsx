@@ -100,16 +100,19 @@ const AccountDetails = () => {
         <ContentItem
           label='Email'
           value={fieldChanges.email}
+          setFieldChanges={setFieldChanges}
           id={fieldChanges.id}
         />
         <ContentItem
           label='Phone'
           value={fieldChanges.phone}
+          setFieldChanges={setFieldChanges}
           id={fieldChanges.id}
         />
         <ContentItem
           label='Joining Date'
           value={convertDate(fieldChanges.joiningDate)}
+          setFieldChanges={setFieldChanges}
           id={fieldChanges.id}
         />
       </div>
@@ -122,6 +125,7 @@ const AccountDetails = () => {
           setFieldChanges={setFieldChanges}
           stateKey='address'
           id={fieldChanges.id}
+          fieldChanges={fieldChanges}
         />
         <ContentItem
           label='Country'
@@ -131,6 +135,7 @@ const AccountDetails = () => {
           setFieldChanges={setFieldChanges}
           stateKey='country'
           id={fieldChanges.id}
+          fieldChanges={fieldChanges}
         />
         <ContentItem
           label='State'
@@ -140,6 +145,7 @@ const AccountDetails = () => {
           setFieldChanges={setFieldChanges}
           stateKey='state'
           id={fieldChanges.id}
+          fieldChanges={fieldChanges}
         />
         <ContentItem
           label='City'
@@ -149,6 +155,7 @@ const AccountDetails = () => {
           setFieldChanges={setFieldChanges}
           stateKey='city'
           id={fieldChanges.id}
+          fieldChanges={fieldChanges}
         />
         <ContentItem
           label='Pincode'
@@ -158,6 +165,7 @@ const AccountDetails = () => {
           setFieldChanges={setFieldChanges}
           stateKey='pincode'
           id={fieldChanges.id}
+          fieldChanges={fieldChanges}
         />
         <ContentItem
           label='GST Number'
@@ -166,6 +174,7 @@ const AccountDetails = () => {
           setFieldChanges={setFieldChanges}
           stateKey='gst'
           id={fieldChanges.id}
+          fieldChanges={fieldChanges}
         />
       </div>
       <div className='bg-gray-100/70 rounded-lg'>

@@ -4,6 +4,7 @@ import { useAutoLoginData } from './actions/User/Login';
 import Router from './routes/Routes';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+export const APP_ENVIRONMENT = 'local';
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -32,7 +32,6 @@ function MyPopover() {
 const HeaderBar = () => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('user');
-  console.log(data?.user.name);
   const navigate = useNavigate();
   return (
     <>

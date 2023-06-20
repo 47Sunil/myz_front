@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import AccountDetails from './AccountDetails';
 import PaymentHistory from './PaymentHistory';
 import { FiEdit, FiCheckSquare } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useMutation, useQueryClient } from 'react-query';
-import { useUserUpdateMutation } from '../../../actions/User/Accounts';
+import {
+  useImageUpload,
+  useUserUpdateMutation,
+} from '../../../actions/User/Accounts';
 import user from '../../../assets/icons/user.png';
+import { toast } from 'react-toastify';
+import { useAutoLoginData } from '../../../actions/User/Login';
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
   border-radius: 18px;
@@ -35,30 +40,62 @@ const Overlay2 = styled.div`
 const ProfileCommon = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
+  const [file, setFile] = useState(null);
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('user');
+  const { mutateAsync: upload, isLoading } = useImageUpload();
+  const hiddenFileInput = useRef(null);
+  const handleClickEdit = (e) => {
+    hiddenFileInput.current.click();
+    setIsEditing(!isEditing);
+  };
+  const handleClickUpload = async (e) => {
+    try {
+      const formData = new FormData();
+      formData.append('image', file);
+      await upload(formData);
+      setIsEditing(!isEditing);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+  const handleChange = (e) => {
+    const fileUpload = e.target.files[0];
+    setFile(fileUpload);
+  };
+
   return (
     <>
       <div className='flex flex-col'>
         <Wrapper className='w-full h-36 z-20 '>
           <Overlay1>
             <Overlay2 className='relative'>
-              <div className='w-32 h-32 absolute translate-x-1/2 right-1/2 bottom-0 rounded-full translate-y-1/2 bg-[#221154] p-1 '>
-                <img
-                  src={data?.user.profile || user}
-                  alt='User Img'
-                  className='rounded-full w-full h-full object-cover'
-                />
-                {/* <input
-                  type='file'
-                  className='appearance-none'
-                />
-                {isEditing ? (
-                  <FiCheckSquare className='absolute top-0' />
-                ) : (
-                  <FiEdit className='absolute bottom-0 right-0 cursor-pointer ' />
-                )} */}
-              </div>
+              {!isLoading && (
+                <div className='w-32 h-32 absolute translate-x-1/2 right-1/2 bottom-0 rounded-full translate-y-1/2 bg-[#221154] p-1 '>
+                  <img
+                    src={data?.user.profile || user}
+                    alt='User Img'
+                    className='rounded-full w-full h-full object-cover'
+                  />
+                  <input
+                    type='file'
+                    className='hidden'
+                    ref={hiddenFileInput}
+                    onChange={handleChange}
+                  />
+                  {isEditing ? (
+                    <FiCheckSquare
+                      className='absolute bottom-0 right-0 cursor-pointer '
+                      onClick={handleClickUpload}
+                    />
+                  ) : (
+                    <FiEdit
+                      className='absolute bottom-0 right-0 cursor-pointer '
+                      onClick={handleClickEdit}
+                    />
+                  )}
+                </div>
+              )}
             </Overlay2>
           </Overlay1>
         </Wrapper>
@@ -110,8 +147,13 @@ export const ContentItem = ({
   const [isEditing, setIsEditing] = useState(false);
   const updateUser = useUserUpdateMutation();
   const ID = id;
-  const handleUpdateUser = async (id, name) => {
-    await updateUser.mutateAsync({ id, name });
+  console.log(fieldChanges);
+  const handleUpdateUser = async (data) => {
+    try {
+      await updateUser.mutateAsync(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -153,8 +195,7 @@ export const ContentItem = ({
                 initial={{ x: 100 }}
                 animate={{ x: 0 }}
                 onClick={() => (
-                  setIsEditing(!isEditing),
-                  handleUpdateUser(ID, fieldChanges.name)
+                  setIsEditing(!isEditing), handleUpdateUser(fieldChanges)
                 )}
               >
                 <FiCheckSquare />
