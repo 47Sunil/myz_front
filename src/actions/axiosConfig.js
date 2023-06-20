@@ -1,13 +1,19 @@
 import axios from 'axios';
-import { APP_ENVIRONMENT } from '../App';
-let baseURL;
+import { APP_ENVIRONMENT } from '../constant';
+export let BASE_ENDPOINT = '';
 if (APP_ENVIRONMENT === 'local') {
-  baseURL = 'http://localhost:3000/api/v1/';
+  BASE_ENDPOINT = 'http://localhost:3000/api/v1/';
+} else if (APP_ENVIRONMENT === 'development') {
+  BASE_ENDPOINT = 'https://api.dev.myzer.ai/api/v1';
+} else if (APP_ENVIRONMENT === 'staging') {
+  BASE_ENDPOINT = 'https://api.staging.myzer.ai/api/v1';
+} else if (APP_ENVIRONMENT === 'production') {
+  BASE_ENDPOINT = 'https://api.myzer.ai/api/v1';
 }
 
 export const requestInstance = axios.create({
   // baseURL: 'http://localhost:3000/api/v1/',
-  baseURL,
+  baseURL: BASE_ENDPOINT,
   headers: {
     'Content-Type': 'application/json',
   },
