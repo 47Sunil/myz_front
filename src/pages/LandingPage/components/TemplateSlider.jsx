@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  useAllTemplatesData,
+  // useAllTemplatesData,
   useTemplatesData,
 } from '../../../actions/LandingPage';
 import { useQuery } from 'react-query';
@@ -30,10 +30,10 @@ const ModalBtn = styled.button`
 const TemplateManager = ({
   open,
   setOpen,
-  createPageData,
-  setCreatePageData,
+  // createPageData,
+  // setCreatePageData,
 }) => {
-  const [templates, setTemplates] = useState([]);
+  // const [templates, setTemplates] = useState([]);
 
   function handleClick() {
     setOpen(!open);
@@ -41,7 +41,7 @@ const TemplateManager = ({
   const { data, isLoading } = useQuery('templates', useTemplatesData);
 
   {
-    !isLoading && console.log(data?.data);
+    // !isLoading && console.log(data?.data);
   }
   return (
     <div className='border-b lg:border-y border-solid border-white/20 pb-4 lg:py-4'>

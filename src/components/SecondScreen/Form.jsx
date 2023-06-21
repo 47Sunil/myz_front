@@ -1,7 +1,7 @@
 import React from 'react';
-import DynamicInputManager from '../DynamicInputManager/DynamicInputManager';
-import { Link, useLocation } from 'react-router-dom';
-import { CleaningServices } from '@mui/icons-material';
+// import DynamicInputManager from '../DynamicInputManager/DynamicInputManager';
+import { Link } from 'react-router-dom';
+// import { CleaningServices } from '@mui/icons-material';
 const Form = ({
   headingText,
   btnText,
@@ -10,7 +10,7 @@ const Form = ({
   to,
   onClick,
   loader,
-  onKeyPress,
+  // onKeyPress,
 }) => {
   return (
     <div className={className}>

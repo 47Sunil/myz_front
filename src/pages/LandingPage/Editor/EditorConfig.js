@@ -1,4 +1,4 @@
-import grapesjs from 'grapesjs'
+import grapesjs from 'grapesjs';
 import basicBlocksPlugin from 'grapesjs-blocks-basic';
 import countdownPlugin from 'grapesjs-component-countdown';
 import touchPlugin from 'grapesjs-touch';
@@ -18,36 +18,42 @@ import { Pannels } from './Editor__Pannels';
 import { CanvasManager } from './Editor__CanvasManager';
 import axios from 'axios';
 
-
 export const geditorConfig = (id, pageType) => {
-    const editor = grapesjs.init({
-        container: '#gjs',
-        height: 'calc(100vh - 101px)',
-        width: 'calc(100vw - 350px)',
-        styleManager: StyleManager,
-        storageManager: StorageManager(id, pageType),
-        selectorManager: SelectorManager,
-        assetManager: AssetManager(id),
-        plugins: [basicBlocksPlugin, countdownPlugin, touchPlugin, postCssPlugin, imageEditorPlugin, styleBgPlugin],
-        pluginsOpts: PluginManager,
-        deviceManager: DeviceManager,
-        layerManager: LayersManager,
-        blockManager: BlockManager,
-        traitManager: TraitManager,
-        panels: Pannels,
-        canvas: CanvasManager
-    })
+  const editor = grapesjs.init({
+    container: '#gjs',
+    height: 'calc(100vh - 101px)',
+    width: 'calc(100vw - 350px)',
+    styleManager: StyleManager,
+    storageManager: StorageManager(id, pageType),
+    selectorManager: SelectorManager,
+    assetManager: AssetManager(id),
+    plugins: [
+      basicBlocksPlugin,
+      countdownPlugin,
+      touchPlugin,
+      postCssPlugin,
+      imageEditorPlugin,
+      styleBgPlugin,
+    ],
+    pluginsOpts: PluginManager,
+    deviceManager: DeviceManager,
+    layerManager: LayersManager,
+    blockManager: BlockManager,
+    traitManager: TraitManager,
+    panels: Pannels,
+    canvas: CanvasManager,
+  });
 
-    editor.on('load', () =>  {
-        console.log("HTML")
-        axios.get(`/api/v1/${pageType}/${id}/content`).then(response=> {
-            console.log(response)
-            editor.DomComponents.addComponent(response.data.data.html)
-            editor.setStyle(response.data.data.css)
-        }) 
-    })
+  editor.on('load', () => {
+    // console.log("HTML")
+    axios.get(`/api/v1/${pageType}/${id}/content`).then((response) => {
+      // console.log(response)
+      editor.DomComponents.addComponent(response.data.data.html);
+      editor.setStyle(response.data.data.css);
+    });
+  });
 
-    return editor;
-}
+  return editor;
+};
 
 export default geditorConfig;

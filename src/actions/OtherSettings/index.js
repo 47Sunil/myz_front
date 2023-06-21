@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { requestInstance } from '../axiosConfig';
 import { toast } from 'react-hot-toast';
 
@@ -7,11 +7,11 @@ export function useIntegrationPhoneMutation() {
   const queryClient = useQueryClient();
   return useMutation(
     async (userData) => {
-      console.log(userData, 'user data integrationd');
+      // console.log(userData, 'user data integrationd');
       try {
         const res = await requestInstance.patch('/users/order', userData);
         // toast.success('domain added successfully');
-        console.log(res);
+        // console.log(res);
         return res;
       } catch (err) {
         toast.error(err.response.data.message);
@@ -24,7 +24,7 @@ export function useIntegrationPhoneMutation() {
         toast.success('Updated');
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
         toast.error(error.response.data.message);
       },
     }
@@ -53,7 +53,7 @@ export function useIntegrationEmailMutation() {
         data && toast.success('Phone Added');
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
         toast.error(error.response.data.message);
       },
     }
@@ -82,7 +82,7 @@ export function useIntegrationWebhookMutation() {
         data && toast.success('Updated');
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
         toast.error(error.response.data.message);
       },
     }

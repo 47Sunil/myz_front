@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import SideBar from '../../components/SideBar/Sidebar';
-import TopBar from '../../components/TopBar/Topbar';
+// import SideBar from '../../components/SideBar/Sidebar';
+// import TopBar from '../../components/TopBar/Topbar';
 
-import DateSection from './components/Date';
+// import DateSection from './components/Date';
 import OrderActivity from './components/Orders';
 import ReportSection from './components/Reports';
-import SplineChart from './components/SplineChart';
+// import SplineChart from './components/SplineChart';
 import BarChart from './components/BarChart';
-import { CountryTables, Tables, TopSellingTables } from './components/Tables';
+import { CountryTables, TopSellingTables } from './components/Tables';
 import AreaChart from './components/AreaChart';
 import Datepicker from 'react-tailwindcss-datepicker';
 
@@ -19,16 +19,16 @@ const Dashboard = () => {
     sessions: '173',
   });
 
-  const [spinChartData, setSpinChartData] = useState({
-    dates: [],
-    averageValues: [],
-  });
+  // const [spinChartData, setSpinChartData] = useState({
+  //   dates: [],
+  //   averageValues: [],
+  // });
 
-  const [locationData, setLocationData] = useState(['']);
+  // const [locationData, setLocationData] = useState(['']);
 
-  const [topProducts, setTopProducts] = useState([]);
+  // const [topProducts, setTopProducts] = useState([]);
 
-  const [trafficSource, setTrafficSource] = useState([]);
+  // const [trafficSource, setTrafficSource] = useState([]);
 
   const [ordersActivity, setOrdersActivity] = useState([]);
 
@@ -94,7 +94,7 @@ const Dashboard = () => {
     endDate: new Date().setMonth(11),
   });
   const handleValueChange = (newValue) => {
-    console.log('newValue:', newValue);
+    // console.log('newValue:', newValue);
     setValue(newValue);
   };
 

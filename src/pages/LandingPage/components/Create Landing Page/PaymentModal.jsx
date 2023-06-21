@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PaymentMethod from './PaymentMethod';
 import { AiOutlineInfoCircle } from 'react-icons/ai';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 const PaymentModal = ({
   setPageData,
   paymentSelect,
@@ -15,8 +15,8 @@ const PaymentModal = ({
   const [isSelected, setIsSelected] = useState(pageData.paymentGateway);
   const queryClient = useQueryClient();
   const paymentData = queryClient.getQueryData('paymentData');
-  console.log(paymentData, 'payment modal payment data');
-  console.log(isSelected, 'is selected');
+  // console.log(paymentData, 'payment modal payment data');
+  // console.log(isSelected, 'is selected');
   return (
     <div className='absolute inset-0 w-full h-full bg-[rgba(0,0,0,0.54)] z-30 flex justify-center items-center'>
       <div className='bg-[#0A031B] rounded-[31px] border border-solid border-[rgba(255,255,255,0.29)] w-[60vw] h-[80vh] p-[34px_68px] overflow-hidden relative'>

@@ -1,8 +1,8 @@
 import React from 'react';
-import TransparentButton from '../../../components/TransparentButton/TransparentButton';
-import Search from '../../../assets/svg/Search';
-import FilterIcon from '../../../assets/svg/FilterIcon';
-import { filterData } from '../../../utils/Data/constant';
+// import TransparentButton from '../../../components/TransparentButton/TransparentButton';
+// import Search from '../../../assets/svg/Search';
+// import FilterIcon from '../../../assets/svg/FilterIcon';
+// import { filterData } from '../../../utils/Data/constant';
 
 const Filter = () => {
   return (

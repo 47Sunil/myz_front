@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AppSidebar from '../components/Global/AppSidebar';
 import HeaderBar from '../components/Global/HeaderBar';
 import { useLocation } from 'react-router-dom';
-import ViewAllTemplatesModal from './LandingPage/components/ViewAllTemplatesModal';
+// import ViewAllTemplatesModal from './LandingPage/components/ViewAllTemplatesModal';
 
 const Background = styled.div`
   height: 100vh;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { useLoginMutation } from '../actions/User/Login';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ const AuthGuard = ({ component }) => {
     useLoginMutation
   );
   const navigate = useNavigate();
-  console.log(data, 'auto login auth guarde');
+  // console.log(data, 'auto login auth guarde');
   return (
     <>
       {!isLoading &&

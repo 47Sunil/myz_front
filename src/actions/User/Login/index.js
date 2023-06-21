@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from 'react-query';
 import { requestInstance } from '../../axiosConfig';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 export function useLoginMutation() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -17,7 +17,8 @@ export function useLoginMutation() {
         navigate('/dashboard');
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log(error);
+        // console.log('error occured: ' + error.message);
       },
     }
   );
@@ -30,7 +31,7 @@ export function useAutoLoginData() {
         const res = await requestInstance.get('users/account');
         return res;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     },
     {
@@ -39,7 +40,7 @@ export function useAutoLoginData() {
         queryClient.invalidateQueries('user');
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
       },
     }
   );

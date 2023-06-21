@@ -1,17 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import AccountDetails from './AccountDetails';
 import PaymentHistory from './PaymentHistory';
 import { FiEdit, FiCheckSquare } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import {
   useImageUpload,
   useUserUpdateMutation,
 } from '../../../actions/User/Accounts';
 import user from '../../../assets/icons/user.png';
 import { toast } from 'react-toastify';
-import { useAutoLoginData } from '../../../actions/User/Login';
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
   border-radius: 18px;
@@ -146,13 +145,13 @@ export const ContentItem = ({
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const updateUser = useUserUpdateMutation();
-  const ID = id;
-  console.log(fieldChanges);
+  // const ID = id;
+  // console.log(fieldChanges);
   const handleUpdateUser = async (data) => {
     try {
       await updateUser.mutateAsync(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

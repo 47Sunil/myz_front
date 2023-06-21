@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SecondScreenWrapper from '../../components/SecondScreen/SecondScreenWrapper';
 import DynamicInputManager from '../../components/DynamicInputManager/DynamicInputManager';
-import TransparentButton from '../../components/TransparentButton/TransparentButton';
+// import TransparentButton from '../../components/TransparentButton/TransparentButton';
 
 const Checkout = () => {
   const [checkoutData, setCheckoutData] = useState({

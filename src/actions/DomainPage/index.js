@@ -32,7 +32,7 @@ export function useDomainMutation() {
         data && navigate('/domain/verification');
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
         // toast.error(error.response.data.message);
       },
     }

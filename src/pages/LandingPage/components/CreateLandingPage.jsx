@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import SecondScreenWrapper from '../../../components/SecondScreen/SecondScreenWrapper';
 import star from '../../../assets/images/star2.png';
 import TransparentButton from '../../../components/TransparentButton/TransparentButton';
-import { AiOutlineSwap, AiFillCaretDown } from 'react-icons/ai';
+import { AiOutlineSwap } from 'react-icons/ai';
 import { useQuery, useQueryClient } from 'react-query';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import {
-  useLandingDomainData,
-  useLandingPageMutation,
-} from '../../../actions/LandingPage';
+// import {
+//   useLandingDomainData,
+//   useLandingPageMutation,
+// } from '../../../actions/LandingPage';
 import PaymentModal from './Create Landing Page/PaymentModal';
 import FormScreen from './Create Landing Page/FormScreen';
 import { useLandingPaymentData } from '../../../actions/LandingPage/index';
@@ -21,8 +21,8 @@ const CreateLandingPage = () => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('templates');
   const ID = searchParams.get('id');
-  const paymentData = useQuery('paymentData', useLandingPaymentData);
-  console.log(paymentData, 'payment data');
+  // const paymentData = useQuery('paymentData', useLandingPaymentData);
+  // console.log(paymentData, 'payment data');
   const [pageData, setPageData] = useState({
     funnelName: '',
     pageName: 'mist',
@@ -52,16 +52,16 @@ const CreateLandingPage = () => {
       },
     },
   });
-  console.log(pageData, 'page data');
+  // console.log(pageData, 'page data');
   const [paymentSelect, setPaymentSelect] = useState(false);
   const templateData = data?.data.filter((i) => {
     return i._id === ID;
   });
-  console.log(templateData, 'template data');
+  // console.log(templateData, 'template data');
   const navigate = useNavigate();
   if (templateData === undefined) {
     navigate('/landing-pages/home');
-    console.log('no template data');
+    // console.log('no template data');
   }
   useEffect(() => {
     window.onbeforeunload = function () {
@@ -69,7 +69,7 @@ const CreateLandingPage = () => {
     };
     if (templateData === undefined) {
       navigate('/landing-pages/home');
-      console.log('no template data');
+      // console.log('no template data');
     }
   }, []);
   return (

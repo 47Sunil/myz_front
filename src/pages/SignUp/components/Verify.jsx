@@ -7,19 +7,16 @@ import bgForm from '../../../assets/images/signin_bg.png';
 import FormLeft from '../../../components/FormLeft/FormLeft';
 import PinkButton from '../../../components/PinkButton/PinkButton';
 import { Link, useNavigate } from 'react-router-dom';
-import GoToHomeBtn from '../../../components/BackToHome/BackToHome';
-import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
+// import GoToHomeBtn from '../../../components/BackToHome/BackToHome';
+// import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
 import OtpInput from 'react-otp-input';
 import {
   useOtpVerificationEmail,
   useOtpVerificationPhone,
 } from '../../../actions/User/Signup';
 import { toast } from 'react-hot-toast';
-import { useQueryClient } from 'react-query';
-import {
-  useAutoLoginData,
-  useLoginMutation,
-} from '../../../actions/User/Login';
+// import { useQueryClient } from 'react-query';
+import { useAutoLoginData } from '../../../actions/User/Login';
 // import { TopError } from './';
 // import { motion } from 'framer-motion';
 // import { useSelector } from 'react-redux';
@@ -47,7 +44,7 @@ const Form = () => {
       await emailVerification(email);
       (await login()) && navigate('/dashboard');
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error(error.response.data.message);
     }
   };

@@ -76,7 +76,8 @@ const DynamicInputManager = ({
   max,
 }) => {
   return (
-    <div className='myzer-form-page-field w-full flex flex-col px-5 pb-5'>
+    <div className='myzer-form-page-field w-full flex flex-col px-5 pb-5 relative'>
+      <i className='absolute left-[2rem] top-[2.9rem]'>{icon}</i>
       <Label htmlFor={htmlId}>
         {label} {isRequired ? <span className='text-red-600'>*</span> : null}
       </Label>

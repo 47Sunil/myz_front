@@ -2,7 +2,7 @@ import React from 'react';
 
 const EyesClose = () => {
   return (
-    <div className='absolute top-[1.1rem] right-[.5rem] text-[#85878c] text-xl p-[0.05rem]'>
+    <div>
       {' '}
       <svg
         width='27'

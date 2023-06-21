@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { DomainTables } from '../../../components/Tables/Tables';
 import { domainTableData } from '../../../utils/Data/constant';
-import { useDomainData } from '../../../actions/DomainPage';
-import { useQuery, useQueryClient } from 'react-query';
+// import { useDomainData } from '../../../actions/DomainPage';
+// import { useQuery, useQueryClient } from 'react-query';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
 
 const Table = () => {

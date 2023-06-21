@@ -9,9 +9,9 @@ const BodyRow = styled.tr`
 `;
 export const CountryTables = ({ heading }) => {
   const { data, isLoading } = useQuery('country', useCountryData);
-  {
-    !isLoading && console.log(data, 'country data');
-  }
+
+  // !isLoading && console.log(data, 'country data');
+
   return (
     <div className='w-full h-full bg-[#1E222D] gap-[20px] rounded-2xl  pt-8  flex  items-center flex-col shadow-[inset_3px_3px_25px_#2d333d] border border-solid border-[#909094] overflow-y-scroll'>
       <div className='w-full'>
@@ -40,9 +40,9 @@ export const CountryTables = ({ heading }) => {
 };
 export const TopSellingTables = ({ heading }) => {
   const { data, isLoading } = useQuery('top_selling', useTopSellingData);
-  {
-    !isLoading && console.log(data, 'top selling data');
-  }
+
+  // !isLoading && console.log(data, 'top selling data');
+
   return (
     <div className='w-full h-full bg-[#1E222D] gap-[20px] rounded-2xl  pt-8  flex  items-center flex-col shadow-[inset_3px_3px_25px_#2d333d] border border-solid border-[#909094]'>
       <div className='w-full'>

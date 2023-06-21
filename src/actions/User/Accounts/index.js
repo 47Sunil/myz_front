@@ -1,15 +1,15 @@
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { reqInstanceImage, requestInstance } from '../../axiosConfig';
 import { useQueryClient, useMutation } from 'react-query';
 import { toast } from 'react-toastify';
-import { queryAllByTitle } from '@testing-library/react';
+// import { queryAllByTitle } from '@testing-library/react';
 
 export function useUserUpdateMutation() {
   const queryClient = useQueryClient();
   return useMutation(
     async (data) => {
       try {
-        console.log(data);
+        // console.log(data);
         const res = await requestInstance.patch(`/users/updateUser`, {
           name: data.name,
           address: {
@@ -20,10 +20,10 @@ export function useUserUpdateMutation() {
             billing_postcode: data.pincode,
           },
         });
-        console.log(res);
+        // console.log(res);
         return res;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     },
     {
@@ -33,14 +33,14 @@ export function useUserUpdateMutation() {
         window.location.reload();
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
       },
     }
   );
 }
 
 export function useChangePasswordMutation() {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   return useMutation(async ({ oldPassword, newPassword }) => {
     const res = await requestInstance.patch('users/update-password', {
       oldPassword,

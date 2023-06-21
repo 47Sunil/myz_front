@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
 import { AiOutlineSearch, AiFillCaretDown } from 'react-icons/ai';
 import { MdNavigateNext, MdNavigateBefore } from 'react-icons/md';
-import templateImage from '../../../assets/images/myzer-templates.png';
+// import templateImage from '../../../assets/images/myzer-templates.png';
 import DropDown from '../../../components/DropDown/DropDown';
 import { Menu } from '@headlessui/react';
-import { useQuery } from 'react-query';
+// import { useQuery } from 'react-query';
 import {
   useAllTemplatesData,
   useCategoryData,
 } from '../../../actions/LandingPage';
-import { motion, stagger } from 'framer-motion';
+// import { motion, stagger } from 'framer-motion';
 import Eye from '../../../assets/svg/Eye';
 import { Link } from 'react-router-dom';
 
@@ -24,10 +24,9 @@ const ViewAllTemplatesModal = () => {
   const { data, isLoading, isPreviousData, isFetching, refetch, isRefetching } =
     useAllTemplatesData(page, searchTemplate);
 
-  {
-    !isLoading &&
-      console.log(data, 'allTemplates', isLoading, 'isLoading or not');
-  }
+  // !isLoading &&
+  //   console.log(data, 'allTemplates', isLoading, 'isLoading or not');
+
   const { isLoading: categoryLoading, data: categoryData } = useCategoryData();
   const [categoryFilter, setCategoryFilter] = useState('All');
   const handleCategoryFilter = (category) => {

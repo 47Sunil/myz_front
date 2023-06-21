@@ -47,7 +47,7 @@ const SettingCard = ({ label, img, description, docs, type = 'text' }) => {
 const Modal = ({ setShowModal, showModal, label, type }) => {
   const queryClient = useQueryClient();
   const { user: userData } = queryClient.getQueryData('user');
-  console.log(userData, 'adsadadadadjkhdkfhkjajajkjhfhjahjkd');
+  // console.log(userData, 'adsadadadadjkhdkfhkjajajkjhfhjahjkd');
   const [whatsapp, setWhatsapp] = useState({
     enable: false,
     value: userData.orderNotify.whatsapp.value,

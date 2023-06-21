@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import './App.css';
-import { useAutoLoginData } from './actions/User/Login';
+// import { useAutoLoginData } from './actions/User/Login';
 import Router from './routes/Routes';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 // export const APP_ENVIRONMENT = 'local';
 

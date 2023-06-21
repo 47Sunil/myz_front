@@ -51,7 +51,7 @@ const AddNewPaymentGateway = () => {
     payment_title: '',
     payment_gateway_data: {},
   });
-  console.log(requestData, 'id payment');
+  // console.log(requestData, 'id payment');
   const addPaymentGateway = usePaymentMutation();
   const handleAddPaymentGateway = async (data) => {
     (await addPaymentGateway).mutateAsync(data);

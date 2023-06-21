@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast';
 
 export async function useTemplatesData() {
   const res = await requestInstance.get('/templates/list');
-  console.log(res, 'landing pages');
+  // console.log(res, 'landing pages');
   return res;
 }
 
@@ -44,10 +44,10 @@ export function useAllTemplatesData(pageNum, name) {
       const res = await requestInstance.get(
         `/templates/list?page=${pageNum}&name=${name}`
       );
-      console.log(res, 'landing pages all dadadasdads');
+      // console.log(res, 'landing pages all dadadasdads');
       return res;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -65,10 +65,10 @@ export function useLandingTablesData(pageNum) {
   const fetchAllTablesData = async () => {
     try {
       const res = await requestInstance.get(`/landingpages/?page=${pageNum}`);
-      console.log(res, 'landing pages all ASDDASDSAADSADSADS');
+      // console.log(res, 'landing pages all ASDDASDSAADSADSADS');
       return res;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -106,7 +106,7 @@ export async function useLandingPublishPatchMutation() {
         queryClient.invalidateQueries('LandingTablesAll');
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
       },
     }
   );
@@ -123,7 +123,7 @@ export async function useLandingPublishPutMutation() {
         queryClient.invalidateQueries('LandingTablesAll');
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
       },
     }
   );
@@ -132,13 +132,13 @@ export async function useLandingPublishPutMutation() {
 export function useLandingTablesMutation() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const { isFetching, mutateAsync, data } = useMutation(
-    async ({ id, page }) => {
+  const { mutateAsync } = useMutation(
+    async ({ id }) => {
       try {
         const res = await requestInstance.delete(`landingpages/${id}`);
         return res;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     },
     {
@@ -146,7 +146,7 @@ export function useLandingTablesMutation() {
         await queryClient.cancelQueries(['LandingTablesAll', page]);
         const prevData = queryClient.getQueryData(['LandingTablesAll', page]);
         queryClient.setQueryData(['LandingTablesAll', page], (oldData) => {
-          console.log(oldData, 'old data');
+          // console.log(oldData, 'old data');
           return oldData.data.filter((dataId) => dataId._id !== id);
         });
         return { prevData };
@@ -178,7 +178,7 @@ export function useLandingPageMutation() {
         navigate(`/landingpages/editor/${data?.data._id}`);
       },
       onError: (error) => {
-        console.log('error occured: ' + error.message);
+        // console.log('error occured: ' + error.message);
       },
     }
   );

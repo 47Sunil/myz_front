@@ -30,7 +30,7 @@ export function useSubscriptionPlanData() {
       const res = await requestInstance.get(`/users/limit`);
       return res;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -38,7 +38,7 @@ export function useSubscriptionPlanData() {
 }
 
 export function useInvoiceData() {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   return useQuery(
     ['invoice'],
     async () => {

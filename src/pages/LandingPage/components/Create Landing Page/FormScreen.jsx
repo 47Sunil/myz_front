@@ -47,13 +47,13 @@ const FormScreen = ({
 }) => {
   const [enabled, setEnabled] = useState(false);
   const [isChecked1, setIsChecked1] = useState(false);
-  console.log(isChecked1, 'is CHECKED 1');
+  // console.log(isChecked1, 'is CHECKED 1');
 
   const [isChecked2, setIsChecked2] = useState(false);
-  console.log(isChecked2, 'is CHECKED 2');
+  // console.log(isChecked2, 'is CHECKED 2');
 
   const [isChecked3, setIsChecked3] = useState(false);
-  console.log(isChecked3, 'is CHECKED 3');
+  // console.log(isChecked3, 'is CHECKED 3');
 
   const [isFunnelName, setIsFunnelName] = useState(false);
   const [isDomainEmpty, setIsDomainEmpty] = useState(false);
@@ -95,7 +95,7 @@ const FormScreen = ({
   };
 
   const onChangeHandler = (e) => {
-    console.log(e, 'on change handler');
+    // console.log(e, 'on change handler');
     setEnabled(!enabled);
   };
   if (!enabled) {

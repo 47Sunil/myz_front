@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Banner from './components/Banner';
 import AddDomain from './components/AddDomain';
 import Table from './components/Table';

@@ -1,4 +1,4 @@
-import razorPayLogo from '../../../../assets/icons/razorpay.png';
+// import razorPayLogo from '../../../../assets/icons/razorpay.png';
 // * INDIVIDUAL PAYEMENT METHOD COMPONENT
 const PaymentMethod = ({
   title,

@@ -12,8 +12,8 @@ if (APP_ENVIRONMENT === 'local') {
 }
 
 export const requestInstance = axios.create({
-  // baseURL: 'http://localhost:3000/api/v1/',
-  baseURL: BASE_ENDPOINT,
+  baseURL: 'http://localhost:3000/api/v1/',
+  // baseURL: BASE_ENDPOINT,
   headers: {
     'Content-Type': 'application/json',
   },

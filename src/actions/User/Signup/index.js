@@ -1,16 +1,16 @@
-import { QueryClient, useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import { requestInstance } from '../../axiosConfig';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 let otp;
 export const useSignupMutation = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   return useMutation(
     async (data) => {
       try {
         const res = await requestInstance.post('/users', data);
-        console.log(res);
+        // console.log(res);
         otp = res.user;
         localStorage.setItem('phone', otp.phone);
         localStorage.setItem('email', otp.email);
@@ -43,7 +43,7 @@ export const useOtpVerificationPhone = () => {
         );
         return res;
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         toast.error(error.response.data.message);
       }
     },

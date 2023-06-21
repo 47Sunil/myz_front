@@ -7,7 +7,7 @@ export function useMyzerQuery(key, fun, url) {
     () => requestInstance.get(url).then((response) => response.data),
     {
       onSuccess: () => {
-        console.log('success');
+        // console.log('success');
       },
     }
   );

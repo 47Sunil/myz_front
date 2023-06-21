@@ -1,4 +1,3 @@
-import { useQueryClient } from 'react-query';
 import {
   AccountLogo,
   DashboardLogo,

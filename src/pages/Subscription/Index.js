@@ -25,20 +25,19 @@ const Index = () => {
   const [enabled, setEnabled] = useState(false);
   const { data } = useAllPlans();
   const [modal, setModal] = useState(false);
-  console.log(data);
-  const { mutateAsync: upgrade, data: upgradeData } =
-    useCheckoutUpgradeMutation();
-  console.log(upgradeData, 'onSuccess upgrade');
+  // console.log(data);
+  const { mutateAsync: upgrade } = useCheckoutUpgradeMutation();
+  // console.log(upgradeData, 'onSuccess upgrade');
 
   const handleSubmit = async (upgradeSubs, id) => {
-    console.log(id, 'iddddddddddddd');
+    // console.log(id, 'iddddddddddddd');
 
     setUpdateSubs((prev) => ({ ...prev, plan_id: id }));
-    console.log(upgradeSubs, 'onbnasdajkdajk');
+    // console.log(upgradeSubs, 'onbnasdajkdajk');
 
     try {
       await upgrade(upgradeSubs);
-      console.log('first');
+      // console.log('first');
     } catch (error) {
       toast.error(error.response.data.message);
     }

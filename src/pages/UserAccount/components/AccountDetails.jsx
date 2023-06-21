@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ContentItem } from './ProfileCommon';
-import { useQuery, useQueryClient } from 'react-query';
-import {
-  useAccountData,
-  useChangePasswordMutation,
-} from '../../../actions/User/Accounts';
+import { useQueryClient } from 'react-query';
+import { useChangePasswordMutation } from '../../../actions/User/Accounts';
 import { RiCloseLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -27,7 +24,7 @@ const AccountDetails = () => {
     newPass: '',
     cnfPass: '',
   });
-  const [errorMsg, setErrorMsg] = useState('');
+  // const [errorMsg, setErrorMsg] = useState('');
   const handleChangePassword = async () => {
     try {
       if (
@@ -72,7 +69,7 @@ const AccountDetails = () => {
     pincode: data?.user?.metadata[0]?.billing_postcode,
     gst: '',
   });
-  console.log(fieldChanges);
+  // console.log(fieldChanges);
 
   function convertDate(date) {
     const newFormatDate = new Date(date);

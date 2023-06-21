@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrandLogo } from '../../assets/Brand/Assets';
 import { data1, data2, data3 } from '../../utils/Data/SidebarData';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 
-const Element = styled.div`
-  background: ${(props) =>
-    !props.transparent
-      ? 'transparent'
-      : 'linear-gradient(180deg, #bd61ec 0%, #5e36ce 100%)'};
-`;
+// const Element = styled.div`
+//   background: ${(props) =>
+//     !props.transparent
+//       ? 'transparent'
+//       : 'linear-gradient(180deg, #bd61ec 0%, #5e36ce 100%)'};
+// `;
 const SideBarItem = styled.div`
   position: relative;
   z-index: 99;
@@ -48,7 +48,7 @@ const SideBarItem = styled.div`
 
 const AppSidebar = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
+  // console.log(pathname);
   return (
     <>
       <div className='flex p-5 justify-between flex-col h-screen'>

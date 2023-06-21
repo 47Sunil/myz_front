@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import CopyIcon from '../../assets/svg/CopyIcon';
 import Eye from '../../assets/svg/Eye';
 import Bin from '../../assets/svg/Bin';
 import Notebook from '../../assets/svg/Notebook';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import {
   useLandingPagesData,
   useLandingPublishPatchMutation,
   useLandingPublishPutMutation,
   useLandingTablesData,
-  useLandingTablesMutation,
 } from '../../actions/LandingPage';
-import { useTransactionData } from '../../actions/Transaction';
+// import { useTransactionData } from '../../actions/Transaction';
 import {
   useDomainData,
   useDomainMutationDelete,
@@ -20,11 +19,11 @@ import {
 } from '../../actions/DomainPage';
 import { Tooltip, IconButton } from '@mui/material';
 import PageLoader from '../../pages/LandingPage/components/PageLoader';
-import { Modal, Box, Typography } from '@mui/material';
+// import { Modal, Box, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdRefresh } from 'react-icons/io';
 import { RiDeleteBin2Fill } from 'react-icons/ri';
-import { toast } from 'react-hot-toast';
+// import { toast } from 'react-hot-toast';
 const HeaderCell = styled.th`
   background: rgba(229, 231, 235, 0.7);
   font-weight: 400;
@@ -84,10 +83,10 @@ function convertDate(date) {
 }
 
 const TransactionTable = ({
-  page,
+  // page,
   headerData,
-  setTotalPages,
-  setLength,
+  // setTotalPages,
+  // setLength,
   data,
   isLoading,
 }) => {
@@ -128,7 +127,7 @@ const TransactionTable = ({
 };
 
 const DomainTables = ({ page, setTotalPages, headerData, setLength }) => {
-  const { data, isLoading, isFetching } = useDomainData(page);
+  const { data, isLoading } = useDomainData(page);
   const { mutateAsync: refresh } = useDomainRefresh();
   const refreshDomain = (id) => {
     refresh(id);
@@ -176,7 +175,7 @@ const DomainTables = ({ page, setTotalPages, headerData, setLength }) => {
 };
 
 const LandingTables = ({
-  pages,
+  // pages,
   headerData,
   setTotalPages,
   page,
@@ -189,11 +188,10 @@ const LandingTables = ({
   //   'LandingTables',
   //   useLandingTablesData
   // );
-  const { data, isLoading, isPreviousData, isFetching } =
-    useLandingTablesData(page);
+  const { data, isLoading, isFetching } = useLandingTablesData(page);
   // const queryClient = useQueryClient()
   // const data = queryClient.getQueryData(['LandingTablesAll',])
-  console.log(data, 'ADADADADADAAD');
+  // console.log(data, 'ADADADADADAAD');
   if (!isFetching && data === undefined) {
     setIsEmpty(true);
   } else {
@@ -210,7 +208,7 @@ const LandingTables = ({
   const pageViewsData = !pageViews.isLoading && pageViews?.data?.data;
 
   {
-    !pageViews.isLoading && console.log(pageViewsData, 'adaddaadad');
+    // !pageViews.isLoading && console.log(pageViewsData, 'adaddaadad');
   }
   // * modifying the data when delete button is clicked
   // const tableMutation = useLandingTablesMutation();
@@ -239,7 +237,7 @@ const LandingTables = ({
     (await tableDraftPatchMutation).mutateAsync({ id });
   };
   const handlePublishTrue = (id) => {
-    console.log(id);
+    // console.log(id);
     handlePublishPatch(id);
   };
   // put -- changes publish to false
@@ -257,10 +255,10 @@ const LandingTables = ({
   };
 
   {
-    !isLoading && console.log(data, 'landing pages table data');
+    // !isLoading && console.log(data, 'landing pages table data');
   }
   const pattern = /\/([^/]+)$/;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
     <table className='w-full border-collapse mb-[41px]'>
       <tr>

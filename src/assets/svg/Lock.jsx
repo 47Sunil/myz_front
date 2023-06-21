@@ -2,7 +2,7 @@ import React from 'react';
 
 const Lock = () => {
   return (
-    <div className='absolute top-[1.1rem] left-[1rem] text-[#85878c] text-xl p-[0.05rem]'>
+    <div>
       <svg
         width='14'
         height='19'

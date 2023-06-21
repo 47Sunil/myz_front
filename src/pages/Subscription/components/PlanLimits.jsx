@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+// import { useQuery, useQueryClient } from 'react-query';
 import { useSubscriptionPlanData } from '../../../actions/Subscription';
 
 const PlanLimits = () => {
@@ -71,22 +71,22 @@ const ProgressBar = ({ limit = 12, limitUsed = 6, label }) => {
   );
 };
 
-const demoData = {
-  landing_page: {
-    limit: '12',
-    limitUsed: '8',
-  },
-  domain: {
-    limit: '12',
-    limitUsed: '1',
-  },
-  aiTokens: {
-    limit: '12',
-    limitUsed: '6',
-  },
-  forms: {
-    limit: '12',
-    limitUsed: '12',
-  },
-};
+// const demoData = {
+//   landing_page: {
+//     limit: '12',
+//     limitUsed: '8',
+//   },
+//   domain: {
+//     limit: '12',
+//     limitUsed: '1',
+//   },
+//   aiTokens: {
+//     limit: '12',
+//     limitUsed: '6',
+//   },
+//   forms: {
+//     limit: '12',
+//     limitUsed: '12',
+//   },
+// };
 export default PlanLimits;

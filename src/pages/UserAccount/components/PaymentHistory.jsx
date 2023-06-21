@@ -1,10 +1,9 @@
-import { ArrowDownward } from '@mui/icons-material';
 import React from 'react';
 import { DownloadIcon } from './icons';
 import { useInvoiceData } from '../../../actions/Subscription';
 
 const PaymentHistory = () => {
-  const { data, isLoading } = useInvoiceData();
+  const { data } = useInvoiceData();
   const monthNames = [
     'Jan',
     'Feb',
@@ -107,35 +106,35 @@ const ListItem = ({
   );
 };
 
-const data = [
-  {
-    invoiceId: '#1234',
-    status: 'paid',
-    dateCreated: '12 june 2022',
-    dateExpiry: '20 june 2022',
-    amount: 69,
-  },
-  {
-    invoiceId: '#1234',
-    status: 'paid',
-    dateCreated: '12 june 2022',
-    dateExpiry: '20 june 2022',
-    amount: 69,
-  },
-  {
-    invoiceId: '#1234',
-    status: 'paid',
-    dateCreated: '12 june 2022',
-    dateExpiry: '20 june 2022',
-    amount: 69,
-  },
-  {
-    invoiceId: '#1234',
-    status: 'not paid',
-    dateCreated: '12 june 2022',
-    dateExpiry: '20 june 2022',
-    amount: 69,
-  },
-];
+// const data = [
+//   {
+//     invoiceId: '#1234',
+//     status: 'paid',
+//     dateCreated: '12 june 2022',
+//     dateExpiry: '20 june 2022',
+//     amount: 69,
+//   },
+//   {
+//     invoiceId: '#1234',
+//     status: 'paid',
+//     dateCreated: '12 june 2022',
+//     dateExpiry: '20 june 2022',
+//     amount: 69,
+//   },
+//   {
+//     invoiceId: '#1234',
+//     status: 'paid',
+//     dateCreated: '12 june 2022',
+//     dateExpiry: '20 june 2022',
+//     amount: 69,
+//   },
+//   {
+//     invoiceId: '#1234',
+//     status: 'not paid',
+//     dateCreated: '12 june 2022',
+//     dateExpiry: '20 june 2022',
+//     amount: 69,
+//   },
+// ];
 
 export default PaymentHistory;

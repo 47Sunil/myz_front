@@ -2,7 +2,7 @@ import React from 'react';
 
 const PhoneIcon = () => {
   return (
-    <div className='absolute top-[1.1rem] left-[1rem] text-[#85878c] text-xl p-[0.05rem] h-16 w-10'>
+    <div>
       <svg
         width='19'
         height='19'

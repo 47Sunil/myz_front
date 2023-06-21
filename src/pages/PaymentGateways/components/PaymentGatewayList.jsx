@@ -50,7 +50,7 @@ const res = {
 
 const ListItem = ({ item }) => {
   const { data, isLoading } = useQuery('payments', usePaymentData);
-  console.log(data, 'payment data table');
+  // console.log(data, 'payment data table');
   const monthNames = [
     'Jan',
     'Feb',

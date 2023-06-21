@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LockIcon from '../../../assets/svg/Lock';
-import UserIcon from '../../../assets/svg/User';
 import PinkButton from '../../../components/PinkButton/PinkButton';
 import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
 import { useCheckoutMutation } from '../../../actions/Checkout';
@@ -17,12 +16,12 @@ const SignForm = () => {
     billing_city: 'Bhopal',
     billing_postcode: '239992',
   });
-  const { mutateAsync: checkout, data } = useCheckoutMutation();
+  const { mutateAsync: checkout } = useCheckoutMutation();
   const handleSubmit = async (e, plan) => {
     try {
       e.preventDefault();
       await checkout(plan);
-      console.log(data, 'form data');
+      // console.log(data, 'form data');
     } catch (err) {
       toast.error(err.response.data.message);
     }
@@ -38,7 +37,6 @@ const SignForm = () => {
         isRequired={true}
         multiline={false}
         type='text'
-        icon={<LockIcon />}
         states={[plan.address_1, setPlan, 'address_1']}
       />
       <DynamicInputManager
@@ -47,7 +45,6 @@ const SignForm = () => {
         isRequired={false}
         multiline={false}
         type='text'
-        icon={<LockIcon />}
         states={[plan.address_2, setPlan, 'address_2']}
       />
       <DynamicInputManager
@@ -56,7 +53,6 @@ const SignForm = () => {
         isRequired={true}
         multiline={false}
         type='text'
-        icon={<LockIcon />}
         states={[plan.billing_country, setPlan, 'billing_country']}
       />
       <DynamicInputManager
@@ -65,7 +61,6 @@ const SignForm = () => {
         isRequired={true}
         multiline={false}
         type='text'
-        icon={<LockIcon />}
         states={[plan.billing_state, setPlan, 'billing_state']}
       />
       <DynamicInputManager
@@ -74,7 +69,6 @@ const SignForm = () => {
         isRequired={true}
         multiline={false}
         type='text'
-        icon={<LockIcon />}
         states={[plan.billing_city, setPlan, 'billing_city']}
       />
       <DynamicInputManager
@@ -83,7 +77,6 @@ const SignForm = () => {
         isRequired={true}
         multiline={false}
         type='text'
-        icon={<LockIcon />}
         states={[plan.billing_postcode, setPlan, 'billing_postcode']}
       />
 

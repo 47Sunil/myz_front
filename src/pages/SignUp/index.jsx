@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import logo from '../../assets/logos/logo.png';
 import rocket from '../../assets/icons/icon_rocket.png';
 import SignUpForm from './components/SignUpForm';

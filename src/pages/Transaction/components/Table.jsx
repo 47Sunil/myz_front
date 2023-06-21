@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { TransactionTable } from '../../../components/Tables/Tables';
-import Pagination from './Pagination';
+// import Pagination from './Pagination';
 import { transactionTableData } from '../../../utils/Data/constant';
-import { useQuery, useQueryClient } from 'react-query';
+// import { useQuery, useQueryClient } from 'react-query';
 import { useTransactionData } from '../../../actions/Transaction';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 const Table = () => {
   const [page, setPage] = useState(1);
@@ -16,7 +16,7 @@ const Table = () => {
     page,
     search
   );
-  console.log(data);
+  // console.log(data);
   const handleSearchTemplate = (e) => {
     if (e.target.value !== '') {
       setSearch(e.target.value);

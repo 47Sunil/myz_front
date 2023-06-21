@@ -11,7 +11,7 @@ const AdvanceOptions = ({
   setIsRedirectEmpty,
   setIsCustomEmpty,
 }) => {
-  console.log(isChecked, 'is CHECKED ADVANCED OPTIONS');
+  // console.log(isChecked, 'is CHECKED ADVANCED OPTIONS');
   const [isAdvanceSelected, setIsAdvanceSelected] = useState(false);
   return (
     <div className='flex gap-4 items-center h-8 w-[40%]'>

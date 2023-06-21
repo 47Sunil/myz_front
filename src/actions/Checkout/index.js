@@ -1,7 +1,7 @@
 import { useMutation } from 'react-query';
 import { requestInstance } from '../axiosConfig';
 import { toast } from 'react-hot-toast';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 
 export const useCheckoutMutation = () => {
   return useMutation(
@@ -16,7 +16,7 @@ export const useCheckoutMutation = () => {
     {
       onSuccess: (data) => {
         data && toast.success('Redirecting to Payment');
-        console.log('url', data.paymentDetails.paymentLink);
+        // console.log('url', data.paymentDetails.paymentLink);
         // const encodedURL = encodeURIComponent(data.paymentDetails.paymentLink);
         // window.location.replace(`https://myzer.io/?url=${encodedURL}`);
         // <Navigate to={} />;

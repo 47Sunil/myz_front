@@ -10,7 +10,7 @@ import CreateLandingPage from './components/CreateLandingPage';
 import { LandingTables } from '../../components/Tables/Tables';
 import { landingTableData } from '../../utils/Data/constant';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
-import { useQueryClient } from 'react-query';
+// import { useQueryClient } from 'react-query';
 import { useLandingTablesMutation } from '../../actions/LandingPage';
 import { toast } from 'react-hot-toast';
 
@@ -32,9 +32,9 @@ const LandingPages = () => {
     });
     // await deleteRowTable(id);
   };
-  console.log(deleteCNF, 'dasdadadadasd');
+  // console.log(deleteCNF, 'dasdadadadasd');
   const handleClickDelete = (id, page) => {
-    console.log(id, 'row id ');
+    // console.log(id, 'row id ');
     handleDeleteRow(id, page);
     setDeleteCNF('');
   };

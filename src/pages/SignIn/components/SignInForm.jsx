@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import GoToHomeBtn from '../../../components/BackToHome/BackToHome';
+import React, { useState } from 'react';
+// import GoToHomeBtn from '../../../components/BackToHome/BackToHome';
 import { Link } from 'react-router-dom';
 import LockIcon from '../../../assets/svg/Lock';
 import UserIcon from '../../../assets/svg/User';
@@ -14,8 +14,8 @@ import { toast } from 'react-hot-toast';
 
 const SignForm = () => {
   const [loginRequest, setLoginRequest] = useState({
-    email: 'donotdelete@gmail.com',
-    password: 'donotdelete',
+    email: '',
+    password: '',
     rememberMe: false,
   });
 
@@ -31,11 +31,14 @@ const SignForm = () => {
       await loginMutation.mutateAsync(loginRequest);
       toast.success('Welcome To Myzer');
     } catch (err) {
+      // toast.error(err.response.data.message);
+      // console.log(err);
       toast.error(err.response.data.message);
     }
   };
   const { handleChange } = useSlide();
-  console.log(loginRequest);
+  // console.log(loginRequest);
+  const [eye, setEye] = useState(false);
   return (
     <form
       action=''
@@ -53,15 +56,23 @@ const SignForm = () => {
         icon={<UserIcon />}
         states={[loginRequest.email, setLoginRequest, 'email']}
       />
-      <DynamicInputManager
-        htmlId='password'
-        label='Password'
-        isRequired={true}
-        multiline={false}
-        type='password'
-        icon={<LockIcon />}
-        states={[loginRequest.password, setLoginRequest, 'password']}
-      />
+      <div className='relative w-full'>
+        <DynamicInputManager
+          htmlId='password'
+          label='Password'
+          isRequired={true}
+          multiline={false}
+          type={eye ? 'text' : 'password'}
+          icon={<LockIcon />}
+          states={[loginRequest.password, setLoginRequest, 'password']}
+        />
+        <div
+          className='absolute right-[2rem] top-[2.9rem] cursor-pointer '
+          onClick={() => setEye(!eye)}
+        >
+          {eye ? <EyeOpenIcon /> : <EyeCloseIcon />}
+        </div>
+      </div>
       <div className='flex items-center justify-between px-5 pb-5'>
         <RememberMe
           loginRequest={loginRequest.rememberMe}

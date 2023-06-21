@@ -3,12 +3,12 @@ import starbg from '../../../assets/images/Star.png';
 import DynamicInputManager from '../../../components/DynamicInputManager/DynamicInputManager';
 import thumbsUp from '../../../assets/icons/ThumbsUp.png';
 import reaction from '../../../assets/icons/reaction.png';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SecondScreenWrapper from '../../../components/SecondScreen/SecondScreenWrapper';
 import SecondScreenForm from '../../../components/SecondScreen/Form';
 import { useDomainMutation } from '../../../actions/DomainPage';
-import { useQueryClient } from 'react-query';
-import { toast } from 'react-hot-toast';
+// import { useQueryClient } from 'react-query';
+// import { toast } from 'react-hot-toast';
 import { Oval } from 'react-loader-spinner';
 const AddNewDomain = () => {
   const [domainName, setDomainName] = useState({
