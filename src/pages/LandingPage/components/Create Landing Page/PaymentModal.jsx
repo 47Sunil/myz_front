@@ -15,7 +15,7 @@ const PaymentModal = ({
   const [isSelected, setIsSelected] = useState(pageData.paymentGateway);
   const queryClient = useQueryClient();
   const paymentData = queryClient.getQueryData('paymentData');
-  // console.log(paymentData, 'payment modal payment data');
+  console.log(paymentData, 'payment modal payment data');
   // console.log(isSelected, 'is selected');
   return (
     <div className='absolute inset-0 w-full h-full bg-[rgba(0,0,0,0.54)] z-30 flex justify-center items-center'>

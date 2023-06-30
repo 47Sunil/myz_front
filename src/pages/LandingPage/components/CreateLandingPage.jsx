@@ -21,7 +21,7 @@ const CreateLandingPage = () => {
   const queryClient = useQueryClient();
   const data = queryClient.getQueryData('templates');
   const ID = searchParams.get('id');
-  // const paymentData = useQuery('paymentData', useLandingPaymentData);
+  const paymentData = useQuery('paymentData', useLandingPaymentData);
   // console.log(paymentData, 'payment data');
   const [pageData, setPageData] = useState({
     funnelName: '',
