@@ -15,6 +15,7 @@ import { Menu, Transition } from '@headlessui/react';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import { Fragment, useState } from 'react';
 import { usePageViewsData } from '../../../actions/Dashboard';
+import { MagnifyingGlass } from 'react-loader-spinner';
 
 ChartJS.register(
   CategoryScale,
@@ -200,11 +201,23 @@ const AreaChart = () => {
           </Transition>
         </Menu>
       </div>
-      <div className='graph h-full w-full px-[1rem]'>
-        <Line
-          options={options}
-          data={graphData}
-        />
+      <div className='graph h-full w-full p-[1rem]'>
+        {isFetching ? (
+          <MagnifyingGlass
+            visible={true}
+            ariaLabel='MagnifyingGlass-loading'
+            wrapperStyle={{}}
+            wrapperClass='MagnifyingGlass-wrapper min-h-full w-full flex items-center justify-center p-[100px]'
+            glassColor='#c0efff'
+            color='#e15b64'
+          />
+        ) : (
+          <Line
+            options={options}
+            data={graphData}
+            className=''
+          />
+        )}
       </div>
       <div className='rounded-b-[13px] border-t border-[#dbdbdb] bg-[#f4f4f4] w-full h-[10%]'></div>
     </div>

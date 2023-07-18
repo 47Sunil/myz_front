@@ -5,6 +5,9 @@ import BarChart from './components/BarChart';
 import { CountryTables, TopSellingTables } from './components/Tables';
 import AreaChart from './components/AreaChart';
 import Datepicker from 'react-tailwindcss-datepicker';
+import BounceRate from './components/BounceRate';
+import ConversionRate from './components/ConversionRate';
+import CountryData from './components/CountryData';
 
 const Dashboard = () => {
   const [value, setValue] = useState({
@@ -14,11 +17,23 @@ const Dashboard = () => {
 
   return (
     <main className='w-full  h-screen   relative grid grid-cols-dashboard min-[3000px]:grid-cols-dashboardLG grid-rows-dashboard gap-[1rem]'>
-      <div className='col-start-1 col-end-6 row-start-1 row-end-5 '>
+      <div className='col-start-1 col-end-7 row-start-1 row-end-5 '>
         <ReportSection />
       </div>
-      <div className='col-start-1 col-end-4 row-start-5 row-end-[12]'>
+      <div className='col-start-1 col-end-5 row-start-5 row-end-[12]'>
         <AreaChart />
+      </div>
+      <div className='col-start-5 col-end-7 row-start-5 row-end-[12]'>
+        <BounceRate />
+      </div>
+      <div className='col-start-1 col-end-3 row-start-[12] row-end-[18]'>
+        <ConversionRate />
+      </div>
+      <div className='col-start-3 col-end-5 row-start-[12] row-end-[18]'>
+        <CountryData />
+      </div>
+      <div className='col-start-5 col-end-7 row-start-[12] row-end-[18]'>
+        <ConversionRate />
       </div>
       {/* <div className='col-start-1 col-end-3 row-start-7 row-end-[14] min-[3000px]:col-start-1  min-[3000px]:col-end-2'>
         <AreaChart />
