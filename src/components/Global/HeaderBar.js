@@ -88,7 +88,7 @@ const HeaderBar = () => {
 //       <path
 //         d='M0 0H42V0C18.9202 0.27807 0.27807 18.9202 0 42V42V0Z'
 //         fill='white'
-//         fill-opacity='0.05'
+//         fillOpacity='0.05'
 //       />
 //     </svg>
 //   );

@@ -19,9 +19,9 @@ export function useIntegrationPhoneMutation() {
     },
     {
       onSuccess: (data) => {
-        queryClient.setQueryData('user', data);
-        queryClient.invalidateQueries('user');
-        toast.success('Updated');
+        data && queryClient.setQueryData('user', data);
+        data && queryClient.invalidateQueries('user');
+        data && toast.success('Updated');
       },
       onError: (error) => {
         // console.log('error occured: ' + error.message);
@@ -49,8 +49,8 @@ export function useIntegrationEmailMutation() {
     },
     {
       onSuccess: (data) => {
-        queryClient.setQueryData('UserData', data);
-        data && toast.success('Phone Added');
+        data && queryClient.setQueryData('user', data);
+        data && toast.success('Email Updated');
       },
       onError: (error) => {
         // console.log('error occured: ' + error.message);
@@ -78,7 +78,7 @@ export function useIntegrationWebhookMutation() {
     },
     {
       onSuccess: (data) => {
-        queryClient.setQueryData('UserData', data);
+        data && queryClient.setQueryData('user', data);
         data && toast.success('Updated');
       },
       onError: (error) => {

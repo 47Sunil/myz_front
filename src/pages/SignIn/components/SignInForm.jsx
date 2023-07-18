@@ -32,7 +32,7 @@ const SignForm = () => {
       toast.success('Welcome To Myzer');
     } catch (err) {
       // toast.error(err.response.data.message);
-      // console.log(err);
+      console.log(err);
       toast.error(err.response.data.message);
     }
   };

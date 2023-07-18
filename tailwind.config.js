@@ -13,8 +13,7 @@ module.exports = {
       backgroundImage: {
         'gradient-myzer':
           'radial-gradient(50rem at left top,rgba(172, 32, 1, 1),rgba(172, 32, 1, 0.14)),radial-gradient(150rem at center left,rgba(28, 146, 255, 1),rgba(28, 146, 255, 0.52)),radial-gradient(150rem at right,rgba(97, 23, 255, 1),rgba(97, 23, 255, 0.57));',
-        'gradient-report':
-          'linear-gradient(121.92deg, #5e36ce 53.35%, #4200ff 105.85%);',
+        'gradient-report': 'linear-gradient(147deg, #5E36CE 0%, #4200FF 100%);',
         'gradient-reddot':
           'linear-gradient(136.47deg, #ff3939 12.64%, #ff9900 82.33%);',
         'gradient-transparent-white':

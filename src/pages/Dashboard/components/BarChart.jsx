@@ -29,9 +29,9 @@ export const options = {
     },
   },
   scales: {
-    beginAtZero: false,
+    // beginAtZero: false,
     x: {
-      beginAtZero: false,
+      // beginAtZero: false,
       grid: {
         color: '#fff',
         display: false,
@@ -46,7 +46,7 @@ export const options = {
       },
     },
     y: {
-      beginAtZero: false,
+      // beginAtZero: false,
       grid: {
         color: '#504E51',
         drawTicks: false,

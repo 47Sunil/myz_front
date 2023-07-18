@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useIntegrationPhoneMutation } from '../../../actions/OtherSettings';
 import { useQueryClient } from 'react-query';
+import { toast } from 'react-hot-toast';
 
 const SettingCard = ({ label, img, description, docs, type = 'text' }) => {
   const [showModal, setShowModal] = useState(false);
@@ -61,35 +62,29 @@ const Modal = ({ setShowModal, showModal, label, type }) => {
     value: userData.orderNotify.webhook.value,
   });
   const handleChangePhone = (e) => {
-    if (e.target.value !== '') {
-      setWhatsapp((prevData) => ({
-        ...prevData,
-        value: e.target.value,
-        enable: true,
-      }));
-    }
+    setWhatsapp((prevData) => ({
+      ...prevData,
+      value: e.target.value,
+      enable: true,
+    }));
   };
 
   // Assuming handleChangePhone was called with a non-empty value
   // console.log(data);
 
   const handleChangeEmail = (e) => {
-    if (e.target.value !== '') {
-      setEmail((prevData) => ({
-        ...prevData,
-        value: e.target.value,
-        enable: true,
-      }));
-    }
+    setEmail((prevData) => ({
+      ...prevData,
+      value: e.target.value,
+      enable: true,
+    }));
   };
   const handleChangeWebhook = (e) => {
-    if (e.target.value !== '') {
-      setWebhook((prevData) => ({
-        ...prevData,
-        value: e.target.value,
-        enable: true,
-      }));
-    }
+    setWebhook((prevData) => ({
+      ...prevData,
+      value: e.target.value,
+      enable: true,
+    }));
   };
   const handleModal = () => {
     setShowModal(!showModal);
@@ -97,8 +92,12 @@ const Modal = ({ setShowModal, showModal, label, type }) => {
   const sendUserData = useIntegrationPhoneMutation();
 
   const handleSubmit = async (data) => {
-    await sendUserData.mutateAsync(data);
-    setShowModal(!showModal);
+    try {
+      await sendUserData.mutateAsync(data);
+      setShowModal(!showModal);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
   };
   return (
     <div className='w-screen h-screen fixed bg-[rgba(0,0,0,.5)] inset-0 z-[10000000] flex justify-center items-center'>

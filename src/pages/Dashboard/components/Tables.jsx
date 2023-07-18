@@ -21,7 +21,7 @@ export const CountryTables = ({ heading }) => {
       </div>
       <div className='w-full px-4'>
         <table className='w-full border-collapse text-center text-white text-[14px]'>
-          {!isLoading &&
+          {/* {!isLoading &&
             Object.entries(data?.data).map(([country, value]) => {
               return (
                 <BodyRow>
@@ -32,7 +32,7 @@ export const CountryTables = ({ heading }) => {
                   <td className='py-1 text-left px-2'>{value}</td>
                 </BodyRow>
               );
-            })}
+            })} */}
         </table>
       </div>
     </div>
