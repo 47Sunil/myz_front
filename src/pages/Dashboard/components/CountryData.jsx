@@ -4,8 +4,10 @@ import { MagnifyingGlass } from 'react-loader-spinner';
 
 const CountryData = () => {
   const { data, isLoading, isFetching, isFetched } = useCountryData();
-  const obj = isFetched && data?.data;
-  console.log(obj);
+  const obj = !isFetching ? data?.data : {};
+  const formattedData = obj && Object.entries(obj);
+  console.log(formattedData);
+
   return (
     <div className='rounded-[13px] bg-white w-full h-full flex flex-col'>
       <div className='rounded-t-[13px] p-[.5rem_1rem] bg-gradient-landing-orange flex items-center justify-between'>
@@ -62,7 +64,7 @@ const CountryData = () => {
           </Transition>
         </Menu> */}
       </div>
-      <div className='pie h-full w-full px-[1rem]'>
+      <div className='pie h-full w-full px-[1rem] overflow-hidden'>
         {isFetching ? (
           <MagnifyingGlass
             visible={true}
@@ -73,15 +75,16 @@ const CountryData = () => {
             color='#e15b64'
           />
         ) : (
-          <div className='flex flex-col items-center justify-start w-full h-full'>
-            {!isFetching &&
-              Object.entries(data.data).map(([key, value], i) => {
-                <div className='flex gap-1'>
-                  <p className=''>{i}</p>
-                  <p className=''>{key}</p>
-                  <p className=''>{value}</p>
-                </div>;
-              })}
+          <div className='flex flex-col items-center justify-start w-full h-full overflow-y-scroll'>
+            {formattedData.map(([key, value], i) => {
+              return (
+                <div className='flex justify-between w-full'>
+                  <p className='text-left'>{i}</p>
+                  <p className='text-left'>{key}</p>
+                  <p className='text-left'>{value}</p>
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
