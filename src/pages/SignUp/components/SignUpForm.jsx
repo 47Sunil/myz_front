@@ -42,6 +42,8 @@ import { useSignupMutation } from '../../../actions/User/Signup';
 
 const SignUpForm = ({ setSignUpError }) => {
   // const [countryCode, setCountryCode] = useState('');
+  const [lockFields, setLockFields] = useState(false);
+
   const [signupData, setSignupData] = useState({
     name: 'arsh ali',
     email: 'arshali.763z@gmail.com',
@@ -52,7 +54,8 @@ const SignUpForm = ({ setSignUpError }) => {
   const handleSubmit = async (e, data) => {
     e.preventDefault();
     try {
-      await signup(data);
+      setLockFields(true);
+      await signup({ data, setLockFields });
     } catch (error) {
       // console.log(error.response.data.message);
     }
@@ -66,6 +69,7 @@ const SignUpForm = ({ setSignUpError }) => {
       onSubmit={(e) => handleSubmit(e, signupData)}
     >
       <DynamicInputManager
+        lock={lockFields}
         htmlId='name'
         label='Name'
         isRequired={true}
@@ -76,37 +80,51 @@ const SignUpForm = ({ setSignUpError }) => {
         states={[signupData.name, setSignupData, 'name']}
       />
       <DynamicInputManager
+        lock={lockFields}
         htmlId='email'
         label='Email Address'
         isRequired={true}
+        placeholder='johndoe@xyz.com'
         multiline={false}
         type='email'
         icon={<MailIcon />}
         states={[signupData.email, setSignupData, 'email']}
       />
       <DynamicInputManager
+        lock={lockFields}
         htmlId='phone'
         label='Phone'
         isRequired={true}
         multiline={false}
+        placeholder={'94xxxxxx78'}
         type='tel'
         icon={<PhoneIcon />}
         states={[signupData.phone, setSignupData, 'phone']}
       />
-      <DynamicInputManager
-        htmlId='password'
-        label='Password'
-        isRequired={true}
-        multiline={false}
-        type='password'
-        icon={
-          isLoading ? <LockIcon /> : eye ? <EyeOpenIcon /> : <EyeCloseIcon />
-        }
-        setEye={setEye}
-        eye={eye}
-        states={[signupData.password, setSignupData, 'password']}
+      <div className='relative w-full'>
+        <DynamicInputManager
+          lock={lockFields}
+          htmlId='password'
+          label='Password'
+          isRequired={true}
+          multiline={false}
+          placeholder={'Enter Password'}
+          type={eye ? 'text' : 'password'}
+          icon={<LockIcon />}
+          states={[signupData.password, setSignupData, 'password']}
+        />
+        <div
+          className='absolute right-[2rem] top-[2.9rem] cursor-pointer '
+          onClick={() => setEye(!eye)}
+        >
+          {eye ? <EyeCloseIcon /> : <EyeOpenIcon />}
+        </div>
+      </div>
+
+      <PinkButton
+        text='Sign Up'
+        lock={lockFields}
       />
-      <PinkButton text='Sign Up' />
       <p className='mt-4 font-normal text-[20px] leading-8 text-[rgba(255,255,255,.82)] px-5 pb-5'>
         Already have an account?{' '}
         <Link

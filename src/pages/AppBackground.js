@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AppSidebar from '../components/Global/AppSidebar';
 import HeaderBar from '../components/Global/HeaderBar';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 // import ViewAllTemplatesModal from './LandingPage/components/ViewAllTemplatesModal';
 
 const Background = styled.div`
@@ -81,29 +81,20 @@ const AppBackground = ({ children }) => {
   const path = location.pathname.split('/').join('');
   return (
     <>
-      {path !== 'accountssignin' &&
-      path !== 'accountssignup' &&
-      path !== 'verify' &&
-      path !== 'domainadd_domain' &&
-      path !== 'domainadd_dns' &&
-      path !== 'domainverification' &&
-      path !== 'checkout' &&
-      !path.includes('editor') &&
-      path !== 'landing-pagescreate_landing_page' ? (
-        <Background>
-          <Overlay />
-          <Header>
-            <HeaderBar />
-          </Header>
-          <Sidebar>
-            <AppSidebar />
-          </Sidebar>
-          <Main className='p-4 '>{children}</Main>
-          {/* <ViewAllTemplatesModal /> */}
-        </Background>
-      ) : (
-        <>{children}</>
-      )}
+      <Background>
+        <Overlay />
+        <Header>
+          <HeaderBar />
+        </Header>
+        <Sidebar>
+          <AppSidebar />
+        </Sidebar>
+
+        <Main className='p-4 '>
+          <Outlet />
+        </Main>
+        {/* <ViewAllTemplatesModal /> */}
+      </Background>
     </>
   );
 };

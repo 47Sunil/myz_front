@@ -13,6 +13,8 @@ import OtpInput from 'react-otp-input';
 import {
   useOtpVerificationEmail,
   useOtpVerificationPhone,
+  useResendEmailMutation,
+  useResendMobileMutation,
 } from '../../../actions/User/Signup';
 import { toast } from 'react-hot-toast';
 // import { useQueryClient } from 'react-query';
@@ -31,8 +33,13 @@ const SignUpLeft = styled.div`
   background-size: cover;
 `;
 const Form = () => {
+  const [lockFields, setLockFields] = useState(false);
   const [phoneOtp, setPhoneOtp] = useState('');
   const [emailOtp, setEmailOtp] = useState('');
+  const isEmailVerified = localStorage.getItem('isEmailVerified');
+  // console.log(typeof isEmailVerified);
+  const isPhoneVerified = localStorage.getItem('isPhoneVerified');
+
   const { mutateAsync: phoneVerification } = useOtpVerificationPhone();
   const { mutateAsync: emailVerification } = useOtpVerificationEmail();
   const { mutateAsync: login } = useAutoLoginData();
@@ -40,14 +47,22 @@ const Form = () => {
   const handleSubmit = async (e, phone, email) => {
     e.preventDefault();
     try {
-      await phoneVerification(phone);
-      await emailVerification(email);
-      (await login()) && navigate('/dashboard');
+      setLockFields(true);
+      await phoneVerification({ phone, setLockFields });
+      await emailVerification({ email, setLockFields });
+      isEmailVerified && isPhoneVerified && navigate('/dashboard');
     } catch (error) {
       // console.log(error);
       toast.error(error.response.data.message);
     }
   };
+  const { mutate: resendPhone } = useResendMobileMutation();
+  const { mutate: resendEmail } = useResendEmailMutation();
+  const handleResendOtp = () => {
+    resendPhone();
+    resendEmail();
+  };
+
   return (
     <form
       className='mb-[1.6rem] flex flex-col'
@@ -56,45 +71,64 @@ const Form = () => {
       <div className='flex flex-col gap-8 mb-12'>
         <div className='flex flex-col gap-3'>
           <label className='text-white'>Phone OTP</label>
-          <OtpInput
-            value={phoneOtp}
-            onChange={setPhoneOtp}
-            numInputs={6}
-            renderSeparator={<span>&nbsp;&nbsp;&nbsp;</span>}
-            renderInput={(props) => <input {...props} />}
-            containerStyle={{ width: '100%' }}
-            inputStyle={'removeSpinBtn'}
-            inputType='number'
-            shouldAutoFocus={true}
-          />
+          {isPhoneVerified === 'true' ? (
+            <p>Mobile already Verified</p>
+          ) : (
+            <OtpInput
+              value={phoneOtp}
+              onChange={setPhoneOtp}
+              numInputs={6}
+              renderSeparator={<span>&nbsp;&nbsp;&nbsp;</span>}
+              renderInput={(props) => <input {...props} />}
+              containerStyle={{ width: '100%' }}
+              inputStyle={
+                lockFields
+                  ? 'disabled removeSpinBtn bg-[rgba(0,0,0,0.56)] border-2 border-white'
+                  : 'removeSpinBtn'
+              }
+              inputType='number'
+              shouldAutoFocus={true}
+            />
+          )}
         </div>
         <div className='flex flex-col gap-3'>
           <label className='text-white'>Email OTP</label>
-
-          <OtpInput
-            value={emailOtp}
-            onChange={setEmailOtp}
-            numInputs={6}
-            renderSeparator={<span>&nbsp;&nbsp;&nbsp;</span>}
-            renderInput={(props) => <input {...props} />}
-            containerStyle={{ width: '100%' }}
-            inputStyle={'removeSpinBtn'}
-          />
+          {isEmailVerified === 'true' ? (
+            <p>Email Already Verified</p>
+          ) : (
+            <OtpInput
+              value={emailOtp}
+              onChange={setEmailOtp}
+              numInputs={6}
+              renderSeparator={<span>&nbsp;&nbsp;&nbsp;</span>}
+              renderInput={(props) => <input {...props} />}
+              containerStyle={{ width: '100%' }}
+              inputStyle={
+                lockFields
+                  ? 'disabled removeSpinBtn bg-[rgba(0,0,0,0.56)] border-2 border-white'
+                  : 'removeSpinBtn'
+              }
+              inputType='number'
+              shouldAutoFocus={true}
+            />
+          )}
         </div>
       </div>
 
       <PinkButton
         text='Verify'
         disabled={phoneOtp === '' && emailOtp === ''}
+        lock={lockFields}
       />
       <p className='mt-4 font-normal text-[20px] leading-8 text-[rgba(255,255,255,.82)] px-5 pb-5'>
         Didn't recieved OTP?{' '}
-        <Link
-          to='/accounts/signin'
+        <button
+          type='button'
           className='text-[#bd61ec] cursor-pointer hover:underline'
+          onClick={handleResendOtp}
         >
           <span>Resend</span>
-        </Link>
+        </button>
       </p>
       {/* <div className='px-5 pb-5'>
         <GoToHomeBtn text={'Go Back To Home'} />
@@ -103,20 +137,35 @@ const Form = () => {
   );
 };
 const SignUp = () => {
+  const isOtpScreen = {};
   return (
-    <>
-      <div className='relative flex w-screen h-screen overflow-hidden'>
-        <SignUpLeft className='overflow-hidden'>
-          <FormLeft
-            logo={logo}
-            heading={'Verify'}
-            headingIcon={rocket}
-            form={<Form />}
-          />
-        </SignUpLeft>
-        <FormRight />
+    // <>
+    //   <div className='relative flex w-screen h-screen overflow-hidden'>
+    //     <SignUpLeft className='overflow-hidden'>
+    //       <FormLeft
+    //         logo={logo}
+    //         heading={'Verify'}
+    //         headingIcon={rocket}
+    //         form={<Form />}
+    //         isOtpScreen={isOtpScreen}
+    //       />
+    //     </SignUpLeft>
+    //     <FormRight />
+    //   </div>
+    // </>
+    <div className=''>
+      <div className='flex items-center mb-[2rem] gap-[0.5rem]'>
+        <h1 className='font-semibold text-[35px] leading-[60px] text-white px-5'>
+          Verify{' '}
+        </h1>
+        <img
+          src={rocket}
+          alt='rocket'
+          className='h-[40px] w-[40px]'
+        />
       </div>
-    </>
+      <Form />
+    </div>
   );
 };
 

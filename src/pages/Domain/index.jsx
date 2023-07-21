@@ -10,15 +10,13 @@ const Domain = () => {
 
   return (
     <>
-      {method === 'home' ? (
-        <div className='z-[3333] relative'>
-          <Banner />
-          <AddDomain />
-          <Table />
-        </div>
-      ) : (
-        <AddNewDomain />
-      )}
+      <div className='z-[3333] relative'>
+        <Banner />
+        <AddDomain />
+        <Table />
+      </div>
+
+      {/* <AddNewDomain /> */}
     </>
   );
 };

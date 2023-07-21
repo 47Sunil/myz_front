@@ -20,7 +20,7 @@ export const data1 = [
   {
     label: 'Landing Pages',
     icon: <LandingPagesLogo />,
-    path: 'landing-pages/home',
+    path: 'landing-pages',
     clicked: <LandingPagesLogo fillOpacity='1' />,
   },
   {
@@ -32,7 +32,7 @@ export const data1 = [
   {
     label: 'Domains',
     icon: <DomainLogo />,
-    path: 'domain/home',
+    path: 'domain',
     clicked: <DomainLogo fillOpacity='1' />,
   },
 ];

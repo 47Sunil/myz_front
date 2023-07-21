@@ -5,9 +5,13 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { MagnifyingGlass } from 'react-loader-spinner';
 import { useBounceRateData } from '../../../actions/Dashboard';
 import { Chart as ChartJS, ArcElement, Legend, Tooltip } from 'chart.js';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import EmptyState from '../../../components/EmptyState/EmptyState';
 ChartJS.register(ArcElement, Tooltip, Legend);
 const BounceRate = () => {
   const { data, isFetching } = useBounceRateData();
+  const isDataEmpty = !isFetching && data === undefined;
   const bounceRateNumber = Number(data?.data);
   console.log(bounceRateNumber);
   const labels = ['Bounce Rate', 'Stay Rate'];
@@ -91,16 +95,14 @@ const BounceRate = () => {
           </Transition>
         </Menu> */}
       </div>
-      <div className='pie h-full w-full px-[1rem]'>
+      <div className='pie h-full w-full px-[1rem] py-[1rem] '>
         {isFetching ? (
-          <MagnifyingGlass
-            visible={true}
-            ariaLabel='MagnifyingGlass-loading'
-            wrapperStyle={{}}
-            wrapperClass='MagnifyingGlass-wrapper min-h-full w-full flex items-center justify-center p-[100px] '
-            glassColor='#c0efff'
-            color='#e15b64'
+          <Skeleton
+            width={'100%'}
+            height={'100%'}
           />
+        ) : isDataEmpty ? (
+          <EmptyState />
         ) : (
           <Pie
             options={options}

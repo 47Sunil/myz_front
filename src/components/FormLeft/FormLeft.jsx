@@ -1,8 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import useSlide from '../../hooks/useSlideAnimation';
-const FormLeft = ({ logo, heading, headingIcon, form }) => {
+import GoToHomeBtn from '../../components/BackToHome/BackToHome';
+import { Link } from 'react-router-dom';
+
+const FormLeft = ({
+  logo,
+  heading,
+  headingIcon,
+  form,
+  isOtpScreen,
+  children,
+}) => {
   const { isChanged } = useSlide();
+  console.log(heading);
   return (
     <>
       {!isChanged ? (
@@ -21,14 +32,19 @@ const FormLeft = ({ logo, heading, headingIcon, form }) => {
               <h2 className='font-semibold text-[35px] leading-[60px] text-white px-5'>
                 {heading}
               </h2>
-              <img
-                className='h-[40px] w-[40px]'
-                src={headingIcon}
-                alt='rocket'
-              />
+              {Object.keys(isOtpScreen).length === 0 && (
+                <img
+                  className='h-[40px] w-[40px]'
+                  src={headingIcon}
+                  alt='rocket'
+                />
+              )}
             </div>
-            {form}
+            {children}
           </div>
+          <Link to='/accounts/signin'>
+            <GoToHomeBtn />
+          </Link>
         </motion.div>
       ) : (
         <motion.div
@@ -54,6 +70,9 @@ const FormLeft = ({ logo, heading, headingIcon, form }) => {
             </div>
             {form}
           </div>
+          <Link to='/accounts/signin'>
+            <GoToHomeBtn />
+          </Link>
         </motion.div>
       )}
     </>

@@ -17,7 +17,7 @@ import {
   useDomainMutationDelete,
   useDomainRefresh,
 } from '../../actions/DomainPage';
-import { Tooltip, IconButton } from '@mui/material';
+// import { Tooltip, IconButton } from '@mui/material';
 import PageLoader from '../../pages/LandingPage/components/PageLoader';
 // import { Modal, Box, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
@@ -285,7 +285,7 @@ const LandingTables = ({
                     <p className='text-gray-500 p-1 text-xs overflow-hidden text-ellipsis w-[100px]'>
                       /{i.url.match(pattern)[1]}
                     </p>
-                    <Tooltip title='Copy'>
+                    {/* <Tooltip title='Copy'>
                       <IconButton>
                         <button
                           className='absolute p-1 right-0'
@@ -294,7 +294,7 @@ const LandingTables = ({
                           <CopyIcon />
                         </button>
                       </IconButton>
-                    </Tooltip>
+                    </Tooltip> */}
                   </div>
                 </div>
               </BodyCell>

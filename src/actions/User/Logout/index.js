@@ -11,7 +11,8 @@ export function useLogoutMutation() {
         const res = await requestInstance.post('users/logout');
         return res;
       } catch (error) {
-        // console.log(error);
+        console.log(error);
+        // return error;
       }
     },
     {

@@ -18,7 +18,7 @@ const Input = styled.input`
   background: ${(props) =>
     props.lock ? 'rgba(0, 0, 0, 0.56)' : 'rgba(255, 255, 255, 0.16)'};
   border-radius: 11px;
-  padding: ${(props) => (props.icon ? `10px 20px 10px 40px` : `10px 20px`)};
+  padding: ${(props) => (props.icon ? `10px 20px 10px 50px` : `10px 20px`)};
   color: white;
   outline: none;
   font-size: ${(props) =>
@@ -31,6 +31,9 @@ const Input = styled.input`
   border: 1px solid #ffffff29;
   ::placeholder {
     color: rgba(255, 255, 255, 0.38);
+  }
+  :disabled {
+    background: rgba(0, 0, 0, 0.56);
   }
 `;
 const Area = styled.textarea`
@@ -114,7 +117,8 @@ const DynamicInputManager = ({
           id={htmlId}
           value={states[0]}
           max={max}
-          disabled
+          disabled={true}
+          lock={lock}
         />
       ) : (
         <Input

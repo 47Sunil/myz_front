@@ -20,20 +20,36 @@ const SignUpLeft = styled.div`
   background-size: cover;
 `;
 const SignUp = () => {
+  // const isOtpScreen = {};
   return (
-    <>
-      <div className='relative flex w-screen h-screen overflow-hidden'>
-        <SignUpLeft className='overflow-hidden'>
-          <FormLeft
-            logo={logo}
-            heading={'Sign Up'}
-            headingIcon={rocket}
-            form={<SignUpForm />}
-          />
-        </SignUpLeft>
-        <FormRight />
+    // <>
+    //   <div className='relative flex w-screen h-screen overflow-hidden'>
+    //     <SignUpLeft className='overflow-hidden'>
+    //       <FormLeft
+    //         logo={logo}
+    //         heading={'Sign Up'}
+    //         headingIcon={rocket}
+    //         form={<SignUpForm />}
+    //         isOtpScreen={isOtpScreen}
+    //       />
+    //     </SignUpLeft>
+    //     <FormRight />
+    //   </div>
+    // </>
+
+    <div className=''>
+      <div className='flex items-center mb-[2rem] gap-[0.5rem]'>
+        <h1 className='font-semibold text-[35px] leading-[60px] text-white px-5'>
+          Sign Up{' '}
+        </h1>
+        <img
+          src={rocket}
+          alt='rocket'
+          className='h-[40px] w-[40px]'
+        />
       </div>
-    </>
+      <SignUpForm />
+    </div>
   );
 };
 

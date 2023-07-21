@@ -13,6 +13,7 @@ import { useLoginMutation } from '../../../actions/User/Login';
 import { toast } from 'react-hot-toast';
 
 const SignForm = () => {
+  const [lockFields, setLockFields] = useState(false);
   const [loginRequest, setLoginRequest] = useState({
     email: '',
     password: '',
@@ -28,6 +29,7 @@ const SignForm = () => {
 
   const handleLogin = async () => {
     try {
+      setLockFields(true);
       await loginMutation.mutateAsync(loginRequest);
       toast.success('Welcome To Myzer');
     } catch (err) {
@@ -55,6 +57,7 @@ const SignForm = () => {
         type='email'
         icon={<UserIcon />}
         states={[loginRequest.email, setLoginRequest, 'email']}
+        lock={lockFields}
       />
       <div className='relative w-full'>
         <DynamicInputManager
@@ -62,15 +65,17 @@ const SignForm = () => {
           label='Password'
           isRequired={true}
           multiline={false}
+          placeholder={'Enter Password'}
           type={eye ? 'text' : 'password'}
           icon={<LockIcon />}
           states={[loginRequest.password, setLoginRequest, 'password']}
+          lock={lockFields}
         />
         <div
           className='absolute right-[2rem] top-[2.9rem] cursor-pointer '
           onClick={() => setEye(!eye)}
         >
-          {eye ? <EyeOpenIcon /> : <EyeCloseIcon />}
+          {eye ? <EyeCloseIcon /> : <EyeOpenIcon />}
         </div>
       </div>
       <div className='flex items-center justify-between px-5 pb-5'>
@@ -78,11 +83,17 @@ const SignForm = () => {
           loginRequest={loginRequest.rememberMe}
           setLoginRequest={setLoginRequest}
         />
-        <Link className='font-normal text-[20px] leading-[33px] text-[rgba(255,255,255,.82)] '>
+        <Link
+          className='font-normal text-[20px] leading-[33px] text-[rgba(255,255,255,.82)]'
+          to={'/accounts/forgetPassword'}
+        >
           Forget Password
         </Link>
       </div>
-      <PinkButton text='Sign In' />
+      <PinkButton
+        text='Sign In'
+        lock={lockFields}
+      />
       <p className='mt-4 font-normal text-[20px] leading-8 text-[rgba(255,255,255,.82)] px-5 pb-5'>
         Don't have an account?{' '}
         <Link

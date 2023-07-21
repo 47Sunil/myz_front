@@ -14,7 +14,7 @@ export function useLoginMutation() {
       onSuccess: (data) => {
         queryClient.setQueryData('user', data);
         queryClient.invalidateQueries('user');
-        navigate('/dashboard');
+        navigate('/');
       },
       onError: (error) => {
         // console.log(error);

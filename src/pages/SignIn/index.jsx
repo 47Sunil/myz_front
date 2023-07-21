@@ -6,6 +6,7 @@ import rocket from '../../assets/icons/icon_rocket.png';
 import bgForm from '../../assets/images/signin_bg.png';
 import styled from 'styled-components';
 import FormLeft from '../../components/FormLeft/FormLeft';
+import Account from '../Accounts/Accounts';
 
 const SignInLeft = styled.div`
   border: 0.5px solid black;
@@ -19,17 +20,33 @@ const SignInLeft = styled.div`
 `;
 
 const SignIn = () => {
+  // const isOtpScreen = {};
   return (
-    <div className='relative flex w-screen h-screen overflow-hidden'>
-      <SignInLeft className=''>
-        <FormLeft
-          logo={logo}
-          heading={'Sign In'}
-          headingIcon={rocket}
-          form={<SignInForm />}
+    // <div className='relative flex w-screen h-screen overflow-hidden'>
+    //   <SignInLeft className=''>
+    // <FormLeft
+    //   logo={logo}
+    //   heading={'Sign In'}
+    //   headingIcon={rocket}
+    //   isOtpScreen={isOtpScreen}
+    // >
+    //   <SignInForm />
+    // </FormLeft>
+    //   </SignInLeft>
+    //   <FormRight />
+    // </div>
+    <div className=''>
+      <div className='flex items-center mb-[2rem] gap-[0.5rem]'>
+        <h1 className='font-semibold text-[35px] leading-[60px] text-white px-5'>
+          Sign In{' '}
+        </h1>
+        <img
+          src={rocket}
+          alt='rocket'
+          className='h-[40px] w-[40px]'
         />
-      </SignInLeft>
-      <FormRight />
+      </div>
+      <SignInForm />
     </div>
   );
 };

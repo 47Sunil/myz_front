@@ -16,6 +16,9 @@ import { IoMdArrowDropdown } from 'react-icons/io';
 import { Fragment, useState } from 'react';
 import { usePageViewsData } from '../../../actions/Dashboard';
 import { MagnifyingGlass } from 'react-loader-spinner';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+import EmptyState from '../../../components/EmptyState/EmptyState';
 
 ChartJS.register(
   CategoryScale,
@@ -105,6 +108,7 @@ const AreaChart = () => {
   };
   console.log(lastUsedDays);
   const { data, isFetching } = usePageViewsData(lastUsedDays);
+  const isDataEmpty = !isFetching && data === undefined;
   console.log(data?.data);
   const labels = data?.data.map((item) => dateToDay(item.day));
   console.log(labels);
@@ -203,14 +207,12 @@ const AreaChart = () => {
       </div>
       <div className='graph h-full w-full p-[1rem]'>
         {isFetching ? (
-          <MagnifyingGlass
-            visible={true}
-            ariaLabel='MagnifyingGlass-loading'
-            wrapperStyle={{}}
-            wrapperClass='MagnifyingGlass-wrapper min-h-full w-full flex items-center justify-center p-[100px]'
-            glassColor='#c0efff'
-            color='#e15b64'
+          <Skeleton
+            width={'100%'}
+            height={'100%'}
           />
+        ) : isDataEmpty ? (
+          <EmptyState />
         ) : (
           <Line
             options={options}
