@@ -95,7 +95,7 @@ const BounceRate = () => {
           </Transition>
         </Menu> */}
       </div>
-      <div className='pie h-full w-full px-[1rem] py-[1rem] '>
+      <div className='pie flex-grow h-[80%] flex items-center justify-center  w-full px-[1rem] py-[1rem] '>
         {isFetching ? (
           <Skeleton
             width={'100%'}
@@ -107,7 +107,7 @@ const BounceRate = () => {
           <Pie
             options={options}
             data={bounceRateData}
-            className='max-h-full w-full'
+            className=''
           />
         )}
       </div>

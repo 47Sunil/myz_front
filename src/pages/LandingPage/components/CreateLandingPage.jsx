@@ -61,7 +61,7 @@ const CreateLandingPage = () => {
   console.log(pageData);
   const navigate = useNavigate();
   if (templateData === undefined) {
-    navigate('/landing-pages/home');
+    navigate('/landing-pages');
     // console.log('no template data');
   }
   useEffect(() => {
@@ -69,16 +69,16 @@ const CreateLandingPage = () => {
       return 'Are you sure you want to refresh? All unsaved data will be lost.';
     };
     if (templateData === undefined) {
-      navigate('/landing-pages/home');
+      navigate('/landing-pages');
       // console.log('no template data');
     }
   }, []);
   return (
     <>
       {templateData === undefined ? (
-        navigate('/landing-pages/home')
+        navigate('/landing-pages')
       ) : (
-        <SecondScreenWrapper gobackLink='/landing-pages/home'>
+        <SecondScreenWrapper gobackLink='/landing-pages'>
           <div className='w-full h-full flex items-center justify-center z-10 absolute inset-0'>
             <div className='bg-gradient-landing-blue w-[30vw] h-[80vh] rounded-[63px] overflow-hidden absolute left-[8%] top-[15%]'>
               <img
@@ -106,7 +106,7 @@ const CreateLandingPage = () => {
                   buttonText={'Switch Template'}
                   icon={<AiOutlineSwap />}
                   dark={true}
-                  onClick={() => navigate('/landing-pages/home')}
+                  onClick={() => navigate('/landing-pages')}
                 />
               </div>
             </div>

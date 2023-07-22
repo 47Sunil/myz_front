@@ -8,6 +8,7 @@ import {
 } from '../../../actions/LandingPage';
 import { useQuery } from 'react-query';
 import Eye from '../../../assets/svg/Eye';
+import PlaceholderImage from '../../../assets/images/27002.jpg';
 
 const Button = styled.button`
   background: ${(props) =>
@@ -38,7 +39,10 @@ const TemplateManager = ({
   function handleClick() {
     setOpen(!open);
   }
-  const { data, isLoading } = useQuery('templates', useTemplatesData);
+  const { data, isLoading, isFetching } = useQuery(
+    'templates',
+    useTemplatesData
+  );
 
   {
     // !isLoading && console.log(data?.data);
@@ -64,11 +68,18 @@ const TemplateManager = ({
           </div>
         </div>
         <div className='flex overflow-x-scroll w-full gap-3'>
-          {data?.data.map((i) => {
+          {data?.data.map((i, idx) => {
             return (
-              <div className='h-[250px] w-[200px] flex-shrink-0 rounded-xl bg-white relative'>
-                {isLoading ? (
-                  <h1 className='text-xl'>Loading...</h1>
+              <div
+                className='h-[250px] w-[200px] flex-shrink-0 rounded-xl bg-white relative'
+                key={idx}
+              >
+                {isLoading || isFetching ? (
+                  <img
+                    src={PlaceholderImage}
+                    alt=''
+                    className='w-full h-full object-cover object-top rounded-xl'
+                  />
                 ) : (
                   <img
                     src={i.image}

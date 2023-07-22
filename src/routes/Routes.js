@@ -37,6 +37,7 @@ import Error from '../pages/Error/components/AccountsError';
 import { element } from 'prop-types';
 import { toast } from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
+import CreateLandingPage from '../pages/LandingPage/components/CreateLandingPage';
 const Protected = ({ isSignedIn, children }) => {
   if (!isSignedIn) {
     console.log(isSignedIn, '++++++++++++++');
@@ -122,6 +123,10 @@ const Router = () => {
           element: <OtherSettings />,
         },
       ],
+    },
+    {
+      path: '/landing-pages/create_landing_page',
+      element: <CreateLandingPage />,
     },
     {
       path: 'accounts',
