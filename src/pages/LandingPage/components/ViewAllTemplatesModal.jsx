@@ -74,25 +74,30 @@ const ViewAllTemplatesModal = () => {
                     onChange={handleSearchTemplate}
                   />
                 </div>
-                <div className='relative flex items-center'>
-                  <label
+                <div className='relative flex items-center '>
+                  {/* <label
                     htmlFor='category'
                     className='absolute left-4 z-10'
                   >
-                    <AiFillCaretDown className='text-[#85878c] text-xl' />
-                  </label>
+                    <AiFillCaretDown className='text-[#85878c] text-xl cursor-pointer' />
+                  </label> */}
                   <DropDown
                     menuClass={
-                      'bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px] h-[50px] text-white w-[220px] flex justify-center relative'
+                      'bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px] h-[50px] text-white w-[220px] flex justify-center relative '
                     }
                     menuBtnText={categoryFilter}
-                    menuBtnClass={'text-[22px] font-medium'}
+                    menuBtnClass={
+                      'text-[22px] font-medium w-full flex items-center gap-[4rem] px-[1rem]'
+                    }
                   >
                     {/* <AiFillCaretDown className='text-[#85878c] text-xl relative z-[100]' /> */}
                     <Menu.Items className='absolute top-[50px] z-[20] flex flex-col gap-4 bg-[#161D24] border border-solid border-[rgba(255,255,255,0.1)] rounded-[13px]  text-white w-[220px] p-4 overflow-y-scroll h-[182px]'>
                       {!categoryLoading &&
-                        categoryData.map((item) => (
-                          <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
+                        categoryData.map((item, idx) => (
+                          <Menu.Item
+                            className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2 w-full'
+                            key={idx}
+                          >
                             <button
                               onClick={() => handleCategoryFilter(item)}
                               className='w-full'
@@ -101,8 +106,11 @@ const ViewAllTemplatesModal = () => {
                             </button>
                           </Menu.Item>
                         ))}
-                      <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2'>
-                        <button onClick={() => setCategoryFilter('All')}>
+                      <Menu.Item className='bg-[rgba(251,251,251,0.22)] rounded-[10px] py-2 w-full'>
+                        <button
+                          onClick={() => setCategoryFilter('All')}
+                          className='w-full '
+                        >
                           All
                         </button>
                       </Menu.Item>

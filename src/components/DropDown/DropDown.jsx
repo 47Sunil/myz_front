@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
+import { AiFillCaretDown } from 'react-icons/ai';
 
 const DropDown = ({ menuClass, menuBtnText, menuBtnClass, children }) => {
   return (
@@ -7,7 +8,10 @@ const DropDown = ({ menuClass, menuBtnText, menuBtnClass, children }) => {
       as='div'
       className={menuClass}
     >
-      <Menu.Button className={menuBtnClass}>{menuBtnText}</Menu.Button>
+      <Menu.Button className={menuBtnClass}>
+        <AiFillCaretDown className='text-[#85878c] text-xl cursor-pointer' />
+        {menuBtnText}
+      </Menu.Button>
       <Transition
         as={Fragment}
         enter='transition ease-out duration-100'

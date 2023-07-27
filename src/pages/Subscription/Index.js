@@ -10,18 +10,20 @@ import { toast } from 'react-hot-toast';
 
 const Index = () => {
   const queryClient = useQueryClient();
-  // const { user } = queryClient.getQueryData('user');
-  // const plan = user.subscription.planName;
-  // const price = user.subscription.amount_paid;
-  // const [updateSubs, setUpdateSubs] = useState({
-  //   plan_id: '',
-  //   address_1: user.metadata[0].address_1,
-  //   address_2: user.metadata[0].address_2,
-  //   billing_city: user.metadata[0].billing_city,
-  //   billing_state: user.metadata[0].billing_state,
-  //   billing_country: user.metadata[0].billing_country,
-  //   billing_postcode: user.metadata[0].billing_postcode,
-  // });
+  const { user } = queryClient.getQueryData('user');
+  const plan = user.subscription.planName;
+  const price = user.subscription.amount_paid;
+  const subsId = user.subscription.plan_id;
+  const [updateSubs, setUpdateSubs] = useState({
+    plan_id: '',
+    address_1: user.metadata[0].address_1,
+    address_2: user.metadata[0].address_2,
+    billing_city: user.metadata[0].billing_city,
+    billing_state: user.metadata[0].billing_state,
+    billing_country: user.metadata[0].billing_country,
+    billing_postcode: user.metadata[0].billing_postcode,
+  });
+
   const [enabled, setEnabled] = useState(false);
   const { data } = useAllPlans();
   const [modal, setModal] = useState(false);
@@ -32,8 +34,8 @@ const Index = () => {
   const handleSubmit = async (upgradeSubs, id) => {
     // console.log(id, 'iddddddddddddd');
 
-    // setUpdateSubs((prev) => ({ ...prev, plan_id: id }));
-    // console.log(upgradeSubs, 'onbnasdajkdajk');
+    setUpdateSubs((prev) => ({ ...prev, plan_id: id }));
+    console.log(upgradeSubs, 'onbnasdajkdajk');
 
     try {
       await upgrade(upgradeSubs);
@@ -55,7 +57,7 @@ const Index = () => {
               Upgrade Your Plan
             </h1>
             <h2 className='text-[#1d1d1d] text-xl'>
-              {/* Current Plan: {user.subscription.planName}{' '} */}
+              Current Plan: {user.subscription.planName}{' '}
             </h2>
             <div className='w-full h-full flex flex-col items-center gap-4'>
               <div className='flex gap-3 items-center justify-center'>
@@ -77,9 +79,8 @@ const Index = () => {
                 </Switch>
                 <span>{!enabled ? 'Monthly' : 'Yearly'}</span>
               </div>
-              {enabled
-                ? {
-                    /* <div className=' w-full h-full grid grid-cols-3 gap-3'>
+              {enabled ? (
+                <div className=' w-full h-full grid grid-cols-3 gap-3'>
                   {data?.data
                     .filter(
                       (i) =>
@@ -105,10 +106,9 @@ const Index = () => {
                         </button>
                       </div>
                     ))}
-                </div> */
-                  }
-                : {
-                    /* <div className=' w-full h-full flex gap-3 justify-center items-center '>
+                </div>
+              ) : (
+                <div className=' w-full h-full flex gap-3 justify-center items-center '>
                   {data?.data
                     .filter(
                       (i) =>
@@ -134,8 +134,8 @@ const Index = () => {
                         </button>
                       </div>
                     ))}
-                </div> */
-                  }}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -143,6 +143,8 @@ const Index = () => {
       <CommonHolder
         setModal={setModal}
         modal={modal}
+        planName={plan}
+        subsId={subsId}
       />
     </>
   );

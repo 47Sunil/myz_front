@@ -2,10 +2,10 @@
 import React from 'react';
 import { DownloadIcon } from './icons';
 import { useInvoiceData } from '../../../actions/Subscription';
+import { Link } from 'react-router-dom';
 
 const PaymentHistory = () => {
   const { data: invoiceData } = useInvoiceData();
-  // console.log(invoiceData, 'asdadads');
   const monthNames = [
     'Jan',
     'Feb',
@@ -61,6 +61,7 @@ const PaymentHistory = () => {
             dateExpiry={convertDate(item.expiry_date)}
             amount={item.amount}
             diffrentColor={index % 2 === 0}
+            invoiceURL={item.invoiceURL}
           />
         );
       })}
@@ -75,6 +76,7 @@ const ListItem = ({
   dateExpiry,
   amount,
   diffrentColor,
+  invoiceURL,
 }) => {
   return (
     <div
@@ -94,10 +96,12 @@ const ListItem = ({
       <div className='w-full text-sm pl-3 '>{amount}</div>
       <div className='w-full text-sm pl-3 flex flex-row gap-4'>
         <div className='cursor-pointer bg-white shadow border border-gray-100 w-5 h-5 rounded flex items-center justify-center'>
-          <DownloadIcon
-            color='#444444'
-            className='h-2.5'
-          />
+          <Link to={invoiceURL}>
+            <DownloadIcon
+              color='#444444'
+              className='h-2.5'
+            />
+          </Link>
         </div>
         {status !== 'paid' && (
           <div className='cursor-pointer bg-yellow-300 border border-yellow-600/40 px-3 text-xs h-5 rounded flex items-center justify-center'>

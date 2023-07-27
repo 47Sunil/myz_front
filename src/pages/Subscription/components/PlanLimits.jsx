@@ -4,17 +4,19 @@ import { useSubscriptionPlanData } from '../../../actions/Subscription';
 
 const PlanLimits = () => {
   const { data, isLoading } = useSubscriptionPlanData();
+  console.log(data);
   return (
     <div className='bg-white mx-3 p-3 rounded-xl mt-5'>
       <h4 className='text-sm text-gray-800 font-medium text-center'>
         Plan Limits
       </h4>
       {!isLoading &&
-        data?.data.map((item) => (
+        data?.data.map((item, idx) => (
           <ProgressBar
             limit={item.limit}
             limitUsed={item.created}
             label={item.label}
+            key={idx}
           />
         ))}
       {/* <ProgressBar

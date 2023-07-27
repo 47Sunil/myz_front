@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { requestInstance } from '../axiosConfig';
 import { toast } from 'react-hot-toast';
 
@@ -59,3 +59,29 @@ export function useInvoiceData() {
     }
   );
 }
+export const useCancelSubsMutation = () => {
+  return useMutation(async () => {
+    try {
+      const res = await requestInstance.delete('/subscriptions/subs');
+      console.log(res);
+      toast.success('Subscription Canceled');
+      return res;
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  });
+};
+
+export const useAdvancedPaymentSubscription = (id) => {
+  return useQuery(['payAdvance', id], async () => {
+    try {
+      const res = await requestInstance.get(
+        `subscriptions/payForSubscription?id=${id}`
+      );
+      console.log(res);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  });
+};

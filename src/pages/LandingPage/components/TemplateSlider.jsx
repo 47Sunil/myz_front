@@ -43,7 +43,6 @@ const TemplateManager = ({
     'templates',
     useTemplatesData
   );
-
   {
     // !isLoading && console.log(data?.data);
   }
@@ -89,9 +88,14 @@ const TemplateManager = ({
                 )}
                 <div className='absolute bottom-0 w-full p-2 flex flex-col items-center gap-4'>
                   <div className='bg-white rounded-full w-[102px] h-[50px] border border-solid border-[#85878C] shadow-[0_0_19px_rgba(0,0,0,.25)] flex gap-2 p-1'>
-                    <button className='bg-gradient-template-eye w-[42px] h-[42px] rounded-full flex justify-center items-center'>
+                    <a
+                      className='bg-gradient-template-eye w-[42px] h-[42px] rounded-full flex justify-center items-center'
+                      rel='noreferrer'
+                      href={i.demoUrl}
+                      target='_blank'
+                    >
                       <Eye eyeColor='#ffffff' />
-                    </button>
+                    </a>
                     <Link
                       to={`/landing-pages/create_landing_page?id=${i._id}`}
                       className='bg-[#DFDEE2] w-[42px] h-[42px] rounded-full flex justify-center items-center'

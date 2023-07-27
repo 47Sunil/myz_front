@@ -2,6 +2,14 @@ import styled from 'styled-components';
 import PaymentHistory from './PaymentHistory';
 import PlanLimits from './PlanLimits';
 import PlanOffers from './PlanOffers';
+import { toast } from 'react-hot-toast';
+import {
+  useAdvancedPaymentSubscription,
+  useCancelSubsMutation,
+} from '../../../actions/Subscription';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
+import { useQueryClient } from 'react-query';
 
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
@@ -30,9 +38,104 @@ const Overlay2 = styled.div`
   border-radius: 18px;
 `;
 
-const CommonHolder = ({ setModal, modal }) => {
+const CommonHolder = ({ setModal, modal, planName, subsId }) => {
+  console.log(planName);
+  const [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const { mutate: cancelSubs, isLoading } = useCancelSubsMutation();
+  const cancelSubscription = () => {
+    cancelSubs();
+  };
+  const handleCancelSubs = () => {
+    openModal();
+    // cancelSubs();
+  };
+  const queryClient = useQueryClient();
+  const { user } = queryClient.getQueryData('user');
+  const userID = user.userId;
+  console.log(userID);
+  const { data } = useAdvancedPaymentSubscription(userID);
+  console.log(data);
+  const handelAdvancedPayment = () => {};
+
   return (
     <div className='flex flex-row h-full relative w-full'>
+      <Transition
+        appear
+        show={isOpen}
+        as={Fragment}
+      >
+        <Dialog
+          as='div'
+          className='relative z-10'
+          onClose={closeModal}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter='ease-out duration-300'
+            enterFrom='opacity-0'
+            enterTo='opacity-100'
+            leave='ease-in duration-200'
+            leaveFrom='opacity-100'
+            leaveTo='opacity-0'
+          >
+            <div className='fixed inset-0 bg-black bg-opacity-25' />
+          </Transition.Child>
+
+          <div className='fixed inset-0 overflow-y-auto'>
+            <div className='flex min-h-full items-center justify-center p-4 text-center'>
+              <Transition.Child
+                as={Fragment}
+                enter='ease-out duration-300'
+                enterFrom='opacity-0 scale-95'
+                enterTo='opacity-100 scale-100'
+                leave='ease-in duration-200'
+                leaveFrom='opacity-100 scale-100'
+                leaveTo='opacity-0 scale-95'
+              >
+                <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
+                  <Dialog.Title
+                    as='h3'
+                    className='text-lg font-medium leading-6 text-gray-900'
+                  >
+                    Confirm Subscription Cancelation
+                  </Dialog.Title>
+                  <div className='mt-2'>
+                    <p className='text-sm text-gray-500'>
+                      You will lose all your access to your websites.
+                    </p>
+                  </div>
+
+                  <div className='mt-4 flex w-full justify-between'>
+                    <button
+                      type='button'
+                      className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 w-[40%]'
+                      onClick={closeModal}
+                    >
+                      No
+                    </button>
+                    <button
+                      type='button'
+                      className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 w-[40%]'
+                      onClick={() => (closeModal(), cancelSubscription())}
+                    >
+                      Yes
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
       <Wrapper className='h-full w-60 z-10 grow '>
         <Overlay1>
           <Overlay2>
@@ -51,14 +154,14 @@ const CommonHolder = ({ setModal, modal }) => {
                   alt='trophy'
                 />
                 <div className='absolute w-full bottom-0 bg-gray-200 h-8 flex items-center justify-center text-xs'>
-                  #123
+                  #{subsId}
                 </div>
               </div>
             </div>
             <div className='-mr-1.5 -ml-1.5 h-16 flex mt-5 justify-center flex-col bg-gradient-to-r from-[#FF9300] to-[#CE6A22] shadow-md'>
               <p className='text-xs text-center text-white'>You Are On</p>
               <p className='text-lg text-center text-white font-medium -mt-1'>
-                Premium Plan
+                {planName.replace(/_/g, ' ')} Plan
               </p>
             </div>
             <PlanLimits />
@@ -68,13 +171,20 @@ const CommonHolder = ({ setModal, modal }) => {
             <div className='mx-3 mt-6'>
               <button
                 className='bg-[#3D1981] py-2 w-full  text-white text-sm rounded-lg'
-                onClick={() => setModal(!modal)}
+                onClick={() =>
+                  planName === 'Expert_Yearly'
+                    ? toast.success('Already on Top Plan')
+                    : setModal(!modal)
+                }
               >
                 Upgrade Plan
               </button>
-              <p className='text-white/80 py-2 text-xs text-center'>
+              <button
+                className='text-white/80 py-2 text-xs text-center w-full'
+                onClick={handleCancelSubs}
+              >
                 Cancel Subscription
-              </p>
+              </button>
             </div>
           </Overlay2>
         </Overlay1>
@@ -94,7 +204,10 @@ const CommonHolder = ({ setModal, modal }) => {
               Months
             </div>
             <div className='w-2/12 text-sm text-right'>
-              <button className='px-6 text-white rounded-lg py-2 bg-gradient-to-r from-[#FF6B00] to-[#FF9900]'>
+              <button
+                className='px-6 text-white rounded-lg py-2 bg-gradient-to-r from-[#FF6B00] to-[#FF9900]'
+                onClick={handelAdvancedPayment}
+              >
                 Pay Now
               </button>
             </div>
