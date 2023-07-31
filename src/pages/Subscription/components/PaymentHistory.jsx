@@ -1,8 +1,12 @@
 // import { ArrowDownward } from '@mui/icons-material';
 import React from 'react';
 import { DownloadIcon } from './icons';
-import { useInvoiceData } from '../../../actions/Subscription';
+import {
+  useAdvancedPaymentSubscription,
+  useInvoiceData,
+} from '../../../actions/Subscription';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const PaymentHistory = () => {
   const { data: invoiceData } = useInvoiceData();
@@ -62,6 +66,7 @@ const PaymentHistory = () => {
             amount={item.amount}
             diffrentColor={index % 2 === 0}
             invoiceURL={item.invoiceURL}
+            key={index}
           />
         );
       })}
@@ -78,6 +83,12 @@ const ListItem = ({
   diffrentColor,
   invoiceURL,
 }) => {
+  const [invoiceIDtosend, setInvoiceIDtosend] = useState('');
+  const invoicePay = () => {
+    setInvoiceIDtosend(invoiceId);
+  };
+  const { data } = useAdvancedPaymentSubscription(invoiceIDtosend);
+
   return (
     <div
       className={
@@ -104,9 +115,12 @@ const ListItem = ({
           </Link>
         </div>
         {status !== 'paid' && (
-          <div className='cursor-pointer bg-yellow-300 border border-yellow-600/40 px-3 text-xs h-5 rounded flex items-center justify-center'>
+          <button
+            className='cursor-pointer bg-yellow-300 border border-yellow-600/40 px-3 text-xs h-5 rounded flex items-center justify-center'
+            onClick={invoicePay}
+          >
             Pay
-          </div>
+          </button>
         )}
       </div>
     </div>

@@ -10,6 +10,7 @@ import {
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { useQueryClient } from 'react-query';
+import { redirect, useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
@@ -60,12 +61,15 @@ const CommonHolder = ({ setModal, modal, planName, subsId }) => {
   };
   const queryClient = useQueryClient();
   const { user } = queryClient.getQueryData('user');
-  const userID = user.userId;
-  console.log(userID);
-  const { data } = useAdvancedPaymentSubscription(userID);
-  console.log(data);
-  const handelAdvancedPayment = () => {};
-
+  console.log(user.subscription.end_date);
+  const advancePay = user.subscription.paymentDetails.paymentLink;
+  const handelAdvancedPayment = () => {
+    window.open(advancePay, '_blank');
+  };
+  const endDate = new Date(user.subscription.end_date);
+  const subsExpiryTime = endDate - Date.now();
+  const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+  console.log(subsExpiryTime);
   return (
     <div className='flex flex-row h-full relative w-full'>
       <Transition
@@ -192,26 +196,30 @@ const CommonHolder = ({ setModal, modal, planName, subsId }) => {
       <div className='grow bg-white my-7 -ml-9 w-[90vw] rounded-xl flex flex-row overflow-y-scroll max-h-full'>
         <div className='bg-black/40 w-10 blur-xl'></div>
         <div className='p-9 flex flex-col w-full '>
-          <div className='bg-gray-100 border border-gray-300/50 p-4 w-full rounded-xl flex items-center'>
-            <div className='w-6/12 text-md text-gray-600'>
-              Your Subscription is Active. But You can Always Pay in Advance.
-            </div>
-            <div className='w-4/12 flex items-center justify-center text-sm text-gray-500'>
-              Extend For
-              <div className='bg-gray-300/60 px-3 rounded py-1 -mt-1 mx-1 flex items-center'>
-                2
+          {/* logic to hide advance payment */}
+          {subsExpiryTime <= sevenDaysInMs && subsExpiryTime > 0 && (
+            <div className='bg-gray-100 border border-gray-300/50 p-4 w-full rounded-xl flex items-center'>
+              <div className='w-6/12 text-md text-gray-600'>
+                Your Subscription is Active. But You can Always Pay in Advance.
               </div>
-              Months
+              <div className='w-4/12 flex items-center justify-center text-sm text-gray-500'>
+                Extend For
+                <div className='bg-gray-300/60 px-3 rounded py-1 -mt-1 mx-1 flex items-center'>
+                  2
+                </div>
+                Months
+              </div>
+              <div className='w-2/12 text-sm text-right'>
+                <button
+                  className='px-6 text-white rounded-lg py-2 bg-gradient-to-r from-[#FF6B00] to-[#FF9900]'
+                  onClick={handelAdvancedPayment}
+                >
+                  Pay Now
+                </button>
+              </div>
             </div>
-            <div className='w-2/12 text-sm text-right'>
-              <button
-                className='px-6 text-white rounded-lg py-2 bg-gradient-to-r from-[#FF6B00] to-[#FF9900]'
-                onClick={handelAdvancedPayment}
-              >
-                Pay Now
-              </button>
-            </div>
-          </div>
+          )}
+
           <PlanOffers />
           <PaymentHistory />
         </div>

@@ -78,7 +78,8 @@ export const useAdvancedPaymentSubscription = (id) => {
       const res = await requestInstance.get(
         `subscriptions/payForSubscription?id=${id}`
       );
-      console.log(res);
+      console.log(res, '++++++++++++++++++');
+      window.open(res.data, '_blank');
       return res;
     } catch (error) {
       console.log(error);
