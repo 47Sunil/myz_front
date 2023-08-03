@@ -1802,7 +1802,7 @@ export const domainTableData = [
 ];
 export const landingTableData = [
   {
-    header: ['Name', 'Date', 'Status', 'Page Views', 'Actions'],
+    header: ['Name', 'Date', 'Status', 'Actions'],
     data: [
       {
         name: 'xyz',

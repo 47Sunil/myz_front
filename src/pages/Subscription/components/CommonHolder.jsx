@@ -3,10 +3,7 @@ import PaymentHistory from './PaymentHistory';
 import PlanLimits from './PlanLimits';
 import PlanOffers from './PlanOffers';
 import { toast } from 'react-hot-toast';
-import {
-  useAdvancedPaymentSubscription,
-  useCancelSubsMutation,
-} from '../../../actions/Subscription';
+import { useCancelSubsMutation } from '../../../actions/Subscription';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { useQueryClient } from 'react-query';

@@ -1,20 +1,45 @@
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
-import { usePaymentData } from '../../../actions/Payment';
+import {
+  useActivatePaymentMutation,
+  usePaymentData,
+} from '../../../actions/Payment';
+import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
+import { useState } from 'react';
 
 const PaymentGatewayList = () => {
+  const [Page, setPage] = useState(1);
+  const { data, isLoading } = usePaymentData(Page);
+  const length = data?.data?.length;
+  console.log(data);
   return (
     <div className='bg-white w-full rounded-t-3xl mt-8'>
       <div className='flex flex-row items-between p-4'>
         <div className='bg-gray-200/80 rounded-lg border border-gray-300 w-64 h-10 flex items-center px-3 text-gray-700 text-sm'>
           Search
         </div>
-        <div className='grow justify-end items-center flex flex-row text-gray-700 text-sm'>
-          Showing
-          <div className='bg-gray-200/80 w-12 h-8 mx-2 flex items-center justify-center pr-2 rounded-md border border-gray-300'>
-            5
-          </div>
-          of 5 Results
+        <div className=' w-full h-full flex justify-end items-center gap-2 text-black p-2'>
+          <p className='text-[12px]'>
+            Showing {length} of <span>{data?.counts}</span>
+          </p>
+          <button
+            className='w-[3rem] bg-[rgba(0,0,0,.5)] h-full rounded-xl flex justify-center items-center text-[25px]'
+            onClick={() => setPage((old) => Math.max(old - 1, 1))}
+            disabled={Page === 1}
+          >
+            <GrFormPrevious />
+          </button>
+          <button
+            className='w-[3rem] bg-[rgba(0,0,0,.5)] h-full rounded-xl flex justify-center items-center text-[25px]'
+            onClick={() => {
+              if (Math.ceil(data?.counts / 10)) {
+                setPage((old) => old + 1);
+              }
+            }}
+            disabled={Page === Math.ceil(data?.counts / 10)}
+          >
+            <GrFormNext />
+          </button>
         </div>
       </div>
       <div className='w-full bg-gray-200/70 grid grid-cols-5 px-4 border-y border-gray-300'>
@@ -34,7 +59,10 @@ const PaymentGatewayList = () => {
           Quick Actions
         </div>
       </div>
-      <ListItem item={res} />
+      <ListItem
+        item={data}
+        isLoading={isLoading}
+      />
     </div>
   );
 };
@@ -48,8 +76,7 @@ const res = {
   collected: '24567 INR',
 };
 
-const ListItem = ({ item }) => {
-  const { data, isLoading } = useQuery('payments', usePaymentData);
+const ListItem = ({ item, isLoading }) => {
   // console.log(data, 'payment data table');
   const monthNames = [
     'Jan',
@@ -74,12 +101,19 @@ const ListItem = ({ item }) => {
     const formattedDate = `${day} ${monthAbbreviation} ${year}`;
     return formattedDate;
   }
+  const { mutate: activate } = useActivatePaymentMutation();
+  const handleActivate = (id) => {
+    activate(id);
+  };
   return (
     <>
       {!isLoading &&
-        data?.data.map((i) => {
+        item?.data.map((i, idx) => {
           return (
-            <div className='w-full grid grid-cols-5 px-4 py-3 text-gray-600 items-center'>
+            <div
+              className='w-full grid grid-cols-5 px-4 py-3 text-gray-600 items-center'
+              key={idx}
+            >
               <div className='w-full text-sm flex gap-4 items-center'>
                 <img
                   src={i.icon}
@@ -110,7 +144,10 @@ const ListItem = ({ item }) => {
                     Deactivate
                   </button>
                 ) : (
-                  <button className='bg-gray-100 border border-gray-800/50 rounded-xl px-4 py-1'>
+                  <button
+                    className='bg-gray-100 border border-gray-800/50 rounded-xl px-4 py-1'
+                    onClick={() => handleActivate(i._id)}
+                  >
                     Activate
                   </button>
                 )}

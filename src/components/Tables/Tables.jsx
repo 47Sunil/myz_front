@@ -273,7 +273,7 @@ const LandingTables = ({
       ) : (
         data?.data?.map((i, idx) => {
           return (
-            <BodyRow>
+            <BodyRow key={idx}>
               <BodyCell className='w-[300px]'>
                 {' '}
                 <div className='w-full text-sm text-gray-900 font-medium'>
@@ -314,7 +314,7 @@ const LandingTables = ({
                   </p>
                 )}
               </BodyCell>
-              <BodyCell className='!text-center'>{pageViewsData[idx]}</BodyCell>
+              {/* <BodyCell className='!text-center'>{pageViewsData[idx]}</BodyCell> */}
               <BodyCell className='w-[300px]'>
                 <div className='flex gap-2 justify-center'>
                   {i.published ? (

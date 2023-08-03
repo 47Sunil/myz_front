@@ -20,9 +20,9 @@ const Dashboard = () => {
       <div className='col-start-1 col-end-7 row-start-1 row-end-5 '>
         <ReportSection />
       </div>
-      {/* <div className='col-start-1 col-end-4 row-start-5 row-end-[12]'>
+      <div className='col-start-1 col-end-4 row-start-5 row-end-[12]'>
         <AreaChart />
-      </div> */}
+      </div>
       <div className='col-start-4 col-end-7 row-start-5 row-end-[12]'>
         <BounceRate />
       </div>

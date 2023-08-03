@@ -1,10 +1,24 @@
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { requestInstance } from '../axiosConfig';
 import { useNavigate } from 'react-router';
 
-export async function usePaymentData() {
-  const res = await requestInstance.get('/payments');
-  return res;
+// export async function usePaymentData(Page) {
+//   const res = await requestInstance.get(`/payments?page=${Page}`);
+//   console.log(res);
+//   return res;
+// }
+
+export function usePaymentData(page) {
+  const fetchPaymentData = async () => {
+    console.log(page, '+++++++++++++++++++++++++');
+    try {
+      const res = await requestInstance.get(`/payments?page=${page}`);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return useQuery(['payments', page], fetchPaymentData);
 }
 
 export async function usePaymentMutation() {
@@ -30,4 +44,17 @@ export async function usePaymentMutation() {
       },
     }
   );
+}
+
+export function useActivatePaymentMutation() {
+  const patchActivate = async (id) => {
+    console.log(id);
+    try {
+      const res = requestInstance.patch(`payments/active/${id}`);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return useMutation(patchActivate);
 }
