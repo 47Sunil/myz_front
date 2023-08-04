@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import {
   useActivatePaymentMutation,
+  useDeactivatePaymentMutation,
   usePaymentData,
 } from '../../../actions/Payment';
 import { GrFormPrevious, GrFormNext } from 'react-icons/gr';
@@ -9,7 +10,7 @@ import { useState } from 'react';
 
 const PaymentGatewayList = () => {
   const [Page, setPage] = useState(1);
-  const { data, isLoading } = usePaymentData(Page);
+  const { data, isLoading, isFetching } = usePaymentData(Page);
   const length = data?.data?.length;
   console.log(data);
   return (
@@ -62,6 +63,8 @@ const PaymentGatewayList = () => {
       <ListItem
         item={data}
         isLoading={isLoading}
+        page={Page}
+        isFetching={isFetching}
       />
     </div>
   );
@@ -76,7 +79,7 @@ const res = {
   collected: '24567 INR',
 };
 
-const ListItem = ({ item, isLoading }) => {
+const ListItem = ({ item, isLoading, page, isFetching }) => {
   // console.log(data, 'payment data table');
   const monthNames = [
     'Jan',
@@ -102,8 +105,12 @@ const ListItem = ({ item, isLoading }) => {
     return formattedDate;
   }
   const { mutate: activate } = useActivatePaymentMutation();
-  const handleActivate = (id) => {
-    activate(id);
+  const { mutate: deactive } = useDeactivatePaymentMutation();
+  const handleActivate = (id, page) => {
+    activate({ id, page });
+  };
+  const handleDeactivate = (id, page) => {
+    deactive({ id, page });
   };
   return (
     <>
@@ -140,15 +147,18 @@ const ListItem = ({ item, isLoading }) => {
               <div className='w-full pl-3 text-sm'>{i.collected}</div>
               <div className='w-full pl-3 text-sm'>
                 {i.active ? (
-                  <button className='bg-gray-100 border border-gray-800/50 rounded-xl px-4 py-1'>
-                    Deactivate
+                  <button
+                    className='bg-gray-100 border border-gray-800/50 rounded-xl px-4 py-1'
+                    onClick={() => handleDeactivate(i._id, page)}
+                  >
+                    {isFetching ? ' Deactivating' : ' Deactivate'}
                   </button>
                 ) : (
                   <button
                     className='bg-gray-100 border border-gray-800/50 rounded-xl px-4 py-1'
-                    onClick={() => handleActivate(i._id)}
+                    onClick={() => handleActivate(i._id, page)}
                   >
-                    Activate
+                    {isFetching ? 'Activating' : 'Activate'}
                   </button>
                 )}
               </div>

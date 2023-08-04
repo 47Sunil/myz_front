@@ -44,7 +44,7 @@ const CreateLandingPage = () => {
     thankYouTitle: 'thankYouTitle',
     p1: 'Hii',
     p2: 'Buye',
-    image: '',
+    image: [],
     metadata: {
       aidata: {
         productName: '',

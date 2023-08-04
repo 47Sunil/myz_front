@@ -129,6 +129,14 @@ const Router = () => {
       element: <CreateLandingPage />,
     },
     {
+      path: ':pageType/editor/:id',
+      element: (
+        <Protected isSignedIn={isSignedIn}>
+          {isUserLoggedIn && <Editor />}
+        </Protected>
+      ),
+    },
+    {
       path: 'accounts',
       element: <Accounts />,
       children: [

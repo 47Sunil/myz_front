@@ -150,7 +150,7 @@ const FormScreen = ({
     const value = e;
     setPageData((prevState) => ({
       ...prevState,
-      image: value,
+      image: [value],
     }));
   };
   const variants = {

@@ -47,14 +47,29 @@ export async function usePaymentMutation() {
 }
 
 export function useActivatePaymentMutation() {
-  const patchActivate = async (id) => {
-    console.log(id);
+  const queryClient = useQueryClient();
+  const patchActivate = async ({ id, page }) => {
     try {
       const res = requestInstance.patch(`payments/active/${id}`);
+      queryClient.invalidateQueries(['payments', page]);
       return res;
     } catch (error) {
       console.log(error);
     }
   };
   return useMutation(patchActivate);
+}
+export function useDeactivatePaymentMutation() {
+  const queryClient = useQueryClient();
+
+  const patchDeactivate = async ({ id, page }) => {
+    try {
+      const res = requestInstance.patch(`payments/deactive/${id}`);
+      queryClient.invalidateQueries(['payments', page]);
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return useMutation(patchDeactivate);
 }
