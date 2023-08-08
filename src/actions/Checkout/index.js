@@ -18,7 +18,7 @@ export const useCheckoutMutation = () => {
         data && toast.success('Redirecting to Payment');
         // console.log('url', data.paymentDetails.paymentLink);
         // const encodedURL = encodeURIComponent(data.paymentDetails.paymentLink);
-        // window.location.replace(`https://myzer.io/?url=${encodedURL}`);
+        // tion.replace(`https://myzer.io/?url=${encodedURL}`);
         // <Navigate to={} />;
         // navigate();
       },

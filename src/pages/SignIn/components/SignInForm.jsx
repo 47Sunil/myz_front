@@ -31,7 +31,7 @@ const SignForm = () => {
     try {
       setLockFields(true);
       await loginMutation.mutateAsync(loginRequest);
-      toast.success('Welcome To Myzer');
+      setLockFields(false);
     } catch (err) {
       // toast.error(err.response.data.message);
       console.log(err);

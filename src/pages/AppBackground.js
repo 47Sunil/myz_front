@@ -113,12 +113,13 @@ const AppBackground = ({ children }) => {
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
   };
-  if (subsExpiryTime > 0 && Date.now() >= timerstartDay) {
-    useEffect(() => {
-      const interval = setInterval(() => getTime(endDate), 1000);
-      return () => clearInterval(interval);
-    }, []);
-  }
+  // if (subsExpiryTime > 0 && Date.now() >= timerstartDay) {
+
+  // }
+  useEffect(() => {
+    const interval = setInterval(() => getTime(endDate), 1000);
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
       {subsExpiryTime <= sevenDaysInMs && subsExpiryTime > 0 ? (

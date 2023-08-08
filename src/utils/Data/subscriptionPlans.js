@@ -1,0 +1,91 @@
+export const subscriptionPlansYearly = [
+  {
+    id: 444,
+    title: 'BASIC',
+    price: '14,999/-',
+    listHeading: `Ideal for Small Business and aspiring Digital Entrepreneurs`,
+    listItems: [
+      'Access to All Features and Updates',
+      'Setup Instant Whatsapp Notifications',
+      'Setup Your Private Domain and Payment Gateway',
+      'Get Priority Ticket Support with Inbuilt Help Desk',
+      'Capture Unlimited Payments at 4% Fees*',
+    ],
+    funnel: '10',
+  },
+  {
+    id: 445,
+    title: 'ADVANCED',
+    price: '19,999/-',
+    listHeading: `Ideal for Small Business and aspiring Digital Entrepreneurs`,
+    listItems: [
+      'Access to All Features and Updates',
+      'Setup Instant Whatsapp Notifications',
+      'Setup Your Private Domain and Payment Gateway',
+      'Get Priority Ticket Support with Inbuilt Help Desk',
+      'Capture Unlimited Payments at 4% Fees*',
+    ],
+    funnel: '50',
+    recommended: 'Best Value For Money Plan 🤩',
+  },
+  {
+    id: 446,
+    title: 'EXPERT',
+    price: '24,999/-',
+    listHeading: `Ideal for Small Business and aspiring Digital Entrepreneurs`,
+    listItems: [
+      'Access to All Features and Updates',
+      'Setup Instant Whatsapp Notifications',
+      'Setup Your Private Domain and Payment Gateway',
+      'Get Priority Ticket Support with Inbuilt Help Desk',
+      'Capture Unlimited Payments at 4% Fees*',
+    ],
+    funnel: '100',
+  },
+];
+
+export const subscriptionPlansMonthly = [
+  {
+    id: 433,
+    title: 'BASIC',
+    price: '1,499/-',
+    listHeading: `Ideal for Small Business and aspiring Digital Entrepreneurs`,
+    listItems: [
+      'Access to All Features and Updates',
+      'Setup Instant Whatsapp Notifications',
+      'Setup Your Private Domain and Payment Gateway',
+      'Get Priority Ticket Support with Inbuilt Help Desk',
+      'Capture Unlimited Payments at 4% Fees*',
+    ],
+    funnel: '10',
+  },
+  {
+    id: 435,
+    title: 'ADVANCED',
+    price: '1,999/-',
+    listHeading: `Ideal for Small Business and aspiring Digital Entrepreneurs`,
+    listItems: [
+      'Access to All Features and Updates',
+      'Setup Instant Whatsapp Notifications',
+      'Setup Your Private Domain and Payment Gateway',
+      'Get Priority Ticket Support with Inbuilt Help Desk',
+      'Capture Unlimited Payments at 4% Fees*',
+    ],
+    funnel: '50',
+    recommended: 'Best Value For Money Plan 🤩',
+  },
+  {
+    id: 436,
+    title: 'EXPERT',
+    price: '2,499/-',
+    listHeading: `Ideal for Small Business and aspiring Digital Entrepreneurs`,
+    listItems: [
+      'Access to All Features and Updates',
+      'Setup Instant Whatsapp Notifications',
+      'Setup Your Private Domain and Payment Gateway',
+      'Get Priority Ticket Support with Inbuilt Help Desk',
+      'Capture Unlimited Payments at 4% Fees*',
+    ],
+    funnel: '100',
+  },
+];

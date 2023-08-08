@@ -1,31 +1,33 @@
 // import { useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
+import { useAutoLoginData } from './actions/User/Login';
 // import { useAutoLoginData } from './actions/User/Login';
 import Router from './routes/Routes';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 // export const APP_ENVIRONMENT = 'local';
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnMount: true,
-      refetchOnWindowFocus: false,
-      retry: 1,
-    },
-  },
-});
-
 function App() {
-  return (
-    <QueryClientProvider
-      client={queryClient}
-      contextSharing={true}
-    >
-      <Router />
-      <ReactQueryDevtools />
-    </QueryClientProvider>
-  );
+  // const [IsSignedIn, setIsSignedIn] = useState(false);
+  // const navigate = useNavigate();
+  // const autoLogin = useAutoLoginData();
+  // const handleLogin = async () => {
+  //   const res = await autoLogin.mutateAsync();
+  //   console.log(res);
+  //   if (res?.success) {
+  //     setIsSignedIn(true);
+  //     navigate('/');
+  //   } else {
+  //     setIsSignedIn(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   !IsSignedIn && handleLogin();
+  // }, []);
+  return <Router />;
 }
 
 export default App;

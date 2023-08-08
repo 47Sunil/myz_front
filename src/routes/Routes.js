@@ -6,6 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
   Navigate,
+  useNavigate,
 } from 'react-router-dom';
 import ForgetPassword from '../pages/ForgetPassword/index';
 import ForgetPasswordEmail from '../pages/ForgetPassword/components/ForgetForm';
@@ -38,6 +39,10 @@ import { element } from 'prop-types';
 import { toast } from 'react-hot-toast';
 import { useQueryClient } from 'react-query';
 import CreateLandingPage from '../pages/LandingPage/components/CreateLandingPage';
+import Unsubscribed from '../pages/Unsubscribed';
+import UnsubscribedForm from '../pages/UnsubscribedForm';
+import PaymentPending from '../pages/unsubscribedPending';
+import PaymentSuccess from '../pages/SubscriptionSucceded';
 const Protected = ({ isSignedIn, children }) => {
   if (!isSignedIn) {
     console.log(isSignedIn, '++++++++++++++');
@@ -53,15 +58,21 @@ const Protected = ({ isSignedIn, children }) => {
 const Router = () => {
   const queryClient = useQueryClient();
   const isUserLoggedIn = queryClient.getQueryData(['user']);
-  console.log(isUserLoggedIn);
+  console.log(isUserLoggedIn, 'isUserLoggedIn');
   const [isSignedIn, setIsSignedIn] = useState(true);
-  console.log(isSignedIn, 'sdsdfsfsdf');
+  console.log(isSignedIn, 'isSignedIn');
   const autoLogin = useAutoLoginData();
   const handleLogin = async () => {
     const res = await autoLogin.mutateAsync();
     console.log(res);
     if (res?.success) {
       setIsSignedIn(true);
+      return (
+        <Navigate
+          to='/'
+          replace
+        />
+      );
     } else {
       setIsSignedIn(false);
     }
@@ -135,6 +146,27 @@ const Router = () => {
           {isUserLoggedIn && <Editor />}
         </Protected>
       ),
+    },
+    {
+      path: '/unsubscribed',
+
+      element: (
+        <Protected isSignedIn={isSignedIn}>
+          {isUserLoggedIn && <Unsubscribed />}
+        </Protected>
+      ),
+    },
+    {
+      path: '/unsubscribed/form/:id',
+      element: <UnsubscribedForm />,
+    },
+    {
+      path: '/unsubscribed/pendingPayment',
+      element: <PaymentPending />,
+    },
+    {
+      path: '/unsubscribed/successPayment',
+      element: <PaymentSuccess />,
     },
     {
       path: 'accounts',

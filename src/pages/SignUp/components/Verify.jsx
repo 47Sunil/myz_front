@@ -50,7 +50,7 @@ const Form = () => {
       setLockFields(true);
       await phoneVerification({ phone, setLockFields });
       await emailVerification({ email, setLockFields });
-      isEmailVerified && isPhoneVerified && navigate('/dashboard');
+      isEmailVerified && isPhoneVerified && navigate('/accounts');
     } catch (error) {
       // console.log(error);
       toast.error(error.response.data.message);

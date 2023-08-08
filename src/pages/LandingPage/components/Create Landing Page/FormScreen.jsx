@@ -94,7 +94,6 @@ const FormScreen = ({
       handleCreatePage(pageData);
     }
   };
-
   const onChangeHandler = (e) => {
     // console.log(e, 'on change handler');
     setEnabled(!enabled);
@@ -526,7 +525,9 @@ const FormScreen = ({
                 </p>
               )}
             </div>
-            <SingleImage getLink={handleImage}></SingleImage>
+            {templateData[0].aiImage && (
+              <SingleImage getLink={handleImage}></SingleImage>
+            )}
           </div>
         )}
       </div>

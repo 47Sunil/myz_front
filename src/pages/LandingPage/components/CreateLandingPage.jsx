@@ -58,7 +58,7 @@ const CreateLandingPage = () => {
   const templateData = data?.data.filter((i) => {
     return i._id === ID;
   });
-  console.log(pageData);
+  console.log(templateData);
   const navigate = useNavigate();
   if (templateData === undefined) {
     navigate('/landing-pages');

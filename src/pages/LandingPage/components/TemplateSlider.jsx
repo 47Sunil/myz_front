@@ -44,7 +44,7 @@ const TemplateManager = ({
     useTemplatesData
   );
   {
-    // !isLoading && console.log(data?.data);
+    !isLoading && console.log(data?.data);
   }
   return (
     <div className='border-b lg:border-y border-solid border-white/20 pb-4 lg:py-4'>
