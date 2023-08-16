@@ -1,6 +1,10 @@
 import React from 'react';
 import { DownloadIcon } from './icons';
-import { useInvoiceData } from '../../../actions/Subscription';
+import {
+  useAdvancedPaymentSubscription,
+  useInvoiceData,
+} from '../../../actions/Subscription';
+import { useState } from 'react';
 
 const PaymentHistory = () => {
   const { data } = useInvoiceData();
@@ -58,6 +62,7 @@ const PaymentHistory = () => {
             dateExpiry={convertDate(item.expiry_date)}
             amount={item.amount}
             diffrentColor={index % 2 === 0}
+            key={index}
           />
         );
       })}
@@ -73,6 +78,13 @@ const ListItem = ({
   amount,
   diffrentColor,
 }) => {
+  const [invoiceIDtosend, setInvoiceIDtosend] = useState('');
+  console.log(invoiceId, 'asdadadadad');
+  const invoicePay = () => {
+    setInvoiceIDtosend(invoiceId);
+  };
+  const { data } = useAdvancedPaymentSubscription(invoiceIDtosend);
+
   return (
     <div
       className={
@@ -97,9 +109,13 @@ const ListItem = ({
           />
         </div>
         {status !== 'paid' && (
-          <div className='cursor-pointer bg-yellow-300 border border-yellow-600/40 px-3 text-xs h-5 rounded flex items-center justify-center'>
+          <button
+            type='button'
+            className='cursor-pointer bg-yellow-300 border border-yellow-600/40 px-3 text-xs h-5 rounded flex items-center justify-center'
+            onClick={invoicePay}
+          >
             Pay
-          </div>
+          </button>
         )}
       </div>
     </div>

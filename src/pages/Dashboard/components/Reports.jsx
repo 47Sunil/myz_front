@@ -7,9 +7,13 @@ import EclipseRight from '../../../assets/svg/Group 200.svg';
 import { ImArrowUp, ImArrowDown } from 'react-icons/im';
 import 'react-loading-skeleton/dist/skeleton.css';
 import NewUserBitmoji from '../../../assets/icons/Frame 8.png';
+import { useQueryClient } from 'react-query';
 
 const ReportSection = () => {
   const { data, isLoading, isFetching } = useReportData();
+  const { user } = JSON.parse(localStorage.getItem('user'));
+  // const queryClient = useQueryClient();
+  // const { user } = queryClient.getQueryData('user');
   const isnew = false;
   const isDataEmpty = !isFetching && data === undefined;
   console.log(isDataEmpty);
@@ -52,7 +56,7 @@ const ReportSection = () => {
               We are Proudly Developed in India{' '}
             </p>
             <h1 className='font-bold text-[#fff] text-[3vw] leading-[30px]'>
-              Namaste Ravinder! Welcome to Myzer
+              Namaste {user.name}! Welcome to Myzer
             </h1>
             <p className='text-[#CDBBFF] font-semibold text-[23px]'>
               We are Always ready to get you more conversions from your funnels.

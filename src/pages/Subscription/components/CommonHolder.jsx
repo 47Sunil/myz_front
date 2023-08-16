@@ -8,6 +8,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { useQueryClient } from 'react-query';
 import { redirect, useNavigate } from 'react-router-dom';
+import { formatDate } from '../../../utils/helper/convertDateDDmmyyyy';
 
 const Wrapper = styled.div`
   background: linear-gradient(152.58deg, #5e36ce 17.08%, #502eb0 98.96%);
@@ -167,7 +168,7 @@ const CommonHolder = ({ setModal, modal, planName, subsId }) => {
             </div>
             <PlanLimits />
             <p className='text-white/80 py-2 text-xs text-center'>
-              Next Payment Date: 15 June 2023
+              Next Payment Date: {formatDate(user.subscription.end_date)}
             </p>
             <div className='mx-3 mt-6'>
               <button

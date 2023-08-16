@@ -7,6 +7,7 @@ import SupportedGateways from './components/SupportedGateways';
 
 const Index = () => {
   const { method } = useParams();
+  console.log(method);
   return (
     <>
       {!method ? (

@@ -122,6 +122,10 @@ const Router = () => {
           element: <PaymentGateway />,
         },
         {
+          path: 'payment-gateways/:method',
+          element: <PaymentGateway />,
+        },
+        {
           path: 'account',
           element: <UserAccount />,
         },

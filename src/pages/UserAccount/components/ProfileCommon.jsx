@@ -40,8 +40,9 @@ const ProfileCommon = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
   const [file, setFile] = useState(null);
-  const queryClient = useQueryClient();
-  const data = queryClient.getQueryData('user');
+  // const queryClient = useQueryClient();
+  // const data = queryClient.getQueryData('user');
+  const { user } = JSON.parse(localStorage.getItem('user'));
   const { mutateAsync: upload, isLoading } = useImageUpload();
   const hiddenFileInput = useRef(null);
   const handleClickEdit = (e) => {
@@ -72,7 +73,7 @@ const ProfileCommon = () => {
               {!isLoading && (
                 <div className='w-32 h-32 absolute translate-x-1/2 right-1/2 bottom-0 rounded-full translate-y-1/2 bg-[#221154] p-1 '>
                   <img
-                    src={data?.user.profile || user}
+                    src={user.profile || user}
                     alt='User Img'
                     className='rounded-full w-full h-full object-cover'
                   />
@@ -100,7 +101,7 @@ const ProfileCommon = () => {
         </Wrapper>
         <div className='bg-black/50 w-11/12 mx-auto h-4  z-10 -mt-3 blur-md'></div>
         <div className='bg-white w-11/12 mx-auto -mt-2 pt-16 rounded-b-xl'>
-          <h4 className='w-full text-center py-4 text-lg'>{data?.user.name}</h4>
+          <h4 className='w-full text-center py-4 text-lg'>{user.name}</h4>
           <div className='w-[500px] bg-gray-100 p-2 mx-auto rounded-full grid grid-cols-3 gap-2 text-sm'>
             <div
               className={

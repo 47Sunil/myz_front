@@ -26,13 +26,14 @@ const Index = () => {
 
   const [enabled, setEnabled] = useState(false);
   const { data } = useAllPlans();
+  console.log(data);
   const [modal, setModal] = useState(false);
   // console.log(data);
   const { mutateAsync: upgrade } = useCheckoutUpgradeMutation();
   // console.log(upgradeData, 'onSuccess upgrade');
 
   const handleSubmit = async (upgradeSubs, id) => {
-    // console.log(id, 'iddddddddddddd');
+    console.log(id, 'iddddddddddddd');
 
     setUpdateSubs((prev) => ({ ...prev, plan_id: id }));
     console.log(upgradeSubs, 'onbnasdajkdajk');
@@ -88,8 +89,11 @@ const Index = () => {
                         i.billing_interval !== 'Monthly' &&
                         i.price > price
                     )
-                    .map((i) => (
-                      <div className='bg-gradient-landing-purple rounded-2xl w-full h-full flex flex-col items-center justify-between px-2 py-8'>
+                    .map((i, idx) => (
+                      <div
+                        className='bg-gradient-landing-purple rounded-2xl w-full h-full flex flex-col items-center justify-between px-2 py-8'
+                        key={idx}
+                      >
                         <div className='flex flex-col gap-4 items-center'>
                           <h1 className='text-[1.5rem] text-white font-semibold'>
                             {i.planName.split('_')[0]}
@@ -116,8 +120,11 @@ const Index = () => {
                         i.billing_interval !== 'Yearly' &&
                         i.price > price
                     )
-                    .map((i) => (
-                      <div className='bg-gradient-landing-purple rounded-2xl w-full h-full flex flex-col items-center justify-between px-2 py-8 max-w-[33%]'>
+                    .map((i, idx) => (
+                      <div
+                        className='bg-gradient-landing-purple rounded-2xl w-full h-full flex flex-col items-center justify-between px-2 py-8 max-w-[33%]'
+                        key={idx}
+                      >
                         <div className='flex flex-col gap-4 items-center'>
                           <h1 className='text-[1.5rem] text-white font-semibold'>
                             {i.planName}

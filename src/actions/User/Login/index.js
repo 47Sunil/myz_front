@@ -27,6 +27,7 @@ export function useLoginMutation() {
     },
     {
       onSuccess: (data) => {
+        localStorage.setItem('user', JSON.stringify(data));
         queryClient.setQueryData('user', data);
         queryClient.invalidateQueries('user');
         console.log('++++++++++++++++++++');

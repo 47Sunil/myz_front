@@ -57,7 +57,7 @@ const GatewayCard = ({ item }) => {
           </p>
         </div>
         <Link
-          to={'/payment-gateway/add?gateway=' + item.id}
+          to={'/payment-gateways/add?gateway=' + item.id}
           className='w-full flex h-12 bg-white rounded-lg btn-card-container flex-row p-2 cursor-pointer'
         >
           <div className='grow justify-center flex items-center'>

@@ -87,8 +87,9 @@ const Main = styled.main`
 const AppBackground = ({ children }) => {
   const location = useLocation();
   const path = location.pathname.split('/').join('');
-  const queryClient = useQueryClient();
-  const { user } = queryClient.getQueryData('user');
+  // const queryClient = useQueryClient();
+  // const { user } = queryClient.getQueryData('user');sub
+  const { user } = JSON.parse(localStorage.getItem('user'));
   const endDate = user.subscription.end_date;
   const endDateFormatted = new Date(user.subscription.end_date);
   const subsExpiryTime = endDateFormatted - Date.now();
