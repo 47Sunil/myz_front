@@ -41,7 +41,7 @@ const UnsubscribedForm = () => {
     try {
       setLockFields(true);
       await takeSubs(subsRequest);
-      navigate('/accounts');
+      // navigate('/accounts');
       toast.success('Welcome To Myzer');
     } catch (err) {
       setLockFields(false);

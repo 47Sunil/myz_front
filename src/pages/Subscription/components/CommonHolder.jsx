@@ -40,7 +40,9 @@ const Overlay2 = styled.div`
 const CommonHolder = ({ setModal, modal, planName, subsId }) => {
   console.log(planName);
   const [isOpen, setIsOpen] = useState(false);
-
+  const { user } = JSON.parse(localStorage.getItem('user'));
+  const subsID = user.subscription.id;
+  console.log(subsID);
   function closeModal() {
     setIsOpen(false);
   }
@@ -57,8 +59,8 @@ const CommonHolder = ({ setModal, modal, planName, subsId }) => {
     openModal();
     // cancelSubs();
   };
-  const queryClient = useQueryClient();
-  const { user } = queryClient.getQueryData('user');
+  // const queryClient = useQueryClient();
+  // const { user } = queryClient.getQueryData('user');
   console.log(user.subscription.end_date);
   const advancePay = user.subscription.paymentDetails.paymentLink;
   const handelAdvancedPayment = () => {
@@ -156,7 +158,7 @@ const CommonHolder = ({ setModal, modal, planName, subsId }) => {
                   alt='trophy'
                 />
                 <div className='absolute w-full bottom-0 bg-gray-200 h-8 flex items-center justify-center text-xs'>
-                  #{subsId}
+                  #{subsID}
                 </div>
               </div>
             </div>

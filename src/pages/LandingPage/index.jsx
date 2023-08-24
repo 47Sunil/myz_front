@@ -76,13 +76,16 @@ const LandingPages = () => {
           <div className='heading-filter-container flex justify-between mt-4 mb-4'>
             <h4 className='text-xl text-white'>Landing pages</h4>
             <div className='flex gap-4 items-center'>
-              <TransparentButton
-                buttonText={'Filter'}
-                transparent={true}
-                filterBtn={true}
-                icon={<FilterIcon />}
-              />
-              {isEmpty && (
+              {isEmpty ? null : (
+                <TransparentButton
+                  buttonText={'Filter'}
+                  transparent={true}
+                  filterBtn={true}
+                  icon={<FilterIcon />}
+                />
+              )}
+
+              {!isEmpty && (
                 <div className=' w-[15rem] h-full flex items-center gap-2 text-white'>
                   <p className='text-[12px]'>
                     Showing {length} of <span>{totalPages}</span>
@@ -94,6 +97,7 @@ const LandingPages = () => {
                   >
                     <GrFormPrevious />
                   </button>
+                  {page}
                   <button
                     className='w-[3rem] bg-[rgba(255,255,255,.5)] h-full rounded-xl flex justify-center items-center text-[25px]'
                     onClick={() => {

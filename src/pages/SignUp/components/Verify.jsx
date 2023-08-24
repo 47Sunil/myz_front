@@ -40,7 +40,7 @@ const Form = () => {
   // console.log(typeof isEmailVerified);
   const isPhoneVerified = localStorage.getItem('isPhoneVerified');
 
-  const { mutateAsync: phoneVerification } = useOtpVerificationPhone();
+  // const { mutateAsync: phoneVerification } = useOtpVerificationPhone();
   const { mutateAsync: emailVerification } = useOtpVerificationEmail();
   const { mutateAsync: login } = useAutoLoginData();
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Form = () => {
     e.preventDefault();
     try {
       setLockFields(true);
-      await phoneVerification({ phone, setLockFields });
+      // await phoneVerification({ phone, setLockFields });
       await emailVerification({ email, setLockFields });
       isEmailVerified && isPhoneVerified && navigate('/accounts');
     } catch (error) {
@@ -56,10 +56,10 @@ const Form = () => {
       toast.error(error.response.data.message);
     }
   };
-  const { mutate: resendPhone } = useResendMobileMutation();
+  // const { mutate: resendPhone } = useResendMobileMutation();
   const { mutate: resendEmail } = useResendEmailMutation();
   const handleResendOtp = () => {
-    resendPhone();
+    // resendPhone();
     resendEmail();
   };
 
@@ -69,7 +69,7 @@ const Form = () => {
       onSubmit={(e) => handleSubmit(e, phoneOtp, emailOtp)}
     >
       <div className='flex flex-col gap-8 mb-12'>
-        <div className='flex flex-col gap-3'>
+        {/* <div className='flex flex-col gap-3'>
           <label className='text-white'>Phone OTP</label>
           {isPhoneVerified === 'true' ? (
             <p>Mobile already Verified</p>
@@ -90,7 +90,7 @@ const Form = () => {
               shouldAutoFocus={true}
             />
           )}
-        </div>
+        </div> */}
         <div className='flex flex-col gap-3'>
           <label className='text-white'>Email OTP</label>
           {isEmailVerified === 'true' ? (
