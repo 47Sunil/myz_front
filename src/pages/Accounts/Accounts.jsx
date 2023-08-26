@@ -15,6 +15,7 @@ const AccountsLeft = styled.div`
   background-position: center;
   background-size: cover;
   padding: 0 5rem;
+  overflow-y: scroll;
 `;
 
 const Accounts = ({ children }) => {

@@ -134,6 +134,17 @@ const SignUpForm = ({ setSignUpError }) => {
           <span>Sign In</span>
         </Link>
       </p>
+      <p className='mt-4 font-normal text-[20px] leading-8 text-[rgba(255,255,255,.82)] px-5 pb-5'>
+        <button
+          className='text-[#bd61ec] cursor-pointer hover:underline'
+          type='button'
+          onClick={() =>
+            window.open('http://localhost:4000/auth/google', '_self')
+          }
+        >
+          <span>Sign In With Google</span>
+        </button>
+      </p>
       {/* <div className='px-5 pb-5'>
         <GoToHomeBtn text={'Go Back To Home'} />
       </div> */}
